@@ -1,9 +1,8 @@
 <div id="main-nav" class="hidden-phone hidden-tablet">
     <ul>
         <li>
-            <a href="index.html" class="selected">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe003;"></span> Dati Aziendali
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe003;"></span>Dati Aziendali',"@company",array("class"=>($selected == "company") ? "selected": "")); ?>
+
         </li>
         <li>
             <a href="arrivo.html">

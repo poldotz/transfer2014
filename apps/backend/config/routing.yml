@@ -27,6 +27,11 @@ company_create:
     url:   /company-create
     param: { module: company, action: create }
 
+company_update:
+    url:   /company-update
+    param: { module: company, action: update }
+
+
 users:
   url:   /gestione-utenti
   param: { module: users, action: index }

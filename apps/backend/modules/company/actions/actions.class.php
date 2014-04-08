@@ -19,7 +19,7 @@ class companyActions extends sfActions
   {
 
       $company = CompanyQuery::create()->findOne();
-      $this->companyForm = new CompanyForm($company);
+      $this->form = new CompanyForm($company);
 
   }
     /**
@@ -32,7 +32,27 @@ class companyActions extends sfActions
 
         $this->form = new CompanyForm();
         $this->processForm($request, $this->form);
-        $this->setTemplate('new');
+        $this->setTemplate('index');
+    }
+
+    /**
+     * Executes index action
+     *
+     * @param sfRequest $request A request object
+     */
+
+    public function executeEdit(sfWebRequest $request)
+    {
+        $this->form = new CompanyForm($this->getRoute()->getObject());
+    }
+
+    public function executeUpdate(sfWebRequest $request)
+    {
+        $company = $request->getParameter('company');
+        $company = CompanyPeer::retrieveByPK($company['id']);
+        $this->form = new CompanyForm($company);
+        $this->processForm($request, $this->form);
+        $this->setTemplate('index');
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form)
@@ -44,9 +64,9 @@ class companyActions extends sfActions
 
         if ($form->isValid())
         {
-            $job = $form->save();
+            $company = $form->save();
 
-            $this->redirect('@company', $job);
+            $this->redirect('company', $company);
         }
     }
 }
