@@ -6,15 +6,18 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
+    title:         Benvenuti in Transfer
     #description:  symfony project
     #keywords:     symfony, project
-    #language:     en
+    language:     it
     #robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:
+      - main.css
 
-  javascripts:    []
+  javascripts:
+      - jquery.min.js
+      - bootstrap.js
 
   has_layout:     true
   layout:         layout

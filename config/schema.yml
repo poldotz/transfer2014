@@ -1,0 +1,20 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  company:
+    _propel_behaviors:
+      Timestampable:         ~
+    id:                      ~
+    name:                    { type: varchar(100), required: true }
+    vat_number:              { type: varchar(20),  required: true }
+    phone:                   { type: varchar(20),  required: false }
+    fax:                     { type: varchar(20),  required: false }
+    mobile:                  { type: varchar(20),  required: false }
+    email:                   { type: varchar(100), required: false }
+    site:                    { type: varchar(150), required: false }
+    formatted_address:       { type: varchar(150), required: false }
+    lat:                     { type: DECIMAL, size: 18, scale: 2, required: false }
+    lon:                     { type: DECIMAL, size: 18, scale: 2, required: false }
+
+

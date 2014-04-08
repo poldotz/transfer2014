@@ -1,0 +1,31 @@
+<div id="main-nav" class="hidden-phone hidden-tablet">
+    <ul>
+        <li>
+            <a href="index.html" class="selected">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe03f;"></span> Prenotazione
+            </a>
+        </li>
+        <li>
+            <a href="arrivo.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe133;"></span> In Arrivo
+            </a>
+        </li>
+        <li>
+            <a href="partenza.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe131;"></span> In Partenza
+            </a>
+        </li>
+        <li>
+            <a href="autista.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span> Servizi Autista
+            </a>
+
+        </li>
+        <li>
+            <a href="hostess.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess
+            </a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>
