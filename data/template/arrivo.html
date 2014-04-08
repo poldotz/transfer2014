@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+  <!--[if lt IE 7]>
+    <html class="lt-ie9 lt-ie8 lt-ie7" lang="en">
+  <![endif]-->
+
+  <!--[if IE 7]>
+    <html class="lt-ie9 lt-ie8" lang="en">
+  <![endif]-->
+
+  <!--[if IE 8]>
+    <html class="lt-ie9" lang="en">
+  <![endif]-->
+
+  <!--[if gt IE 8]>
+    <!-->
+    <html lang="en">
+    <!--
+  <![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <title>Maremania admin panel</title>
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+    <meta name="description" content="Maremania Admin">
+    <script src="js/html5-trunk.js"></script>
+    <link href="icomoon/style.css" rel="stylesheet">
+    <!--[if lte IE 7]>
+    <script src="css/icomoon-font/lte-ie7.js"></script>
+    <![endif]-->
+
+    <!-- NVD graphs css -->
+    <link href="css/nvd-charts.css" rel="stylesheet">
+
+    <!-- Bootstrap css -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- fullcalendar css -->
+    <link href='css/fullcalendar/fullcalendar.css' rel='stylesheet' />
+    <link href='css/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+
+      <link href="css/timepicker.css" rel="stylesheet">
+      <link href="css/datepicker.css" rel="stylesheet">
+      <link href="css/bootstrap-editable.css" rel="stylesheet">
+      <link href="css/select2.css" rel="stylesheet">
+      <style>
+          input {
+              max-width: 100%;
+          }
+      </style>
+
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logotop">
+          <!--<img width="86" height="34" alt="home" src="img/logo_mini.png">-->
+      </a>
+        <div id="mini-nav-left">
+            <ul class="hidden-phone">
+                <li >
+                    <a class="active" href="profile.html">Configurazione</a>
+                </li>
+                <li>
+                    <a href="login.html">Cliente e Tariffe</a>
+                </li>
+                <li>
+                    <a href="login.html">Localit&agrave</a>
+                </li>
+                <li> <a class="active" href="login.html">Servizi</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+      <div id="mini-nav">
+        <ul>
+          <li>
+            <a href="profile.html"><span class="fs1" aria-hidden="true" data-icon="&#xe072;"></span></a>
+          </li>
+          <li>
+            <a href="login.html"><span class="fs1" aria-hidden="true" data-icon="&#xe0b1;"></span></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="dashboard-wrapper">
+        <div id="main-nav" class="hidden-phone hidden-tablet">
+          <ul>
+            <li>
+              <a href="index.html" >
+                <span class="fs1" aria-hidden="true" data-icon="&#xe03f;"></span> Prenotazione
+              </a>
+            </li>
+            <li>
+              <a href="arrivo.html" class="selected">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe133;"></span> In Arrivo
+              </a>
+            </li>
+            <li>
+              <a href="partenza.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe131;"></span> In Partenza
+              </a>
+            </li>
+            <li>
+              <a href="autista.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span> Servizi Autista
+              </a>
+
+            </li>
+            <li>
+              <a href="hostess.html">
+                <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess
+              </a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="main-container">
+          <div class="navbar hidden-desktop">
+            <div class="navbar-inner">
+              <div class="container">
+                <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </a>
+                <div class="nav-collapse collapse navbar-responsive-collapse">
+                  <ul class="nav">
+                      <li>
+                          <a class="active" href="profile.html">Configurazione</a>
+                      </li>
+                      <li>
+                          <a href="login.html">Cliente e Tariffe</a>
+                      </li>
+                      <li>
+                          <a href="login.html">Localit&agrave</a>
+                      </li>
+                      <li>
+                          <a href="index.html" >
+                              <span class="fs1" aria-hidden="true" data-icon="&#xe0a0;"></span> Prenotazione
+                          </a>
+                      </li>
+                      <li>
+                          <a href="reports.html">
+                              <span class="fs1" aria-hidden="true" data-icon="&#xe097;"></span> In Arrivo
+                          </a>
+                      </li>
+                      <li>
+                          <a href="forms.html" class="selected">
+                              <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span> In Partenza
+                          </a>
+                      </li>
+                      <li>
+                          <a href="graphs.html">
+                              <span class="fs1" aria-hidden="true" data-icon="&#xe096;"></span> Servizi Autista
+                          </a>
+                      </li>
+                      <li>
+                          <a href="ui-elements.html">
+                              <span class="fs1" aria-hidden="true" data-icon="&#xe0a5;"></span> Servizi Hostes
+                          </a>
+                      </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--<div class="page-header">
+            <div class="pull-left">
+              <h2>Dashboard</h2>
+            </div>
+            <div class="pull-right">
+              <ul class="stats">
+                <li class="color-first hidden-phone">
+                  <span class="fs1" aria-hidden="true" data-icon="&#xe037;"></span>
+                  <div class="details">
+                    <span class="big">$879,89</span>
+                    <span>Balance</span>
+                  </div>
+                </li>
+                <li class="color-second">
+                  <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
+                  <div class="details" id="date-time">
+                    <span>Date </span>
+                    <span>Day, Time</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
+          </div>-->
+
+          <div class="row-fluid">
+              <div class="span12" style="margin-bottom: 0px;">
+                  <div class="widget">
+                      <div class="widget-header">
+                          <div class=" form-inline">
+                              Arrivi del:
+                              <div class="input-append date" id="dp3" data-date="02-01-2013" data-date-format="dd-mm-yyyy">
+                              <input class="span6" type="text" value="02-01-2013">
+                              <span class="add-on"><i class="icon-th"></i></span>
+                                </div>
+                              <a href="#" title="Inserimento Autisti" class="btn btn-small btn-info"/>
+
+                              <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span>
+
+                              </a>
+                              <a href="#" title="Cambia Data" class="btn btn-small btn-warning2"/>
+                                  <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
+                              </a>
+                              <a href="#" title="Invia Email" class="btn btn-small btn-success"/>
+                              <span class="fs1" aria-hidden="true" data-icon=" &#xe040;"></span>
+                              </a>
+                              <div class="pull-right">
+                                  <button type="submit" class="btn btn-small btn-primary">SALVA</button>
+                              </div>
+                            </div>
+
+                      </div>
+                      <div style="padding: 5px;" class="widget-body">
+                          <form class="form-horizontal no-margin">
+                              <fieldset>
+                                  <div class="control-group">
+                                      <div style="margin-left: 0px;" class="controls">
+                                          <div class="row-fluid">
+                                              <div class="span2">
+                                                 <span class="label label-inverse" style="font-size: 14px; font-weight: bolder">
+                                             Progressivo: 2
+                                        </span>
+                                              </div>
+                                              <div style="margin-left: 5px; margin-right: 25px;" class="span2">
+                                                  <span class="label label-inverse" style="font-size: 14px; font-weight: bolder">
+                                                Data Reg.: 29/12/2013 10:30
+                                                </span>
+                                              </div>
+                                              <div class="span3">
+                                                  <select class="input-block-level" required >
+                                                      <option>Tipo Cliente</option>
+                                                      <option>Privato</option>
+                                                      <option>Azienda</option>
+                                                  </select>
+                                              </div>
+                                              <div class="span4 input-left-top-margins">
+                                                  <select class="input-block-level" required >
+                                                      <option>Nome cliente</option>
+                                                      <option selected>Cliente di test</option>
+                                                      <option>Azienda</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="control-group">
+                                      <div style="margin-left: 0px;" class="controls">
+                                          <div class="row-fluid">
+                                              <div class="span4 input-left-top-margins">
+                                                  <input type="text" class="input-block-level" title="Referente" placeholder="Referente">
+                                              </div>
+                                              <div class="span3 input-left-top-margins"required>
+                                                  <select class="input-block-level" required >
+                                                      <option>Mezzo Richiesto</option>
+                                                      <option selected>Bus 17/30</option>
+                                                      <option>Azienda</option>
+                                                  </select>
+                                              </div>
+                                              <div class="span2 input-left-top-margins">
+                                                  <input type="text" class="input-block-level" maxlength="2" pattern="\d{2}" title="Adulti" placeholder="Adulti" required>
+                                              </div>
+                                              <div class="span2 input-left-top-margins">
+                                                  <input type="text" class="input-block-level" maxlength="2" pattern="\d{2}" title="Bambini" placeholder="Bambini" required>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="control-group">
+                                      <div style="margin-left: 0px;" class="controls">
+                                          <div class="row-fluid">
+
+                                              <div class="span4 input-left-top-margins" required>
+                                                  <select class="input-block-level" required >
+                                                      <option>DA</option>
+                                                      <option selected>APT ELMAS</option>
+                                                      <option>Maracalagonin hotel 4 torri alte</option>
+                                                  </select>
+                                              </div>
+
+                                              <div class="span3 input-left-top-margins">
+                                                  <select class="input-block-level" required >
+                                                      <option>A</option>
+                                                      <option selected>ABAMAR</option>
+                                                      <option>Azienda</option>
+                                                  </select>
+                                              </div>
+                                              <div class="span2 input-left-top-margins" required>
+                                                  <input type="text" class="input-block-level" title="Sigla" placeholder="Sigla" >
+                                              </div>
+                                              <div  class="span1 input-left-top-margins" required>
+                                                  <div class="input-append bootstrap-timepicker form-inline">
+
+                                                      <input id="timepicker1" value="10:30" type="text" readonly="readonly" class="span9">
+                                                      <span class="add-on btn">
+                                                        <i class="icon-time">
+                                                        </i>
+                                                      </span>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="control-group">
+                                      <div style="margin-left: 0px;" class="controls">
+                                          <div class="row-fluid">
+                                              <div style="margin-left: 0px;" class="span4 input-left-top-margins" required>
+                                                  <select class="input-block-level" required >
+                                                      <option>Autista</option>
+                                                      <option selected>Maurizio</option>
+                                                      <option>Leonardo <Podda></Podda></option>
+                                                  </select>
+                                              </div>
+                                              <div class="span3 form-inline" required>
+                                                  <label>Pagamento:</label>
+                                                  <label class="radio inline">
+                                                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                                      VO
+                                                  </label>
+                                                  <label class="radio inline">
+                                                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="">
+                                                      RD
+                                                  </label>
+                                              </div>
+                                              <div class="span4 input-left-top-margins" required>
+                                                  <input type="text" class="input-block-level" title="Nota" placeholder="Nota" >
+                                              </div>
+                                              <div class="span1 form-inline" required>
+                                                  <label class="radio inline">
+                                                      <input type="checkbox"  value="annulla">
+                                                      Annulla
+                                                  </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </fieldset>
+                          </form>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row-fluid">
+              <div class="span12">
+              <div id="dt_example" class="example_alt_pagination">
+              <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
+              <thead>
+              <tr>
+                  <th style="width:5%">Annullato</th>
+                  <th style="width:5%">Prog.</th>
+                  <th style="width:5%" class="hidden-phone">Ora Arr.</th>
+                  <th style="width:10%" class="hidden-phone">Sigla</th>
+                  <th style="width:10%" class="hidden-phone">Mezzo Rich.</th>
+                  <th style="width:10%" class="hidden-phone">Autista</th>
+                  <th style="width:15%" >Cliente</th>
+                  <th style="width:15%" class="hidden-phone">Referente</th>
+                  <th style="width:15%" class="hidden-phone">Tragitto</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="gradeX">
+                  <td><span class="label label-success">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe0d4;"></span> NO
+                  </span></td>
+                  <td>2/2014</td>
+                  <td>10:30</td>
+                  <td class="hidden-phone">
+                      AK123
+                  </td>
+                  <td class="hidden-phone">
+                      Bus 17/30
+                  </td>
+                  <td class="hidden-phone">Maurizio</td>
+                  <td>Cliente di test</td>
+                  <td>Sempronio</td>
+                  <td class="hidden-phone">
+                    APT ELMAS-ABAMAR
+                  </td>
+              </tr>
+              <tr class="gradeX">
+                  <td><span class="label label-important">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe0d5;"></span> SI
+                  </span></td>
+                  <td>1/2014</td>
+                  <td>12:30</td>
+                  <td class="hidden-phone">
+                      38421
+                  </td>
+                  <td class="hidden-phone">
+                      Minibus 4/8
+                  </td>
+                  <td class="hidden-phone">Sempronio</td>
+                  <td>Cliente privato</td>
+                  <td>Mevio</td>
+                  <td class="hidden-phone">
+                      APT ELMAS-CAGLIARI
+                  </td>
+              </tr>
+
+
+              </tbody>
+              </table>
+              <div class="clearfix"></div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div><!-- dashboard-container -->
+    </div><!-- container-fluid -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+
+    <!-- Flot charts -->
+    <script src="js/flot/jquery.flot.js"></script>
+    <script src="js/flot/jquery.flot.selection.js"></script>
+    <script src="js/flot/jquery.flot.pie.js"></script>
+
+    <!-- Google Visualization JS -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- Easy Pie Chart JS -->
+    <script src="js/pie-charts/jquery.easy-pie-chart.js"></script>
+
+    <!-- Sparkline charts -->
+    <script src="js/sparkline.js"></script>
+
+    <!-- Datatables JS -->
+    <script src="js/jquery.dataTables.js"></script>
+
+    <!-- Calendar Js -->
+    <script src='js/fullcalendar/jquery-ui-1.10.2.custom.min.js'></script>
+    <script src='js/fullcalendar/fullcalendar.min.js'></script>
+
+    <script src="js/wysiwyg/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="js/date-picker/date.js"></script>
+    <script type="text/javascript" src="js/date-picker/daterangepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
+
+    <!-- Editable Inputs -->
+    <script src="js/bootstrap-editable.min.js"></script>
+    <script src="js/select2.js"></script>
+
+
+    <!-- Tiny scrollbar js -->
+    <script src="js/tiny-scrollbar.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/custom-index.js"></script>
+    <script src="js/custom-calendar.js"></script>
+
+    <script src="js/theming.js"></script>
+    <script src="js/custom.js"></script>
+      
+  </body>
+</html>

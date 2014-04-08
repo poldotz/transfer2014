@@ -1,0 +1,12 @@
+{
+    "name": "ntbusinsiness/transfer",
+    "description": "transfer software",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "poldotz",
+            "email": "leonardo.podda@gmail.com"
+        }
+    ]
+}
