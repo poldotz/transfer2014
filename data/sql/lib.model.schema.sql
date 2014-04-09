@@ -27,5 +27,45 @@ CREATE TABLE `company`
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- vehicle_type
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `vehicle_type`;
+
+CREATE TABLE `vehicle_type`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- vehicle
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `vehicle`;
+
+CREATE TABLE `vehicle`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `vehicle_type_id` INTEGER NOT NULL,
+    `model` VARCHAR(100) NOT NULL,
+    `plate_number` VARCHAR(20),
+    `frame_number` VARCHAR(50),
+    `mileage` BIGINT,
+    `note` VARCHAR(255),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`id`),
+    INDEX `vehicle_FI_1` (`vehicle_type_id`),
+    CONSTRAINT `vehicle_FK_1`
+        FOREIGN KEY (`vehicle_type_id`)
+        REFERENCES `vehicle_type` (`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

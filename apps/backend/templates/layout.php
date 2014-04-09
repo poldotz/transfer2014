@@ -8,8 +8,8 @@
 
     <script src="/js/html5-trunk.js"></script>
     <link href="/icomoon/style.css" rel="stylesheet">
-
     <?php include_stylesheets() ?>
+    <?php include_javascripts() ?>
 
   </head>
   <body>
@@ -34,6 +34,6 @@
         </div>
     </div>
     <?php endif; ?>
-    <?php include_javascripts() ?>
+
   </body>
 </html>

@@ -5,9 +5,7 @@
 
         </li>
         <li>
-            <a href="arrivo.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe0b7;"></span> Categorie Mezzi
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe0b7;"></span> Categorie Mezzi',"@vehicle_type",array("class"=>($selected == "vehicle_type") ? "selected": "")); ?>
         </li>
         <li>
             <a href="partenza.html">

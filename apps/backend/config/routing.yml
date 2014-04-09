@@ -31,6 +31,18 @@ company_update:
     url:   /company-update
     param: { module: company, action: update }
 
+vehicle_type:
+    url:   /categorie-mezzi
+    param: { module: vehicleType, action: index }
+
+vehicle_type_create:
+    url:   /categorie-mezzi-create
+    param: { module: vehicleType, action: create }
+
+vehicle_type_update:
+    url:   /categorie-mezzi-update
+    param: { module: vehicleType, action: update }
+
 
 users:
   url:   /gestione-utenti

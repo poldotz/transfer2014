@@ -12,15 +12,12 @@ class companyActions extends sfActions
 {
  /**
   * Executes index action
-  *
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request)
   {
-
       $company = CompanyQuery::create()->findOne();
       $this->form = new CompanyForm($company);
-
   }
     /**
      * Executes index action

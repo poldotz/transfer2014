@@ -17,4 +17,19 @@ propel:
     lat:                     { type: DECIMAL, size: 18, scale: 2, required: false }
     lon:                     { type: DECIMAL, size: 18, scale: 2, required: false }
 
+  vehicle_type:
+    _propel_behaviors:
+      Timestampable:         ~
+    id:                      ~
+    name:                    { type: varchar(100), required: true, unique: true }
 
+  vehicle:
+    _propel_behaviors:
+      Timestampable:         ~
+    id:                      ~
+    vehicle_type_id:         { type: integer, foreignTable: vehicle_type, foreignReference: id, required: true, onDelete: cascade }
+    model :                  { type: varchar(100), required: true }
+    plate_number:            { type: varchar(20) }
+    frame_number:            { type: varchar(50) }
+    mileage:                 { type: bigint }
+    note:                    { type: varchar(255) }
