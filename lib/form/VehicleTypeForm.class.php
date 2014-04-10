@@ -11,5 +11,7 @@ class VehicleTypeForm extends BaseVehicleTypeForm
 {
   public function configure()
   {
+      $this->useFields(array('name'));
+
   }
 }

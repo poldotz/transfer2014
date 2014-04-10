@@ -14,7 +14,7 @@
           <?php if (!$form->getObject()->isNew()): ?>
             &nbsp;<?php echo link_to('Delete', 'vehicleType/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
           <?php endif; ?>
-          <input type="submit" value="Save" />
+          <input type="submit" value="Salva" />
         </td>
       </tr>
     </tfoot>
@@ -25,20 +25,6 @@
         <td>
           <?php echo $form['name']->renderError() ?>
           <?php echo $form['name'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['created_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['created_at']->renderError() ?>
-          <?php echo $form['created_at'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['updated_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['updated_at']->renderError() ?>
-          <?php echo $form['updated_at'] ?>
         </td>
       </tr>
     </tbody>

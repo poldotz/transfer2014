@@ -35,12 +35,22 @@ vehicle_type:
     url:   /categorie-mezzi
     param: { module: vehicleType, action: index }
 
+vehicle_type_new:
+    url:   /nuova-categoria-mezzi
+    param: { module: vehicleType, action: new }
+
+vehicle_type_edit:
+    url:   /modifica-categoria-mezzi/:id
+    param: { module: vehicleType, action: new }
+    requirements:
+      id: \d+
+
 vehicle_type_create:
-    url:   /categorie-mezzi-create
+    url:   /crea-categoria-mezzi
     param: { module: vehicleType, action: create }
 
 vehicle_type_update:
-    url:   /categorie-mezzi-update
+    url:   /aggiorna-categoria-mezzi
     param: { module: vehicleType, action: update }
 
 

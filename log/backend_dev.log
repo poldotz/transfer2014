@@ -8520,3 +8520,1293 @@ Apr 09 17:52:18 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | 
 Apr 09 17:52:18 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
 Apr 09 17:52:18 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
 Apr 09 17:52:18 symfony [info] {sfWebResponse} Send content (83 o)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:12:01 symfony [info] {sfPatternRouting} Match route "company" (/dati-aziendali) for /dati-aziendali with parameters array (  'module' => 'company',  'action' => 'index',)
+Apr 10 16:12:01 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:01 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:12:01 symfony [info] {sfBasicSecurityFilter} Action "company/index" requires authentication, forwarding to "sfGuardAuth/signin"
+Apr 10 16:12:01 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:01 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:12:01 symfony [info] {sfGuardAuthActions} Call "sfGuardAuthActions->executeSignin()"
+Apr 10 16:12:01 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/sfGuardAuth/templates/signinSuccess.php"
+Apr 10 16:12:01 symfony [info] {main} Set slot "container_open"
+Apr 10 16:12:01 symfony [info] {main} Set slot "container_close"
+Apr 10 16:12:01 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:01 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:01 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:12:01 symfony [info] {main} Get slot "container_open"
+Apr 10 16:12:01 symfony [info] {main} Get slot "container_close"
+Apr 10 16:12:01 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:12:01 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:12:01 symfony [info] {sfWebDebugLogger} Configuration 864.18 ms (12)
+Apr 10 16:12:01 symfony [info] {sfWebDebugLogger} Factories 325.55 ms (1)
+Apr 10 16:12:01 symfony [info] {sfWebDebugLogger} Action "sfGuardAuth/signin" 30.61 ms (1)
+Apr 10 16:12:01 symfony [info] {sfWebDebugLogger} View "Success" for "sfGuardAuth/signin" 136.08 ms (1)
+Apr 10 16:12:01 symfony [info] {sfWebDebugLogger} Partial "global/_header" 6.95 ms (1)
+Apr 10 16:12:01 symfony [info] {sfWebResponse} Send content (38903 o)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:12:38 symfony [info] {sfPatternRouting} Match route "sf_guard_signin" (/login) for /login with parameters array (  'module' => 'sfGuardAuth',  'action' => 'signin',)
+Apr 10 16:12:38 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:38 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:12:38 symfony [info] {sfGuardAuthActions} Call "sfGuardAuthActions->executeSignin()"
+Apr 10 16:12:39 symfony [debug] {sfPropelLogger} time:  0.405 sec | slow: YES | mem:    4.0 MB | mempeak:    4.0 MB | memdelta:      0.0 B | SELECT sf_guard_user.ID, sf_guard_user.USERNAME, sf_guard_user.FIRST_NAME, sf_guard_user.LAST_NAME, sf_guard_user.EMAIL, sf_guard_user.PHONE, sf_guard_user.ALGORITHM, sf_guard_user.SALT, sf_guard_user.PASSWORD, sf_guard_user.CREATED_AT, sf_guard_user.LAST_LOGIN, sf_guard_user.IS_ACTIVE, sf_guard_user.IS_SUPER_ADMIN, sf_guard_user.IP_ADDRESS FROM `sf_guard_user` WHERE ((sf_guard_user.USERNAME='admin' OR sf_guard_user.EMAIL='admin') AND sf_guard_user.IS_ACTIVE=1) LIMIT 1
+Apr 10 16:12:39 symfony [info] {myUser} User is authenticated
+Apr 10 16:12:39 symfony [debug] {sfPropelLogger} time:  0.388 sec | slow: YES | mem:    5.8 MB | mempeak:    5.8 MB | memdelta:      0.0 B | SELECT sf_guard_user_permission.USER_ID, sf_guard_user_permission.PERMISSION_ID, sf_guard_permission.ID, sf_guard_permission.NAME, sf_guard_permission.DESCRIPTION FROM `sf_guard_user_permission` LEFT JOIN `sf_guard_permission` ON (sf_guard_user_permission.PERMISSION_ID=sf_guard_permission.ID) WHERE sf_guard_user_permission.USER_ID=1
+Apr 10 16:12:40 symfony [debug] {sfPropelLogger} time:  0.348 sec | slow: YES | mem:    6.5 MB | mempeak:    6.5 MB | memdelta:      0.0 B | SELECT sf_guard_user_group.USER_ID, sf_guard_user_group.GROUP_ID, sf_guard_group.ID, sf_guard_group.NAME, sf_guard_group.DESCRIPTION FROM `sf_guard_user_group` LEFT JOIN `sf_guard_group` ON (sf_guard_user_group.GROUP_ID=sf_guard_group.ID) WHERE sf_guard_user_group.USER_ID=1
+Apr 10 16:12:40 symfony [info] {myUser} Add credential(s) ""
+Apr 10 16:12:40 symfony [debug] {sfPropelLogger} time:  0.046 sec | slow:  NO | mem:    6.5 MB | mempeak:    6.5 MB | memdelta:      0.0 B | UPDATE `sf_guard_user` SET `LAST_LOGIN`='2014-04-10 16:12:40' WHERE sf_guard_user.ID=1
+Apr 10 16:12:40 symfony [info] {sfFrontWebController} Redirect to "http://transfer2014/favicon.ico"
+Apr 10 16:12:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 302 Found"
+Apr 10 16:12:40 symfony [info] {sfWebResponse} Send header "Location: http://transfer2014/favicon.ico"
+Apr 10 16:12:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:12:40 symfony [info] {sfWebDebugLogger} Configuration 67.59 ms (10)
+Apr 10 16:12:40 symfony [info] {sfWebDebugLogger} Factories 7.79 ms (1)
+Apr 10 16:12:40 symfony [info] {sfWebDebugLogger} Action "sfGuardAuth/signin" 1917.66 ms (1)
+Apr 10 16:12:40 symfony [info] {sfWebResponse} Send content (102 o)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:12:44 symfony [info] {sfPatternRouting} Match route "company" (/dati-aziendali) for /dati-aziendali with parameters array (  'module' => 'company',  'action' => 'index',)
+Apr 10 16:12:44 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:44 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:12:44 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:12:44 symfony [info] {companyActions} Call "companyActions->executeIndex()"
+Apr 10 16:12:44 symfony [debug] {sfPropelLogger} time:  0.261 sec | slow: YES | mem:    3.8 MB | mempeak:    3.8 MB | memdelta:      0.0 B | SELECT company.ID, company.NAME, company.VAT_NUMBER, company.PHONE, company.FAX, company.MOBILE, company.EMAIL, company.SITE, company.FORMATTED_ADDRESS, company.LAT, company.LON, company.CREATED_AT, company.UPDATED_AT FROM `company` LIMIT 1
+Apr 10 16:12:44 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/company/templates/indexSuccess.php"
+Apr 10 16:12:44 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:12:44 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:44 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:44 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:12:44 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:12:44 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:12:44 symfony [info] {sfWebDebugLogger} Configuration 4.94 ms (10)
+Apr 10 16:12:44 symfony [info] {sfWebDebugLogger} Factories 6.85 ms (1)
+Apr 10 16:12:44 symfony [info] {sfWebDebugLogger} Action "company/index" 596.78 ms (1)
+Apr 10 16:12:44 symfony [info] {sfWebDebugLogger} View "Success" for "company/index" 32.59 ms (1)
+Apr 10 16:12:44 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 10.55 ms (1)
+Apr 10 16:12:44 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.73 ms (1)
+Apr 10 16:12:44 symfony [info] {sfWebResponse} Send content (42997 o)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:12:47 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 16:12:47 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:47 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:12:47 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:12:47 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 16:12:47 symfony [debug] {sfPropelLogger} time:  0.175 sec | slow: YES | mem:    3.3 MB | mempeak:    3.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 16:12:47 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 16:12:47 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:12:47 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:47 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:47 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:12:47 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:12:47 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:12:47 symfony [info] {sfWebDebugLogger} Configuration 9.50 ms (10)
+Apr 10 16:12:47 symfony [info] {sfWebDebugLogger} Factories 5.96 ms (1)
+Apr 10 16:12:47 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 257.18 ms (1)
+Apr 10 16:12:47 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 36.38 ms (1)
+Apr 10 16:12:47 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.76 ms (1)
+Apr 10 16:12:47 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.72 ms (1)
+Apr 10 16:12:47 symfony [info] {sfWebResponse} Send content (41017 o)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:12:48 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 16:12:48 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:48 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:12:48 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:12:48 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:12:58 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 16:12:58 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:12:58 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:12:58 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:12:58 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 16:12:58 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 16:12:58 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 16:12:58 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:12:58 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:58 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:12:58 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:12:58 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:12:58 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:12:58 symfony [info] {sfWebDebugLogger} Configuration 1.01 ms (9)
+Apr 10 16:12:58 symfony [info] {sfWebDebugLogger} Factories 6.22 ms (1)
+Apr 10 16:12:58 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 58.92 ms (1)
+Apr 10 16:12:58 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.24 ms (1)
+Apr 10 16:12:58 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.66 ms (1)
+Apr 10 16:12:58 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.68 ms (1)
+Apr 10 16:12:58 symfony [info] {sfWebResponse} Send content (40933 o)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 16:13:41 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:13:41 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:13:41 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:13:41 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 16:13:41 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 16:13:41 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 16:13:41 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:13:41 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:13:41 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:13:41 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:13:41 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:13:41 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:13:41 symfony [info] {sfWebDebugLogger} Configuration 1.04 ms (9)
+Apr 10 16:13:41 symfony [info] {sfWebDebugLogger} Factories 7.24 ms (1)
+Apr 10 16:13:41 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 39.34 ms (1)
+Apr 10 16:13:41 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.93 ms (1)
+Apr 10 16:13:41 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.75 ms (1)
+Apr 10 16:13:41 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.69 ms (1)
+Apr 10 16:13:41 symfony [info] {sfWebResponse} Send content (40993 o)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:13:41 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 16:13:41 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:13:41 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:13:41 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:13:41 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 16:14:08 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:14:08 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:14:08 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:14:08 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 16:14:08 symfony [debug] {sfPropelLogger} time:  0.008 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 16:14:08 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 16:14:08 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:14:08 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:14:08 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:14:08 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:14:08 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:14:08 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:14:08 symfony [info] {sfWebDebugLogger} Configuration 1.01 ms (9)
+Apr 10 16:14:08 symfony [info] {sfWebDebugLogger} Factories 6.93 ms (1)
+Apr 10 16:14:08 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 67.05 ms (1)
+Apr 10 16:14:08 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.36 ms (1)
+Apr 10 16:14:08 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.72 ms (1)
+Apr 10 16:14:08 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.71 ms (1)
+Apr 10 16:14:08 symfony [info] {sfWebResponse} Send content (40993 o)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:14:08 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 16:14:08 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:14:08 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:14:08 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:14:08 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:14:09 symfony [info] {sfPatternRouting} Match route "company" (/dati-aziendali) for /dati-aziendali with parameters array (  'module' => 'company',  'action' => 'index',)
+Apr 10 16:14:09 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:14:09 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:14:09 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:14:09 symfony [info] {companyActions} Call "companyActions->executeIndex()"
+Apr 10 16:14:09 symfony [debug] {sfPropelLogger} time:  0.008 sec | slow:  NO | mem:    3.0 MB | mempeak:    3.0 MB | memdelta:      0.0 B | SELECT company.ID, company.NAME, company.VAT_NUMBER, company.PHONE, company.FAX, company.MOBILE, company.EMAIL, company.SITE, company.FORMATTED_ADDRESS, company.LAT, company.LON, company.CREATED_AT, company.UPDATED_AT FROM `company` LIMIT 1
+Apr 10 16:14:09 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/company/templates/indexSuccess.php"
+Apr 10 16:14:09 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:14:09 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:14:09 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:14:09 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:14:09 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:14:09 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:14:09 symfony [info] {sfWebDebugLogger} Configuration 79.22 ms (10)
+Apr 10 16:14:09 symfony [info] {sfWebDebugLogger} Factories 7.95 ms (1)
+Apr 10 16:14:09 symfony [info] {sfWebDebugLogger} Action "company/index" 54.12 ms (1)
+Apr 10 16:14:09 symfony [info] {sfWebDebugLogger} View "Success" for "company/index" 7.61 ms (1)
+Apr 10 16:14:09 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.87 ms (1)
+Apr 10 16:14:09 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.74 ms (1)
+Apr 10 16:14:09 symfony [info] {sfWebResponse} Send content (42976 o)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 16:14:10 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:14:10 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:14:10 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:14:10 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 16:14:10 symfony [debug] {sfPropelLogger} time:  0.001 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 16:14:10 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 16:14:10 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 16:14:10 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:14:10 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 16:14:10 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 16:14:10 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 16:14:10 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 16:14:10 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 16:14:10 symfony [info] {sfWebDebugLogger} Factories 7.14 ms (1)
+Apr 10 16:14:10 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 76.50 ms (1)
+Apr 10 16:14:10 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.37 ms (1)
+Apr 10 16:14:10 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.67 ms (1)
+Apr 10 16:14:10 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.68 ms (1)
+Apr 10 16:14:10 symfony [info] {sfWebResponse} Send content (40994 o)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 16:14:10 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 16:14:10 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 16:14:10 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 16:14:10 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 16:14:10 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:36:29 symfony [info] {sfPatternRouting} Match route "company" (/dati-aziendali) for /dati-aziendali with parameters array (  'module' => 'company',  'action' => 'index',)
+Apr 10 17:36:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:36:29 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:36:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:36:29 symfony [info] {companyActions} Call "companyActions->executeIndex()"
+Apr 10 17:36:29 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT company.ID, company.NAME, company.VAT_NUMBER, company.PHONE, company.FAX, company.MOBILE, company.EMAIL, company.SITE, company.FORMATTED_ADDRESS, company.LAT, company.LON, company.CREATED_AT, company.UPDATED_AT FROM `company` LIMIT 1
+Apr 10 17:36:29 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/company/templates/indexSuccess.php"
+Apr 10 17:36:29 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:36:29 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:36:29 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:36:29 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:36:29 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:36:29 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:36:29 symfony [info] {sfWebDebugLogger} Configuration 1.08 ms (9)
+Apr 10 17:36:29 symfony [info] {sfWebDebugLogger} Factories 6.14 ms (1)
+Apr 10 17:36:29 symfony [info] {sfWebDebugLogger} Action "company/index" 18.45 ms (1)
+Apr 10 17:36:29 symfony [info] {sfWebDebugLogger} View "Success" for "company/index" 6.54 ms (1)
+Apr 10 17:36:29 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.66 ms (1)
+Apr 10 17:36:29 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.69 ms (1)
+Apr 10 17:36:29 symfony [info] {sfWebResponse} Send content (43052 o)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:36:34 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/edit/id/1 with parameters array (  'module' => 'vehicleType',  'action' => 'edit',  'id' => '1',)
+Apr 10 17:36:34 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:36:34 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:36:34 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:36:34 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeEdit()"
+Apr 10 17:36:34 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT `ID`, `NAME`, `CREATED_AT`, `UPDATED_AT` FROM `vehicle_type` WHERE `ID` = '1'
+Apr 10 17:36:34 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/editSuccess.php"
+Apr 10 17:36:34 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:36:34 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/_form.php"
+Apr 10 17:36:34 symfony [err] {InvalidArgumentException} Widget "created_at" does not exist.
+Apr 10 17:36:35 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Apr 10 17:36:35 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:36:35 symfony [info] {sfWebDebugLogger} Configuration 1.02 ms (9)
+Apr 10 17:36:35 symfony [info] {sfWebDebugLogger} Factories 6.57 ms (1)
+Apr 10 17:36:35 symfony [info] {sfWebDebugLogger} Action "vehicleType/edit" 28.79 ms (1)
+Apr 10 17:36:35 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/edit" 314.66 ms (1)
+Apr 10 17:36:35 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.69 ms (1)
+Apr 10 17:36:35 symfony [info] {sfWebDebugLogger} Partial "vehicleType/_form" 312.08 ms (1)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:37:32 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/edit/id/1 with parameters array (  'module' => 'vehicleType',  'action' => 'edit',  'id' => '1',)
+Apr 10 17:37:32 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:37:32 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:37:32 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:37:32 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeEdit()"
+Apr 10 17:37:32 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT `ID`, `NAME`, `CREATED_AT`, `UPDATED_AT` FROM `vehicle_type` WHERE `ID` = '1'
+Apr 10 17:37:32 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/editSuccess.php"
+Apr 10 17:37:32 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:37:32 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/_form.php"
+Apr 10 17:37:32 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:37:32 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:37:32 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:37:32 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:37:32 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} Configuration 1.21 ms (9)
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} Factories 7.19 ms (1)
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} Action "vehicleType/edit" 5.70 ms (1)
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/edit" 7.93 ms (1)
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.73 ms (1)
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} Partial "vehicleType/_form" 2.78 ms (1)
+Apr 10 17:37:32 symfony [info] {sfWebDebugLogger} Partial "global/_header" 1.21 ms (1)
+Apr 10 17:37:32 symfony [info] {sfWebResponse} Send content (43748 o)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:39:16 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:39:16 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:39:16 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:39:16 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:39:16 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:39:17 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    3.0 MB | mempeak:    3.0 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:39:17 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:39:17 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:39:17 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:39:17 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:39:17 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:39:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:39:17 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:39:17 symfony [info] {sfWebDebugLogger} Configuration 38.62 ms (10)
+Apr 10 17:39:17 symfony [info] {sfWebDebugLogger} Factories 44.53 ms (1)
+Apr 10 17:39:17 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 41.86 ms (1)
+Apr 10 17:39:17 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.85 ms (1)
+Apr 10 17:39:17 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.71 ms (1)
+Apr 10 17:39:17 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.71 ms (1)
+Apr 10 17:39:17 symfony [info] {sfWebResponse} Send content (41511 o)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:39:17 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:39:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:39:17 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:39:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:39:17 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:39:17 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:39:17 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:39:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:39:17 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:39:17 symfony [info] {sfWebResponse} Send content (409 o)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:39:19 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/new with parameters array (  'module' => 'vehicleType',  'action' => 'new',)
+Apr 10 17:39:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:39:19 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:39:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:39:19 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeNew()"
+Apr 10 17:39:19 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/newSuccess.php"
+Apr 10 17:39:19 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/_form.php"
+Apr 10 17:39:19 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:39:19 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:39:19 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:39:19 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:39:19 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:39:19 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 17:39:19 symfony [info] {sfWebDebugLogger} Factories 7.09 ms (1)
+Apr 10 17:39:19 symfony [info] {sfWebDebugLogger} Action "vehicleType/new" 3.13 ms (1)
+Apr 10 17:39:19 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/new" 5.90 ms (1)
+Apr 10 17:39:19 symfony [info] {sfWebDebugLogger} Partial "vehicleType/_form" 2.08 ms (1)
+Apr 10 17:39:19 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.69 ms (1)
+Apr 10 17:39:19 symfony [info] {sfWebResponse} Send content (38148 o)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:39:21 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:39:21 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:39:21 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:39:21 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:39:21 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:39:21 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:39:21 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:39:21 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:39:21 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:39:21 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:39:21 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:39:21 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:39:21 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:39:21 symfony [info] {sfWebDebugLogger} Configuration 1.01 ms (9)
+Apr 10 17:39:21 symfony [info] {sfWebDebugLogger} Factories 6.39 ms (1)
+Apr 10 17:39:21 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.12 ms (1)
+Apr 10 17:39:21 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.80 ms (1)
+Apr 10 17:39:21 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.69 ms (1)
+Apr 10 17:39:21 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.67 ms (1)
+Apr 10 17:39:21 symfony [info] {sfWebResponse} Send content (41505 o)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:39:22 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:39:22 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:39:22 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:39:22 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:39:22 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:39:22 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:39:22 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:39:22 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:39:22 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:39:22 symfony [info] {sfWebResponse} Send content (409 o)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:45:57 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:45:57 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:45:57 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:45:57 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:45:57 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    3.0 MB | mempeak:    3.0 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:45:57 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:45:57 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:45:57 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:45:57 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:45:57 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:45:57 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:45:57 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:45:57 symfony [info] {sfWebDebugLogger} Configuration 38.83 ms (10)
+Apr 10 17:45:57 symfony [info] {sfWebDebugLogger} Factories 44.44 ms (1)
+Apr 10 17:45:57 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 2.90 ms (1)
+Apr 10 17:45:57 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.91 ms (1)
+Apr 10 17:45:57 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.69 ms (1)
+Apr 10 17:45:57 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.72 ms (1)
+Apr 10 17:45:57 symfony [info] {sfWebResponse} Send content (41552 o)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:45:57 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:45:57 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:45:57 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:45:57 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:45:57 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:45:57 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:45:57 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:45:57 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:45:57 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:45:57 symfony [info] {sfWebResponse} Send content (419 o)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:46:08 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:46:08 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:46:08 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:46:08 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:46:08 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:46:08 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:46:08 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:46:08 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:46:09 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:46:09 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:46:09 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:46:09 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:46:09 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:46:09 symfony [info] {sfWebDebugLogger} Configuration 1.11 ms (9)
+Apr 10 17:46:09 symfony [info] {sfWebDebugLogger} Factories 6.66 ms (1)
+Apr 10 17:46:09 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 21.09 ms (1)
+Apr 10 17:46:09 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.72 ms (1)
+Apr 10 17:46:09 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.72 ms (1)
+Apr 10 17:46:09 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.68 ms (1)
+Apr 10 17:46:09 symfony [info] {sfWebResponse} Send content (41519 o)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:46:09 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:46:09 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:46:09 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:46:09 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:46:09 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:46:09 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:46:09 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:46:09 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:46:09 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:46:09 symfony [info] {sfWebResponse} Send content (419 o)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:46:26 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:46:26 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:46:26 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:46:26 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:46:26 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:46:26 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:46:26 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:46:26 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:46:26 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:46:26 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:46:26 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:46:26 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:46:26 symfony [info] {sfWebDebugLogger} Configuration 1.22 ms (9)
+Apr 10 17:46:26 symfony [info] {sfWebDebugLogger} Factories 6.30 ms (1)
+Apr 10 17:46:26 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 2.92 ms (1)
+Apr 10 17:46:26 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.70 ms (1)
+Apr 10 17:46:26 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.66 ms (1)
+Apr 10 17:46:26 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.67 ms (1)
+Apr 10 17:46:26 symfony [info] {sfWebResponse} Send content (41549 o)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:46:26 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:46:26 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:46:26 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:46:26 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:46:26 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:46:26 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:46:26 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:46:26 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:46:26 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:46:26 symfony [info] {sfWebResponse} Send content (425 o)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:46:29 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:46:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:46:29 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:46:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:46:29 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:46:29 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:46:29 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:46:29 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:46:29 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:46:29 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:46:29 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:46:29 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:46:29 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:46:29 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 17:46:29 symfony [info] {sfWebDebugLogger} Factories 6.48 ms (1)
+Apr 10 17:46:29 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.09 ms (1)
+Apr 10 17:46:29 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 7.86 ms (1)
+Apr 10 17:46:29 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.71 ms (1)
+Apr 10 17:46:29 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.76 ms (1)
+Apr 10 17:46:29 symfony [info] {sfWebResponse} Send content (41517 o)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:46:30 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:46:30 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:46:30 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:46:30 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:46:30 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:46:30 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:46:30 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:46:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:46:30 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:46:30 symfony [info] {sfWebResponse} Send content (425 o)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:48:23 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:48:23 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:48:23 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:48:23 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:48:23 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:48:23 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    3.0 MB | mempeak:    3.0 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:48:23 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:48:24 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:48:24 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:48:24 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:48:24 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:48:24 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:48:24 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:48:24 symfony [info] {sfWebDebugLogger} Configuration 39.83 ms (10)
+Apr 10 17:48:24 symfony [info] {sfWebDebugLogger} Factories 45.61 ms (1)
+Apr 10 17:48:24 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 30.89 ms (1)
+Apr 10 17:48:24 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 7.63 ms (1)
+Apr 10 17:48:24 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.69 ms (1)
+Apr 10 17:48:24 symfony [info] {sfWebDebugLogger} Partial "global/_header" 1.25 ms (1)
+Apr 10 17:48:24 symfony [info] {sfWebResponse} Send content (41554 o)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:48:24 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:48:24 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:48:24 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:48:24 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:48:24 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:48:24 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:48:24 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:48:24 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:48:24 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:48:24 symfony [info] {sfWebResponse} Send content (409 o)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:48:30 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:48:30 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:48:30 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:48:30 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:48:30 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:48:30 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:48:30 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:48:30 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:48:30 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:48:30 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:48:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:48:30 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:48:30 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 17:48:30 symfony [info] {sfWebDebugLogger} Factories 6.45 ms (1)
+Apr 10 17:48:30 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.01 ms (1)
+Apr 10 17:48:30 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.65 ms (1)
+Apr 10 17:48:30 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.71 ms (1)
+Apr 10 17:48:30 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.68 ms (1)
+Apr 10 17:48:30 symfony [info] {sfWebResponse} Send content (41517 o)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:48:30 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:48:30 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:48:30 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:48:30 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:48:30 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:48:30 symfony [debug] {sfPropelLogger} time:  0.017 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:48:30 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:48:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:48:30 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:48:30 symfony [info] {sfWebResponse} Send content (409 o)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:49:08 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:08 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:08 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:08 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:49:08 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:49:08 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:49:08 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:49:08 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:08 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:08 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:49:08 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:08 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:49:08 symfony [info] {sfWebDebugLogger} Configuration 1.05 ms (9)
+Apr 10 17:49:08 symfony [info] {sfWebDebugLogger} Factories 8.37 ms (1)
+Apr 10 17:49:08 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 4.85 ms (1)
+Apr 10 17:49:08 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 7.53 ms (1)
+Apr 10 17:49:08 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.82 ms (1)
+Apr 10 17:49:08 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.70 ms (1)
+Apr 10 17:49:08 symfony [info] {sfWebResponse} Send content (41550 o)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:08 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:49:08 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:08 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:08 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:08 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:49:08 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:49:08 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:49:08 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:08 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:49:08 symfony [info] {sfWebResponse} Send content (403 o)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:17 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicle_type_edit/1 with parameters array (  'module' => 'vehicle_type_edit',  'action' => '1',)
+Apr 10 17:49:17 symfony [info] {sfFrontWebController} Action "vehicle_type_edit/1" does not exist
+Apr 10 17:49:17 symfony [err] {sfError404Exception} Action "vehicle_type_edit/1" does not exist.
+Apr 10 17:49:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 404 Not Found"
+Apr 10 17:49:17 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:49:17 symfony [info] {sfWebDebugLogger} Configuration 0.54 ms (5)
+Apr 10 17:49:17 symfony [info] {sfWebDebugLogger} Factories 6.53 ms (1)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:19 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:49:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:19 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:19 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:49:19 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:49:19 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:49:19 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:49:19 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:19 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:19 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:49:19 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:19 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:49:19 symfony [info] {sfWebDebugLogger} Configuration 1.02 ms (9)
+Apr 10 17:49:19 symfony [info] {sfWebDebugLogger} Factories 6.34 ms (1)
+Apr 10 17:49:19 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.51 ms (1)
+Apr 10 17:49:19 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.94 ms (1)
+Apr 10 17:49:19 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.71 ms (1)
+Apr 10 17:49:19 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.71 ms (1)
+Apr 10 17:49:19 symfony [info] {sfWebResponse} Send content (41517 o)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:20 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:49:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:20 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:20 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:49:20 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:49:20 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:49:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:20 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:49:20 symfony [info] {sfWebResponse} Send content (403 o)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:26 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:49:26 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:26 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:26 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:26 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:49:26 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:49:26 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:49:26 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:49:26 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:26 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:26 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:49:26 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:26 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:49:26 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 17:49:26 symfony [info] {sfWebDebugLogger} Factories 6.11 ms (1)
+Apr 10 17:49:26 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.03 ms (1)
+Apr 10 17:49:26 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.68 ms (1)
+Apr 10 17:49:26 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.72 ms (1)
+Apr 10 17:49:26 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.70 ms (1)
+Apr 10 17:49:26 symfony [info] {sfWebResponse} Send content (41547 o)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:27 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:49:27 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:27 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:27 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:27 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:49:27 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:49:27 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:49:27 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:27 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:49:27 symfony [info] {sfWebResponse} Send content (405 o)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:28 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /@vehicle_type_edit/1 with parameters array (  'module' => '@vehicle_type_edit',  'action' => '1',)
+Apr 10 17:49:28 symfony [info] {sfFrontWebController} Action "vehicle_type_edit/1" does not exist
+Apr 10 17:49:28 symfony [err] {sfError404Exception} Action "vehicle_type_edit/1" does not exist.
+Apr 10 17:49:28 symfony [info] {sfWebResponse} Send status "HTTP/1.1 404 Not Found"
+Apr 10 17:49:28 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:49:28 symfony [info] {sfWebDebugLogger} Configuration 0.54 ms (5)
+Apr 10 17:49:28 symfony [info] {sfWebDebugLogger} Factories 7.36 ms (1)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:29 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:49:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:29 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:29 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:49:29 symfony [debug] {sfPropelLogger} time:  0.027 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:49:29 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:49:29 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:49:29 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:29 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:49:29 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:49:29 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:29 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:49:29 symfony [info] {sfWebDebugLogger} Configuration 1.02 ms (9)
+Apr 10 17:49:29 symfony [info] {sfWebDebugLogger} Factories 6.51 ms (1)
+Apr 10 17:49:29 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 29.69 ms (1)
+Apr 10 17:49:29 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 7.05 ms (1)
+Apr 10 17:49:29 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.68 ms (1)
+Apr 10 17:49:29 symfony [info] {sfWebDebugLogger} Partial "global/_header" 1.11 ms (1)
+Apr 10 17:49:29 symfony [info] {sfWebResponse} Send content (41518 o)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:49:30 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:49:30 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:49:30 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:49:30 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:49:30 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:49:30 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:49:30 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:49:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:49:30 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:49:30 symfony [info] {sfWebResponse} Send content (405 o)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:50:33 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:33 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:33 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:33 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:50:33 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:50:33 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:50:33 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:50:33 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:33 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:33 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:50:33 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:33 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:50:33 symfony [info] {sfWebDebugLogger} Configuration 1.01 ms (9)
+Apr 10 17:50:33 symfony [info] {sfWebDebugLogger} Factories 6.11 ms (1)
+Apr 10 17:50:33 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 2.80 ms (1)
+Apr 10 17:50:33 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.63 ms (1)
+Apr 10 17:50:33 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.67 ms (1)
+Apr 10 17:50:33 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.67 ms (1)
+Apr 10 17:50:33 symfony [info] {sfWebResponse} Send content (41549 o)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:33 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:50:33 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:33 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:33 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:33 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:50:33 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:50:33 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:50:33 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:33 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:50:33 symfony [info] {sfWebResponse} Send content (419 o)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:50:37 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:37 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:37 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:37 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:50:37 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:50:37 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:50:37 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:50:37 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:37 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:37 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:50:37 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:37 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:50:37 symfony [info] {sfWebDebugLogger} Configuration 1.01 ms (9)
+Apr 10 17:50:37 symfony [info] {sfWebDebugLogger} Factories 6.31 ms (1)
+Apr 10 17:50:37 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 20.29 ms (1)
+Apr 10 17:50:37 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.89 ms (1)
+Apr 10 17:50:37 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.72 ms (1)
+Apr 10 17:50:37 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.69 ms (1)
+Apr 10 17:50:37 symfony [info] {sfWebResponse} Send content (41519 o)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:37 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:50:37 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:37 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:37 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:37 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:50:37 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:50:37 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:50:37 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:37 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:50:37 symfony [info] {sfWebResponse} Send content (419 o)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:50:43 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:43 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:43 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:43 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:50:43 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:50:43 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:50:43 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:50:43 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:43 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:43 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:50:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:43 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:50:43 symfony [info] {sfWebDebugLogger} Configuration 0.99 ms (9)
+Apr 10 17:50:43 symfony [info] {sfWebDebugLogger} Factories 6.31 ms (1)
+Apr 10 17:50:43 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 2.87 ms (1)
+Apr 10 17:50:43 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.52 ms (1)
+Apr 10 17:50:43 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.68 ms (1)
+Apr 10 17:50:43 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.68 ms (1)
+Apr 10 17:50:43 symfony [info] {sfWebResponse} Send content (41548 o)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:43 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:50:43 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:43 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:43 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:43 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:50:43 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:50:43 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:50:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:43 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:50:43 symfony [info] {sfWebResponse} Send content (425 o)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:50:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:46 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:46 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:50:46 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:50:46 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:50:46 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:50:46 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:46 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:50:46 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:50:46 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:46 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:50:46 symfony [info] {sfWebDebugLogger} Configuration 1.04 ms (9)
+Apr 10 17:50:46 symfony [info] {sfWebDebugLogger} Factories 6.75 ms (1)
+Apr 10 17:50:46 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.03 ms (1)
+Apr 10 17:50:46 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.57 ms (1)
+Apr 10 17:50:46 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.66 ms (1)
+Apr 10 17:50:46 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.66 ms (1)
+Apr 10 17:50:46 symfony [info] {sfWebResponse} Send content (41517 o)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:50:46 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:50:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:50:46 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:50:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:50:46 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:50:46 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:50:46 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:50:46 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:50:46 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:50:46 symfony [info] {sfWebResponse} Send content (425 o)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:51:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:17 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:17 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:51:17 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:51:17 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:51:17 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:51:17 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:17 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:17 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:51:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:17 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:51:17 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 17:51:17 symfony [info] {sfWebDebugLogger} Factories 7.14 ms (1)
+Apr 10 17:51:17 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 3.07 ms (1)
+Apr 10 17:51:17 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.97 ms (1)
+Apr 10 17:51:17 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.71 ms (1)
+Apr 10 17:51:17 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.70 ms (1)
+Apr 10 17:51:17 symfony [info] {sfWebResponse} Send content (41549 o)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:17 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:51:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:17 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:17 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:51:17 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:51:17 symfony [debug] {sfPropelLogger} time:  0.003 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:51:17 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:17 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:51:17 symfony [info] {sfWebResponse} Send content (409 o)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:51:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:19 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:19 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:51:19 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:51:19 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:51:19 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:51:19 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:19 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:19 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:51:19 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:19 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:51:19 symfony [info] {sfWebDebugLogger} Configuration 1.03 ms (9)
+Apr 10 17:51:19 symfony [info] {sfWebDebugLogger} Factories 9.29 ms (1)
+Apr 10 17:51:19 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 21.55 ms (1)
+Apr 10 17:51:19 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 7.06 ms (1)
+Apr 10 17:51:19 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.72 ms (1)
+Apr 10 17:51:19 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.72 ms (1)
+Apr 10 17:51:19 symfony [info] {sfWebResponse} Send content (41519 o)
+Apr 10 17:51:19 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:20 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:51:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:20 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:20 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:51:20 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:51:20 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:51:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:20 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:51:20 symfony [info] {sfWebResponse} Send content (409 o)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:21 symfony [info] {sfPatternRouting} Match route "company" (/dati-aziendali) for /dati-aziendali with parameters array (  'module' => 'company',  'action' => 'index',)
+Apr 10 17:51:21 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:21 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:21 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:21 symfony [info] {companyActions} Call "companyActions->executeIndex()"
+Apr 10 17:51:21 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT company.ID, company.NAME, company.VAT_NUMBER, company.PHONE, company.FAX, company.MOBILE, company.EMAIL, company.SITE, company.FORMATTED_ADDRESS, company.LAT, company.LON, company.CREATED_AT, company.UPDATED_AT FROM `company` LIMIT 1
+Apr 10 17:51:21 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/company/templates/indexSuccess.php"
+Apr 10 17:51:21 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:51:21 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:21 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:21 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:51:21 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:21 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:51:21 symfony [info] {sfWebDebugLogger} Configuration 1.00 ms (9)
+Apr 10 17:51:21 symfony [info] {sfWebDebugLogger} Factories 6.50 ms (1)
+Apr 10 17:51:21 symfony [info] {sfWebDebugLogger} Action "company/index" 11.24 ms (1)
+Apr 10 17:51:21 symfony [info] {sfWebDebugLogger} View "Success" for "company/index" 7.18 ms (1)
+Apr 10 17:51:21 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.77 ms (1)
+Apr 10 17:51:21 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.71 ms (1)
+Apr 10 17:51:21 symfony [info] {sfWebResponse} Send content (43132 o)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Match route "vehicle_type" (/categorie-mezzi) for /categorie-mezzi with parameters array (  'module' => 'vehicleType',  'action' => 'index',)
+Apr 10 17:51:22 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:22 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:22 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:22 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeIndex()"
+Apr 10 17:51:22 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.8 MB | mempeak:    2.8 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type`
+Apr 10 17:51:22 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/modules/vehicleType/templates/indexSuccess.php"
+Apr 10 17:51:22 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_configuration_navbar.php"
+Apr 10 17:51:22 symfony [info] {sfPHPView} Decorate content with "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:22 symfony [info] {sfPHPView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/layout.php"
+Apr 10 17:51:22 symfony [info] {sfPartialView} Render "/home/lpodda/PhpstormProjects/transfer2014/apps/backend/templates/_header.php"
+Apr 10 17:51:22 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:22 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Apr 10 17:51:22 symfony [info] {sfWebDebugLogger} Configuration 1.01 ms (9)
+Apr 10 17:51:22 symfony [info] {sfWebDebugLogger} Factories 6.25 ms (1)
+Apr 10 17:51:22 symfony [info] {sfWebDebugLogger} Action "vehicleType/index" 2.86 ms (1)
+Apr 10 17:51:22 symfony [info] {sfWebDebugLogger} View "Success" for "vehicleType/index" 6.54 ms (1)
+Apr 10 17:51:22 symfony [info] {sfWebDebugLogger} Partial "global/_configuration_navbar" 0.69 ms (1)
+Apr 10 17:51:22 symfony [info] {sfWebDebugLogger} Partial "global/_header" 0.69 ms (1)
+Apr 10 17:51:22 symfony [info] {sfWebResponse} Send content (41510 o)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signin" (/login)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_signout" (/logout)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_user_set_password" (/set_password)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_password" (/request_password)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_do_password" (/request_password/do)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Connect sfRoute "sf_guard_forgot_password_reset_password" (/reset_password/:key/:id)
+Apr 10 17:51:22 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /vehicleType/get_data with parameters array (  'module' => 'vehicleType',  'action' => 'get_data',)
+Apr 10 17:51:22 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Apr 10 17:51:22 symfony [info] {sfFilterChain} Executing filter "sfBasicSecurityFilter"
+Apr 10 17:51:22 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Apr 10 17:51:22 symfony [info] {vehicleTypeActions} Call "vehicleTypeActions->executeGet_data()"
+Apr 10 17:51:22 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT COUNT(*) FROM `vehicle_type`
+Apr 10 17:51:22 symfony [debug] {sfPropelLogger} time:  0.000 sec | slow:  NO | mem:    2.5 MB | mempeak:    2.5 MB | memdelta:      0.0 B | SELECT vehicle_type.ID, vehicle_type.NAME, vehicle_type.CREATED_AT, vehicle_type.UPDATED_AT FROM `vehicle_type` ORDER BY vehicle_type.NAME ASC LIMIT 10
+Apr 10 17:51:22 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Apr 10 17:51:22 symfony [info] {sfWebResponse} Send header "Content-Type: application/json"
+Apr 10 17:51:22 symfony [info] {sfWebResponse} Send content (409 o)
