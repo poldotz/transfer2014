@@ -54,9 +54,51 @@ vehicle_type_update:
     param: { module: vehicleType, action: update }
 
 
+
+vehicle:
+    url:   /mezzi
+    param: { module: vehicle, action: index }
+
+vehicle_new:
+    url:   /nuovo-mezzo
+    param: { module: vehicle, action: new }
+
+vehicle_edit:
+    url:   /modifica-mezzo/:id
+    param: { module: vehicle, action: new }
+    requirements:
+      id: \d+
+
+vehicle_create:
+    url:   /crea-mezzo
+    param: { module: vehicle, action: create }
+
+vehicle_update:
+    url:   /aggiorna-mezzo
+    param: { module: vehicle, action: update }
+
+
 users:
   url:   /gestione-utenti
   param: { module: users, action: index }
+
+user_new:
+    url:   /nuovo-utente
+    param: { module: users, action: new }
+
+user_edit:
+    url:   /modifica-utente/:id
+    param: { module: users, action: new }
+    requirements:
+      id: \d+
+
+user_create:
+    url:   /crea-utente
+    param: { module: users, action: create }
+
+user_update:
+    url:   /aggiorna-utente
+    param: { module: users, action: update }
 
 
 sf_guard_signin:

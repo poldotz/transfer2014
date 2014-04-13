@@ -33,3 +33,10 @@ propel:
     frame_number:            { type: varchar(50) }
     mileage:                 { type: bigint }
     note:                    { type: varchar(255) }
+
+  sf_guard_user_profile:
+    _attributes: { phpName: sfGuardUserProfile }
+    id:
+    user_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    first_name:  varchar(20)
+    last_name:   varchar(20)

@@ -8,9 +8,7 @@
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe0b7;"></span> Categorie Mezzi',"@vehicle_type",array("class"=>($selected == "vehicle_type") ? "selected": "")); ?>
         </li>
         <li>
-            <a href="partenza.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe0ab;"></span> Mezzi
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe0ab;"></span> Mezzi',"@vehicle",array("class"=>($selected == "vehicle") ? "selected": "")); ?>
         </li>
         <li>
             <a href="autista.html">
@@ -19,9 +17,7 @@
 
         </li>
         <li>
-            <a href="hostess.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Utenti
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Utenti','@users',array("class"=>($selected == "users") ? "selected": "")); ?>
         </li>
     </ul>
     <div class="clearfix"></div>

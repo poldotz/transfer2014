@@ -19,4 +19,7 @@
  */
 class VehicleType extends BaseVehicleType
 {
+    public function __toString(){
+        return $this->getName();
+    }
 }
