@@ -11,13 +11,10 @@
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe0ab;"></span> Mezzi',"@vehicle",array("class"=>($selected == "vehicle") ? "selected": "")); ?>
         </li>
         <li>
-            <a href="autista.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span> Autisti
-            </a>
-
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Utenti','@users',array("class"=>($selected == "users") ? "selected": "")); ?>
         </li>
         <li>
-            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Utenti','@users',array("class"=>($selected == "users") ? "selected": "")); ?>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe071;"></span> Clienti',"@customer",array("class"=>($selected == "customer") ? "selected": "")); ?>
         </li>
     </ul>
     <div class="clearfix"></div>

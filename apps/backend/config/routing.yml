@@ -53,29 +53,27 @@ vehicle_type_update:
     url:   /aggiorna-categoria-mezzi
     param: { module: vehicleType, action: update }
 
+customer:
+    url:   /clienti
+    param: { module: customer, action: index }
 
+customer_new:
+    url:   /nuovo-cliente
+    param: { module: customer, action: new }
 
-vehicle:
-    url:   /mezzi
-    param: { module: vehicle, action: index }
-
-vehicle_new:
-    url:   /nuovo-mezzo
-    param: { module: vehicle, action: new }
-
-vehicle_edit:
-    url:   /modifica-mezzo/:id
-    param: { module: vehicle, action: new }
+customer_edit:
+    url:   /modifica-cliente/:id
+    param: { module: customer, action: new }
     requirements:
       id: \d+
 
-vehicle_create:
-    url:   /crea-mezzo
-    param: { module: vehicle, action: create }
+customer_create:
+    url:   /crea-cliente
+    param: { module: customer, action: create }
 
-vehicle_update:
-    url:   /aggiorna-mezzo
-    param: { module: vehicle, action: update }
+customer_update:
+    url:   /aggiorna-cliente
+    param: { module: customer, action: update }
 
 
 users:
