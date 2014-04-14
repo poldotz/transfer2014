@@ -15,14 +15,14 @@ abstract class BasesfGuardUserProfileForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'user_id'    => new sfWidgetFormPropelChoice(array('model' => 'sfGuardUser', 'add_empty' => false)),
+      'user_id'    => new sfWidgetFormPropelChoice(array('model' => 'sfGuardUser', 'add_empty' => true)),
       'first_name' => new sfWidgetFormInputText(),
       'last_name'  => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
-      'user_id'    => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id')),
+      'user_id'    => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id', 'required' => false)),
       'first_name' => new sfValidatorString(array('max_length' => 20, 'required' => false)),
       'last_name'  => new sfValidatorString(array('max_length' => 20, 'required' => false)),
     ));

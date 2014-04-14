@@ -28,6 +28,34 @@
         </td>
       </tr>
       <tr>
+          <th><?php echo $form['password']->renderLabel() ?></th>
+          <td>
+              <?php echo $form['password']->renderError() ?>
+              <?php echo $form['password'] ?>
+          </td>
+      </tr>
+      <tr>
+          <th><?php echo $form['password_again']->renderLabel() ?></th>
+          <td>
+              <?php echo $form['password_again']->renderError() ?>
+              <?php echo $form['password_again'] ?>
+          </td>
+      </tr>
+      <tr>
+          <th><?php echo $form['internal_user_groups']->renderLabel() ?></th>
+          <td>
+              <?php echo $form['internal_user_groups']->renderError() ?>
+              <?php echo $form['internal_user_groups'] ?>
+          </td>
+      </tr>
+      <tr>
+          <th><?php echo $form['is_active']->renderLabel() ?></th>
+          <td>
+              <?php echo $form['is_active']->renderError() ?>
+              <?php echo $form['is_active'] ?>
+          </td>
+      </tr>
+      <tr>
         <th><?php echo $form['first_name']->renderLabel() ?></th>
         <td>
           <?php echo $form['first_name']->renderError() ?>

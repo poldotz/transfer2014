@@ -22,6 +22,8 @@
 
                     <th>Gruppo</th>
 
+                    <th>Stato</th>
+
                     <th>Azioni</th>
 
                 </tr>

@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `sf_guard_user_profile`;
 CREATE TABLE `sf_guard_user_profile`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id` INTEGER NOT NULL,
+    `user_id` INTEGER,
     `first_name` VARCHAR(20),
     `last_name` VARCHAR(20),
     PRIMARY KEY (`id`),
