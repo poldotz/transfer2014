@@ -18,6 +18,14 @@
 class sfGuardUser extends PluginsfGuardUser
 {
 
+    public function getFirstName(){
+        return $this->first_name;
+    }
+
+    public function getLastName(){
+        return $this->last_name;
+    }
+
     /*public function addsfGuardUserProfile()
     {
         if(!$profile = $this->getProfile())
@@ -38,23 +46,5 @@ class sfGuardUser extends PluginsfGuardUser
     {
         $this->getProfile()->setEmail($email);
     }*/
-
-    public function getFirstName()
-    {
-        return $this->getProfile()->getFirstName();
-    }
-    public function setFirstName($first_name)
-    {
-        $this->getProfile()->setFirstName($first_name);
-    }
-
-    public function getLastName()
-    {
-        return $this->getProfile()->getFirstName();
-    }
-    public function setLastName($last_name)
-    {
-        $this->getProfile()->setLastName($last_name);
-    }
 
 }

@@ -7,7 +7,7 @@
  * @subpackage sf_guard_user
  * @version    SVN: $Id: sfGuardUserForm.class.php 24560 2009-11-30 11:05:31Z fabien $
  */
-class sfGuardUserForm extends sfGuardUserAdminForm
+class sfGuardUserForm extends BasesfGuardUserForm
 {
   public function configure()
   {
@@ -17,7 +17,16 @@ class sfGuardUserForm extends sfGuardUserAdminForm
     $c->add(sfGuardGroupPeer::NAME,sfConfig::get('app_internal_user_groups', array('Amministratore','Operatore','Autista')),Criteria::IN);
     $this->setWidget('internal_user_groups',new sfWidgetFormPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup')));
 
-    $this->setValidator('internal_user_groups', new sfValidatorPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup', 'required' => false)));
+      $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
+      $this->validatorSchema['password']->setOption('required', false);
+
+    $this->widgetSchema['password_again'] = new sfWidgetFormInputPassword();
+    $this->validatorSchema['password_again'] = clone $this->validatorSchema['password'];
+
+    $this->widgetSchema->moveField('password_again', 'after', 'password');
+    $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
+
+      $this->setValidator('internal_user_groups', new sfValidatorPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup', 'required' => false)));
 
     unset(
       $this['last_login'],

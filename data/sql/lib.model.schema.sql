@@ -68,6 +68,19 @@ CREATE TABLE `vehicle`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- customer_type
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `customer_type`;
+
+CREATE TABLE `customer_type`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `description` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- sf_guard_user_profile
 -- ---------------------------------------------------------------------
 
@@ -77,13 +90,32 @@ CREATE TABLE `sf_guard_user_profile`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER,
-    `first_name` VARCHAR(20),
-    `last_name` VARCHAR(20),
+    `customer_type_id` INTEGER NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `vat_number` VARCHAR(12),
+    `tax_code` VARCHAR(16),
+    `phone` VARCHAR(20),
+    `fax` VARCHAR(20),
+    `mobile` VARCHAR(20),
+    `email` VARCHAR(100),
+    `site` VARCHAR(150),
+    `formatted_address` VARCHAR(150),
+    `lat` DECIMAL(18,2),
+    `lon` DECIMAL(18,2),
+    `iban` VARCHAR(27),
+    `bic` VARCHAR(11),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
     PRIMARY KEY (`id`),
     INDEX `sf_guard_user_profile_FI_1` (`user_id`),
+    INDEX `sf_guard_user_profile_FI_2` (`customer_type_id`),
     CONSTRAINT `sf_guard_user_profile_FK_1`
         FOREIGN KEY (`user_id`)
         REFERENCES `sf_guard_user` (`id`)
+        ON DELETE CASCADE,
+    CONSTRAINT `sf_guard_user_profile_FK_2`
+        FOREIGN KEY (`customer_type_id`)
+        REFERENCES `customer_type` (`id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
