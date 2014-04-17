@@ -8,7 +8,7 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class customerActions extends sfActionsf
+class customerActions extends sfActions
 {
  /**
   * Executes index action
@@ -25,22 +25,18 @@ class customerActions extends sfActionsf
         $this->getResponse()->setContentType('application/json');
 
         //start: sorting
-        $type_colnames = array(sfGuardUserPeer::USERNAME);
+        $type_colnames = array(CustomerPeer::NAME);
         $iSortCol_0 = $request->getParameter('iSortCol_0');
         if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
         $c = new Criteria();
-        //$c->addJoin(sfGuardUserPeer::ID,sfGuardUserProfilePeer::USER_ID);
-        $c->addJoin(sfGuardUserPeer::ID,sfGuardUserGroupPeer::USER_ID);
-        $c->addJoin(sfGuardUserGroupPeer::GROUP_ID,sfGuardGroupPeer::ID);
+        $c->addJoin(CustomerPeer::USER_ID,sfGuardUserPeer::ID,Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerPeer::CUSTOMER_TYPE_ID,CustomerTypePeer::ID);
         if ($query = $request->getParameter('sSearch'))
         {
-            $c->addOr(sfGuardUserPeer::USERNAME,"%".$query."%",Criteria::LIKE);
-            $c->addOr(sfGuardUserPeer::FIRST_NAME,"%".$query."%",Criteria::LIKE);
-            $c->addOr(sfGuardUserPeer::LAST_NAME,"%".$query."%",Criteria::LIKE);
-            $c->addOr(sfGuardGroupPeer::NAME,"%".$query."%",Criteria::LIKE);
-
-            //$c->addOr(sfGuardUserProfilePeer::FIRST_NAME,"%".$query."%",Criteria::LIKE);
-            //$c->addOr(sfGuardUserProfilePeer::LAST_NAME,"%".$query."%",Criteria::LIKE);
+            $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
+            $c->addOr(CustomerPeer::VAT_NUMBER,"%".$query."%",Criteria::LIKE);
+            $c->addOr(CustomerPeer::TAX_CODE,"%".$query."%",Criteria::LIKE);
+            $c->addOr(CustomerTypePeer::DESCRIPTION,"%".$query."%",Criteria::LIKE);
         }
         if ('asc' === $request->getParameter('sSortDir_0', 'asc'))
         {
@@ -54,7 +50,7 @@ class customerActions extends sfActionsf
         //start: paging
         $item_per_page = $request->getParameter('iDisplayLength', 10);
         $page = ($request->getParameter('iDisplayStart', 0) / $item_per_page) + 1;
-        $pager = sfGuardUserPeer::doSelectPager($page, $item_per_page, $c);
+        $pager = CustomerPeer::doSelectPager($page, $item_per_page, $c);
         //end: paging
         $json = '{"iTotalRecords":'.$pager->getNbResults().',
      "iTotalDisplayRecords":'.$pager->getNbResults().',
@@ -63,8 +59,9 @@ class customerActions extends sfActionsf
         foreach ($pager->getResults() as $v)
         {
             if ($first++) $json .= ',';
-            $status = $v->getIsActive() ? "SI" : "NO";
-            $json .= '["'.$v->getUserName().'","'.$v->getFirstName().'","'.$v->getLastName().'","'.$v->getEmail().'","'.$v->getPhone().'","'.implode(",",$v->getGroupNames()).'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'users/edit/id/'.$v->getId().' \';\">"]';
+            $status = $v->getSfGuardUser()->getIsActive() ? "ATTIVO" : "NON ATTIVO";
+            $tax_field = $v->getCustomerType() == "Privato" ? $v->getTaxCode() : $v->getVatNumber();
+            $json .= '["'.$v->getName().'","'.$v->getCustomerType().'","'.$tax_field.'","'.$v->getEmail().'","'.$v->getPhone().'","'.$v->getFax().'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'users/edit/id/'.$v->getId().' \';\">"]';
         }
         $json .= ']}';
         return $this->renderText($json);
@@ -72,14 +69,14 @@ class customerActions extends sfActionsf
 
     public function executeNew(sfWebRequest $request)
     {
-        $this->form = new sfGuardUserForm();
+        $this->form = new CustomerForm();
     }
 
     public function executeCreate(sfWebRequest $request)
     {
         $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-        $this->form = new sfGuardUserForm();
+        $this->form = new CustomerForm();
 
         $this->processForm($request, $this->form);
 
@@ -110,9 +107,65 @@ class customerActions extends sfActionsf
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid())
         {
-            $user = $form->save();
+            if($form->getObject()->isNew()){
+                $values = $form->getValues();
+                if(isset($values['user_id']) && $values['user_id'] > 0){
+                    $user = sfGuardUserPeer::retrieveByPK($values['user_id']);
+                    if(isset($values['email']) && strlen($values['email'])>0){
+                        $checkUserEmail = sfGuardUserPeer::retrieveByUsernameOrEmail($values['email']);
+                        if(!isset($checkUserEmail)){
+                            $user->setEmail($values['email']);
+                            $user->setUsername($values['email']);
+                        }
+                        else{
+                            $user->setEmail(uniqid());
+                            $user->setUsername(uniqid());
+                        }
 
-            $this->redirect('users/edit?id='.$user->getId());
+                        if(isset($values['is_active'])){
+                            $user->setIsActive($values['is_active']);
+                        }
+                        else{
+                            $user->setIsActive(false);
+                        }
+                    }
+                    else{
+                        $user->setEmail(uniqid());
+                        $user->setUsername(uniqid());
+                    }
+                    $user->save();
+                }
+                else{
+                    $user = new sfGuardUser();
+                    if(isset($values['email']) && strlen($values['email'])>0){
+                        $checkUserEmail = sfGuardUserPeer::retrieveByUsernameOrEmail($values['email']);
+                        if(!isset($checkUserEmail)){
+                            $user->setEmail($values['email']);
+                            $user->setUsername($values['email']);
+                        }
+                        else{
+                            $user->setEmail(uniqid());
+                            $user->setUsername(uniqid());
+                        }
+
+                        if(isset($values['is_active'])){
+                            $user->setIsActive($values['is_active']);
+                        }
+                        else{
+                            $user->setIsActive(false);
+                        }
+                    }
+                    else{
+                        $user->setEmail(uniqid());
+                        $user->setUsername(uniqid());
+                    }
+                    $user->save();
+                }
+            }
+
+            $customer = $form->save();
+
+            $this->redirect('customer/edit?id='.$customer->getId());
         }
     }
 

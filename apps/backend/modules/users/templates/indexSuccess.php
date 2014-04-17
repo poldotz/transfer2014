@@ -22,7 +22,7 @@
 
                     <th>Gruppo</th>
 
-                    <th>Stato</th>
+                    <th>Attivo</th>
 
                     <th>Azioni</th>
 

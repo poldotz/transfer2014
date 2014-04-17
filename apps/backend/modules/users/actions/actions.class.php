@@ -63,7 +63,7 @@ class usersActions extends sfActions
         foreach ($pager->getResults() as $v)
         {
             if ($first++) $json .= ',';
-            $status = $v->getIsActive() ? "SI" : "NO";
+            $status = $v->getIsActive() ? "ATTIVO" : "NON ATTIVO";
             $json .= '["'.$v->getUserName().'","'.$v->getFirstName().'","'.$v->getLastName().'","'.$v->getEmail().'","'.$v->getPhone().'","'.implode(",",$v->getGroupNames()).'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'users/edit/id/'.$v->getId().' \';\">"]';
         }
         $json .= ']}';

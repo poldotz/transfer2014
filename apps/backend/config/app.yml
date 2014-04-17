@@ -4,4 +4,4 @@
 # default values
 all:
   internal_user_groups: [Amministratore,Operatore,Autista]
-  sf_guard_plugin_profile_class: customer
+  sf_guard_plugin_profile_class: Customer

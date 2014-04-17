@@ -39,12 +39,12 @@ propel:
     description: { type: varchar(100),required: true}
 
   sf_guard_user_profile:
-    _attributes: { phpName: customer }
+    _attributes: { phpName: Customer }
     _propel_behaviors:
       Timestampable:         ~
     id:                      ~
     user_id:              { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: false, onDelete: cascade }
-    customer_type_id:     { type: integer, foreignTable: customer_type, foreignReference: id, required: true, onDelete: cascade }
+    customer_type_id:     { type: integer, foreignTable: customer_type, foreignReference: id, required: false, onDelete: cascade }
     name:                 { type: varchar(100), required: true }
     vat_number:           { type: varchar(12), required: false }
     tax_code:             { type: varchar(16), required: false }

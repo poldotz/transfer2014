@@ -2,10 +2,10 @@
 
 /**
  * Data object containing the SQL and PHP code to migrate the database
- * up to version 1397677702.
- * Generated on 2014-04-16 21:48:22 by poldotz
+ * up to version 1397723759.
+ * Generated on 2014-04-17 10:35:59 by lpodda
  */
-class PropelMigration_1397677702
+class PropelMigration_1397723759
 {
 
     public function preUp($manager)
@@ -42,7 +42,7 @@ class PropelMigration_1397677702
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-ALTER TABLE `sf_guard_user_profile` CHANGE `user_id` `user_id` INTEGER;
+ALTER TABLE `sf_guard_user_profile` CHANGE `customer_type_id` `customer_type_id` INTEGER;
 
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
@@ -64,7 +64,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-ALTER TABLE `sf_guard_user_profile` CHANGE `user_id` `user_id` INTEGER NOT NULL;
+ALTER TABLE `sf_guard_user_profile` CHANGE `customer_type_id` `customer_type_id` INTEGER NOT NULL;
 
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

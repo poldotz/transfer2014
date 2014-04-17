@@ -90,7 +90,7 @@ CREATE TABLE `sf_guard_user_profile`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER,
-    `customer_type_id` INTEGER NOT NULL,
+    `customer_type_id` INTEGER,
     `name` VARCHAR(100) NOT NULL,
     `vat_number` VARCHAR(12),
     `tax_code` VARCHAR(16),

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * customer form.
+ * Customer form.
  *
  * @package    transfer
  * @subpackage form
  * @author     Poldotz
  */
-class customerForm extends BasecustomerForm
+class CustomerForm extends BaseCustomerForm
 {
   public function configure()
   {

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * customer form base class.
+ * Customer form base class.
  *
- * @method customer getObject() Returns the current form's model object
+ * @method Customer getObject() Returns the current form's model object
  *
  * @package    transfer
  * @subpackage form
  * @author     Poldotz
  */
-abstract class BasecustomerForm extends BaseFormPropel
+abstract class BaseCustomerForm extends BaseFormPropel
 {
   public function setup()
   {
@@ -64,7 +64,7 @@ abstract class BasecustomerForm extends BaseFormPropel
 
   public function getModelName()
   {
-    return 'customer';
+    return 'Customer';
   }
 
 
