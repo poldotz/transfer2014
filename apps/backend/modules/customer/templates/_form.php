@@ -9,6 +9,7 @@
     <tfoot>
       <tr>
         <td colspan="2">
+            <?php echo $form['user_id'] ?>
           <?php echo $form->renderHiddenFields(false) ?>
           &nbsp;<a href="<?php echo url_for('customer/index') ?>">Indietro</a>
           <?php if (!$form->getObject()->isNew()): ?>
@@ -32,6 +33,13 @@
           <td>
               <?php echo $form['customer_type_id']->renderError() ?>
               <?php echo $form['customer_type_id'] ?>
+          </td>
+      </tr>
+      <tr>
+          <th><?php echo $form['is_active']->renderLabel() ?></th>
+          <td>
+              <?php echo $form['is_active']->renderError() ?>
+              <?php echo $form['is_active'] ?>
           </td>
       </tr>
       <tr>

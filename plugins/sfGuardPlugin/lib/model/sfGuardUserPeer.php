@@ -17,18 +17,26 @@
  */
 class sfGuardUserPeer extends PluginsfGuardUserPeer
 {
-    public static function retrieveByUsernameOrEmail($usernameOrEmail, $isActive = true)
+    public static function retrieveByUsernameOrEmail($usernameOrEmail, $isActive = null,$user_id = null)
     {
         $c = new Criteria();
         $c0 = $c->getNewCriterion(self::USERNAME, $usernameOrEmail);
         $c1 = $c->getNewCriterion(self::EMAIL, $usernameOrEmail);
-        $c2 = $c->getNewCriterion(self::IS_ACTIVE, $isActive);
         $c0->addOr($c1);
-        $c0->addAnd($c2);
+        if(isset($isActive)){
+            $c2 = $c->getNewCriterion(self::IS_ACTIVE, $isActive);
+            $c0->addAnd($c2);
+        }
+
+        if(isset($user_id)){
+            $c3 = $c->getNewCriterion(self::ID,$user_id,Criteria::NOT_EQUAL);
+            $c0->addAnd($c3);
+        }
         $c->add($c0);
 
         return self::doSelectOne($c);
     }
+
 
     public static function doSelectPager($page=1, $item_per_page = 10, Criteria $criteria = null)
     {

@@ -61,7 +61,7 @@ class customerActions extends sfActions
             if ($first++) $json .= ',';
             $status = $v->getSfGuardUser()->getIsActive() ? "ATTIVO" : "NON ATTIVO";
             $tax_field = $v->getCustomerType() == "Privato" ? $v->getTaxCode() : $v->getVatNumber();
-            $json .= '["'.$v->getName().'","'.$v->getCustomerType().'","'.$tax_field.'","'.$v->getEmail().'","'.$v->getPhone().'","'.$v->getFax().'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'users/edit/id/'.$v->getId().' \';\">"]';
+            $json .= '["'.$v->getName().'","'.$v->getCustomerType().'","'.$tax_field.'","'.$v->getEmail().'","'.$v->getPhone().'","'.$v->getFax().'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'customer/edit/id/'.$v->getId().' \';\">"]';
         }
         $json .= ']}';
         return $this->renderText($json);
@@ -85,17 +85,17 @@ class customerActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        $user = sfGuardUserQuery::create()->findPk($request->getParameter('id'));
-        $this->forward404Unless($user, sprintf('Object User does not exist (%s).', $request->getParameter('id')));
-        $this->form = new sfGuardUserForm($user);
+        $user = CustomerQuery::create()->findPk($request->getParameter('id'));
+        $this->forward404Unless($user, sprintf('Object Customer  does not exist (%s).', $request->getParameter('id')));
+        $this->form = new CustomerForm($user);
     }
 
     public function executeUpdate(sfWebRequest $request)
     {
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-        $user = sfGuardUserQuery::create()->findPk($request->getParameter('id'));
-        $this->forward404Unless($user, sprintf('Object User does not exist (%s).', $request->getParameter('id')));
-        $this->form = new sfGuardUserForm($user);
+        $user = CustomerQuery::create()->findPk($request->getParameter('id'));
+        $this->forward404Unless($user, sprintf('Object Customer does not exist (%s).', $request->getParameter('id')));
+        $this->form = new CustomerForm($user);
 
         $this->processForm($request, $this->form);
 
@@ -107,46 +107,47 @@ class customerActions extends sfActions
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid())
         {
+            $values = $form->getValues();
+
             if($form->getObject()->isNew()){
-                $values = $form->getValues();
-                if(isset($values['user_id']) && $values['user_id'] > 0){
-                    $user = sfGuardUserPeer::retrieveByPK($values['user_id']);
-                    if(isset($values['email']) && strlen($values['email'])>0){
-                        $checkUserEmail = sfGuardUserPeer::retrieveByUsernameOrEmail($values['email']);
-                        if(!isset($checkUserEmail)){
-                            $user->setEmail($values['email']);
-                            $user->setUsername($values['email']);
-                        }
-                        else{
-                            $user->setEmail(uniqid());
-                            $user->setUsername(uniqid());
-                        }
-
-                        if(isset($values['is_active'])){
-                            $user->setIsActive($values['is_active']);
-                        }
-                        else{
-                            $user->setIsActive(false);
-                        }
-                    }
-                    else{
-                        $user->setEmail(uniqid());
-                        $user->setUsername(uniqid());
-                    }
-                    $user->save();
-                }
-                else{
                     $user = new sfGuardUser();
-                    if(isset($values['email']) && strlen($values['email'])>0){
-                        $checkUserEmail = sfGuardUserPeer::retrieveByUsernameOrEmail($values['email']);
-                        if(!isset($checkUserEmail)){
-                            $user->setEmail($values['email']);
-                            $user->setUsername($values['email']);
+
+                    if(isset($values['email']) && strlen($values['email'])){
+                        $user->setEmail($values['email']);
+                        $user->setUsername($values['email']);
+                    }
+                    else{
+                        $userEmail = uniqid();
+                        $user->setEmail($userEmail);
+                        $user->setUsername($userEmail);
+                    }
+
+                    $user->save();
+                    $customer = new Customer();
+                    $customer->fromArray($values, BasePeer::TYPE_FIELDNAME);
+                    $customer->setsfGuardUser($user);
+                    $customer->save();
+                    $this->redirect('customer/edit?id='.$customer->getId());
+            }
+            else{
+                    try{
+                        $user = sfGuardUserPeer::retrieveByPK($values['user_id']);
+                        if(isset($values['email']) && strlen($values['email'])>0 && $user->getEmail() !== $values['email']){
+                            $checkUserEmail = sfGuardUserPeer::retrieveByUsernameOrEmail($values['email'],true,$user->getId());
+                            if(!isset($checkUserEmail)){
+                                $user->setEmail($values['email']);
+                                $user->setUsername($values['email']);
+
+                            }
+                            else{
+                                $errorSchema = $form->getErrorSchema();
+                                $errorSchema->addError(new sfValidatorError(new sfValidatorEmail(), 'Campo Email usato precedentemente da un altro utente.'), 'email');
+                                throw new sfValidatorErrorSchema(new sfValidatorEmail(), $errorSchema);
+                            }
+
                         }
-                        else{
-                            $user->setEmail(uniqid());
-                            $user->setUsername(uniqid());
-                        }
+                        $user->setEmail($values['email']);
+                        $user->setUsername($values['email']);
 
                         if(isset($values['is_active'])){
                             $user->setIsActive($values['is_active']);
@@ -154,19 +155,19 @@ class customerActions extends sfActions
                         else{
                             $user->setIsActive(false);
                         }
+                        $user->save();
+                        $customer = CustomerPeer::retrieveByPK($values['id']);
+                        $customer->fromArray($values, BasePeer::TYPE_FIELDNAME);
+                        $customer->setsfGuardUser($user);
+                        $customer->save();
+                        $this->redirect('customer/edit?id='.$customer->getId());
                     }
-                    else{
-                        $user->setEmail(uniqid());
-                        $user->setUsername(uniqid());
+                    catch (Exception $e){
+                        //print_r($e->getMessage());
                     }
-                    $user->save();
-                }
             }
-
-            $customer = $form->save();
-
-            $this->redirect('customer/edit?id='.$customer->getId());
         }
+
     }
 
 }
