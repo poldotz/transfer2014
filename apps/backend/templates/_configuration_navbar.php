@@ -16,6 +16,9 @@
         <li>
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe071;"></span> Clienti',"@customer",array("class"=>($selected == "customer") ? "selected": "")); ?>
         </li>
+        <li>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe00d;"></span> Localit&agrave',"@locality",array("class"=>($selected == "locality") ? "selected": "")); ?>
+        </li>
     </ul>
     <div class="clearfix"></div>
 </div>

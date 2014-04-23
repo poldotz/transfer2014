@@ -58,3 +58,19 @@ propel:
     lon:                  { type: DECIMAL, size: 18, scale: 2, required: false }
     iban:                 { type: varchar(27), required: false}
     bic:                  { type: varchar(11), required: false}
+
+  locality:
+    _propel_behaviors:
+      Timestampable:         ~
+      Geocodable:            ~
+    id:                      ~
+    user_id:              { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: false, onDelete: setnull }
+    is_vector:            { type: boolean, required: true, default: 0 }
+    is_active:            { type: boolean, required: true, default: 1 }
+    name:                 { type: varchar(200), required: true  }
+    phone:                { type: varchar(20),  required: false }
+    fax:                  { type: varchar(20),  required: false }
+    mobile:               { type: varchar(20),  required: false }
+    email:                { type: varchar(100), required: false }
+    site:                 { type: varchar(150), required: false }
+    formatted_address:    { type: varchar(150), required: false }

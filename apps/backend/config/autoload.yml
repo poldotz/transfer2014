@@ -1,0 +1,5 @@
+autoload:
+  geocoder:
+    name:       geocoder
+    path:       %SF_LIB_DIR%/vendor/geocoder
+    recursive:  true

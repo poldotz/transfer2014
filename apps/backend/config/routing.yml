@@ -121,6 +121,28 @@ user_update:
     param: { module: users, action: update }
 
 
+locality:
+    url:   /localita
+    param: { module: locality, action: index }
+
+locality_new:
+    url:   /nuova-localita
+    param: { module: locality, action: new }
+
+locality_edit:
+    url:   /modifica-localita/:id
+    param: { module: locality, action: new }
+    requirements:
+      id: \d+
+
+locality_create:
+    url:   /crea-localita
+    param: { module: locality, action: create }
+
+locality_update:
+    url:   /aggiorna-localita
+    param: { module: locality, action: update }
+
 sf_guard_signin:
   url:   /login
   param: { module: sfGuardAuth, action: signin }

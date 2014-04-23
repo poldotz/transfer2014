@@ -119,5 +119,36 @@ CREATE TABLE `sf_guard_user_profile`
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- locality
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `locality`;
+
+CREATE TABLE `locality`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id` INTEGER,
+    `is_vector` TINYINT(1) DEFAULT 0 NOT NULL,
+    `is_active` TINYINT(1) DEFAULT 1 NOT NULL,
+    `name` VARCHAR(200) NOT NULL,
+    `phone` VARCHAR(20),
+    `fax` VARCHAR(20),
+    `mobile` VARCHAR(20),
+    `email` VARCHAR(100),
+    `site` VARCHAR(150),
+    `formatted_address` VARCHAR(150),
+    `lat` DECIMAL(18,2),
+    `lon` DECIMAL(18,2),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`id`),
+    INDEX `locality_FI_1` (`user_id`),
+    CONSTRAINT `locality_FK_1`
+        FOREIGN KEY (`user_id`)
+        REFERENCES `sf_guard_user` (`id`)
+        ON DELETE SET NULL
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
