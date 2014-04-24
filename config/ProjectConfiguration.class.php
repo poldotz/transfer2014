@@ -6,6 +6,21 @@ sfCoreAutoload::register();
 class ProjectConfiguration extends sfProjectConfiguration
 {
 
+    static protected $geocoderLoaded = false;
+
+    static public function registerGeocoder()
+    {
+        if (self::$geocoderLoaded) {
+            return;
+        }
+
+        require_once sfConfig::get('sf_lib_dir') . '/vendor/Geocoder/autoload.php';
+
+        self::$geocoderLoaded = true;
+    }
+
+
+
 
   public function setup()
   {

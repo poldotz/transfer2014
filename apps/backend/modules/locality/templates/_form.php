@@ -19,6 +19,9 @@
       </tr>
     </tfoot>
     <tbody>
+      <?php if($sf_user->hasFlash('error')): ?>
+            <?php echo $sf_user->getFlash('error'); ?>
+      <?php endif; ?>
       <?php echo $form->renderGlobalErrors() ?>
       <tr>
           <th><?php echo $form['name']->renderLabel() ?></th>

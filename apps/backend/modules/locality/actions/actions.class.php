@@ -86,8 +86,8 @@ class localityActions extends sfActions
     $this->forward404Unless($Locality, sprintf('Object Locality does not exist (%s).', $request->getParameter('id')));
     $this->form = new LocalityForm($Locality);
 
-    $this->processForm($request, $this->form);
-
+    $error = $this->processForm($request, $this->form);
+    $this->getUser()->setFlash('error',$error);
     $this->setTemplate('edit');
   }
 
@@ -107,9 +107,13 @@ class localityActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $Locality = $form->save();
-
-      $this->redirect('locality/edit?id='.$Locality->getId());
+      try{
+        $Locality = $form->save();
+        $this->redirect('locality/edit?id='.$Locality->getId());
+      }
+      catch(Exception $e){
+          return "Verificate l'indirizzo inserito e riprovare";
+      }
     }
   }
 }

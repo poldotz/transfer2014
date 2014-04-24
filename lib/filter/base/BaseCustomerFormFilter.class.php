@@ -23,12 +23,12 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterPropel
       'email'             => new sfWidgetFormFilterInput(),
       'site'              => new sfWidgetFormFilterInput(),
       'formatted_address' => new sfWidgetFormFilterInput(),
-      'lat'               => new sfWidgetFormFilterInput(),
-      'lon'               => new sfWidgetFormFilterInput(),
       'iban'              => new sfWidgetFormFilterInput(),
       'bic'               => new sfWidgetFormFilterInput(),
       'created_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'updated_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'latitude'          => new sfWidgetFormFilterInput(),
+      'longitude'         => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -43,12 +43,12 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterPropel
       'email'             => new sfValidatorPass(array('required' => false)),
       'site'              => new sfValidatorPass(array('required' => false)),
       'formatted_address' => new sfValidatorPass(array('required' => false)),
-      'lat'               => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
-      'lon'               => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'iban'              => new sfValidatorPass(array('required' => false)),
       'bic'               => new sfValidatorPass(array('required' => false)),
       'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'updated_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'latitude'          => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'longitude'         => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('customer_filters[%s]');
@@ -78,12 +78,12 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterPropel
       'email'             => 'Text',
       'site'              => 'Text',
       'formatted_address' => 'Text',
-      'lat'               => 'Number',
-      'lon'               => 'Number',
       'iban'              => 'Text',
       'bic'               => 'Text',
       'created_at'        => 'Date',
       'updated_at'        => 'Date',
+      'latitude'          => 'Number',
+      'longitude'         => 'Number',
     );
   }
 }

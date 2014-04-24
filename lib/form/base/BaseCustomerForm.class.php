@@ -26,12 +26,12 @@ abstract class BaseCustomerForm extends BaseFormPropel
       'email'             => new sfWidgetFormInputText(),
       'site'              => new sfWidgetFormInputText(),
       'formatted_address' => new sfWidgetFormInputText(),
-      'lat'               => new sfWidgetFormInputText(),
-      'lon'               => new sfWidgetFormInputText(),
       'iban'              => new sfWidgetFormInputText(),
       'bic'               => new sfWidgetFormInputText(),
       'created_at'        => new sfWidgetFormDateTime(),
       'updated_at'        => new sfWidgetFormDateTime(),
+      'latitude'          => new sfWidgetFormInputText(),
+      'longitude'         => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -47,12 +47,12 @@ abstract class BaseCustomerForm extends BaseFormPropel
       'email'             => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'site'              => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'formatted_address' => new sfValidatorString(array('max_length' => 150, 'required' => false)),
-      'lat'               => new sfValidatorNumber(array('required' => false)),
-      'lon'               => new sfValidatorNumber(array('required' => false)),
       'iban'              => new sfValidatorString(array('max_length' => 27, 'required' => false)),
       'bic'               => new sfValidatorString(array('max_length' => 11, 'required' => false)),
       'created_at'        => new sfValidatorDateTime(array('required' => false)),
       'updated_at'        => new sfValidatorDateTime(array('required' => false)),
+      'latitude'          => new sfValidatorNumber(array('required' => false)),
+      'longitude'         => new sfValidatorNumber(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('customer[%s]');
