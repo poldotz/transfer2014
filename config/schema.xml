@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" package="lib.model" defaultIdMethod="native">
+
+  <table name="airport">
+      <behavior name="Timestampable" />
+      <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+      <column name="code" type="varchar" size="5" required="true"/>
+      <column name="name" type="varchar" size="100" required="true"/>
+      <column name="city" type="varchar" size="100" required="true"/>
+      <column name="country" type="varchar" size="100" required="true"/>
+      <column name="lat" type="double" size="10" scale="8" required="true"/>
+      <column name="lng" type="double" size="10" scale="8" required="true"/>
+      <column name="timezone" type="varchar" size="100" required="true"/>
+      <unique name="aita_code">
+          <unique-column name="code" />
+      </unique>
+  </table>
+  <table name="company">
+    <behavior name="Timestampable" />
+    <behavior name="Geocodable">
+        <parameter name="geocode_address" value="true" />
+        <parameter name="address_columns" value="formatted_address" />
+        <parameter name="geocoder_provider" value="\Geocoder\Provider\GoogleMapsProvider" />
+        <parameter name="geocoder_api_key" value="AIzaSyDHe1uZEarjAj5pYie_sNwZsEqwLaeuUeY" />
+    </behavior>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="name" type="varchar" required="true" size="100" />
+    <column name="vat_number" type="varchar" required="true" size="20" />
+    <column name="phone" type="varchar" required="false" size="20" />
+    <column name="fax" type="varchar" required="false" size="20" />
+    <column name="mobile" type="varchar" required="false" size="20" />
+    <column name="email" type="varchar" required="false" size="100" />
+    <column name="site" type="varchar" required="false" size="150" />
+    <column name="formatted_address" type="varchar" required="false" size="150" />
+  </table>
+
+  <table name="vehicle_type">
+    <behavior name="Timestampable" />
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="name" type="varchar" required="true" size="100" />
+  </table>
+
+  <table name="vehicle">
+    <behavior name="Timestampable" />
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="vehicle_type_id" type="integer" required="true" />
+    <foreign-key foreignTable="vehicle_type" onDelete="cascade">
+      <reference local="vehicle_type_id" foreign="id" />
+    </foreign-key>
+    <column name="model" type="varchar" required="true" size="100" />
+    <column name="plate_number" type="varchar" size="20" />
+    <column name="frame_number" type="varchar" size="50" />
+    <column name="mileage" type="bigint" />
+    <column name="note" type="varchar" size="255" />
+  </table>
+
+  <table name="customer_type">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="description" type="varchar" required="true" size="100" />
+  </table>
+
+  <table name="sf_guard_user_profile" phpName="Customer">
+    <behavior name="Timestampable" />
+    <behavior name="Geocodable">
+        <parameter name="geocode_address" value="true" />
+        <parameter name="address_columns" value="formatted_address" />
+        <parameter name="geocoder_provider" value="\Geocoder\Provider\GoogleMapsProvider" />
+        <parameter name="geocoder_api_key" value="AIzaSyDHe1uZEarjAj5pYie_sNwZsEqwLaeuUeY" />
+    </behavior>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="false" />
+    <foreign-key foreignTable="sf_guard_user" onDelete="cascade">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <column name="customer_type_id" type="integer" required="false" />
+    <foreign-key foreignTable="customer_type" onDelete="cascade">
+      <reference local="customer_type_id" foreign="id" />
+    </foreign-key>
+    <column name="name" type="varchar" required="true" size="100" />
+    <column name="vat_number" type="varchar" required="false" size="12" />
+    <column name="tax_code" type="varchar" required="false" size="16" />
+    <column name="phone" type="varchar" required="false" size="20" />
+    <column name="fax" type="varchar" required="false" size="20" />
+    <column name="mobile" type="varchar" required="false" size="20" />
+    <column name="email" type="varchar" required="false" size="100" />
+    <column name="site" type="varchar" required="false" size="150" />
+    <column name="formatted_address" type="varchar" required="false" size="150" />
+    <column name="iban" type="varchar" required="false" size="27" />
+    <column name="bic" type="varchar" required="false" size="11" />
+  </table>
+
+  <table name="locality">
+    <behavior name="Timestampable" />
+    <behavior name="Geocodable">
+      <parameter name="geocode_address" value="true" />
+      <parameter name="address_columns" value="formatted_address" />
+      <parameter name="geocoder_provider" value="\Geocoder\Provider\GoogleMapsProvider" />
+      <parameter name="geocoder_api_key" value="AIzaSyDHe1uZEarjAj5pYie_sNwZsEqwLaeuUeY" />
+    </behavior>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="user_id" type="integer" required="false" />
+    <foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <column name="is_vector" type="boolean" required="true" default="0" />
+    <column name="is_active" type="boolean" required="true" default="1" />
+    <column name="name" type="varchar" required="true" size="200" />
+    <column name="phone" type="varchar" required="false" size="20" />
+    <column name="fax" type="varchar" required="false" size="20" />
+    <column name="mobile" type="varchar" required="false" size="20" />
+    <column name="email" type="varchar" required="false" size="100" />
+    <column name="site" type="varchar" required="false" size="150" />
+    <column name="formatted_address" type="varchar" required="false" size="150" />
+  </table>
+
+  <table name="booking">
+      <behavior name="Timestampable"/>
+      <behavior name="versionable">
+          <parameter name="log_created_at" value="true" />
+          <parameter name="log_created_by" value="true" />
+      </behavior>
+      <!--<behavior name="archivable"/>-->
+      <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+      <column name="booking_date" type="timestamp" required="true"/>
+      <column name="year" type="integer" size="4" required="true"/>
+      <column name="number" type="integer" size="12" required="true"/>
+      <column name="adult" type="integer" size="4" required="true"/>
+      <column name="child" type="integer" size="4" required="false" default="0"/>
+      <column name="contact" type="varchar" size="100" required="false"/>
+      <column name="rif_file" type="varchar" size="20" required="false"/>
+      <column name="customer_id" type="integer" required="true"/>
+      <column name="vehicle_type_id" type="integer" required="true"/>
+      <column name="is_confirmed" type="boolean" default="false" required="true"/>
+      <foreign-key foreignTable="sf_guard_user_profile">
+          <reference local="customer_id" foreign="id" />
+      </foreign-key>
+      <foreign-key foreignTable="vehicle_type">
+          <reference local="vehicle_type_id" foreign="id" />
+      </foreign-key>
+      <unique name="identification_number">
+         <unique-column name="year" />
+         <unique-column name="number" />
+      </unique>
+  </table>
+
+  <table name="payment_method">
+      <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+      <column name="name" type="varchar" size="100" required="true"/>
+      <column name="is_active" type="boolean" required="true" default="1" />
+  </table>
+
+  <table name="arrival">
+    <behavior name="Timestampable"/>
+    <behavior name="versionable">
+        <parameter name="log_created_at" value="true" />
+        <parameter name="log_created_by" value="true" />
+    </behavior>
+    <!--<behavior name="archivable"/>-->
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="booking_id" type="integer" required="false"/>
+    <column name="day" type="date" required="false"/>
+    <column name="hour" type="time" required="false"/>
+    <column name="flight" type="varchar" size="10" required="false"/>
+    <column name="cost" type="decimal" size="10" scale="2" required="false"/>
+    <column name="note" type="varchar" size="100" required="false"/>
+    <column name="payment_method_id" type="integer" required="false"/>
+    <column name="locality_from" type="integer" required="false"/>
+    <column name="locality_to" type="integer" required="false"/>
+    <column name="driver_id" type="integer" required="false"/>
+    <column name="vehicle_id" type="integer" required="false"/>
+    <column name="cancelled" type="boolean" required="false" default="0"/>
+    <unique name="booking">
+        <unique-column name="booking_id" />
+    </unique>
+    <foreign-key foreignTable="locality" name="locality_from" onDelete="none" onUpdate="cascade">
+        <reference local="locality_from" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="locality" name="locality_to" onDelete="none" onUpdate="cascade">
+        <reference local="locality_to" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="booking" onDelete="cascade" onUpdate="cascade">
+        <reference local="booking_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="payment_method">
+        <reference local="payment_method_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="sf_guard_user" onDelete="setnull" onUpdate="cascade">
+        <reference local="driver_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="vehicle" onDelete="setnull" onUpdate="cascade">
+        <reference local="vehicle_id" foreign="id" />
+    </foreign-key>
+  </table>
+
+  <table name="departure">
+    <behavior name="Timestampable"/>
+    <behavior name="versionable">
+        <parameter name="log_created_at" value="true" />
+        <parameter name="log_created_by" value="true" />
+    </behavior>
+    <!--<behavior name="archivable"/>-->
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="booking_id" type="integer"/>
+    <column name="day" type="date" required="false"/>
+    <column name="hour" type="time" required="false"/>
+    <column name="pick_up" type="boolean" required="false" default="false"/>
+    <column name="departure_time" type="time" required="false"/>
+    <column name="flight" type="varchar" size="10" required="false"/>
+    <column name="cost" type="decimal" size="10" scale="2" required="false"/>
+    <column name="note" type="varchar" size="100" required="false"/>
+    <column name="payment_method_id" type="integer" required="false"/>
+    <column name="locality_from" type="integer" required="false"/>
+    <column name="locality_to" type="integer" required="false"/>
+    <column name="driver_id" type="integer" required="false"/>
+    <column name="vehicle_id" type="integer" required="false"/>
+    <column name="cancelled" type="boolean" required="false" default="0"/>
+    <unique name="booking_departure">
+        <unique-column name="booking_id" />
+    </unique>
+    <foreign-key foreignTable="locality" name="locality_from_departure" onDelete="none" onUpdate="cascade">
+        <reference local="locality_from" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="locality" name="locality_to_departure" onDelete="none" onUpdate="cascade">
+        <reference local="locality_to" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="booking" onDelete="cascade" onUpdate="cascade">
+        <reference local="booking_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="payment_method">
+        <reference local="payment_method_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="sf_guard_user" onDelete="setnull" onUpdate="cascade">
+        <reference local="driver_id" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="vehicle" onDelete="setnull" onUpdate="cascade">
+        <reference local="vehicle_id" foreign="id" />
+    </foreign-key>
+  </table>
+</database>

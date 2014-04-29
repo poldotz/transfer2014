@@ -24,6 +24,7 @@ test:
 
 all:
   .settings:
+    default_culture: it_IT
     # Form security secret (CSRF protection)
     csrf_secret:            c5606d97c5c32fdc74195b3793253b65fee8f27e
 

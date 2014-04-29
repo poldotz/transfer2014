@@ -78,7 +78,10 @@ class customerActions extends sfActions
 
         $this->form = new CustomerForm();
 
-        $this->processForm($request, $this->form);
+        $error = $this->processForm($request, $this->form);
+        if(isset($error)){
+            $this->getUser()->setFlash('error',$error);
+        }
 
         $this->setTemplate('new');
     }
@@ -97,7 +100,11 @@ class customerActions extends sfActions
         $this->forward404Unless($user, sprintf('Object Customer does not exist (%s).', $request->getParameter('id')));
         $this->form = new CustomerForm($user);
 
-        $this->processForm($request, $this->form);
+        $error = $this->processForm($request, $this->form);
+        if(isset($error)){
+            $this->getUser()->setFlash('error',$error);
+        }
+
 
         $this->setTemplate('edit');
     }
@@ -121,12 +128,17 @@ class customerActions extends sfActions
                         $user->setEmail($userEmail);
                         $user->setUsername($userEmail);
                     }
-
+                    try{
                     $user->save();
                     $customer = new Customer();
                     $customer->fromArray($values, BasePeer::TYPE_FIELDNAME);
                     $customer->setsfGuardUser($user);
-                    $customer->save();
+
+                        $customer->save();
+                    }
+                    catch(Exception $e){
+                        return "Verificare l'indirizzo inserito e riprovare";
+                    }
                     $this->redirect('customer/edit?id='.$customer->getId());
             }
             else{
@@ -160,11 +172,13 @@ class customerActions extends sfActions
                         $customer->fromArray($values, BasePeer::TYPE_FIELDNAME);
                         $customer->setsfGuardUser($user);
                         $customer->save();
-                        $this->redirect('customer/edit?id='.$customer->getId());
                     }
-                    catch (Exception $e){
-                        //print_r($e->getMessage());
+                    catch(Exception $e){
+                            return "Verificare l'indirizzo inserito e riprovare";
                     }
+                    $this->redirect('customer/edit?id='.$customer->getId());
+
+
             }
         }
 

@@ -7769,3 +7769,19 @@ label{
     height: 30px;
     line-height: 30px;
 }
+.sessionYear{
+   height:25px;
+   margin-bottom: 2.5px;
+   padding:4px 4px;
+   color: #000000;
+   max-width: 68px;
+}
+li.horizontal_type
+{
+    display: inline;
+    text-align: center;
+    margin: 0 5px;
+}
+ul.radio_list{
+    display:inline;
+}

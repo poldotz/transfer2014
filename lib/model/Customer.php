@@ -19,5 +19,9 @@
  */
 class Customer extends BaseCustomer
 {
+    public function __toString(){
+        return $this->getName();
+
+    }
 
 }

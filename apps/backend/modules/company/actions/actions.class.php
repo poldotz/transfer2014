@@ -28,7 +28,10 @@ class companyActions extends sfActions
     public function executeCreate(sfWebRequest $request){
 
         $this->form = new CompanyForm();
-        $this->processForm($request, $this->form);
+        $error = $this->processForm($request, $this->form);
+        if(isset($error)){
+            $this->getUser()->setFlash('error',$error);
+        }
         $this->setTemplate('index');
     }
 
@@ -48,7 +51,10 @@ class companyActions extends sfActions
         $company = $request->getParameter('company');
         $company = CompanyPeer::retrieveByPK($company['id']);
         $this->form = new CompanyForm($company);
-        $this->processForm($request, $this->form);
+        $error = $this->processForm($request, $this->form);
+        if(isset($error)){
+            $this->getUser()->setFlash('error',$error);
+        }
         $this->setTemplate('index');
     }
 
@@ -61,7 +67,12 @@ class companyActions extends sfActions
 
         if ($form->isValid())
         {
-            $company = $form->save();
+            try{
+                $company = $form->save();
+            }
+            catch(Exception $e){
+                return "Verificare indirizzo inserito e riprovare.";
+            }
 
             $this->redirect('company', $company);
         }

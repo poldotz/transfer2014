@@ -3,8 +3,9 @@
 
 rendering: ~
 security:  ~
-
 # insert your own filters here
+sessionYearFilter:
+  class: sessionYearFilter
 
 cache:     ~
 execution: ~

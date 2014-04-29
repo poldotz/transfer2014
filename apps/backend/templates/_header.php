@@ -14,11 +14,21 @@
     </a>
     <div id="mini-nav-left">
         <ul class="hidden-phone">
-            <li >
+            <?php if($sf_user->hasCredential('configuration')): ?>
+            <li>
                 <?php echo link_to('configurazione','@users',array('class'=>'active')) ?>
+            </li>
+            <?php endif; ?>
+            <?php if($sf_user->hasCredential('services')): ?>
             <li>
                 <?php echo link_to('Servizi','@booking',array('class'=>'active')) ?>
             </li>
+            <?php endif; ?>
+            <?php if($sf_user->hasCredential('configuration')): ?>
+            <li style="border-right: 0px solid #1a1a1a;">
+                <?php include_component('general','sessionYear'); ?>
+            </li>
+        <?php endif; ?>
         </ul>
         <div class="clearfix"></div>
     </div>

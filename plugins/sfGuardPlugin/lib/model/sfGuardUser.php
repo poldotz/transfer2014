@@ -18,6 +18,7 @@
 class sfGuardUser extends PluginsfGuardUser
 {
 
+
     public function getFirstName(){
         return $this->first_name;
     }

@@ -18,6 +18,7 @@ public function getGeocoder()
 if ($apiKeyProvider) :  ?>
     $provider = new <?php echo $apiKeyProvider ?>;
 <?php endif; ?>
+    ProjectConfiguration::registerGeocoder();
     $geocoder = new \Geocoder\Geocoder(new <?php echo $geocoderProvider ?>(new <?php echo $geocoderAdapter ?>()<?php echo $apiKey ?>));
 
     return $geocoder;

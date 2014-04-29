@@ -14,10 +14,13 @@ default:
 
   stylesheets:
       - main.css
+      - jq-theme/jquery-ui-1.8.16.custom.css
 
   javascripts:
       - jquery.min.js
       - bootstrap.js
+      - bootbox.min.js
+      - jq-theme/jquery-ui-1.8.16.custom.min.js
 
   has_layout:     true
   layout:         layout

@@ -51,4 +51,17 @@ class sfGuardUserPeer extends PluginsfGuardUserPeer
         $pager->init();
         return $pager;
     }
+
+    public function getDrivers($active = true){
+
+        return sfGuardUserQuery::create()
+            ->filterByIsActive($active)
+            ->usesfGuardUserGroupQuery()
+            ->usesfGuardGroupQuery()
+            ->filterByName('Autista',Criteria::EQUAL)
+            ->endUse()
+            ->endUse()
+            ->orderBy('sfGuardUser.firstName',Criteria::DESC)
+            ->find();
+    }
 }

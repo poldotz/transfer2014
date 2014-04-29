@@ -2,7 +2,9 @@
 <div class="main-container">
     <?php include_stylesheets_for_form($form) ?>
     <?php include_javascripts_for_form($form) ?>
-
+    <?php if($sf_user->hasFlash('error')): ?>
+        <?php echo $sf_user->getFlash('error'); ?>
+    <?php endif; ?>
     <?php echo form_tag_for($form, '@company') ?>
     <table id="job_form">
         <tfoot>

@@ -19,4 +19,9 @@
  */
 class Locality extends BaseLocality
 {
+
+    function __toString()
+    {
+        return $this->getName();
+    }
 }

@@ -1,0 +1,6 @@
+{
+    "name": "ntbusiness/transfer",
+    "require": {
+        "nategood/httpful": "dev-master"
+    }
+}

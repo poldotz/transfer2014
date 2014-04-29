@@ -1,9 +1,7 @@
 <div id="main-nav" class="hidden-phone hidden-tablet">
     <ul>
         <li>
-            <a href="index.html" class="selected">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe03f;"></span> Prenotazione
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe03f;"></span> Prenotazione',"@booking",array("class"=>($selected == "booking") ? "selected": "")); ?>
         </li>
         <li>
             <a href="arrivo.html">

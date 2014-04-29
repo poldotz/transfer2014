@@ -19,13 +19,32 @@ class ProjectConfiguration extends sfProjectConfiguration
         self::$geocoderLoaded = true;
     }
 
+    static protected $composerLoaded = false;
+
+    static public function registerComposer()
+    {
+        if (self::$geocoderLoaded) {
+            return;
+        }
+
+        require_once sfConfig::get('sf_lib_dir') . '/vendor/vendor/autoload.php';
+
+        self::$composerLoaded = true;
+    }
+
 
 
 
   public function setup()
   {
+      $this->getEventDispatcher()->connect(
+          'form.validation_error',
+          array('BaseForm', 'listenToValidationError')
+      );
+
     $this->enablePlugins('sfPropelORMPlugin');
     $this->enablePlugins('sfGuardPlugin');
     $this->enablePlugins('sfGuardExtraPlugin');
+    $this->enablePlugins('sfFormExtraPlugin');
   }
 }
