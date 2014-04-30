@@ -15,6 +15,10 @@ homepage:
   url:   /
   param: { module: booking, action: index }
 
+booking_copy:
+  url:   /clona-prenotazione
+  param: { module: booking, action: copy }
+
 booking:
     url:   /gestione-prenotazioni
     param: { module: booking, action: index }

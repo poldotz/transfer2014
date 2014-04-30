@@ -40,7 +40,7 @@ class ArrivalForm extends BaseArrivalForm
       $c4->add(PaymentMethodPeer::IS_ACTIVE,true,Criteria::EQUAL);
       $this->widgetSchema['payment_method_id'] = new sfWidgetFormPropelChoice(array('model'=>'paymentMethod','criteria'=>$c4,'multiple'=>false,'expanded'=>true),array("class"=>"horizontal_type"));
       $this->widgetSchema['cancelled'] = new sfWidgetFormInputCheckbox(array(),array("class"=>"radio inline"));
-
+      $this->validatorSchema['booking_id']->setOption('required',false);
 
 
   }

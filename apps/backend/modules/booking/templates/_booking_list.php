@@ -31,12 +31,36 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#booking_list').dataTable({
+       oTable = $('#booking_list').dataTable({
             'bLengthChange': false,
             "iDisplayLength": 5,
             'bProcessing': true,
             'bServerSide': true,
-            'sAjaxSource': "<?php echo url_for('booking/get_data') ?>"
+            'sAjaxSource': "<?php echo url_for('booking/get_data') ?>",
+            'fnDrawCallback': function() {
+                clickRowHandler();
+            }
         }).fnSetFilteringDelay();
-    })
+
+        /* Click event handler */
+        function clickRowHandler() {
+            $('#booking_list tbody tr').bind('click', function () {
+                var aData = oTable.fnGetData( this );
+                var idNumber = aData[0];
+                postSelectedRow(idNumber);
+            });
+        }
+
+        function postSelectedRow(idNumber) {
+            $.get("<?php echo url_for('booking/editJs') ?>", {
+                    idNumber: idNumber
+                },
+                function(book){
+                    $("#booking_container").html( book );
+                }).fail(function(){
+                    bootbox.alert('Prenotazione non trovata!');
+                });
+
+        }
+    });
 </script>

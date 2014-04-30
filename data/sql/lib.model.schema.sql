@@ -231,7 +231,7 @@ DROP TABLE IF EXISTS `arrival`;
 CREATE TABLE `arrival`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `booking_id` INTEGER,
+    `booking_id` INTEGER NOT NULL,
     `day` DATE,
     `hour` TIME,
     `flight` VARCHAR(10),
@@ -292,7 +292,7 @@ DROP TABLE IF EXISTS `departure`;
 CREATE TABLE `departure`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `booking_id` INTEGER,
+    `booking_id` INTEGER NOT NULL,
     `day` DATE,
     `hour` TIME,
     `pick_up` TINYINT(1) DEFAULT 0,
@@ -383,7 +383,7 @@ DROP TABLE IF EXISTS `arrival_archive`;
 CREATE TABLE `arrival_archive`
 (
     `id` INTEGER NOT NULL,
-    `booking_id` INTEGER,
+    `booking_id` INTEGER NOT NULL,
     `day` DATE,
     `hour` TIME,
     `flight` VARCHAR(10),
@@ -416,7 +416,7 @@ DROP TABLE IF EXISTS `departure_archive`;
 CREATE TABLE `departure_archive`
 (
     `id` INTEGER NOT NULL,
-    `booking_id` INTEGER,
+    `booking_id` INTEGER NOT NULL,
     `day` DATE,
     `hour` TIME,
     `pick_up` TINYINT(1) DEFAULT 0,
@@ -486,7 +486,7 @@ DROP TABLE IF EXISTS `arrival_version`;
 CREATE TABLE `arrival_version`
 (
     `id` INTEGER NOT NULL,
-    `booking_id` INTEGER,
+    `booking_id` INTEGER NOT NULL,
     `day` DATE,
     `hour` TIME,
     `flight` VARCHAR(10),
@@ -520,7 +520,7 @@ DROP TABLE IF EXISTS `departure_version`;
 CREATE TABLE `departure_version`
 (
     `id` INTEGER NOT NULL,
-    `booking_id` INTEGER,
+    `booking_id` INTEGER NOT NULL,
     `day` DATE,
     `hour` TIME,
     `pick_up` TINYINT(1) DEFAULT 0,

@@ -15,7 +15,7 @@ abstract class BaseDepartureForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
-      'booking_id'         => new sfWidgetFormPropelChoice(array('model' => 'Booking', 'add_empty' => true)),
+      'booking_id'         => new sfWidgetFormPropelChoice(array('model' => 'Booking', 'add_empty' => false)),
       'day'                => new sfWidgetFormDate(),
       'hour'               => new sfWidgetFormTime(),
       'pick_up'            => new sfWidgetFormInputCheckbox(),
@@ -38,7 +38,7 @@ abstract class BaseDepartureForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
-      'booking_id'         => new sfValidatorPropelChoice(array('model' => 'Booking', 'column' => 'id', 'required' => false)),
+      'booking_id'         => new sfValidatorPropelChoice(array('model' => 'Booking', 'column' => 'id')),
       'day'                => new sfValidatorDate(array('required' => false)),
       'hour'               => new sfValidatorTime(array('required' => false)),
       'pick_up'            => new sfValidatorBoolean(array('required' => false)),

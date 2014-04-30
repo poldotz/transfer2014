@@ -7785,3 +7785,7 @@ li.horizontal_type
 ul.radio_list{
     display:inline;
 }
+
+#booking_list tbody tr:hover {
+    cursor: pointer;
+}

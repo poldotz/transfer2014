@@ -19,4 +19,12 @@
  */
 class Booking extends BaseBooking
 {
+    protected function doSave(PropelPDO $con)
+    {
+        $this->collArrivals = null;
+        $this->collDepartures=  null;
+        return parent::doSave($con);
+    }
+
+
 }

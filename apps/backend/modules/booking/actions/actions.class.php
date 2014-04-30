@@ -42,6 +42,26 @@ class bookingActions extends sfActions
       }
   }
 
+    public function executeEditJs(sfWebRequest $request){
+
+        if ($request->isXmlHttpRequest())
+        {
+            sfConfig::set('sf_web_debug', false);
+            $idNumber = explode("/",$request->getParameter('idNumber'));
+            if(is_array($idNumber)){
+                $number = $idNumber[0];
+                $year = $idNumber[1];
+                $booking = BookingPeer::getBookingByIdNumber($number,$year);
+                $this->form = new BookingForm($booking);
+                return $this->renderPartial('booking/booking_form', array('form' => $this->form));
+            }else{
+                $response = sfContext::getInstance()->getResponse();
+                return $response->setStatusCode(404,'Prenotazione non trovata.');
+            }
+
+        }
+    }
+
 
     public function executeGet_data(sfWebRequest $request)
     {
@@ -49,7 +69,7 @@ class bookingActions extends sfActions
         $this->getResponse()->setContentType('application/json');
 
         //start: sorting
-        $type_colnames = array(BookingPeer::YEAR,BookingPeer::NUMBER);
+        $type_colnames = array(BookingPeer::NUMBER,BookingPeer::YEAR);
         $iSortCol_0 = $request->getParameter('iSortCol_0');
         if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
         $c = new Criteria();
@@ -63,7 +83,7 @@ class bookingActions extends sfActions
             $c->addOr(BookingPeer::RIF_FILE,"%".$query."%",Criteria::LIKE);
             $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
         }
-        if ('asc' === $request->getParameter('sSortDir_0', 'asc'))
+        if ('desc' === $request->getParameter('sSortDir_0', 'desc'))
         {
             $c->addAscendingOrderByColumn($type_colnames[$iSortCol_0]);
         }
@@ -109,6 +129,22 @@ class bookingActions extends sfActions
         $booking = BookingQuery::create()->findPk($request->getParameter('id'));
         $this->forward404Unless($booking, sprintf('Object Booking  does not exist (%s).', $request->getParameter('id')));
         $this->form = new BookingForm($booking);
+        $this->setTemplate('index');
+    }
+
+    public function executeCopy(sfWebRequest $request){
+
+        $oldBook = BookingPeer::retrieveByPK($request->getParameter('id'));
+
+        $newBook = $oldBook->copy(true);
+        $session_year = $this->getUser()->getSessionYear();
+        $number = BookingPeer::getIdentificationNumber($session_year);
+        $newBook->setNumber($number);
+        $newBook->setYear($session_year);
+        $newBook->setBookingDate(date('Y-m-d H:i:s',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),$session_year)));
+        $newBook->setVersionCreatedBy($this->getUser()->getUsername());
+        $this->form = new BookingCopyForm($newBook,array('booking_id'=> $oldBook->getId()));
+        $this->setTemplate('index');
     }
 
     public function executeUpdate(sfWebRequest $request)

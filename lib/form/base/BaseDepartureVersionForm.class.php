@@ -39,7 +39,7 @@ abstract class BaseDepartureVersionForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'                 => new sfValidatorPropelChoice(array('model' => 'Departure', 'column' => 'id', 'required' => false)),
-      'booking_id'         => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'booking_id'         => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647)),
       'day'                => new sfValidatorDate(array('required' => false)),
       'hour'               => new sfValidatorTime(array('required' => false)),
       'pick_up'            => new sfValidatorBoolean(array('required' => false)),

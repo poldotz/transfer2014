@@ -11,41 +11,49 @@ class BookingForm extends BaseBookingForm
 {
   public function configure()
   {
-
-      $this->setWidget('customer_type_id',new sfWidgetFormPropelChoice(array('model'=>'customerType','add_empty'=>'Tipo Cliente')));
-
+      $this->disableLocalCSRFProtection();
       $this->setWidget('number',new sfWidgetFormInputHidden());
       $this->setWidget('year',new sfWidgetFormInputHidden());
       $this->setWidget('booking_date',new sfWidgetFormInputHidden());
       $this->setWidget('version_created_by',new sfWidgetFormInputHidden());
 
-
-      $c = new Criteria();
-
-
       $customer_type_id = sfContext::getInstance()->getRequest()->getParameter('customer_type_id');
+      if($this->getObject()->getCustomerId()){
+        $customer = $this->getObject()->getCustomer();
+        $customer_type_id = $customer->getCustomerTypeId();
+        $this->setDefault('customer_type_id',$customer_type_id);
+      }
+      $this->setWidget('customer_type_id',new sfWidgetFormPropelChoice(array('model'=>'customerType','add_empty'=>'Tipo Cliente')));
+      $c1 = new Criteria();
 
       if(isset($customer_type_id)){
-          $c->add(CustomerPeer::CUSTOMER_TYPE_ID,$customer_type_id,Criteria::EQUAL);
+          $c1->add(CustomerPeer::CUSTOMER_TYPE_ID,$customer_type_id,Criteria::EQUAL);
       }
       else{
-          $c->add(CustomerPeer::CUSTOMER_TYPE_ID, null, Criteria::ISNOTNULL);
+          $c1->add(CustomerPeer::CUSTOMER_TYPE_ID, null, Criteria::ISNOTNULL);
       }
-      $c->addDescendingOrderByColumn('name');
-      $this->setWidget('customer_id',new sfWidgetFormPropelChoice(array('model'=>'customer','criteria'=>$c,'add_empty'=>'Nome Cliente')));
+      $c1->addDescendingOrderByColumn('name');
+      $this->setWidget('customer_id',new sfWidgetFormPropelChoice(array('model'=>'customer','criteria'=>$c1,'add_empty'=>'Nome Cliente')));
 
       $this->setWidget('vehicle_type_id',new sfWidgetFormPropelChoice(array('model'=>'vehicleType','add_empty'=>'Mezzo Richiesto')));
 
       $this->setDefault('child','');
 
-      $arrival = new Arrival();
-      $arrival->setBooking($this->getObject());
-      $arrivalForm = new ArrivalForm();
+      if($this->getObject()->getId()){
+          $arrival = ArrivalQuery::create()->findOneByBookingId($this->getObject()->getId());
+          $departure = DepartureQuery::create()->findOneByBookingId($this->getObject()->getId());
+      }
+
+
+      $arrivalForm = new ArrivalForm($arrival);
       $this->embedForm('arrival',$arrivalForm);
 
-      $departure = new Departure();
-      $departure->setBooking($this->getObject());
-      $departureForm = new DepartureForm();
+      if(!isset($departure)){
+          $departure = new Departure();
+          $departure->setBooking($this->getObject());
+      }
+
+      $departureForm = new DepartureForm($departure);
       $this->embedForm('departure',$departureForm);
 
       $this->setValidator('customer_type_id',new sfValidatorPropelChoice(array('model'=>'customerType','required'=>true)));
@@ -62,13 +70,21 @@ class BookingForm extends BaseBookingForm
     {
         if (null === $forms)
         {
-            $arrival = $this->getValue('arrival');
+
             $forms = $this->embeddedForms;
             foreach ($forms as $name => $form)
             {
-                if (!isset($arriva[$name]))
+                $embForm = $this->getValue($name);
+                if (!isset($embForm))
                 {
-                    unset($forms['arrival'][$name]);
+                    unset($forms[$name]);
+                }
+                else{
+                    $booking_id = $forms[$name]->getObject()->getBookingId();
+                    if(!isset($booking_id)){
+                        $forms[$name]->getObject()->setBookingId($this->getObject()->getId());
+                        $forms[$name]->getObject()->setVersionCreatedBy($this->getObject()->getVersionCreatedBy());
+                    }
                 }
             }
         }

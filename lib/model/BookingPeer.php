@@ -32,6 +32,13 @@ class BookingPeer extends BaseBookingPeer
         $pager->init();
         return $pager;
     }
+
+    public static function getBookingByIdNumber($number,$year){
+        $c = new Criteria();
+        $c->add(BookingPeer::NUMBER,$number,Criteria::EQUAL);
+        $c->add(BookingPeer::YEAR,$year,Criteria::EQUAL);
+        return BookingPeer::doSelectOne($c);
+    }
     /*
      * Restituisce il numero progressivo relativo ad un anno.
      */

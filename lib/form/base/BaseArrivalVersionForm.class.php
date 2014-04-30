@@ -37,7 +37,7 @@ abstract class BaseArrivalVersionForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'                 => new sfValidatorPropelChoice(array('model' => 'Arrival', 'column' => 'id', 'required' => false)),
-      'booking_id'         => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'booking_id'         => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647)),
       'day'                => new sfValidatorDate(array('required' => false)),
       'hour'               => new sfValidatorTime(array('required' => false)),
       'flight'             => new sfValidatorString(array('max_length' => 10, 'required' => false)),

@@ -12,7 +12,7 @@ abstract class BaseArrivalArchiveFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'booking_id'        => new sfWidgetFormFilterInput(),
+      'booking_id'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'day'               => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'hour'              => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'flight'            => new sfWidgetFormFilterInput(),

@@ -157,7 +157,7 @@
     </behavior>
     <!--<behavior name="archivable"/>-->
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
-    <column name="booking_id" type="integer" required="false"/>
+    <column name="booking_id" type="integer" required="true"/>
     <column name="day" type="date" required="false"/>
     <column name="hour" type="time" required="false"/>
     <column name="flight" type="varchar" size="10" required="false"/>
@@ -200,7 +200,7 @@
     </behavior>
     <!--<behavior name="archivable"/>-->
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
-    <column name="booking_id" type="integer"/>
+    <column name="booking_id" type="integer" required="true"/>
     <column name="day" type="date" required="false"/>
     <column name="hour" type="time" required="false"/>
     <column name="pick_up" type="boolean" required="false" default="false"/>
