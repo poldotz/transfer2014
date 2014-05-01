@@ -11,22 +11,7 @@
 
 <div id="booking_container" class="span12" style="margin-bottom: 0px;">
     <div class="widget">
-        <div class="widget-header">
-            <div class="title">
-                <button id="save_booking_form" class="btn btn-small btn-success" type="button">
-                    Salva
-                </button>
-                <button id="new_booking_form" class="btn btn-small btn-info" type="button">
-                    Nuovo
-                </button>
-                <button id="copy_booking_form" class="btn btn-small btn-warning input-top-margin" type="button">
-                    Clona
-                </button>
-                <button class="btn btn-small  btn-inverse input-top-margin" type="button">
-                    Filtra
-                </button>
-            </div>
-        </div>
+        <?php include_partial('booking_button_widget'); ?>
         <div style="padding: 5px;" class="widget-body">
             <form id="booking_form" action="<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
                 <?php echo $form->renderHiddenFields() ?>
@@ -52,5 +37,9 @@
 
     $('#copy_booking_form').on('click',function(){
         document.location.href = '<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'index' : 'copy?id='.$form->getObject()->getId())) ?>'
+    });
+
+    $('#search_booking_form').on('click',function(){
+        document.location.href = '<?php echo url_for('booking/search') ?>'
     });
 </script>

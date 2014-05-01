@@ -30,6 +30,96 @@ class bookingActions extends sfActions
 
   }
 
+  public function executeSearch(sfWebRequest $request){
+
+      if ($request->isXmlHttpRequest()){
+
+          sfConfig::set('sf_web_debug', false);
+          $this->getResponse()->setContentType('application/json');
+
+          $form = new BookingSearchForm();
+          $values = $request->getParameter($form->getName());
+
+          //start: sorting
+          $type_colnames = array(BookingPeer::NUMBER,BookingPeer::YEAR);
+          $iSortCol_0 = $request->getParameter('iSortCol_0',0);
+          if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
+          $c = new Criteria();
+          $c->addJoin(BookingPeer::CUSTOMER_ID,CustomerPeer::ID);
+          $c->addJoin(BookingPeer::VEHICLE_TYPE_ID,VehicleTypePeer::ID);
+          if (!empty($values))
+          {
+              // booking search.
+
+              if($values['booking_date']['year'] && $values['booking_date']['month'] && $values['booking_date']['day']){
+                  $c->addAnd(BookingPeer::BOOKING_DATE,
+                             $values['booking_date']['year']."-".sprintf("%02d",$values['booking_date']['month'])."-".sprintf("%02d",$values['booking_date']['day'])." 00:00:00",
+                             Criteria::GREATER_THAN
+                            );
+                  $c->addAnd(BookingPeer::BOOKING_DATE,
+                             $values['booking_date']['year']."-".sprintf("%02d",$values['booking_date']['month'])."-".sprintf("%02d",$values['booking_date']['day'])." 23:59:59",
+                             Criteria::LESS_THAN
+                            ) ;
+              }
+
+
+              if($values['contact']){
+                $c->addOr(BookingPeer::CONCTACT,"%".$values['contact']."%",Criteria::LIKE);
+              }
+              if($values['rif_file']){
+                $c->addOr(BookingPeer::RIF_FILE,"%".$values['rif_file']."%",Criteria::LIKE);
+              }
+              if($values['customer_id']){
+                $c->addAnd(CustomerPeer::ID,$values['customer_id'],Criteria::EQUAL);
+              }
+              if($values['customer_type_id']){
+                $c->addAnd(CustomerPeer::CUSTOMER_TYPE_ID,$values['customer_type_id'],Criteria::EQUAL);
+              }
+              if($values['vehicle_type_id']){
+                  $c->addAnd(BookingPeer::VEHICLE_TYPE_ID,$values['vehicle_type_id'],Criteria::EQUAL);
+              }
+              if($values['adult']){
+                  $c->addAnd(BookingPeer::ADULT,$values['adult'],Criteria::EQUAL);
+              }
+              if($values['child']){
+                  $c->addAnd(BookingPeer::CHILD,$values['child'],Criteria::EQUAL);
+              }
+
+              // arrival search
+          }
+          if ('desc' === $request->getParameter('sSortDir_0', 'desc'))
+          {
+              $c->addAscendingOrderByColumn($type_colnames[$iSortCol_0]);
+          }
+          else
+          {
+              $c->addDescendingOrderByColumn($type_colnames[$iSortCol_0]);
+          }
+          //end: sorting
+          //start: paging
+          $item_per_page = $request->getParameter('iDisplayLength', 10);
+          $page = ($request->getParameter('iDisplayStart', 0) / $item_per_page) + 1;
+          $pager = BookingPeer::doSelectPager($page, $item_per_page, $c);
+          //end: paging
+          $json = '{"iTotalRecords":'.$pager->getNbResults().',
+     "iTotalDisplayRecords":'.$pager->getNbResults().',
+     "aaData":[';
+          $first = 0;
+          foreach ($pager->getResults() as $v)
+          {
+              if ($first++) $json .= ',';
+              $json .= '["'.$v->getNumber().'/'.$v->getYear().'","'.$v->getCustomer().'","'.$v->getContact().'","'.$v->getBookingDate('d-m-Y H:i').'","'.$v->getRifFile().'","'.$v->getAdult().'/'.($v->getChild() ? $v->getChild() : 0).'","'.$v->getVehicleType().'","'.$v->getVersionCreatedBy().'"]';
+          }
+          $json .= ']}';
+          return $this->renderText($json);
+      }
+      $session_year = $this->getUser()->getSessionYear();
+      $booking = new Booking();
+      $this->form = new BookingSearchForm($booking);
+
+
+  }
+
 
   public function executeSelectCustomer(sfWebRequest $request){
 

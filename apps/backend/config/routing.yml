@@ -15,13 +15,20 @@ homepage:
   url:   /
   param: { module: booking, action: index }
 
-booking_copy:
-  url:   /clona-prenotazione
-  param: { module: booking, action: copy }
-
 booking:
     url:   /gestione-prenotazioni
     param: { module: booking, action: index }
+
+booking_copy:
+  url:   /clona-prenotazione/:id
+  param: { module: booking, action: copy }
+  requirements:
+    id: \d+
+
+booking_search:
+    url:   /cerca-prenotazioni
+    param: { module: booking, action: search }
+
 
 company:
     url:   /dati-aziendali
