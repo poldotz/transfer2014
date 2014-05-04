@@ -30,6 +30,14 @@ booking_search:
     param: { module: booking, action: search }
 
 
+arrival:
+    url:   /in-arrivo
+    param: { module: arrival, action: index }
+
+departure:
+    url:   /in-partenza
+    param: { module: departure, action: index }
+
 company:
     url:   /dati-aziendali
     param: { module: company, action: index }

@@ -128,9 +128,16 @@ class bookingActions extends sfActions
             sfConfig::set('sf_web_debug', false);
             $this->form = new BookingForm();
             return $this->renderPartial('booking/selectCustomer', array('form' => $this->form));
-
       }
   }
+
+    public function executeEdit(sfWebRequest $request)
+    {
+        $booking = BookingQuery::create()->findPk($request->getParameter('id'));
+        $this->forward404Unless($booking, sprintf('Object Booking  does not exist (%s).', $request->getParameter('id')));
+        $this->form = new BookingForm($booking);
+        $this->setTemplate('index');
+    }
 
     public function executeEditJs(sfWebRequest $request){
 
@@ -211,14 +218,6 @@ class bookingActions extends sfActions
             $this->getUser()->setFlash('error',$error);
         }
 
-        $this->setTemplate('index');
-    }
-
-    public function executeEdit(sfWebRequest $request)
-    {
-        $booking = BookingQuery::create()->findPk($request->getParameter('id'));
-        $this->forward404Unless($booking, sprintf('Object Booking  does not exist (%s).', $request->getParameter('id')));
-        $this->form = new BookingForm($booking);
         $this->setTemplate('index');
     }
 

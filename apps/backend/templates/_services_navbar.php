@@ -4,14 +4,10 @@
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe03f;"></span> Prenotazione',"@booking",array("class"=>($selected == "booking") ? "selected": "")); ?>
         </li>
         <li>
-            <a href="arrivo.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe133;"></span> In Arrivo
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe133;"></span> In Arrivo',"@arrival",array("class"=>($selected == "arrival") ? "selected": "")); ?>
         </li>
         <li>
-            <a href="partenza.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe131;"></span> In Partenza
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe131;"></span> In Partenza',"@departure",array("class"=>($selected == "departure") ? "selected": "")); ?>
         </li>
         <li>
             <a href="autista.html">

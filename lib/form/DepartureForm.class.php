@@ -11,12 +11,24 @@ class DepartureForm extends BaseDepartureForm
 {
     public function configure()
     {
-        $years = range(date('Y')-10, date('Y')+10);
-        $this->widgetSchema['day'] = new sfWidgetFormJQueryDate(
-            array('date_widget' => new sfWidgetFormDate(
-                    array('years' => array_combine($years, $years),
-                        'format' => '%day%/%month%/%year%'))
-            ));
+        if($this->getOption('day',"") == "hidden"){
+
+            $this->widgetSchema['day'] = new sfWidgetFormInputHidden();
+
+            $this->validatorSchema->setOption('allow_extra_fields', true);
+            $years = range(date('Y')-10, date('Y')+10);
+            $this->widgetSchema['day_change'] = new sfWidgetFormInput();
+            $day = sfContext::getInstance()->getUser()->getCurrentDepartureDate();
+            $this->setDefault('day_change',date("d-m-Y", strtotime($day)));
+        }
+        else{
+            $years = range(date('Y')-10, date('Y')+10);
+            $this->widgetSchema['day'] = new sfWidgetFormJQueryDate(
+                array('date_widget' => new sfWidgetFormDate(
+                        array('years' => array_combine($years, $years),
+                            'format' => '%day%/%month%/%year%'))
+                ));
+        }
         $c1 = new Criteria();
         $c1->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
         $c1->add(LocalityPeer::IS_VECTOR,false,Criteria::EQUAL);
@@ -25,8 +37,8 @@ class DepartureForm extends BaseDepartureForm
 
         $c2 = new Criteria();
         $c2->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
-        $c2->add(LocalityPeer::IS_VECTOR,true,Criteria::EQUAL);
         $c2->addDescendingOrderByColumn('name');
+        $c2->addDescendingOrderByColumn(LocalityPeer::IS_VECTOR);
         $this->widgetSchema['locality_to'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c2,'add_empty'=>'A'));
 
         $this->widgetSchema['hour'] = new sfWidgetFormTime();

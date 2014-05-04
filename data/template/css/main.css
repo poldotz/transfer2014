@@ -5170,7 +5170,7 @@ header #mini-nav-left .dropdown-menu li:last-child {
             margin-top: 3px; }
             .dashboard-wrapper .main-container .widget .widget-header div.tools > a:hover, .dashboard-wrapper .main-container .widget-border .widget-header div.tools > a:hover {
               text-decoration: none;
-              opacity: .6; }
+              opacity: .6; }\
       .dashboard-wrapper .main-container .widget .widget-body, .dashboard-wrapper .main-container .widget-border .widget-body {
         padding: 10px; }
     .dashboard-wrapper .main-container .widget-border:hover {

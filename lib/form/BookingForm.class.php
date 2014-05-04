@@ -44,6 +44,17 @@ class BookingForm extends BaseBookingForm
           $departure = DepartureQuery::create()->findOneByBookingId($this->getObject()->getId());
       }
 
+      if(!isset($arrival)){
+          $arrival = new Arrival();
+          $arrival->setBooking($this->getObject());
+
+          $user = sfContext::getInstance()->getUser();
+          $user->setCurrentArrivalDate($arrival->getDay());
+      }
+      else{
+          $user = sfContext::getInstance()->getUser();
+          $user->setCurrentArrivalDate($arrival->getDay());
+      }
 
       $arrivalForm = new ArrivalForm($arrival);
       $this->embedForm('arrival',$arrivalForm);
@@ -51,6 +62,13 @@ class BookingForm extends BaseBookingForm
       if(!isset($departure)){
           $departure = new Departure();
           $departure->setBooking($this->getObject());
+
+          $user = sfContext::getInstance()->getUser();
+          $user->setCurrentDepartureDate($departure->getDay());
+      }
+      else{
+          $user = sfContext::getInstance()->getUser();
+          $user->setCurrentDepartureDate($departure->getDay());
       }
 
       $departureForm = new DepartureForm($departure);

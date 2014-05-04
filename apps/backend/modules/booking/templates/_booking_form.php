@@ -39,7 +39,7 @@
         document.location.href = '<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'index' : 'copy?id='.$form->getObject()->getId())) ?>'
     });
 
-    $('#search_booking_form').on('click',function(){
-        document.location.href = '<?php echo url_for('booking/search') ?>'
+    $('#copy_booking_form').on('click',function(){
+        document.location.href = '<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'index' : 'copy?id='.$form->getObject()->getId())) ?>'
     });
 </script>

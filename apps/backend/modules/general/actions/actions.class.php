@@ -27,7 +27,6 @@ class generalActions extends sfActions
           $this->getUser()->setAttribute('session_year',$parameter['year']);
       }
       $this->redirect('@homepage');
-
   }
 
 }

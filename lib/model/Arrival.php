@@ -19,4 +19,32 @@
  */
 class Arrival extends BaseArrival
 {
+    public function getDriver(){
+        $driver = sfGuardUserPeer::retrieveByPK($this->getDriverId());
+        if($driver){
+          return  $driver->getDriver();
+        }
+        else{
+            return "";
+        }
+    }
+    public function getLocalityFromName(){
+        $locality_from = LocalityPeer::retrieveByPK($this->getLocalityFrom());
+        if(isset($locality_from)){
+            return $locality_from->getName();
+        }
+        else{
+            return "";
+        }
+    }
+    public function getLocalityToName(){
+        $locality_to = LocalityPeer::retrieveByPK($this->getLocalityTo());
+        if(isset($locality_to)){
+            return $locality_to->getName();
+        }
+        else{
+            return "";
+        }
+    }
+
 }

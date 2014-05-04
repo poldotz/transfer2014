@@ -27,6 +27,10 @@ class sfGuardUser extends PluginsfGuardUser
         return $this->last_name;
     }
 
+    public function getDriver(){
+        return $this->getFirstName();
+    }
+
     /*public function addsfGuardUserProfile()
     {
         if(!$profile = $this->getProfile())

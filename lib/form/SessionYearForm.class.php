@@ -27,4 +27,5 @@ class SessionYearForm extends BaseForm
 
         $this->widgetSchema->setNameFormat('session_year[%s]');
     }
+
 }

@@ -1,21 +1,21 @@
 <table id="booking_list" class="table table-condensed table-striped table-hover table-bordered pull-left dataTable">
     <thead>
     <tr>
-        <th>Progressivo</th>
+        <th style="width:5%">Progressivo</th>
 
-        <th>Cliente</th>
+        <th style="width: 20%">Cliente</th>
 
-        <th>Referente</th>
+        <th style="width: 15%">Referente</th>
 
-        <th>Data Prenot.</th>
+        <th style="width: 10%">Data Prenot.</th>
 
-        <th>Rif.File</th>
+        <th style="width: 10%">Rif.File</th>
 
-        <th>Pax</th>
+        <th style="width: 5%">Pax</th>
 
-        <th>Mezzo Richiesto</th>
+        <th style="width: 10%">Mezzo Richiesto</th>
 
-        <th>Creato da</th>
+        <th style="width: 15%">Creato da</th>
 
     </tr>
 
@@ -36,10 +36,29 @@
             "iDisplayLength": 5,
             'bProcessing': true,
             'bServerSide': true,
+            "sPaginationType": "full_numbers",
             'sAjaxSource': "<?php echo url_for('booking/get_data') ?>",
             'fnDrawCallback': function() {
                 clickRowHandler();
+            },
+           "oLanguage": {
+               "sProcessing":     "Caricamento...",
+           "sLengthMenu":     "Visualizza _MENU_ elementi",
+            "sZeroRecords":   "La ricerca non ha portato alcun risultato",
+            "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
+            "sInfoEmpty":     "Vista da 0 a 0 di 0 elementi",
+            "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+            "sInfoPostFix":    "",
+            "sSearch":          "Cerca:",
+            "sLoadingRecords": "",
+            "sUrl":            "",
+            "oPaginate": {
+            "sFirst":    "Inizio",
+                "sPrevious": "Precedente",
+                "sNext":    "Successivo",
+                "sLast":     "Fine"
             }
+        }
         }).fnSetFilteringDelay();
 
         /* Click event handler */

@@ -47,12 +47,12 @@
                 </div>
                 <div class="span1 input-left-top-margins" required>
                     <div class="input-append bootstrap-timepicker form-inline">
-                        <?php echo $form['departure']['departure_time']->render(array('class'=>"span9")) ?>                    </div>
+                        <?php echo $form['departure']['departure_time']->render(array('class'=>"span9")) ?>
+                    </div>
                 </div>
 
                 <div style="margin-left: 15px; margin-right: 0px;" class="span1">
-                    <input type="checkbox"  value="annulla">
-                    PK
+                   <?php echo $form['departure']['pick_up']->render() ?>
                 </div>
                 <div class="span4 input-left-top-margins" required>
                     <?php echo $form['departure']['driver_id']->render(array('class'=>"input-block-level")) ?>

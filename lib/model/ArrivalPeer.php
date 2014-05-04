@@ -19,4 +19,18 @@
  */
 class ArrivalPeer extends BaseArrivalPeer
 {
+
+    public static function doSelectPager($page=1, $item_per_page = 10, Criteria $criteria = null)
+    {
+        if ($criteria === null)
+        {
+            $criteria = new Criteria();
+        }
+        $pager = new sfPropelPager('Arrival', $item_per_page);
+        $pager->setCriteria($criteria);
+        $pager->setPage($page);
+        $pager->setPeerMethod('doSelect');
+        $pager->init();
+        return $pager;
+    }
 }

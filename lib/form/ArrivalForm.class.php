@@ -11,12 +11,25 @@ class ArrivalForm extends BaseArrivalForm
 {
   public function configure()
   {
-      $years = range(date('Y')-10, date('Y')+10);
-      $this->widgetSchema['day'] = new sfWidgetFormJQueryDate(
-          array('date_widget' => new sfWidgetFormDate(
-                  array('years' => array_combine($years, $years),
-                      'format' => '%day%/%month%/%year%'))
-          ));
+
+      if($this->getOption('day',"") == "hidden"){
+
+          $this->widgetSchema['day'] = new sfWidgetFormInputHidden();
+
+          $this->validatorSchema->setOption('allow_extra_fields', true);
+          $years = range(date('Y')-10, date('Y')+10);
+          $this->widgetSchema['day_change'] = new sfWidgetFormInput();
+          $day = sfContext::getInstance()->getUser()->getCurrentArrivalDate();
+          $this->setDefault('day_change',date("d-m-Y", strtotime($day)));
+      }
+      else{
+          $years = range(date('Y')-10, date('Y')+10);
+          $this->widgetSchema['day'] = new sfWidgetFormJQueryDate(
+              array('date_widget' => new sfWidgetFormDate(
+                      array('years' => array_combine($years, $years),
+                          'format' => '%day%/%month%/%year%'))
+              ));
+      }
       $c1 = new Criteria();
       $c1->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
       $c1->add(LocalityPeer::IS_VECTOR,true,Criteria::EQUAL);
@@ -41,7 +54,6 @@ class ArrivalForm extends BaseArrivalForm
       $this->widgetSchema['payment_method_id'] = new sfWidgetFormPropelChoice(array('model'=>'paymentMethod','criteria'=>$c4,'multiple'=>false,'expanded'=>true),array("class"=>"horizontal_type"));
       $this->widgetSchema['cancelled'] = new sfWidgetFormInputCheckbox(array(),array("class"=>"radio inline"));
       $this->validatorSchema['booking_id']->setOption('required',false);
-
 
   }
 }

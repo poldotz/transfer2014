@@ -995,7 +995,7 @@ table td[class*="span"], table th[class*="span"] {
     background-color: #c8e0ef; }
 
 form {
-    margin: 0 0 20px; }
+    margin: 0 0 0; }
 
 fieldset {
     padding: 0;
@@ -1571,7 +1571,7 @@ input.search-query {
     margin-left: 0; }
 
 .control-group {
-    margin-bottom: 10px; }
+    margin-bottom: 1px; }
 
 legend + .control-group {
     margin-top: 20px;
@@ -4755,7 +4755,7 @@ header #mini-nav-left .dropdown-menu li:last-child {
     border-bottom: 0; }
 #main-nav {
     position: relative;
-    padding: 10px 0 0 0; }
+    padding: 5px 0 0 0; }
 #main-nav ul li {
     min-width: 95px;
     float: left;
@@ -5069,16 +5069,16 @@ header #mini-nav-left .dropdown-menu li:last-child {
 .dashboard-wrapper {
     position: relative;
     top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     /*margin-left: 190px;*/ }
 .dashboard-wrapper .main-container {
-    min-height: 570px;
+    min-height: 500px;
     border-top: 5px solid #428bca;
     background: white;
     -webkit-border-radius: 0 3px 3px 3px;
     -moz-border-radius: 0 3px 3px 3px;
     border-radius: 0 3px 3px 3px;
-    padding: 10px; }
+    padding: 2px 10px 0 10px; }
 .dashboard-wrapper .main-container .page-header {
     margin: 0;
     border-bottom: 0;
@@ -5091,7 +5091,7 @@ header #mini-nav-left .dropdown-menu li:last-child {
     float: left; }
 .dashboard-wrapper .main-container .page-header ul.stats li {
     float: left;
-    padding: 5px 10px;
+    padding: 0px 10px;
     height: 34px;
     margin-left: 15px;
     -webkit-border-radius: 2px;
@@ -5120,7 +5120,7 @@ header #mini-nav-left .dropdown-menu li:last-child {
     border: 1px solid #e0e0e0;
     clear: both;
     margin-top: 0px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px; }
@@ -5142,9 +5142,9 @@ header #mini-nav-left .dropdown-menu li:last-child {
     -moz-border-radius: 3px 3px 0 0;
     border-radius: 3px 3px 0 0;
     border-bottom: 1px solid #d9d9d9;
-    height: 25px;
-    line-height: 25px;
-    padding: 5px 10px; }
+    height: 30px;
+    line-height: 30px;
+    padding: 2px 10px; }
 .dashboard-wrapper .main-container .widget .widget-header .title, .dashboard-wrapper .main-container .widget-border .widget-header .title {
     color: #333333;
     float: left;
@@ -7786,6 +7786,13 @@ ul.radio_list{
     display:inline;
 }
 
+#arrival_list tbody tr:hover {
+    cursor: pointer;
+}
+
 #booking_list tbody tr:hover {
     cursor: pointer;
+}
+.embed + img {
+    position: relative; left: -21px; top: -1px;
 }
