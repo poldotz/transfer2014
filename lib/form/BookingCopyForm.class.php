@@ -42,22 +42,31 @@ class BookingCopyForm extends BaseBookingForm
       if($booking_id){
 
           $arrival = ArrivalQuery::create()->findOneByBookingId($booking_id);
-          $arrival = $arrival->copy(true);
-          $arrival->setBookingId(null);
+          if($arrival){
+            $arrival = $arrival->copy(true);
+            $arrival->setBookingId(null);
+
+          }
+          else{
+              $arrival = new Arrival();
+              $arrival->setBooking($this->getObject());
+          }
+
+          $arrivalForm = new ArrivalForm($arrival);
+          $this->embedForm('arrival',$arrivalForm);
+
 
           $departure = DepartureQuery::create()->findOneByBookingId($booking_id);
-          $departure = $departure->copy(true);
-          $departure->setBookingId(null);
+          if($departure){
+            $departure = $departure->copy(true);
+            $departure->setBookingId(null);
+
+          }
+          else{
+              $departure = new Departure();
+              $departure->setBooking($this->getObject());
+          }
       }
-
-      $arrivalForm = new ArrivalForm($arrival);
-      $this->embedForm('arrival',$arrivalForm);
-
-      if(!isset($departure)){
-          $departure = new Departure();
-          $departure->setBooking($this->getObject());
-      }
-
       $departureForm = new DepartureForm($departure);
       $this->embedForm('departure',$departureForm);
 

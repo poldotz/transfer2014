@@ -32,14 +32,14 @@
     });
 
     $('#new_booking_form').on('click',function(){
-        document.location.href = '<?php echo url_for('booking/index') ?>'
+        document.location.href = '<?php echo url_for('booking/index') ?>';
     });
 
     $('#copy_booking_form').on('click',function(){
-        document.location.href = '<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'index' : 'copy?id='.$form->getObject()->getId())) ?>'
+        document.location.href = '<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'index' : 'copy?id='.$form->getObject()->getId())) ?>';
     });
 
-    $('#copy_booking_form').on('click',function(){
-        document.location.href = '<?php echo url_for('booking/'.($form->getObject()->isNew() ? 'index' : 'copy?id='.$form->getObject()->getId())) ?>'
+    $('#search_booking_form').on('click',function(){
+        document.location.href = '<?php echo url_for('booking/search') ?>';
     });
 </script>

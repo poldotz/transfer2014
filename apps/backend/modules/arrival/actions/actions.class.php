@@ -30,39 +30,36 @@ class arrivalActions extends sfActions
     $this->form = new BookingArrivalForm($booking);
   }
 
+    /**
+     * set arrival day
+     */
+    public function executeUpdateDay(sfWebRequest $request){
+
+        $booking_form = $request->getParameter('booking');
+        $day = date('Y-m-d',strtotime($booking_form['arrival']['day_update']));
+        $arrival_id = $booking_form['arrival']['id'];
+        $arrival = ArrivalPeer::retrieveByPK($arrival_id);
+        $arrival->setDay($day);
+        $arrival->save();
+        $this->redirect('arrival/index');
+
+  }
+
+
+
     public function executeGet_data(sfWebRequest $request)
     {
         sfConfig::set('sf_web_debug', false);
         $this->getResponse()->setContentType('application/json');
         $day  = $this->getUser()->getCurrentArrivalDate();
-        //start: sorting
-        $type_colnames = array(ArrivalPeer::HOUR,BookingPeer::NUMBER,BookingPeer::YEAR);
-        $iSortCol_0 = $request->getParameter('iSortCol_0',ArrivalPeer::HOUR);
-        if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
-        $c = new Criteria();
-        $c->add(ArrivalPeer::DAY,$day,Criteria::EQUAL);
-        $c->addJoin(ArrivalPeer::BOOKING_ID,BookingPeer::ID);
-        $c->addJoin(BookingPeer::CUSTOMER_ID,CustomerPeer::ID);
-        $c->addJoin(BookingPeer::VEHICLE_TYPE_ID,VehicleTypePeer::ID);
-        if ($query = $request->getParameter('sSearch'))
-        {
-            $c->addOr(BookingPeer::YEAR,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::NUMBER,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::CONCTACT,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::RIF_FILE,"%".$query."%",Criteria::LIKE);
-            $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
-        }
-        if ('asc' === $request->getParameter('sSortDir_0', 'asc'))
-        {
-            $c->addAscendingOrderByColumn(ArrivalPeer::HOUR);
-        }
-        else
-        {
-            $c->addDescendingOrderByColumn(ArrivalPeer::HOUR);
-        }
-        //end: sorting
-        //start: paging
-        $arrivals = ArrivalPeer::doSelect($c);
+        $arrivals = ArrivalQuery::create()
+            ->filterByDay($day)
+            ->orderByHour()
+            ->orderById()
+            ->find();
+        $con = Propel::getConnection();
+        $con->getLastExecutedQuery();
+
         $json = '{ "data":[';
         $first = 0;
         foreach ($arrivals as $v)
@@ -169,7 +166,6 @@ class arrivalActions extends sfActions
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid())
         {
-            $values = $form->getValues();
             $booking = $form->save();
             $this->redirect('arrival/edit?id='.$booking->getId());
 

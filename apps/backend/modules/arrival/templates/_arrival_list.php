@@ -6,7 +6,7 @@
  * Time: 8.35
  */
 ?>
-<table id="arrival_list" class="table table-condensed table-striped table-hover table-bordered pull-left dataTable">
+<table id="arrival_list" class="table table-condensed stripe table-bordered pull-left dataTable">
     <thead>
     <tr>
         <th style="width: 0%"></th>
@@ -53,10 +53,9 @@
 
                 },
             ],
-            "saveState": true,
+            ordering:false,
             "scrollY": 200,
             scrollCollapse: true,
-            stateSave:      true,
             "fnInitComplete": function (o) {
                 // Immediately scroll to row 1000
                 scroller = o.oScroller;
@@ -116,27 +115,24 @@
             if($( "#set_driver_container").hasClass('hidden')){
                 $( "#set_driver_container").removeClass('hidden');
                 scroller.fnScrollToRow( rowIndex );
+                var oTT = TableTools.fnGetInstance( 'arrival_list' );
+                oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
             }
             else{
                 $( "#set_driver_container").addClass('hidden');
             }
-            /*scroller.fnScrollToRow(rowIndex);
-            var oTT = TableTools.fnGetInstance( 'arrival_list' );
-            oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
-            var aData = oTT.fnGetSelectedData();
-            alert(aData[0][0]);
-            rowIndex = rowIndex + 1;*/
         });
 
         $('#set_arrival_driver').submit(function(e){
+
+
             e.preventDefault();
             $(this).attr('action');
             var driver_id = $(this).find('select').val();
+
+            var table = $('#arrival_list').DataTable();
             scroller.fnScrollToRow(rowIndex);
-            var oTT = TableTools.fnGetInstance( 'arrival_list' );
-            oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
-            var aData = oTT.fnGetSelectedData();
-            var arrival_id = aData[0][0];
+            var arrival_id = table.cell(rowIndex,0).data();
             if(arrival_id && driver_id){
                 $.ajax({
                     url: "<?php echo url_for('arrival/setDriver') ?>",
@@ -145,10 +141,12 @@
 
                 })
                     .done(function(driver_name){
-                        var table = $('#arrival_list').DataTable();
+
                         table.cell(rowIndex,6).data(driver_name);
                         rowIndex  = rowIndex + 1;
                         scroller.fnScrollToRow(rowIndex);
+                        var oTT = TableTools.fnGetInstance( 'arrival_list' );
+                        oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
                 })
                     .fail(function(){
                     bootbox.alert('Errore durante il salvataggio!');

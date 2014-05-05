@@ -14,6 +14,9 @@
         <?php include_partial('arrival_button_widget',array('form'=>$form)); ?>
         <div style="padding: 5px;" class="widget-body">
             <?php if(!$form->getObject()->isNew()):?>
+            <div id="edit_day_container" class="row-fluid hidden center-align-text">
+                <?php include_partial('editDay',array('form'=>$form)); ?>
+            </div>
                 <form id="arrival_form" action="<?php echo url_for('arrival/update?id='.$form->getObject()->getId()) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
                     <?php echo $form->renderHiddenFields() ?>
                     <?php include_partial('arrivalFields',array('form'=>$form))?>

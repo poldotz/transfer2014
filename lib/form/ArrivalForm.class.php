@@ -18,9 +18,11 @@ class ArrivalForm extends BaseArrivalForm
 
           $this->validatorSchema->setOption('allow_extra_fields', true);
           $years = range(date('Y')-10, date('Y')+10);
-          $this->widgetSchema['day_change'] = new sfWidgetFormInput();
           $day = sfContext::getInstance()->getUser()->getCurrentArrivalDate();
+          $this->widgetSchema['day_change'] = new sfWidgetFormInput();
+          $this->widgetSchema['day_update'] = new sfWidgetFormInput();
           $this->setDefault('day_change',date("d-m-Y", strtotime($day)));
+          $this->setDefault('day_update',date("d-m-Y", strtotime($day)));
       }
       else{
           $years = range(date('Y')-10, date('Y')+10);

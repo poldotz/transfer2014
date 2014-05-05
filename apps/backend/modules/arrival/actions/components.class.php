@@ -13,4 +13,9 @@ class ArrivalComponents extends sfComponents {
         $this->form = new ArrivalForm();
     }
 
+    public function executeEditDay(){
+
+        $this->formDay = new ArrivalForm(null,array('day'=>'hidden'));
+    }
+
 } 

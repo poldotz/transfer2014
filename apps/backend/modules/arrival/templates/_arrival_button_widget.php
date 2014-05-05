@@ -19,7 +19,7 @@
                 <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span>
 
             </a>
-            <a href="#" title="Cambia Data" class="btn btn-small btn-warning2"/>
+            <a id="edit_day" href="#" title="Cambia Data" class="btn btn-small btn-warning2"/>
             <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
             </a>
             <a href="#" title="Invia Email" class="btn btn-small btn-success"/>
