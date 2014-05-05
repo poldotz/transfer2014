@@ -162,6 +162,10 @@ locality_update:
     url:   /aggiorna-localita
     param: { module: locality, action: update }
 
+route:
+    url:   /percorsi
+    param: { module: route, action: index }
+
 sf_guard_signin:
   url:   /login
   param: { module: sfGuardAuth, action: signin }

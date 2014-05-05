@@ -37,8 +37,9 @@ class DepartureForm extends BaseDepartureForm
 
         $c2 = new Criteria();
         $c2->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
-        $c2->addDescendingOrderByColumn('name');
         $c2->addDescendingOrderByColumn(LocalityPeer::IS_VECTOR);
+        $c2->addDescendingOrderByColumn(LocalityPeer::NAME,Criteria::DESC);
+
         $this->widgetSchema['locality_to'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c2,'add_empty'=>'A'));
 
         $this->widgetSchema['hour'] = new sfWidgetFormTime();

@@ -2,10 +2,10 @@
 
 /**
  * Data object containing the SQL and PHP code to migrate the database
- * up to version 1398180424.
- * Generated on 2014-04-22 17:27:04 by poldotz
+ * up to version 1399299027.
+ * Generated on 2014-05-05 16:10:27 by lpodda
  */
-class PropelMigration_1398180424
+class PropelMigration_1399299027
 {
 
     public function preUp($manager)
@@ -42,28 +42,25 @@ class PropelMigration_1398180424
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE TABLE `locality`
+CREATE TABLE `route`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id` INTEGER,
-    `is_vector` TINYINT(1) DEFAULT 0 NOT NULL,
-    `is_active` TINYINT(1) DEFAULT 1 NOT NULL,
-    `name` VARCHAR(200) NOT NULL,
-    `phone` VARCHAR(20),
-    `fax` VARCHAR(20),
-    `mobile` VARCHAR(20),
-    `email` VARCHAR(100),
-    `site` VARCHAR(150),
-    `formatted_address` VARCHAR(150),
-    `lat` DECIMAL(18,2),
-    `lon` DECIMAL(18,2),
-    `created_at` DATETIME,
-    `updated_at` DATETIME,
+    `locality_from` INTEGER NOT NULL,
+    `locality_to` INTEGER NOT NULL,
+    `duration` TIME NOT NULL,
+    `distance` INTEGER NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `loBcality_FI_1` (`user_id`),
-    CONSTRAINT `locality_FK_1`
-        FOREIGN KEY (`user_id`)
-        REFERENCES `sf_guard_user` (`id`)
+    UNIQUE INDEX `route_point` (`locality_from`, `locality_to`),
+    INDEX `FI_te_locality_to` (`locality_to`),
+    CONSTRAINT `route_locality_from`
+        FOREIGN KEY (`locality_from`)
+        REFERENCES `locality` (`id`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT `route_locality_to`
+        FOREIGN KEY (`locality_to`)
+        REFERENCES `locality` (`id`)
+        ON UPDATE CASCADE
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -87,7 +84,15 @@ SET FOREIGN_KEY_CHECKS = 1;
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE IF EXISTS `locality`;
+DROP TABLE IF EXISTS `route`;
+
+ALTER TABLE `arrival` CHANGE `cost` `cost` DECIMAL;
+
+ALTER TABLE `arrival_version` CHANGE `cost` `cost` DECIMAL;
+
+ALTER TABLE `departure` CHANGE `cost` `cost` DECIMAL;
+
+ALTER TABLE `departure_version` CHANGE `cost` `cost` DECIMAL;
 
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

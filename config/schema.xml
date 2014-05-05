@@ -113,6 +113,24 @@
     <column name="formatted_address" type="varchar" required="false" size="150" />
   </table>
 
+  <table name="route">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="locality_from" type="integer" required="true"/>
+    <column name="locality_to" type="integer" required="true"/>
+    <column name="duration" type="time" required="true" default="00:00:00"/>
+    <column name="distance" type="integer" required="true" default="0"/>
+    <unique name="route_point">
+      <unique-column name="locality_from" />
+      <unique-column name="locality_to" />
+    </unique>
+    <foreign-key foreignTable="locality" name="route_locality_from" onDelete="cascade" onUpdate="cascade">
+      <reference local="locality_from" foreign="id" />
+    </foreign-key>
+    <foreign-key foreignTable="locality" name="route_locality_to" onDelete="cascade" onUpdate="cascade">
+      <reference local="locality_to" foreign="id" />
+    </foreign-key>
+  </table>
+
   <table name="booking">
       <behavior name="Timestampable"/>
       <behavior name="versionable">

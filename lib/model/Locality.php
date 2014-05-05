@@ -24,4 +24,6 @@ class Locality extends BaseLocality
     {
         return $this->getName();
     }
+
+
 }

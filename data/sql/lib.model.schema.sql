@@ -173,6 +173,34 @@ CREATE TABLE `locality`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- route
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `route`;
+
+CREATE TABLE `route`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `locality_from` INTEGER NOT NULL,
+    `locality_to` INTEGER NOT NULL,
+    `duration` TIME DEFAULT '00:00:00' NOT NULL,
+    `distance` INTEGER DEFAULT 0 NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `route_point` (`locality_from`, `locality_to`),
+    INDEX `FI_te_locality_to` (`locality_to`),
+    CONSTRAINT `route_locality_from`
+        FOREIGN KEY (`locality_from`)
+        REFERENCES `locality` (`id`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT `route_locality_to`
+        FOREIGN KEY (`locality_to`)
+        REFERENCES `locality` (`id`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- booking
 -- ---------------------------------------------------------------------
 

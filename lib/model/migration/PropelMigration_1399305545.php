@@ -2,10 +2,10 @@
 
 /**
  * Data object containing the SQL and PHP code to migrate the database
- * up to version 1398182294.
- * Generated on 2014-04-22 17:58:14 by poldotz
+ * up to version 1399305545.
+ * Generated on 2014-05-05 17:59:05 by lpodda
  */
-class PropelMigration_1398182294
+class PropelMigration_1399305545
 {
 
     public function preUp($manager)
@@ -42,12 +42,9 @@ class PropelMigration_1398182294
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-ALTER TABLE `locality` DROP FOREIGN KEY `locality_FK_1`;
+ALTER TABLE `route` CHANGE `duration` `duration` TIME DEFAULT \'00:00:00\' NOT NULL;
 
-ALTER TABLE `locality` ADD CONSTRAINT `locality_FK_1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `sf_guard_user` (`id`)
-    ON DELETE SET NULL;
+ALTER TABLE `route` CHANGE `distance` `distance` INTEGER DEFAULT 0 NOT NULL;
 
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
@@ -69,12 +66,17 @@ SET FOREIGN_KEY_CHECKS = 1;
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-ALTER TABLE `locality` DROP FOREIGN KEY `locality_FK_1`;
+ALTER TABLE `arrival` CHANGE `cost` `cost` DECIMAL;
 
-ALTER TABLE `locality` ADD CONSTRAINT `locality_FK_1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `sf_guard_user` (`id`)
-    ON DELETE CASCADE;
+ALTER TABLE `arrival_version` CHANGE `cost` `cost` DECIMAL;
+
+ALTER TABLE `departure` CHANGE `cost` `cost` DECIMAL;
+
+ALTER TABLE `departure_version` CHANGE `cost` `cost` DECIMAL;
+
+ALTER TABLE `route` CHANGE `duration` `duration` TIME NOT NULL;
+
+ALTER TABLE `route` CHANGE `distance` `distance` INTEGER NOT NULL;
 
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
