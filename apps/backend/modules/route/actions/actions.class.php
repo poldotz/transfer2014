@@ -17,8 +17,39 @@ class routeActions extends sfActions
 
   public function executeSearch(sfWebRequest $request){
 
+      $locality_from = $request->getParameter('locality_from',null);
+      if($locality_from){
+        $this->form = new RouteCollectionForm(null,array('locality_from'=>$locality_from));
+        $this->locality_from = LocalityPeer::retrieveByPK($locality_from);
+      }
+      else{
+        $this->redirect('route/index');
+      }
+
+  }
+
+  public  function executeSave(sfWebRequest $request){
+      $routes = $request->getParameter('routes');
+      foreach($routes as $route){
+          if(isset($route['id'])){
+              $routeObject = RouteQuery::create()->findPk($route['id']);
+          }
+          else{
+              $routeObject = new Route();
+          }
+          $routeForm = new RouteForm($routeObject);
+
+          $routeForm->bind($route);
+          if($routeForm->isValid()){
+              $routeForm->save();
+          }
+          else{
+              var_dump($routeForm->getErrorSchema()->getErrors());
+              exit;
+          }
+      }
       $locality_from = $request->getParameter('locality_from');
-      $this->form = new RouteCollectionForm(null,array('locality_from'=>$locality_from));
+      $this->redirect('route/search?locality_from='.$locality_from);
 
   }
 

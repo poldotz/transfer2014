@@ -17,6 +17,6 @@ class DepartureLocalityForm extends RouteForm
       $c1->add(LocalityPeer::IS_VECTOR,false,Criteria::EQUAL);
       $c1->addDescendingOrderByColumn('name');
       $this->widgetSchema['locality_from'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c1,'add_empty'=>'Seleziona una località'));
-
+      $this->widgetSchema->setNameFormat('%s');
   }
 }

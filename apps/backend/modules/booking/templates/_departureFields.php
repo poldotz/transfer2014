@@ -79,3 +79,10 @@
         </div>
     </div>
 </fieldset>
+<script type="text/javascript">
+    $('#booking_departure_hour_hour').change(function(){
+        //var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        alert(valueSelected);
+    });
+</script>

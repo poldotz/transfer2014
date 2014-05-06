@@ -165,6 +165,9 @@ locality_update:
 route:
     url:   /percorsi
     param: { module: route, action: index }
+route_search:
+    url:   /ricerca-percorsi
+    param: { module: route, action: search }
 
 sf_guard_signin:
   url:   /login
