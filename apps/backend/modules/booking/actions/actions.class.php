@@ -174,9 +174,19 @@ class bookingActions extends sfActions
         $c->addJoin(BookingPeer::VEHICLE_TYPE_ID,VehicleTypePeer::ID);
         if ($query = $request->getParameter('sSearch'))
         {
-            $c->addOr(BookingPeer::YEAR,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::NUMBER,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::CONCTACT,"%".$query."%",Criteria::LIKE);
+            $identification_number = explode("/",$query);
+
+            if(isset($identification_number) && isset($identification_number[1]) &&
+               strlen($identification_number['1']) &&  isset($identification_number[0]) &&  is_numeric($identification_number[0])){
+                $c->addAnd(BookingPeer::YEAR,$identification_number[1],Criteria::EQUAL);
+                $c->addAnd(BookingPeer::NUMBER,$identification_number[0],Criteria::EQUAL);
+            }
+            else{
+                $c->addOr(BookingPeer::YEAR,$query,Criteria::EQUAL);
+                $c->addOr(BookingPeer::NUMBER,"%".$query."%",Criteria::LIKE);
+            }
+
+            $c->addOr(BookingPeer::CONTACT,"%".$query."%",Criteria::LIKE);
             $c->addOr(BookingPeer::RIF_FILE,"%".$query."%",Criteria::LIKE);
             $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
         }
@@ -249,6 +259,72 @@ class bookingActions extends sfActions
         }
         $this->setTemplate('index');
     }
+
+    public function executePickUp(sfWebRequest $request){
+        $hour  = $request->getParameter('hour');
+        $minute  = $request->getParameter('minute');
+        $locality_from   = $request->getParameter('locality_from');
+        $locality_to  = $request->getParameter('locality_to');
+        $pickUp  = $request->getParameter('pickUp');
+
+        if($pickUp == "false"){
+            $route = RouteQuery::create()
+                ->filterByLocalityFrom($locality_from)
+                ->filterByLocalityTo($locality_to)
+                ->findOne();
+            if($route){
+                $duration = $route->getDuration();
+                $durationTime = explode(":",$duration);
+                $departureTime =  $this->calculateDepartureTime($hour,$minute,(int) $durationTime[0],(int) $durationTime[1]);
+            }
+
+        }else{
+            $departureTime = array('departureHour'=>$hour,'departureMinute'=>$minute);
+        }
+
+        $departureTime = json_encode($departureTime);
+        sfConfig::set('sf_web_debug', false);
+        $this->getResponse()->setContentType('application/json');
+        return $this->renderText($departureTime);
+
+    }
+
+    private function calculateDepartureTime($hour,$minute,$routeHour = 0,$routeMinute = 0){
+        // il tempo che deve essere sottratto: anticipo del vettore + durata.
+        if($minute < $routeMinute)
+        {
+            if($hour == 1){
+                $hour = 25;
+            }
+            if($hour == 0){
+                $hour = 24;
+            }
+            $hour = $hour - 1;
+            if($hour == 24){
+                $hour = 0;
+            }
+
+            $minute = $minute + 60;
+        }
+
+        $minute = $minute - $routeMinute;
+        $minus = 0;
+
+        if($hour < $routeHour)
+        {
+            $minus = $hour - $routeHour;
+            $hour = 24 + $minus;
+        }
+        else{
+            $hour = $hour - $routeHour;
+        }
+
+        return  array('departureHour'=>$hour,'departureMinute'=>$minute);
+
+    }
+
+
+
 
     protected function processForm(sfWebRequest $request, sfForm $form)
     {

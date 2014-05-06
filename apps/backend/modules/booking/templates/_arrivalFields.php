@@ -64,7 +64,13 @@
                 </div>
                 <div class="span2 form-inline" required>
                     <label class="radio inline">
-                        <?php echo $form['arrival']['cancelled']->render() ?> Annulla
+                        <?php echo $form['arrival']['cancelled']->render() ?>
+
+                        <?php if($form['arrival']['cancelled']->getValue() == 1): ?>
+                            <div class="label label-important">Annullato</div>
+                        <?php else: ?>
+                            Annulla
+                        <?php endif; ?>
                     </label>
                 </div>
             </div>
