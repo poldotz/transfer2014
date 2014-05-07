@@ -82,13 +82,19 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-left: 10px;" class="span1 input-left-top-margins" required>
+                <div style="margin-left: 40px; margin-right: 0px;" class="span1">
                     <div class="input-append bootstrap-timepicker form-inline">
                         <?php echo $form['departure']['departure_time']->render(array('class'=>"span9")) ?>
                     </div>
                 </div>
-                <div style="margin-left: 15px; margin-right: 0px;" class="span1 input-left-top-margins">
-                    <?php echo $form['departure']['pick_up']->render() ?> PK
+                <div style="margin-left: 40px; margin-right: 0px;" class="span1">
+                    <?php echo $form['departure']['pick_up']->render() ?>
+
+                    <?php if($form['departure']['pick_up']->getValue() == 1): ?>
+                        <div class="label label-important">PK</div>
+                    <?php else: ?>
+                        PK
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -108,7 +114,13 @@
                 </div>
                 <div class="span1 form-inline" required>
                     <label class="radio inline">
-                        <?php echo $form['departure']['cancelled']->render() ?> Annulla
+                        <?php echo $form['departure']['cancelled']->render() ?>
+
+                        <?php if($form['departure']['cancelled']->getValue() == 1): ?>
+                            <div class="label label-important">Annullato</div>
+                        <?php else: ?>
+                            Annulla
+                        <?php endif; ?>
                     </label>
                 </div>
             </div>
@@ -136,6 +148,66 @@
                 }
             });
 
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $('#booking_departure_hour_hour').change(function(){
+        var hour = this.value;
+        var minute = $('#booking_departure_hour_minute').val();
+        var locality_from  = $('#booking_departure_locality_from').val();
+        var locality_to = $('#booking_departure_locality_to').val();
+        var pickUp = $('#booking_departure_pick_up').prop('checked');
+        if(pickUp === false){
+            if(hour && minute && locality_from && locality_to){
+                $.ajax({
+                    url: '<?php echo url_for('departure/pickUp')?>',
+                    data: {hour: hour, minute: minute, locality_from: locality_from, locality_to: locality_to,pickUp: pickUp},
+                    method: "post",
+                    dataType: "json"
+                })
+                    .done(function(response){
+                        var hour = $('#booking_departure_departure_time_hour').val(response.departureHour);
+                        var minute = $('#booking_departure_departure_time_minute').val(response.departureMinute);
+
+                    })
+                    .fail(function(msg){
+                        bootbox.alert("errore:" + msg);
+                    });
+
+            }else{
+                bootbox.alert('Selezionare località di partenza di arrivo e l\'orario');
+            }
+        }
+    });
+
+    $('#booking_departure_hour_minute').change(function(){
+        var hour = $('#booking_departure_hour_hour').val();
+        var minute = this.value;
+        var locality_from  = $('#booking_departure_locality_from').val();
+        var locality_to = $('#booking_departure_locality_to').val();
+        var pickUp = $('#booking_departure_pick_up').prop('checked');
+        if(pickUp === false){
+            if(hour && minute && locality_from && locality_to){
+                $.ajax({
+                    url: '<?php echo url_for('departure/pickUp')?>',
+                    data: {hour: hour, minute: minute, locality_from: locality_from, locality_to: locality_to,pickUp: pickUp},
+                    method: "post",
+                    dataType: "json"
+                })
+                    .done(function(response){
+                        var hour = $('#booking_departure_departure_time_hour').val(response.departureHour);
+                        var minute = $('#booking_departure_departure_time_minute').val(response.departureMinute);
+
+                    })
+                    .fail(function(msg){
+                        bootbox.alert("errore:" + msg);
+                    });
+
+            }else{
+                bootbox.alert('Selezionare località di partenza di arrivo e l\'orario');
+            }
         }
     });
 </script>

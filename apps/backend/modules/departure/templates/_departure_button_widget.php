@@ -14,15 +14,14 @@
             <?php echo $form['departure']['day_change']->render(array('class'=>'input-small','readonly')); ?>
         </form>&nbsp;&nbsp;&nbsp;
         <?php if(!$form->getObject()->isNew()): ?>
-            <a href="#" title="Inserimento Autisti" class="btn btn-small btn-info"/>
-
+            <a id="set_driver" href="Javascript:void(0)" title="Inserimento Autisti" class="btn btn-small btn-info"/>
             <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span>
 
             </a>
-            <a href="#" title="Cambia Data" class="btn btn-small btn-warning2"/>
-            <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
+            <a id="edit_day" href="Javascript:void(0)" title="Cambia Data" class="btn btn-small btn-warning2"/>
+                <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
             </a>
-            <a href="#" title="Invia Email" class="btn btn-small btn-success"/>
+            <a href="Javascript:void(0)" title="Invia Email" class="btn btn-small btn-success"/>
             <span class="fs1" aria-hidden="true" data-icon=" &#xe040;"></span>
             </a>
             <div class="pull-right">
@@ -45,4 +44,16 @@
         dateFormat: 'dd-mm-yy'
 
     }).addClass("embed");
+
+    $('#set_driver').click(function(){
+        if($( "#set_driver_container").hasClass('hidden')){
+            $( "#set_driver_container").removeClass('hidden');
+            scroller.fnScrollToRow( rowIndex );
+            var oTT = TableTools.fnGetInstance( 'departure_list' );
+            oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
+        }
+        else{
+            $( "#set_driver_container").addClass('hidden');
+        }
+    });
 </script>

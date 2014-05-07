@@ -74,6 +74,49 @@ class arrivalActions extends sfActions
         return $this->renderText($json);
     }
 
+    public function executeArrivalPdf(sfWebRequest $request){
+        $day  = $this->getUser()->getCurrentArrivalDate();
+
+        $header = array('N.','Progr.','Arrivo','Vettore','Cliente','Referente','Pax','Tragitto','Categoria Mezzo','Autista','Tipo','Nota');
+        $con = Propel::getConnection();
+        $con->useDebug(true);
+
+        $select = "SELECT b.number, a.hour, a.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', p.name,a.note ";
+        $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
+                 " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
+                 " JOIN locality as locfrom on (a.locality_from = locfrom.id) ".
+                 " JOIN locality as locto ON (a.locality_to = locto.id) ".
+                 " JOIN vehicle_type as v ON (b.vehicle_type_id = v.id) ".
+                 " JOIN sf_guard_user as driver on (a.driver_id = driver.id) ".
+                 " JOIN payment_method as p on (a.payment_method_id = p.id) ";
+        $where = " WHERE a.day ='".$day."' ";
+        $order_by = " ORDER BY a.hour, v.id, b.number;";
+
+        $query = $select.$from.$where.$order_by;
+
+        $statement = $con->prepare($query);
+        $statement->execute();
+
+        if($statement->rowCount()){
+            $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        }
+
+        var_dump($row);
+
+        try{
+            $pdf = new TCPDF("L","mm","A4");
+        }
+        catch(Exception $e){
+            $e->getMessage();
+        }
+
+        $pdf->AddPage();
+        $pdf->SetAutoPageBreak(1,0.5);
+        //$pdf->Output("arrival_transfer"."_".$day.".pdf","I");
+        exit;
+    }
+
     /**
      * set the current session arrival date.
      */

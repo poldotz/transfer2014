@@ -6,9 +6,10 @@
  * Time: 8.35
  */
 ?>
-<table id="departure_list" class="table table-condensed table-striped table-hover table-bordered pull-left dataTable">
+<table id="departure_list" class="table table-condensed stripe table-bordered pull-left dataTable">
     <thead>
     <tr>
+        <th style="width: 0%"></th>
         <th style="width: 4%">Annullato</th>
 
         <th style="width: 5%">Progressivo</th>
@@ -38,55 +39,109 @@
 <br/>
 
 <script type="text/javascript">
+    var scroller = {};
+    var rowIndex = 0;
     $(document).ready(function() {
-        oTable = $('#departure_list').dataTable({
-            'bLengthChange': false,
-            "iDisplayLength": 5,
-            'bProcessing': true,
-            'bServerSide': true,
-            'sAjaxSource': "<?php echo url_for('departure/get_data') ?>",
-            'fnDrawCallback': function() {
+
+        table = $('#departure_list').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false
+
+                }
+            ],
+            ordering:false,
+            "scrollY": 200,
+            scrollCollapse: true,
+            "fnInitComplete": function (o) {
+                // Immediately scroll to row 1000
+                scroller = o.oScroller;
+                scroller.fnScrollToRow( rowIndex );
+            },
+            "dom": 'T<"clear">rtiS',
+            tableTools: {
+                "sRowSelect": "single",
+                "aButtons": [ ]
+            },
+            "deferRender": true,
+            'ajax': "<?php echo url_for('departure/get_data') ?>",
+            "drawCallback": function(settings) {
                 clickRowHandler();
             },
-            "oLanguage": {
-                "sProcessing":     "Caricamento...",
+            "language": {
+                "processing":     "Caricamento...",
                 "sLengthMenu":     "Visualizza _MENU_ elementi",
-                "sZeroRecords":   "La ricerca non ha portato alcun risultato",
-                "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
-                "sInfoEmpty":     "Vista da 0 a 0 di 0 elementi",
-                "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
-                "sInfoPostFix":    "",
-                "sSearch":          "Cerca:",
-                "sLoadingRecords": "",
-                "sUrl":            "",
-                "oPaginate": {
-                    "sFirst":    "Inizio",
-                    "sPrevious": "Precedente",
-                    "sNext":    "Successivo",
-                    "sLast":     "Fine"
+                "zeroRecords":   "La ricerca non ha portato alcun risultato",
+                "info":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
+                "infoEmpty":     "Vista da 0 a 0 di 0 elementi",
+                "infoFiltered":   "(filtrati da _MAX_ elementi totali)",
+                "infoPostFix":    "",
+                "search":          "Cerca:",
+                "loadingRecords": "",
+                "paginate": {
+                    "first":    "Inizio",
+                    "previous": "Precedente",
+                    "next":    "Successivo",
+                    "last":     "Fine"
                 }
             }
-        }).fnSetFilteringDelay();
+        });
 
         /* Click event handler */
         function clickRowHandler() {
-            $('#departure_list tbody tr').bind('click', function () {
-                var aData = oTable.fnGetData( this );
-                var idNumber = aData[1];
+            $('#departure_list tbody tr').bind('dblclick', function () {
+                var aData = table.row( this).data();
+                var idNumber = aData[2];
                 postSelectedRow(idNumber);
             });
         }
 
         function postSelectedRow(idNumber) {
-            $.get("<?php echo url_for('arrival/editJs') ?>", {
+            $.get("<?php echo url_for('departure/editJs') ?>", {
                     idNumber: idNumber
                 },
-                function(arrival){
-                    $("#arrival_container").html(arrival);
+                function(departure){
+                    $("#departure_container").html(departure);
                 }).fail(function(){
-                    bootbox.alert('Arrivo non trovato!');
+                    bootbox.alert('Partenza non trovata!');
                 });
 
         }
+
+        $('#set_departure_driver').submit(function(e){
+
+
+            e.preventDefault();
+            $(this).attr('action');
+            var driver_id = $(this).find('select').val();
+
+            var table = $('#departure_list').DataTable();
+            scroller.fnScrollToRow(rowIndex);
+            var departure_id = table.cell(rowIndex,0).data();
+            if(departure_id && driver_id){
+                $.ajax({
+                    url: "<?php echo url_for('departure/setDriver') ?>",
+                    data:{departure_id: departure_id, driver_id: driver_id},
+                    type: "POST"
+
+                })
+                    .done(function(driver_name){
+
+                        table.cell(rowIndex,6).data(driver_name);
+                        rowIndex  = rowIndex + 1;
+                        scroller.fnScrollToRow(rowIndex);
+                        var oTT = TableTools.fnGetInstance( 'departure_list' );
+                        oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
+                    })
+                    .fail(function(){
+                        bootbox.alert('Errore durante il salvataggio!');
+                    });
+
+            }else{
+                bootbox.alert('Nessun Record Selezionato.');
+            }
+
+        });
     });
 </script>

@@ -53,9 +53,8 @@
 
                 <div style="margin-left: 40px; margin-right: 0px;" class="span1">
                    <?php echo $form['departure']['pick_up']->render() ?>
-
                     <?php if($form['departure']['pick_up']->getValue() == 1): ?>
-                        <div class="label label-important">PickUp</div>
+                        <div class="label label-important">PK</div>
                     <?php else: ?>
                         PickUp
                     <?php endif; ?>
@@ -104,6 +103,35 @@
             if(hour && minute && locality_from && locality_to){
                 $.ajax({
                     url: '<?php echo url_for('booking/pickUp')?>',
+                    data: {hour: hour, minute: minute, locality_from: locality_from, locality_to: locality_to,pickUp: pickUp},
+                    method: "post",
+                    dataType: "json"
+                })
+                    .done(function(response){
+                        var hour = $('#booking_departure_departure_time_hour').val(response.departureHour);
+                        var minute = $('#booking_departure_departure_time_minute').val(response.departureMinute);
+
+                    })
+                    .fail(function(msg){
+                        bootbox.alert("errore:" + msg);
+                    });
+
+            }else{
+                bootbox.alert('Selezionare località di partenza di arrivo e l\'orario');
+            }
+        }
+    });
+
+    $('#booking_departure_hour_minute').change(function(){
+        var hour = $('#booking_departure_hour_hour').val();
+        var minute = this.value;
+        var locality_from  = $('#booking_departure_locality_from').val();
+        var locality_to = $('#booking_departure_locality_to').val();
+        var pickUp = $('#booking_departure_pick_up').prop('checked');
+        if(pickUp === false){
+            if(hour && minute && locality_from && locality_to){
+                $.ajax({
+                    url: '<?php echo url_for('departure/pickUp')?>',
                     data: {hour: hour, minute: minute, locality_from: locality_from, locality_to: locality_to,pickUp: pickUp},
                     method: "post",
                     dataType: "json"

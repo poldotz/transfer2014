@@ -30,57 +30,86 @@ class departureActions extends sfActions
         $this->form = new BookingDepartureForm($booking);
     }
 
+    public function executeEditJs(sfWebRequest $request){
+
+        if ($request->isXmlHttpRequest())
+        {
+            sfConfig::set('sf_web_debug', false);
+            $idNumber = explode("/",$request->getParameter('idNumber'));
+            if(is_array($idNumber)){
+                $number = $idNumber[0];
+                $year = $idNumber[1];
+                $booking = BookingPeer::getBookingByIdNumber($number,$year);
+                $this->form = new BookingDepartureForm($booking);
+                return $this->renderPartial('departure/departure_form', array('form' => $this->form));
+            }else{
+                $response = sfContext::getInstance()->getResponse();
+                return $response->setStatusCode(404,'Prenotazione non trovata.');
+            }
+
+        }
+    }
+
     public function executeGet_data(sfWebRequest $request)
     {
         sfConfig::set('sf_web_debug', false);
         $this->getResponse()->setContentType('application/json');
-
-        //start: sorting
-        $type_colnames = array(BookingPeer::NUMBER,BookingPeer::YEAR);
-        $iSortCol_0 = $request->getParameter('iSortCol_0');
-        if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
-        $c = new Criteria();
         $day  = $this->getUser()->getCurrentDepartureDate();
-        $c->add(DeparturePeer::DAY,$day,Criteria::EQUAL);
-        $c->addJoin(DeparturePeer::BOOKING_ID,BookingPeer::ID);
-        $c->addJoin(BookingPeer::CUSTOMER_ID,CustomerPeer::ID);
-        $c->addJoin(BookingPeer::VEHICLE_TYPE_ID,VehicleTypePeer::ID);
-        if ($query = $request->getParameter('sSearch'))
-        {
-            $c->addOr(BookingPeer::YEAR,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::NUMBER,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::CONCTACT,"%".$query."%",Criteria::LIKE);
-            $c->addOr(BookingPeer::RIF_FILE,"%".$query."%",Criteria::LIKE);
-            $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
-        }
-        if ('asc' === $request->getParameter('sSortDir_0', 'asc'))
-        {
-            $c->addAscendingOrderByColumn($type_colnames[$iSortCol_0]);
-        }
-        else
-        {
-            $c->addDescendingOrderByColumn($type_colnames[$iSortCol_0]);
-        }
-        //end: sorting
-        //start: paging
-        $item_per_page = $request->getParameter('iDisplayLength', 10);
-        $page = ($request->getParameter('iDisplayStart', 0) / $item_per_page) + 1;
-        $pager = DeparturePeer::doSelectPager($page, $item_per_page, $c);
-        //end: paging
-        $json = '{"iTotalRecords":'.$pager->getNbResults().',
-     "iTotalDisplayRecords":'.$pager->getNbResults().',
-     "aaData":[';
+        $departures = DepartureQuery::create()
+            ->filterByDay($day)
+            ->orderByHour()
+            ->orderById()
+            ->find();
+        $json = '{ "data":[';
         $first = 0;
-        foreach ($pager->getResults() as $v)
+        foreach ($departures as $v)
         {
             if ($first++) $json .= ',';
             $booking = $v->getBooking();
             $route = $v->getLocalityFromName()."-".$v->getLocalityToName();
             $is_cancelled = $v->getCancelled() ? 'SI':'NO';
-            $json .= '["'.$is_cancelled.'","'.$booking->getNumber().'/'.$booking->getYear().'","'.substr($v->getHour(),0,5).'","'.$v->getFlight().'","'.$booking->getVehicleType().'","'.$v->getDriver().'","'.$booking->getCustomer().'","'.$booking->getContact().'","'.$route.'"]';
+            $json .= '["'.$v->getId().'","'.$is_cancelled.'","'.$booking->getNumber().'/'.$booking->getYear().'","'.substr($v->getHour(),0,5).'","'.$v->getFlight().'","'.$booking->getVehicleType().'","'.$v->getDriver().'","'.$booking->getCustomer().'","'.$booking->getContact().'","'.$route.'"]';
         }
         $json .= ']}';
         return $this->renderText($json);
+    }
+
+    public function executeSetDriver(sfWebRequest $request){
+        if ($request->isXmlHttpRequest())
+        {
+            sfConfig::set('sf_web_debug', false);
+            $departure = DeparturePeer::retrieveByPK($request->getParameter('departure_id'));
+            $driver = $departure->getDriver();
+            $departure->setDriverId($request->getParameter('driver_id'));
+            try{
+                $res = $departure->save();
+
+                if($res){
+                    $driver = $departure->getDriver();
+                }
+                return $this->renderText($driver);
+
+            }
+            catch(Exception $e){
+                $response = sfContext::getInstance()->getResponse();
+                return $response->setStatusCode(500,'Errore nel salvataggio.');
+            }
+        }
+    }
+
+    /**
+     * set departure day
+     */
+    public function executeUpdateDay(sfWebRequest $request){
+
+        $booking_form = $request->getParameter('booking');
+        $day = date('Y-m-d',strtotime($booking_form['departure']['day_update']));
+        $departure_id = $booking_form['departure']['id'];
+        $departure = DeparturePeer::retrieveByPK($departure_id);
+        $departure->setDay($day);
+        $departure->save();
+        $this->redirect('departure/index');
+
     }
 
     /**
@@ -115,25 +144,7 @@ class departureActions extends sfActions
         $this->setTemplate('index');
     }
 
-    public function executeEditJs(sfWebRequest $request){
 
-        if ($request->isXmlHttpRequest())
-        {
-            sfConfig::set('sf_web_debug', false);
-            $idNumber = explode("/",$request->getParameter('idNumber'));
-            if(is_array($idNumber)){
-                $number = $idNumber[0];
-                $year = $idNumber[1];
-                $booking = BookingPeer::getBookingByIdNumber($number,$year);
-                $this->form = new BookingDepartureForm($booking);
-                return $this->renderPartial('departure/departure_form', array('form' => $this->form));
-            }else{
-                $response = sfContext::getInstance()->getResponse();
-                return $response->setStatusCode(404,'Prenotazione non trovata.');
-            }
-
-        }
-    }
 
     public function executeUpdate(sfWebRequest $request)
     {
@@ -163,5 +174,68 @@ class departureActions extends sfActions
             $this->form = $form;
             $this->setTemplate('index');
         }
+    }
+
+    public function executePickUp(sfWebRequest $request){
+        $hour  = $request->getParameter('hour');
+        $minute  = $request->getParameter('minute');
+        $locality_from   = $request->getParameter('locality_from');
+        $locality_to  = $request->getParameter('locality_to');
+        $pickUp  = $request->getParameter('pickUp');
+
+        if($pickUp == "false"){
+            $route = RouteQuery::create()
+                ->filterByLocalityFrom($locality_from)
+                ->filterByLocalityTo($locality_to)
+                ->findOne();
+            if($route){
+                $duration = $route->getDuration();
+                $durationTime = explode(":",$duration);
+                $departureTime =  $this->calculateDepartureTime($hour,$minute,(int) $durationTime[0],(int) $durationTime[1]);
+            }
+
+        }else{
+            $departureTime = array('departureHour'=>$hour,'departureMinute'=>$minute);
+        }
+
+        $departureTime = json_encode($departureTime);
+        sfConfig::set('sf_web_debug', false);
+        $this->getResponse()->setContentType('application/json');
+        return $this->renderText($departureTime);
+
+    }
+
+    private function calculateDepartureTime($hour,$minute,$routeHour = 0,$routeMinute = 0){
+        // il tempo che deve essere sottratto: anticipo del vettore + durata.
+        if($minute < $routeMinute)
+        {
+            if($hour == 1){
+                $hour = 25;
+            }
+            if($hour == 0){
+                $hour = 24;
+            }
+            $hour = $hour - 1;
+            if($hour == 24){
+                $hour = 0;
+            }
+
+            $minute = $minute + 60;
+        }
+
+        $minute = $minute - $routeMinute;
+        $minus = 0;
+
+        if($hour < $routeHour)
+        {
+            $minus = $hour - $routeHour;
+            $hour = 24 + $minus;
+        }
+        else{
+            $hour = $hour - $routeHour;
+        }
+
+        return  array('departureHour'=>$hour,'departureMinute'=>$minute);
+
     }
 }

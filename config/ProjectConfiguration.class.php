@@ -46,5 +46,6 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfGuardPlugin');
     $this->enablePlugins('sfGuardExtraPlugin');
     $this->enablePlugins('sfFormExtraPlugin');
+    $this->enablePlugins('sfTCPDFPlugin');
   }
 }

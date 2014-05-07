@@ -111,17 +111,6 @@
 
         }
 
-        $('#set_driver').click(function(){
-            if($( "#set_driver_container").hasClass('hidden')){
-                $( "#set_driver_container").removeClass('hidden');
-                scroller.fnScrollToRow( rowIndex );
-                var oTT = TableTools.fnGetInstance( 'arrival_list' );
-                oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
-            }
-            else{
-                $( "#set_driver_container").addClass('hidden');
-            }
-        });
 
         $('#set_arrival_driver').submit(function(e){
 

@@ -8,7 +8,7 @@
 ?>
     <div class="span12 form-inline">
         <div class="control-group">
-            <form action="<?php echo ('arrival/updateDay') ?>" method="post">
+            <form action="<?php echo url_for('arrival/updateDay') ?>" method="post">
                 <label>Cambia data: </label>
                 <?php echo $form['arrival']['id']->render(); ?>
                 <?php echo $form['arrival']['day_update']->render(array('class'=>'input-small','readonly')); ?>
