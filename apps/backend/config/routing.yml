@@ -41,6 +41,10 @@ service_driver:
     url: /servizi-autista
     param: {module: serviceDriver, action: index}
 
+services_pdf:
+    url: /servizi-autisti-pdf
+    param: {module: serviceDriver, action: servicesDriversPdf }
+
 company:
     url:   /dati-aziendali
     param: { module: company, action: index }

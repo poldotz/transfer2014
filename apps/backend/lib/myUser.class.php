@@ -27,20 +27,23 @@ class myUser extends sfGuardSecurityUser
     public function setCurrentArrivalDate($date = ""){
         if($date){
             $this->setAttribute('current_arrival_date',$date);
+            $this->setAttribute('current_drivers_date',$date);
+
         }
         else{
-            $this->setAttribute('current_arrival_date',date('Y-m-d'));
+            $this->setAttribute('current_arrival_date',date('Y-m-d',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),$this->getSessionYear())));
         }
 
     }
 
     public function getCurrentArrivalDate(){
-        return $this->getAttribute('current_arrival_date',date('Y-m-d'));
+        return $this->getAttribute('current_arrival_date',date('Y-m-d',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),$this->getSessionYear())));
     }
 
     public function setCurrentDepartureDate($date = ""){
         if($date){
             $this->setAttribute('current_departure_date',$date);
+            $this->setAttribute('current_drivers_date',$date);
         }
         else{
             $this->setAttribute('current_departure_date',date('Y-m-d'));
@@ -48,7 +51,20 @@ class myUser extends sfGuardSecurityUser
     }
 
     public function getCurrentDepartureDate(){
-        return $this->getAttribute('current_departure_date',date('Y-m-d'));
+        return $this->getAttribute('current_departure_date',date('Y-m-d',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),$this->getSessionYear())));
+    }
+
+    public function setCurrentDriversDate($date = ""){
+        if($date){
+            $this->setAttribute('current_drivers_date',$date);
+        }
+        else{
+            $this->setAttribute('current_drivers_date',date('Y-m-d',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),$this->getSessionYear())));
+        }
+    }
+
+    public function getCurrentDriversDate(){
+        return $this->getAttribute('current_drivers_date',date('Y-m-d',mktime(date('H'),date('i'),date('s'),date('m'),date('d'),$this->getSessionYear())));
     }
 
 }

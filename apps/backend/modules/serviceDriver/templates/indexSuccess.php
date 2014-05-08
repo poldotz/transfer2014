@@ -7,7 +7,7 @@
 <?php use_javascript('dataTableNew/dataTables.tableTools.min.js') ?>
 <?php slot('container_open') ?>
     <div class="container-fluid">
-        <?php include_partial('drivers_services',array('services'=>$services)) ?>
+        <?php include_component('serviceDriver','driversServices') ?>
         <div style="margin-left: 190px;" class="dashboard-wrapper">
 <?php end_slot(); ?>
 <div class="main-container">
