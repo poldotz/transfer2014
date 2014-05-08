@@ -23,7 +23,7 @@
             <a href="Javascript:void(0)" title="Invia Email" class="btn btn-small btn-success"/>
                 <span class="fs1" aria-hidden="true" data-icon="&#xe040;"></span>
             </a>
-            <a id="print_arrival" href="<?php echo url_for('arrival/arrivalPdf') ?>" title="stampa arrivi" class="btn btn-small btn-inverse"/>
+            <a id="print_arrival" target="_blank" href="<?php echo url_for('arrival/arrivalPdf') ?>" title="stampa arrivi" class="btn btn-small btn-inverse"/>
                 <span class="fs1" aria-hidden="true" data-icon="&#xe051;"></span>
             </a>
             <div class="pull-right">

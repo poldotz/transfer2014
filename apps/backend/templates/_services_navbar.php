@@ -10,10 +10,7 @@
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe131;"></span> In Partenza',"@departure",array("class"=>($selected == "departure") ? "selected": "")); ?>
         </li>
         <li>
-            <a href="autista.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span> Servizi Autista
-            </a>
-
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span> Servizi Autista',"@service_driver",array("class"=>($selected == "service_driver") ? "selected": "")); ?>
         </li>
         <li>
             <a href="hostess.html">

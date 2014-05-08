@@ -143,7 +143,7 @@
       <column name="year" type="integer" size="4" required="true"/>
       <column name="number" type="integer" size="12" required="true"/>
       <column name="adult" type="integer" size="4" required="true"/>
-      <column name="child" type="integer" size="4" required="false" default="0"/>
+      <column name="child" type="integer" size="4" required="false" default="0  "/>
       <column name="contact" type="varchar" size="100" required="false"/>
       <column name="rif_file" type="varchar" size="20" required="false"/>
       <column name="customer_id" type="integer" required="true"/>
