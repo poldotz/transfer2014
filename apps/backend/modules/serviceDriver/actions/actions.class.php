@@ -25,7 +25,6 @@ class serviceDriverActions extends sfActions
      * set the current session arrival date.
      */
     public function executeChangeDate(sfWebRequest $request){
-
         $date =$request->getParameter('day_change');
         $day = date('Y-m-d',strtotime($date));
 
@@ -53,7 +52,7 @@ class serviceDriverActions extends sfActions
             $con = Propel::getConnection();
             $con->useDebug(true);
 
-            $select = "(SELECT b.number,  'Arrivo' as 'Arrivo', substr(a.hour,1,5) as 'hour', a.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', p.name,a.note ";
+            $select = "(SELECT if(a.cancelled,'si','no') as 'Annullato', b.number, 'Arrivo' as 'Arrivo', substr(a.hour,1,5) as 'hour', a.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', p.name,a.note ";
             $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
                 " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
                 " JOIN locality as locfrom on (a.locality_from = locfrom.id) ".
@@ -67,7 +66,7 @@ class serviceDriverActions extends sfActions
             $queryArrivals = $select.$from.$where.$order_by;
 
 
-            $select = "(SELECT b.number, if(locto.is_vector,'Partenza','Taxi') as 'servizio', substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', p.name,d.note ";
+            $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, if(locto.is_vector,'Partenza','Taxi') as 'servizio', substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', p.name,d.note ";
             $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
                 " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
                 " JOIN locality as locfrom on (d.locality_from = locfrom.id) ".
@@ -105,19 +104,19 @@ class serviceDriverActions extends sfActions
                         'Tipo',
                         'Nota');
                     $w = array (
-                        5,
                         8,
+                        11,
+                        14,
                         15,
                         15,
-                        10,
                         40,
                         40,
                         10,
                         45,
                         28,
                         25,
-                        10,
-                        42
+                        9,
+                        35
                     );
                     $rows = $statement->fetchAll(PDO::FETCH_NUM);
                     $pdf->FancyTable($header, $rows,$w);
