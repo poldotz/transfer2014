@@ -1,10 +1,10 @@
 <div class="left-sidebar"> <!-- Leftside bar start -->
             <br/><br/>
             <div class="content">
-                <table   class="table table-condensed table-bordered no-margin">
+                <table class="table striped table-condensed table-bordered no-margin sidebar">
                     <thead>
                     <tr>
-                        <th style="width:15%">
+                        <th style="width:15%;">
                             Autista
                         </th>
                         <th style="width:5%" class="hidden-phone">
@@ -15,9 +15,9 @@
                     </thead>
                     <tbody style="background-color: #ffffff">
                     <?php $tot = 0; ?>
-                    <?php foreach($services as $service): ?>
+                    <?php foreach($services as $key => $service): ?>
                      <?php $tot += $service['num']; ?>
-                    <tr>
+                    <tr style="cursor: pointer" class="service_driver" data-content="<?php echo $key ?>" data-date="<?php echo $sf_user->getCurrentDriversDate() ?>">
                         <td>
                             <?php echo $service['driver'] ?>
                         </td>
@@ -37,3 +37,27 @@
                 </div>
             </div>
         </div><!-- Leftside bar end -->
+
+<script type="text/javascript">
+    $('.service_driver').click(function(){
+
+        var day = $(this).attr('data-date');
+        var driver_id = $(this).attr('data-content');
+        $.ajax(
+            {
+                url: '<?php echo url_for('serviceDriver/driverServiceList') ?>',
+                data: { day: day, driver_id: driver_id},
+                type: "post",
+                success: function (HTML){
+                    if (HTML > ""){
+                        $('#service_driver_list').html(HTML);
+                    }
+                    return false;
+                }
+            }
+        );
+
+
+    });
+
+</script>

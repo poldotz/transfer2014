@@ -7796,3 +7796,6 @@ ul.radio_list{
 .embed + img {
     position: relative; left: -21px; top: -1px;
 }
+table.sidebar tr:hover td {
+    background-color: #C4FFD7;
+}

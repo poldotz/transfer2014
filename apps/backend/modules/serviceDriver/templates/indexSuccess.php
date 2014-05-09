@@ -24,43 +24,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="widget-body">
-                    <table class="table table-striped table-condensed table-bordered no-margin">
-                        <thead>
-                        <tr>
-                            <th class="span1">Tipo</th>
-                            <th class="span1">Orario</th>
-                            <th class="span1">Sigla</th>
-                            <th class="span2 hidden-phone">Mezzo Richiesto</th>
-                            <th class="span2 hidden-phone">Cliente</th>
-                            <th class="span2 hidden-phone">Referente</th>
-                            <th class="span2 hidden-phone">Tragitto</th>
-                            <th class="span1">Azione</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Partenza</td>
-                            <td>
-                                10:30
-                            </td>
-                            <td>AZ123</td>
-                            <td class="vertical-align-mid hidden-phone">
-                                Bus 17/30
-                            </td>
-                            <td class="hidden-phone">
-                                Cliente di test
-                            </td>
-                            <td class="hidden-phone">
-                                Sempronio
-                            </td>
-                            <td class="hidden-phone">ABAMAR - APT-ELMAS</td>
-                            <td>
-                                <span data-icon="&#xe07f;"></span> Visualizza
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div id="service_driver_list"class="widget-body">
+                <?php include_partial('driverServiceList',array('driverServices'=>$driverServices)) ?>
                 </div>
             </div>
         </div>

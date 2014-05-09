@@ -18,6 +18,7 @@ class serviceDriverActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
       $this->form = new ServiceDriverForm();
+      $this->driverServices = array();
   }
 
 
@@ -132,6 +133,19 @@ class serviceDriverActions extends sfActions
             }
             sfView::NONE;
             exit;
+    }
+
+    /**
+     * show driver's services list.
+     */
+    public function executeDriverServiceList(sfRequest $request){
+        $day = $request->getParameter('day');
+        $driver_id = $request->getParameter('driver_id');
+        $services = Driver::getDriverServicesDay($day,$driver_id);
+        return $this->renderPartial('driverServiceList',array('driverService'=>$services));
+        exit;
+        sfView::SUCCESS;
+
     }
 
 
