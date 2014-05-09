@@ -47,4 +47,14 @@
     <?php endif;  ?>
     </tbody>
 </table>
-
+<hr/>
+<div class="clearfix"></div>
+<div class="row-fluid">
+    <div class="span12 center-align-text">
+<?php if(count($driverService)): ?>
+        <a class="btn btn-success" target="_blank" href="<?php echo url_for('serviceDriver/driverServiceListPdf?id='.$id.'&day='.$day) ?>" >
+            STAMPA
+        </a>
+    </div>
+</div>
+<?php endif; ?>

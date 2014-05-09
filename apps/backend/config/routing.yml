@@ -41,6 +41,10 @@ service_driver:
     url: /servizi-autista
     param: {module: serviceDriver, action: index}
 
+service_hostess:
+    url: /servizi-hostess
+    param: {module: serviceHostess, action: index}
+
 services_pdf:
     url: /servizi-autisti-pdf
     param: {module: serviceDriver, action: servicesDriversPdf }

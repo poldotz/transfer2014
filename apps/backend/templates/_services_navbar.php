@@ -13,9 +13,8 @@
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span> Servizi Autista',"@service_driver",array("class"=>($selected == "service_driver") ? "selected": "")); ?>
         </li>
         <li>
-            <a href="hostess.html">
-                <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess
-            </a>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess',"@service_hostess",array("class"=>($selected == "service_hostess") ? "selected": "")); ?>
+
         </li>
     </ul>
     <div class="clearfix"></div>
