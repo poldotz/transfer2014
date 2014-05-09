@@ -14,6 +14,4 @@ class serviceDriverComponents extends sfComponents {
         $this->services = $services;
     }
 
-
-
 } 

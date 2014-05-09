@@ -18,6 +18,11 @@
 class sfGuardUser extends PluginsfGuardUser
 {
 
+    public function __toString(){
+
+        return ucfirst($this->first_name). " ".ucfirst(substr($this->last_name,0,1));
+
+}
 
     public function getFirstName(){
         return $this->first_name;

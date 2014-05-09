@@ -34,38 +34,18 @@ Class Driver {
         ->select(array('DRIVER_ID', 'num','driver'))
         ->orderBy('sfGuardUser.FIRST_NAME')
         ->find();
-        $departures= $departures->toArray();
-        if(count($arrivals)){
-            foreach($arrivals as &$arrival){
-                foreach($departures as $departure){
-                    if(in_array($arrival['DRIVER_ID'],$departure)){
-                        $arrival['num'] = $arrival['num'] + $departure['num'];
-                    }
-                    else{
-                        $arrival = $departure;
-                    }
-                }
-            }
-            $services = $arrivals;
-            return $services;
-      }
-      else if(count($departures)){
-            foreach($departures as &$departure){
-                foreach($arrivals as &$arrival){
-                    if(in_array($arrival['DRIVER_ID'],$departure)){
-                        $departure['num'] = $departure['num'] + $arrival['num'];
-                    }
-                    else{
-                        $departure = $arrival;
-                    }
-                }
-            }
-            $services = $departures;
+        $departures = $departures->toArray();
+        $raw_services = array_merge($arrivals,$departures);
 
-            return $services;
+        $services = array();
+        foreach($raw_services as $row){
+            if(array_key_exists($row['DRIVER_ID'],$services)){
+                $services[$row['DRIVER_ID']]['num'] += $row['num'];
+            }else{
+                $services[$row['DRIVER_ID']] = $row;
+            }
         }
-
-        return $departures;
+        return $services;
     }
 
     public static function translateToItaDayOfWeek($giorno ="")
