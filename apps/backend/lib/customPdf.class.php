@@ -143,7 +143,7 @@ class CustomPdf extends TCPDF {
             $this->setX(2);
             for ($i = 0; $i < count($row); $i++)
             {
-                if($i < count($row)-1)
+                if($i < count($row) -1 )
                 {
                     if($i == 0)
                     {

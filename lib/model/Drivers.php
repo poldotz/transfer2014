@@ -35,14 +35,36 @@ Class Driver {
         ->orderBy('sfGuardUser.FIRST_NAME')
         ->find();
         $departures= $departures->toArray();
-
-        foreach($arrivals as $arrival){
-            foreach($departures as &$departure){
-                if(in_array($arrival['DRIVER_ID'],$departure)){
-                    $departure['num'] = $departure['num'] + $arrival['num'];
+        if(count($arrivals)){
+            foreach($arrivals as &$arrival){
+                foreach($departures as $departure){
+                    if(in_array($arrival['DRIVER_ID'],$departure)){
+                        $arrival['num'] = $arrival['num'] + $departure['num'];
+                    }
+                    else{
+                        $arrival = $departure;
+                    }
                 }
             }
+            $services = $arrivals;
+            return $services;
+      }
+      else if(count($departures)){
+            foreach($departures as &$departure){
+                foreach($arrivals as &$arrival){
+                    if(in_array($arrival['DRIVER_ID'],$departure)){
+                        $departure['num'] = $departure['num'] + $arrival['num'];
+                    }
+                    else{
+                        $departure = $arrival;
+                    }
+                }
+            }
+            $services = $departures;
+
+            return $services;
         }
+
         return $departures;
     }
 
