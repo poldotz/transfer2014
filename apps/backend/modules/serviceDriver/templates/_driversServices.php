@@ -31,10 +31,22 @@
                 <br/>
                 <div class="row-fluid">
                     <div class="span12 center-align-text">
-                        <label class="label-success"> Tot: <?php echo $tot ?> </label><br/>
+                        <span class="badge badge-inverse "> <strong>TOT:  <?php echo $tot ?></strong></span>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row-fluid">
+                    <div class="span12 center-align-text">
                         <a href="<?php echo url_for('@services_pdf') ?>" target="_blank" class="btn btn-inverse"><span class="" data-icon="&#xe051;"></span> Stampa tutti</a>
                     </div>
                 </div>
+                <hr/>
+                <div class="row-fluid">
+                    <div class="span12 center-align-text">
+                        <a href="<?php echo url_for('@services_email-pdf') ?>" target="_blank" class="btn btn-success"><span class="fs1" data-icon="&#xe040;"></span> Invia a tutti</a>
+                    </div>
+                </div>
+                <hr/>
             </div>
         </div><!-- Leftside bar end -->
 

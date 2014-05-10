@@ -99,7 +99,7 @@ class arrivalActions extends sfActions
         try{
             $statement = $con->prepare($query);
             $statement->execute();
-            $pdf = new CustomPdf("L","mm","A4");
+            $pdf = new CustomPdf();
             $title = 'Transfer in arrivo: ('.$statement->rowCount().') - '.$giorno.' '.$data;
             $pdf->setHeaderTitle($title);
             $pdf->AddPage();
@@ -107,30 +107,30 @@ class arrivalActions extends sfActions
 
             if($statement->rowCount()){
                 $header = array('N.',
-                                'Progr.',
+                                'Prg.',
                                 'Arrivo',
                                 'Vettore',
                                 'Cliente',
                                 'Referente',
                                 'Pax',
                                 'Tragitto',
-                                'Categoria Mezzo',
+                                'Mezzo',
                                 'Autista',
                                 'Tipo',
                                 'Nota');
                 $w = array (
-                    8,
-                    12,
+                    5,
+                    9,
                     15,
                     18,
                     40,
                     40,
-                    10,
-                    45,
-                    28,
+                    8,
+                    50,
+                    25,
                     25,
                     10,
-                    42
+                    50
                 );
                 $rows = $statement->fetchAll(PDO::FETCH_NUM);
                 $pdf->FancyTable($header, $rows,$w);

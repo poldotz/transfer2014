@@ -25,9 +25,9 @@ default:
   # document author
   PDF_AUTHOR: "TCPDF"
   # header title
-  PDF_HEADER_TITLE: "TCPDF Example"
+  PDF_HEADER_TITLE: ""
   # header description string
-  PDF_HEADER_STRING: "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org - symfony1 plugin by Vernet Loïc (Aka COil) - http://www.symfony-project.org/plugins/sfTCPDFPlugin"
+  PDF_HEADER_STRING: ""
   # image logo
   PDF_HEADER_LOGO: "tcpdf_logo.jpg"
   # header logo image width [mm]
@@ -47,11 +47,11 @@ default:
   # right margin
   PDF_MARGIN_RIGHT: "15"
   # default main font name
-  PDF_FONT_NAME_MAIN: "helvetica"
+  PDF_FONT_NAME_MAIN: "courier"
   # default main font size
   PDF_FONT_SIZE_MAIN: "10"
   # default data font name
-  PDF_FONT_NAME_DATA: "helvetica"
+  PDF_FONT_NAME_DATA: "courier"
   # default data font size
   PDF_FONT_SIZE_DATA: "8"
   # default monospaced font name

@@ -14,7 +14,7 @@
           <?php if (!$form->getObject()->isNew()): ?>
             &nbsp;<?php //echo link_to('Delete', 'vehicle/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
           <?php endif; ?>
-          <input type="submit" value="Save" />
+          <input type="submit" value="SALVA" />
         </td>
       </tr>
     </tfoot>

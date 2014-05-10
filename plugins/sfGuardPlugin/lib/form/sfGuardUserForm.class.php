@@ -38,6 +38,17 @@ class sfGuardUserForm extends BasesfGuardUserForm
       $this['sf_guard_user_group_list'],
       $this['sf_guard_user_permission_list']
     );
+
+      $this->widgetSchema->setLabels(array(
+          'username'    => 'Nome utente',
+          'password_again' => 'Ripeti Password',
+          'first_name'   => 'Nome',
+          'last_name' => 'Cognome',
+          'internal_user_groups' => 'Gruppo utente',
+          'is_active' => 'Attivo',
+          'phone' => 'Telefono'
+
+      ));
   }
 
     public function updateDefaultsFromObject()

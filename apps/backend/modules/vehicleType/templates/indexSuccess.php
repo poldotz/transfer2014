@@ -10,7 +10,7 @@
                     <table id="vehicle_type" class="table table-condensed table-striped table-hover table-bordered pull-left dataTable">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Nome</th>
                             <th>Azioni</th>
                         </tr>
 

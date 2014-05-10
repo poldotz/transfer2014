@@ -17,8 +17,9 @@ Class Driver {
         ->where('Arrival.DAY = ?',$day)
         ->withColumn('count(*)', 'num')
         ->withColumn('concat(sfGuardUser.FIRST_NAME," ",sfGuardUser.LAST_NAME)', 'driver')
+        ->withColumn('sfGuardUser.EMAIL', 'EMAIL')
         ->groupBy('Arrival.DRIVER_ID')
-        ->select(array('DRIVER_ID', 'num','driver'))
+        ->select(array('DRIVER_ID', 'num','driver','EMAIL'))
         ->orderBy('sfGuardUser.FIRST_NAME')
         ->find();
 
@@ -30,8 +31,9 @@ Class Driver {
         ->where('Departure.DAY = ?', $day)
         ->withColumn('count(*)', 'num')
         ->withColumn('concat(sfGuardUser.FIRST_NAME," ",sfGuardUser.LAST_NAME)', 'driver')
+        ->withColumn('sfGuardUser.EMAIL', 'EMAIL')
         ->groupBy('Departure.DRIVER_ID')
-        ->select(array('DRIVER_ID', 'num','driver'))
+        ->select(array('DRIVER_ID', 'num','driver',"EMAIL"))
         ->orderBy('sfGuardUser.FIRST_NAME')
         ->find();
         $departures = $departures->toArray();

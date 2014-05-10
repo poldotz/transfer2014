@@ -14,7 +14,14 @@
         <form action="<?php echo url_for('route/save')?>" method="post">
             <input type="hidden" name="locality_from" value="<?php echo $locality_from->getId() ?>"/>
             <button type="submit" class="btn btn-success">Salva</button>
+            <br/><br/>
             <table class="table table-bordered table-striped">
+            <thead>
+            <th>Localit&agrave</th>
+            <th>Vettore</th>
+            <th>Durata</th>
+            <th>Distanza</th>
+            </thead>
             <?php foreach($form->getFormFieldSchema() as $collectionField): ?>
                     <?php if(get_class($collectionField) == 'sfFormFieldSchema'): ?>
                     <tr>

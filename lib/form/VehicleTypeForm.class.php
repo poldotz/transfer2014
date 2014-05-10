@@ -13,5 +13,9 @@ class VehicleTypeForm extends BaseVehicleTypeForm
   {
       $this->useFields(array('name'));
 
+      $this->widgetSchema->setLabels(array(
+          'name'    => 'Nome',
+      ));
+
   }
 }

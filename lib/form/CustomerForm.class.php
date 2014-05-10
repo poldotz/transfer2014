@@ -26,5 +26,17 @@ class CustomerForm extends BaseCustomerForm
       else{
           $this->setDefault('is_active',$this->getObject()->getsfGuardUser()->getIsActive());
       }
+      $this->widgetSchema->setLabels(array(
+          'name'    => 'Denominazione',
+          'customer_type_id' => 'Tipo Cliente',
+          'is_active'   => 'Attivo',
+          'vat_number' => 'P. IVA',
+          'tax_code' => 'CF.',
+          'phone' => 'Telefono',
+          'mobile' => 'Cellulare',
+          'formatted_address' => 'Indirizzo'
+
+      ));
+
   }
 }

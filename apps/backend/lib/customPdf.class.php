@@ -7,15 +7,22 @@ class CustomPdf extends TCPDF {
         $this->headerTitle = $text;
     }
 
-    public function getHeaderTitle(){
+    public function __construct($orientation='L', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false){
+       parent::__construct($orientation,$unit);
+        // set header and footer fonts
+        $this->setHeaderFont(Array('courier','', 7));
+        $this->setFooterFont(Array('courier', '', 7));
+    }
+
+        public function getHeaderTitle(){
         return $this->headerTitle;
     }
 
     function Header() {
         //Logo
         //$this->Image('images/travel_002.png', 1, 2,35);
-        $this->SetFont('courier','',8);
-        $this->Cell(500,2,date('d-m-Y:H:i:s') . " - Pag. " . $this->PageNo() ,0,1,'C');
+        $this->SetFont('courier','',7);
+        $this->Cell(0,2,date('d-m-Y:H:i:s') . " - Pag. " . $this->PageNo() ,0,1,'R');
         $this->SetFont('courier','B',10);
         //Title
         $this->Cell(0,4,$this->getHeaderTitle(),0,1,'C');
@@ -94,14 +101,14 @@ class CustomPdf extends TCPDF {
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.3);
         $this->SetFont('courier', '', 8);
-        $pos = -1;
+        $pos =  -1;
         $pos2 = -1;
         $pos3 = -1;
         $pos4 = -1;
         $pos5 = -1;
         $somma = 0.0;
 
-        $this->setX(2);
+        $this->setX(1);
         for ($i = 0; $i < count($header); $i++)
         {
 
@@ -120,7 +127,7 @@ class CustomPdf extends TCPDF {
                 /*if($header[$i] == "Costo")
                     $pos5 = $i;*/
 
-                $this->Cell($w[$i], 4, $header[$i], 1, 0, 'C', 1);
+                    $this->Cell($w[$i], 4, $header[$i], 1, 0, 'C', 1);
 
             }
             /*else
@@ -140,24 +147,24 @@ class CustomPdf extends TCPDF {
         $num = 1;
         $this->ln(8);
         foreach ($data as $row) {
-            $this->setX(2);
+            $this->setX(1);
             for ($i = 0; $i < count($row); $i++)
             {
                 if($i < count($row) -1 )
                 {
                     if($i == 0)
                     {
-                        $this->Cell(8, 6.5, $num, 0, 0, 'C', $fill);
+                        $this->Cell($w[$i], 4, $num, 0, 0, 'C', $fill);
                         if($row[$i]=="si")
                         {
-                            $this->Line($this->GetX()-3,$this->GetY() + 3.25,295,$this->GetY() + 3.25);
+                            $this->Line($this->GetX()-$w[$i],$this->GetY()+2,294,$this->GetY() + 2);
                         }
                     }
                     else
                     {
                         if($i == $pos)
                         {
-                            $this->Cell($w[$i], 6.5, $row[$i], 0, 0, 'C', $fill);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill);
                             if(strlen($row[$i])==0)
                                 $this->Line($this->GetX()-24,$this->GetY()+3.25,$this->GetX()-1,$this->GetY()+3.25);
                         }
@@ -165,16 +172,16 @@ class CustomPdf extends TCPDF {
                         {
                             if($row[$i] == "VO")
                                 $row[$pos4] = "";
-                            $this->Cell($w[$i], 6.5, $row[$i], 0, 0, 'C', $fill);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill);
 
                         }
                         else
-                            $this->Cell($w[$i], 6.5, $row[$i], 0, 0, 'C', $fill);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill);
                     }
 
                 }
                 else{
-                    $this->Cell($w[$i] , 6.5, $row[$i], 0, 1, 'L', 0);
+                    $this->Cell($w[$i] , 4, $row[$i], 0, 1, 'L', 0);
                 }
             }
             $num=$num+1;

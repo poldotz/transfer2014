@@ -13,5 +13,11 @@ class CompanyForm extends BaseCompanyForm
   {
       $this->useFields(array('name', 'vat_number', 'phone', 'fax', 'mobile', 'email', 'formatted_address'));
 
+      $this->widgetSchema->setLabels(array(
+          'name'    => 'Denominazione',
+          'vat_number'   => 'P. Iva',
+          'phone' => 'Telefono',
+          'formatted_address' => 'Indirizzo'
+      ));
   }
 }

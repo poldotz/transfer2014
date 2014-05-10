@@ -23,7 +23,8 @@ class serviceHostessSearchFrom extends sfForm {
                 'from_date'	=> new sfValidatorDate(),
                 'to_date'	=> new sfValidatorDate(),
             )),
-
         ));
+
+
     }
 }
