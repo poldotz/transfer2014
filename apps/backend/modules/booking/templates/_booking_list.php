@@ -1,21 +1,21 @@
 <table id="booking_list" class="table table-condensed table-striped table-hover table-bordered pull-left dataTable">
     <thead>
     <tr>
-        <th style="width:5%">Progressivo</th>
+        <th style="width:4%">Progressivo</th>
 
-        <th style="width: 20%">Cliente</th>
+        <th style="width: 21%">Cliente</th>
 
-        <th style="width: 15%">Referente</th>
+        <th style="width: 21%">Referente</th>
 
-        <th style="width: 10%">Data Prenot.</th>
+        <th style="width: 9%">Data Prenot.</th>
 
-        <th style="width: 10%">Rif.File</th>
+        <th style="width: 11%">Rif.File</th>
 
-        <th style="width: 5%">Pax</th>
+        <th style="width: 4%">Pax</th>
 
-        <th style="width: 10%">Mezzo Richiesto</th>
+        <th style="width: 14%">Mezzo Richiesto</th>
 
-        <th style="width: 15%">Creato da</th>
+        <th style="width: 7%">Creato da</th>
 
     </tr>
 

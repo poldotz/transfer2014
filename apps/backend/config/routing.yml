@@ -142,7 +142,7 @@ user_new:
 
 user_edit:
     url:   /modifica-utente/:id
-    param: { module: users, action: new }
+    param: { module: users, action: edit }
     requirements:
       id: \d+
 

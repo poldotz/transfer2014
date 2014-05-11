@@ -19,6 +19,18 @@
  */
 class Arrival extends BaseArrival
 {
+    public function preInsert(PropelPDO $con = null)
+    {
+        $this->setFlight(strtoupper($this->getFlight()));
+        return true;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $this->setFlight(strtoupper($this->getFlight()));
+        return true;
+    }
+
     public function getDriver(){
         $driver = sfGuardUserPeer::retrieveByPK($this->getDriverId());
         if($driver){

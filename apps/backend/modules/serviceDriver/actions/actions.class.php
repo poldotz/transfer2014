@@ -50,46 +50,14 @@ class serviceDriverActions extends sfActions
             $giorno =  explode('-',$day);
             $giorno = Driver::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
 
-            $con = Propel::getConnection();
-            $con->useDebug(true);
+            $rows = Driver::getDriverServicesDay($day,$service['DRIVER_ID']);
 
-            $select = "(SELECT if(a.cancelled,'si','no') as 'Annullato', b.number, 'Arrivo' as 'Arrivo', substr(a.hour,1,5) as 'hour', a.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, p.name,a.note ";
-            $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
-                " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
-                " JOIN locality as locfrom on (a.locality_from = locfrom.id) ".
-                " JOIN locality as locto ON (a.locality_to = locto.id) ".
-                " JOIN vehicle_type as v ON (b.vehicle_type_id = v.id) ".
-                " LEFT JOIN sf_guard_user as driver on (a.driver_id = driver.id) ".
-                " LEFT JOIN payment_method as p on (a.payment_method_id = p.id) ";
-            $where = " WHERE a.day ='".$day."' AND a.driver_id = ".$service['DRIVER_ID']." AND a.cancelled = 0 ";
-            $order_by = " ORDER BY a.hour, v.id, b.number)";
-
-            $queryArrivals = $select.$from.$where.$order_by;
-
-
-            $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, if(locto.is_vector,'Partenza','Taxi') as 'servizio', substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, p.name,d.note ";
-            $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
-                " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
-                " JOIN locality as locfrom on (d.locality_from = locfrom.id) ".
-                " JOIN locality as locto ON (d.locality_to = locto.id) ".
-                " JOIN vehicle_type as v ON (b.vehicle_type_id = v.id) ".
-                " LEFT JOIN sf_guard_user as driver on (d.driver_id = driver.id) ".
-                " LEFT JOIN payment_method as p on (d.payment_method_id = p.id) ";
-            $where = " WHERE d.day ='".$day."' AND d.driver_id = ".$service['DRIVER_ID'] ." AND d.cancelled = 0 ";
-            $order_by = " ORDER BY d.hour, v.id, b.number)";
-
-            $queryDepature = $select.$from.$where.$order_by;
-
-                $statement = $con->prepare($queryArrivals . "UNION" . $queryDepature);
-                $statement->execute();
-
-
-                $title = 'Autista: '.$service["driver"].' numero servizi:  ('.$statement->rowCount().') - '.$giorno.' '.$data;
+            $title = 'Autista: '.$service["driver"].' numero servizi:  ('.count($rows).') - '.$giorno.' '.$data;
                 $pdf->setHeaderTitle($title);
                 $pdf->AddPage();
                 $pdf->SetAutoPageBreak(1,0.5);
 
-                if($statement->rowCount()){
+                if($rows){
                     $header = array(
                         'N.',
                         'PRA',
@@ -100,24 +68,24 @@ class serviceDriverActions extends sfActions
                         'Referente',
                         'Pax',
                         'Tragitto',
-                        'Categoria Mezzo',
+                        'Mezzo',
                         'Tipo',
                         'Nota');
+
                     $w = array (
-                        8,
-                        11,
-                        14,
+                        5,
+                        9,
+                        21,
                         15,
-                        15,
+                        18,
                         40,
                         40,
                         10,
-                        45,
-                        28,
-                        9,
-                        35
+                        50,
+                        25,
+                        10,
+                        52
                     );
-                    $rows = $statement->fetchAll(PDO::FETCH_NUM);
                     $pdf->FancyTable($header, $rows,$w);
                    }
             }
@@ -145,45 +113,15 @@ class serviceDriverActions extends sfActions
                 $giorno =  explode('-',$day);
                 $giorno = Driver::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
 
-                $con = Propel::getConnection();
-
-                $select = "(SELECT if(a.cancelled,'si','no') as 'Annullato', b.number, 'Arrivo' as 'Arrivo', substr(a.hour,1,5) as 'hour', a.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, p.name,a.note ";
-                $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
-                    " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
-                    " JOIN locality as locfrom on (a.locality_from = locfrom.id) ".
-                    " JOIN locality as locto ON (a.locality_to = locto.id) ".
-                    " JOIN vehicle_type as v ON (b.vehicle_type_id = v.id) ".
-                    " LEFT JOIN sf_guard_user as driver on (a.driver_id = driver.id) ".
-                    " LEFT JOIN payment_method as p on (a.payment_method_id = p.id) ";
-                $where = " WHERE a.day ='".$day."' AND a.driver_id = ".$service['DRIVER_ID']." AND a.cancelled = 0 ";
-                $order_by = " ORDER BY a.hour, v.id, b.number)";
-
-                $queryArrivals = $select.$from.$where.$order_by;
+                $rows = Driver::getDriverServicesDay($day,$service['DRIVER_ID']);
 
 
-                $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, if(locto.is_vector,'Partenza','Taxi') as 'servizio', substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,15) as 'customer', substr(b.contact,1,15) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', v.name, p.name,d.note ";
-                $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
-                    " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
-                    " JOIN locality as locfrom on (d.locality_from = locfrom.id) ".
-                    " JOIN locality as locto ON (d.locality_to = locto.id) ".
-                    " JOIN vehicle_type as v ON (b.vehicle_type_id = v.id) ".
-                    " LEFT JOIN sf_guard_user as driver on (d.driver_id = driver.id) ".
-                    " LEFT JOIN payment_method as p on (d.payment_method_id = p.id) ";
-                $where = " WHERE d.day ='".$day."' AND d.driver_id = ".$service['DRIVER_ID'] ." AND d.cancelled = 0 ";
-                $order_by = " ORDER BY d.hour, v.id, b.number)";
-
-                $queryDepature = $select.$from.$where.$order_by;
-
-                $statement = $con->prepare($queryArrivals . "UNION" . $queryDepature);
-                $statement->execute();
-
-
-                $title = 'Autista: '.$service["driver"].' numero servizi:  ('.$statement->rowCount().') - '.$giorno.' '.$data;
+                $title = 'Autista: '.$service["driver"].' numero servizi:  ('.$rows.') - '.$giorno.' '.$data;
                 $pdf = new CustomPdf("L","mm","A4");
                 $pdf->setHeaderTitle($title);
                 $pdf->AddPage();
 
-                if($statement->rowCount()){
+                if($rows){
                     $header = array(
                         'N.',
                         'PRA',
@@ -194,25 +132,25 @@ class serviceDriverActions extends sfActions
                         'Referente',
                         'Pax',
                         'Tragitto',
-                        'Categoria Mezzo',
+                        'Mezzo',
                         'Tipo',
                         'Nota');
+
                     $w = array (
-                        8,
-                        11,
-                        14,
+                        5,
+                        9,
+                        21,
                         15,
-                        15,
+                        18,
                         40,
                         40,
                         10,
-                        45,
-                        28,
-                        9,
-                        35
+                        50,
+                        25,
+                        10,
+                        52
                     );
-                    $rows = $statement->fetchAll(PDO::FETCH_NUM);
-                    $pdf->FancyTable($header, $rows,$w);
+                    $pdf->FancyTable($header,$rows,$w);
                 }
                 $pdf->Output("uploads/servizi_autisti"."_".$giorno."_".$data.".pdf", 'F');
 
@@ -254,17 +192,8 @@ class serviceDriverActions extends sfActions
         exit;
     }
 
-    public function executeTextPdf(){
 
-        $pdf = new CustomPdf();
-        $pdf->setHeaderTitle($title);
-        $pdf->AddPage();
-        $pdf->SetAutoPageBreak(1,0.5);
-
-    }
-
-
-/**
+    /**
      * show driver's services list.
      */
     public function executeDriverServiceList(sfRequest $request){
@@ -322,7 +251,7 @@ class serviceDriverActions extends sfActions
                             50,
                             25,
                             10,
-                            56
+                            52
                         );
                         $pdf->FancyTable($header, $services ,$w);
                     }

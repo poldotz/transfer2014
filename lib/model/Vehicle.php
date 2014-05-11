@@ -19,4 +19,17 @@
  */
 class Vehicle extends BaseVehicle
 {
+
+    public function preInsert(PropelPDO $con = null)
+    {
+        $this->setModel(strtoupper($this->getModel()));
+        return true;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $this->setModel(strtoupper($this->getModel()));
+
+        return true;
+    }
 }

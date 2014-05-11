@@ -19,6 +19,19 @@
  */
 class Customer extends BaseCustomer
 {
+    public function preInsert(PropelPDO $con = null)
+    {
+        $this->setName(strtoupper($this->getName()));
+        return true;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $this->setName(strtoupper($this->getName()));
+        return true;
+    }
+
+
     public function __toString(){
         return $this->getName();
 

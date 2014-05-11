@@ -19,6 +19,22 @@
  */
 class Booking extends BaseBooking
 {
+    public function preInsert(PropelPDO $con = null)
+    {
+        $this->setRifFile( strtoupper($this->getRifFile()));
+        $this->setContact(strtoupper($this->getContact()));
+        return true;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $this->setRifFile( strtoupper($this->getRifFile()));
+        $this->setContact(strtoupper($this->getContact()));
+
+        return true;
+    }
+
+
     protected function doSave(PropelPDO $con)
     {
         $this->collArrivals = null;

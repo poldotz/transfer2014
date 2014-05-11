@@ -17,16 +17,17 @@ class sfGuardUserForm extends BasesfGuardUserForm
     $c->add(sfGuardGroupPeer::NAME,sfConfig::get('app_internal_user_groups', array('Amministratore','Operatore','Autista')),Criteria::IN);
     $this->setWidget('internal_user_groups',new sfWidgetFormPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup')));
 
-      $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
-      $this->validatorSchema['password']->setOption('required', false);
+    $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
+    $this->validatorSchema['password']->setOption('required', false);
+    $this->validatorSchema['email']->setMessage('required','Campo Obbligatorio');
 
     $this->widgetSchema['password_again'] = new sfWidgetFormInputPassword();
     $this->validatorSchema['password_again'] = clone $this->validatorSchema['password'];
 
     $this->widgetSchema->moveField('password_again', 'after', 'password');
-    $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
+    $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'Le due password non corrispondono.')));
 
-      $this->setValidator('internal_user_groups', new sfValidatorPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup', 'required' => false)));
+    $this->setValidator('internal_user_groups', new sfValidatorPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup', 'required' => false)));
 
     unset(
       $this['last_login'],
@@ -39,15 +40,14 @@ class sfGuardUserForm extends BasesfGuardUserForm
       $this['sf_guard_user_permission_list']
     );
 
-      $this->widgetSchema->setLabels(array(
-          'username'    => 'Nome utente',
-          'password_again' => 'Ripeti Password',
-          'first_name'   => 'Nome',
-          'last_name' => 'Cognome',
-          'internal_user_groups' => 'Gruppo utente',
-          'is_active' => 'Attivo',
-          'phone' => 'Telefono'
-
+    $this->widgetSchema->setLabels(array(
+      'username'    => 'Nome utente:',
+      'password_again' => 'Ripeti Password:',
+      'first_name'   => 'Nome:',
+      'last_name' => 'Cognome:',
+      'internal_user_groups' => 'Gruppo utente:',
+      'is_active' => 'Attivo:',
+      'phone' => 'Telefono:'
       ));
   }
 

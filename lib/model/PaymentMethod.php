@@ -21,7 +21,7 @@ class PaymentMethod extends BasePaymentMethod
 {
     function __toString()
     {
-        return $this->getName();
+        return strtoupper($this->getName());
     }
 
 }

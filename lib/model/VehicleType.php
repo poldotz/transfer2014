@@ -22,4 +22,16 @@ class VehicleType extends BaseVehicleType
     public function __toString(){
         return $this->getName();
     }
+
+    public function preInsert(PropelPDO $con = null)
+    {
+        $this->setName(strtoupper($this->getName()));
+        return true;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $this->setName(strtoupper($this->getName()));
+        return true;
+    }
 }

@@ -56,18 +56,19 @@ class usersActions extends sfActions
         $page = ($request->getParameter('iDisplayStart', 0) / $item_per_page) + 1;
         $pager = sfGuardUserPeer::doSelectPager($page, $item_per_page, $c);
         //end: paging
-        $json = '{"iTotalRecords":'.$pager->getNbResults().',
-     "iTotalDisplayRecords":'.$pager->getNbResults().',
-     "aaData":[';
-        $first = 0;
+
+        $json["iTotalRecords"] = $pager->getNbResults();
+        $json["iTotalDisplayRecords"] = $pager->getNbResults();
+        $json["aaData"] = array();
         foreach ($pager->getResults() as $v)
         {
-            if ($first++) $json .= ',';
-            $status = $v->getIsActive() ? "ATTIVO" : "NON ATTIVO";
-            $json .= '["'.$v->getUserName().'","'.$v->getFirstName().'","'.$v->getLastName().'","'.$v->getEmail().'","'.$v->getPhone().'","'.implode(",",$v->getGroupNames()).'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'users/edit/id/'.$v->getId().' \';\">"]';
+            $status = $v->getIsActive() ? '<span class="badge badge-success"> ATTIVO</span>' : '<span class="badge badge-warning"> NON ATTIVO</span>';
+            $url = $this->generateUrl('user_edit',array('id'=>$v->getId()));
+            $action = '<input class="btn btn-info" style="float:left; margin: 5px;" value="Modifica" type="button" onclick="document.location.href=\''.$url.'\'">';
+            $val = array($v->getUserName(),$v->getFirstName(),$v->getLastName(),$v->getEmail(),$v->getPhone(),implode(",",$v->getGroupNames()),$status,$action);
+            array_push($json["aaData"],$val);
         }
-        $json .= ']}';
-        return $this->renderText($json);
+        return $this->renderText(json_encode($json));
     }
 
     public function executeNew(sfWebRequest $request)

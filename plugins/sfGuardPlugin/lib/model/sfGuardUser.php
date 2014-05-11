@@ -18,6 +18,20 @@
 class sfGuardUser extends PluginsfGuardUser
 {
 
+    public function preInsert(PropelPDO $con = null)
+    {
+        $this->setFirstName(strtoupper($this->getFirstName()));
+        $this->setLastName(strtoupper($this->getLastName()));
+        return true;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $this->setFirstName(strtoupper($this->getFirstName()));
+        $this->setLastName(strtoupper($this->getLastName()));
+        return true;
+    }
+
     public function __toString(){
 
         return ucfirst($this->first_name). " ".ucfirst(substr($this->last_name,0,1)).".";
