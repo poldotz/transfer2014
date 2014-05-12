@@ -43,7 +43,7 @@
                 <hr/>
                 <div class="row-fluid">
                     <div class="span12 center-align-text">
-                        <a href="<?php echo url_for('@services_email-pdf') ?>" target="_blank" class="btn btn-success"><span class="fs1" data-icon="&#xe040;"></span> Invia a tutti</a>
+                        <a href="Javascript:void(0)" id="send_mail_to_drivers" class="btn btn-success"><span class="fs1" data-icon="&#xe040;"></span> Invia a tutti</a>
                     </div>
                 </div>
                 <hr/>
@@ -51,6 +51,21 @@
         </div><!-- Leftside bar end -->
 
 <script type="text/javascript">
+
+    $('#send_mail_to_drivers').click(function(){
+        $.ajax({
+                url: '<?php echo url_for('@services_email-pdf') ?>',
+                type: "get",
+                success: function (response){
+                    if (response > ""){
+                        bootbox.alert(response);
+                    }
+                    return false;
+                }
+            }
+        );
+    });
+
     $('.service_driver').click(function(){
 
         var day = $(this).attr('data-date');

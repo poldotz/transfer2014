@@ -34,4 +34,27 @@ class DeparturePeer extends BaseDeparturePeer
         return $pager;
     }
 
+    public static function getServicesByDay($day){
+
+        $con = Propel::getConnection();
+        $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,22) as 'customer', substr(b.contact,1,22) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type',concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', substr(p.name,1,2) as 'pay_method',substr(d.note,1,30) as 'note' ";
+        $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
+            " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
+            " JOIN locality as locfrom on (d.locality_from = locfrom.id) ".
+            " JOIN locality as locto ON (d.locality_to = locto.id) ".
+            " JOIN vehicle_type as v ON (b.vehicle_type_id = v.id) ".
+            " LEFT JOIN sf_guard_user as driver on (d.driver_id = driver.id) ".
+            " LEFT JOIN payment_method as p on (d.payment_method_id = p.id) ";
+        $where = " WHERE d.day ='".$day."'";
+        $order_by = " ORDER BY d.hour, v.id, b.number)";
+
+        $query = $select.$from.$where.$order_by;
+
+        $statement = $con->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_NUM);
+
+
+    }
+
 }

@@ -54,8 +54,6 @@ Class Driver {
 
         $con = Propel::getConnection();
 
-        $con = Propel::getConnection();
-
         $select = "(SELECT if(a.cancelled,'si','no') as 'Annullato', b.number, 'Arrivo' as 'arrival', substr(a.hour,1,5) as 'hour', a.flight, substr(c.name, 1,22) as 'customer', substr(b.contact,1,22) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type', substr(p.name,1,2) as 'pay_method',substr(a.note,1,32) as 'note' ";
         $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
             " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
@@ -93,37 +91,5 @@ Class Driver {
             $services  = $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         return $services;
-    }
-
-    public static function translateToItaDayOfWeek($giorno ="")
-    {
-        switch($giorno)
-        {
-            case "Sun":
-                $giorno = "Domenica";
-                break;
-            case "Mon":
-                $giorno = "Lunedi";
-                break;
-            case "Tue":
-                $giorno = "Martedi";
-                break;
-            case "Wed":
-                $giorno = "Mercoledi";
-                break;
-            case "Thu":
-                $giorno = "Giovedi";
-                break;
-            case "Fri":
-                $giorno = "Venerdi";
-                break;
-            case "Sat":
-                $giorno = "Sabato";
-                break;
-            default:
-                $giorno = "Errore";
-                break;
-        }
-        return $giorno;
     }
 }

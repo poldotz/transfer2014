@@ -46,8 +46,8 @@ all:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       mail.maremania.it
+          host:       mail.maremania.com
           port:       25
           encryption: ~
-          username:   maremania
-          password:   password
+          username:   transfer@maremania.com
+          password:   tra1234

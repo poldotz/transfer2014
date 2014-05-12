@@ -97,6 +97,59 @@ class departureActions extends sfActions
         }
     }
 
+    public function executeDeparturePdf(sfWebRequest $request){
+        $day  = $this->getUser()->getCurrentDepartureDate();
+        $data = date('d-m-Y',strtotime($day));
+        $giorno =  explode('-',$day);
+        $giorno = UtilityHelper::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
+
+        $rows = DeparturePeer::getServicesByDay($day);
+
+        try{
+            $pdf = new CustomPdf();
+            $title = 'Transfer in arrivo: ('.count($rows).') - '.$giorno.' '.$data;
+            $pdf->setHeaderTitle($title);
+            $pdf->AddPage();
+            $pdf->SetAutoPageBreak(1,0.5);
+
+            if(count($rows)){
+                $header = array('N.',
+                    'Prg.',
+                    'Servizio',
+                    'Vettore',
+                    'Cliente',
+                    'Referente',
+                    'Pax',
+                    'Tragitto',
+                    'Mezzo',
+                    'Autista',
+                    'Tipo',
+                    'Nota');
+                $w = array (
+                    5,
+                    9,
+                    15,
+                    18,
+                    40,
+                    40,
+                    8,
+                    50,
+                    25,
+                    25,
+                    10,
+                    50
+                );
+                $pdf->FancyTable($header, $rows,$w);
+            }
+            $pdf->Output("transfer_arrivo"."_".$giorno."_".$data.".pdf","I");
+        }
+        catch(Exception $e){
+            $e->getMessage();
+        }
+        sfView::NONE;
+        exit;
+    }
+
     /**
      * set departure day
      */
