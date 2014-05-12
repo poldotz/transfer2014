@@ -48,7 +48,9 @@ service_hostess:
 services_email-pdf:
     url: /servizi-autisti-email-pdf
     param: {module: serviceDriver, action: servicesDriversPdfEmail }
-
+driver-services_email-pdf:
+        url: /driver-services_email-pdf
+        param: {module: serviceDriver, action: servicesDriverPdfEmail }
 services_pdf:
     url: /servizi-autisti-pdf
     param: {module: serviceDriver, action: servicesDriversPdf }

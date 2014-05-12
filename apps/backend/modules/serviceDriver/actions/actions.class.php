@@ -87,6 +87,30 @@ class serviceDriverActions extends sfActions
         }
     }
 
+    public function executeServicesDriverPdfEmail(sfWebRequest $request){
+        //sfConfig::set('sf_web_debug', false);
+        $day = $this->getUser()->getCurrentDriversDate();
+        $driver_id = $request->getParameter('driver_id');
+        try{
+            $data = date('d-m-Y',strtotime($day));
+            $giorno =  explode('-',$day);
+            $giorno = UtilityHelper::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
+            $sended = 0;
+            $driver = sfGuardUserPeer::retrieveByPK($driver_id);
+            $rows = Driver::getDriverServicesDay($day,$driver->getId());
+            $title = 'Autista: '.$driver.' numero servizi:  ('.count($rows).') - '.$giorno.' '.$data;
+            $filename = sfConfig::get('sf_upload_dir')."/servizi_autisti"."_".$giorno."_".$data.".pdf";
+            $this->generateDriverServicesPdf(null,$title,$rows,$filename,true,"F");
+            $template_params = array('name'=>$driver,'date'=>$data);
+            $sended = $this->sendEmailTo('driver_mail',$template_params,array($driver->getEmail()=>$driver),$title,$filename);
+            unlink($filename);
+            return $this->renderText("Numero email inviate: ".$sended);
+        }
+        catch(Exception $e){
+            $this->renderText($e->getMessage());
+        }
+    }
+
 
     /**
      * show driver's services list.

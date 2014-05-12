@@ -62,8 +62,7 @@
                     }
                     return false;
                 }
-            }
-        );
+            });
     });
 
     $('.service_driver').click(function(){

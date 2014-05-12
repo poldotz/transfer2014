@@ -52,9 +52,32 @@
 <div class="row-fluid">
     <div class="span12 center-align-text">
 <?php if(count($driverService)): ?>
-        <a class="btn btn-success" target="_blank" href="<?php echo url_for('serviceDriver/driverServiceListPdf?id='.$id.'&day='.$day) ?>" >
+        <a class="btn btn-info" target="_blank" href="<?php echo url_for('serviceDriver/driverServiceListPdf?id='.$id.'&day='.$day) ?>" >
             STAMPA
+        </a>
+        <a class="btn btn-success" id="send_mail_to_single_driver" data-content="<?php echo $id ?>" href="Javascript:void(0)" data-icon="&#xe040;" >
+            INVIA EMAIL
         </a>
     </div>
 </div>
 <?php endif; ?>
+
+<script type="text/javascript">
+    $('#send_mail_to_single_driver').click(function(){
+
+        var driver_id = $(this).attr('data-content');
+        $.ajax({
+            url: '<?php echo url_for('@driver-services_email-pdf') ?>',
+            type: "post",
+            data: { driver_id: driver_id},
+            success: function (response){
+                if (response > ""){
+                    bootbox.alert(response);
+                }
+                return false;
+            }
+        });
+    });
+
+
+</script>
