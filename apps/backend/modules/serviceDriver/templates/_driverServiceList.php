@@ -38,7 +38,15 @@
         </td>
         <td class="hidden-phone"><?php echo $service[8]?></td>
         <td>
-            <span data-icon="&#xe07f;"></span> Visualizza
+            <?php if($service[2] == "Partenza" || $service[2] == "Taxi"): ?>
+                <a href="<?php echo url_for('@departure')?>">
+                    <span data-icon="&#xe07f;"></span> Visualizza
+                </a>
+            <?php else: ?>
+                <a href="<?php echo url_for('@arrival')?>">
+                    <span data-icon="&#xe07f;"></span> Visualizza
+                </a>
+            <?php endif; ?>
         </td>
     </tr>
     <?php endforeach; ?>
