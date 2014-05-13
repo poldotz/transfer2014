@@ -12,7 +12,7 @@
           <?php echo $form->renderHiddenFields(false) ?>
           &nbsp;<a href="<?php echo url_for('rate/index') ?>">Indietro</a>
           <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'rate/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
+            &nbsp;<?php //echo link_to('Delete', 'rate/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
           <?php endif; ?>
           <input type="submit" value="SALVA" />
         </td>
@@ -55,13 +55,13 @@
           <?php echo $form['hour_to']->render(array('style'=>'width:80px;')) ?>
         </td>
       </tr>
-      <tr>
+      <!--<tr>
         <th><?php echo $form['surcharge']->renderLabel() ?></th>
         <td>
           <?php echo $form['surcharge']->renderError() ?>
           <?php echo $form['surcharge'] ?>%
         </td>
-      </tr>
+      </tr>-->
       <tr>
         <th><?php echo $form['note']->renderLabel() ?></th>
         <td>

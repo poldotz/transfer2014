@@ -33,4 +33,17 @@ class RatePeer extends BaseRatePeer
         $pager->init();
         return $pager;
     }
+
+
+    public static function getRateByAttributes($day,$hour){
+
+        $c = new Criteria();
+        $c->add(RatePeer::DAY,"%.$day.%",Criteria::LIKE);
+        $c->add(RatePeer::HOUR_FROM,".$hour.",Criteria::LESS_EQUAL);
+        $c->add(RatePeer::HOUR_TO,".$hour.",Criteria::GREATER_EQUAL);
+        $rate = RatePeer::doSelectOne($c);
+// disjunction
+        return $rate;
+
+    }
 }
