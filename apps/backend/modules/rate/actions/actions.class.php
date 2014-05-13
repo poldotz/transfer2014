@@ -118,7 +118,7 @@ class rateActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-        $values = $form->getValues();
+
       $Rate = $form->save();
 
       $this->redirect('rate/edit?id='.$Rate->getId());
