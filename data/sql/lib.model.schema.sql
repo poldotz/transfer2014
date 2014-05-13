@@ -219,8 +219,50 @@ CREATE TABLE `rate`
     `note` VARCHAR(255),
     `created_at` DATETIME,
     `updated_at` DATETIME,
+    `version` INTEGER DEFAULT 0,
+    `version_created_at` DATETIME,
+    `version_created_by` VARCHAR(100),
     PRIMARY KEY (`id`),
     UNIQUE INDEX `rate_name` (`name`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- customer_rate_table
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `customer_rate_table`;
+
+CREATE TABLE `customer_rate_table`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `customer_id` INTEGER NOT NULL,
+    `rate_id` INTEGER NOT NULL,
+    `vehicle_type_id` INTEGER NOT NULL,
+    `cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    `version` INTEGER DEFAULT 0,
+    `version_created_at` DATETIME,
+    `version_created_by` VARCHAR(100),
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `customer_rate_table_index` (`customer_id`, `rate_id`, `vehicle_type_id`),
+    INDEX `customer_rate_table_FI_1` (`rate_id`),
+    INDEX `customer_rate_table_FI_3` (`vehicle_type_id`),
+    CONSTRAINT `customer_rate_table_FK_1`
+        FOREIGN KEY (`rate_id`)
+        REFERENCES `rate` (`id`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT `customer_rate_table_FK_2`
+        FOREIGN KEY (`customer_id`)
+        REFERENCES `sf_guard_user_profile` (`id`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT `customer_rate_table_FK_3`
+        FOREIGN KEY (`vehicle_type_id`)
+        REFERENCES `vehicle_type` (`id`)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -286,7 +328,9 @@ CREATE TABLE `arrival`
     `day` DATE,
     `hour` TIME,
     `flight` VARCHAR(10),
-    `cost` DECIMAL(10,2),
+    `rate_cost` DECIMAL(10,2),
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
     `locality_from` INTEGER,
@@ -349,7 +393,9 @@ CREATE TABLE `departure`
     `pick_up` TINYINT(1) DEFAULT 0,
     `departure_time` TIME,
     `flight` VARCHAR(10),
-    `cost` DECIMAL(10,2),
+    `rate_cost` DECIMAL(10,2),
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
     `locality_from` INTEGER,
@@ -398,6 +444,30 @@ CREATE TABLE `departure`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- rate_archive
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rate_archive`;
+
+CREATE TABLE `rate_archive`
+(
+    `id` INTEGER NOT NULL,
+    `name` VARCHAR(20) NOT NULL,
+    `description` VARCHAR(100),
+    `day` VARCHAR(7) NOT NULL,
+    `hour_from` TIME NOT NULL,
+    `hour_to` TIME NOT NULL,
+    `surcharge` INTEGER(3),
+    `per_person` TINYINT(1) DEFAULT 0,
+    `note` VARCHAR(255),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    `archived_at` DATETIME,
+    PRIMARY KEY (`id`),
+    INDEX `rate_archive_I_1` (`name`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- booking_archive
 -- ---------------------------------------------------------------------
 
@@ -438,7 +508,9 @@ CREATE TABLE `arrival_archive`
     `day` DATE,
     `hour` TIME,
     `flight` VARCHAR(10),
-    `cost` DECIMAL(10,2),
+    `rate_cost` DECIMAL(10,2),
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
     `locality_from` INTEGER,
@@ -473,7 +545,9 @@ CREATE TABLE `departure_archive`
     `pick_up` TINYINT(1) DEFAULT 0,
     `departure_time` TIME,
     `flight` VARCHAR(10),
-    `cost` DECIMAL(10,2),
+    `rate_cost` DECIMAL(10,2),
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
     `locality_from` INTEGER,
@@ -491,6 +565,63 @@ CREATE TABLE `departure_archive`
     INDEX `departure_archive_I_4` (`driver_id`),
     INDEX `departure_archive_I_5` (`vehicle_id`),
     INDEX `departure_archive_I_6` (`booking_id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- rate_version
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rate_version`;
+
+CREATE TABLE `rate_version`
+(
+    `id` INTEGER NOT NULL,
+    `name` VARCHAR(20) NOT NULL,
+    `description` VARCHAR(100),
+    `day` VARCHAR(7) NOT NULL,
+    `hour_from` TIME NOT NULL,
+    `hour_to` TIME NOT NULL,
+    `surcharge` INTEGER(3),
+    `per_person` TINYINT(1) DEFAULT 0,
+    `note` VARCHAR(255),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    `version` INTEGER DEFAULT 0 NOT NULL,
+    `version_created_at` DATETIME,
+    `version_created_by` VARCHAR(100),
+    `customer_rate_table_ids` TEXT,
+    `customer_rate_table_versions` TEXT,
+    PRIMARY KEY (`id`,`version`),
+    CONSTRAINT `rate_version_FK_1`
+        FOREIGN KEY (`id`)
+        REFERENCES `rate` (`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- customer_rate_table_version
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `customer_rate_table_version`;
+
+CREATE TABLE `customer_rate_table_version`
+(
+    `id` INTEGER NOT NULL,
+    `customer_id` INTEGER NOT NULL,
+    `rate_id` INTEGER NOT NULL,
+    `vehicle_type_id` INTEGER NOT NULL,
+    `cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    `version` INTEGER DEFAULT 0 NOT NULL,
+    `version_created_at` DATETIME,
+    `version_created_by` VARCHAR(100),
+    `rate_id_version` INTEGER DEFAULT 0,
+    PRIMARY KEY (`id`,`version`),
+    CONSTRAINT `customer_rate_table_version_FK_1`
+        FOREIGN KEY (`id`)
+        REFERENCES `customer_rate_table` (`id`)
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -541,7 +672,9 @@ CREATE TABLE `arrival_version`
     `day` DATE,
     `hour` TIME,
     `flight` VARCHAR(10),
-    `cost` DECIMAL(10,2),
+    `rate_cost` DECIMAL(10,2),
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
     `locality_from` INTEGER,
@@ -577,7 +710,9 @@ CREATE TABLE `departure_version`
     `pick_up` TINYINT(1) DEFAULT 0,
     `departure_time` TIME,
     `flight` VARCHAR(10),
-    `cost` DECIMAL(10,2),
+    `rate_cost` DECIMAL(10,2),
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
     `locality_from` INTEGER,
