@@ -90,7 +90,8 @@
 
         /* Click event handler */
         function clickRowHandler() {
-            $('#departure_list tbody tr').bind('dblclick', function () {
+            $('#departure_list tbody tr').bind('click', function () {
+                myApp.showPleaseWait();
                 var aData = table.row( this).data();
                 var idNumber = aData[2];
                 postSelectedRow(idNumber);
@@ -103,7 +104,9 @@
                 },
                 function(departure){
                     $("#departure_container").html(departure);
+                    myApp.hidePleaseWait();
                 }).fail(function(){
+                    myApp.hidePleaseWait();
                     bootbox.alert('Partenza non trovata!');
                 });
 

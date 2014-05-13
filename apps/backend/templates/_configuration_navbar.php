@@ -22,6 +22,9 @@
             <ul>
                 <li><?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe11b;"></span> Percorsi',"@route",array("class"=>($selected == "route") ? "selected": "")); ?></li>
             </ul>
+        <li>
+            <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe0a0;"></span> Tariffe',"@rate",array("class"=>($selected == "rate") ? "selected": "")); ?>
+        </li>
 
         </li>
     </ul>

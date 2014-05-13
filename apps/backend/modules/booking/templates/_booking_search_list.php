@@ -46,6 +46,7 @@
         /* Click event handler */
         function clickRowHandler() {
             $('#booking_search_list tbody tr').bind('click', function () {
+                myApp.showPleaseWait();
                 var aData = oTable.fnGetData( this );
                 var idNumber = aData[0];
                 postSelectedRow(idNumber);
@@ -58,7 +59,9 @@
                 },
                 function(book){
                     $("#booking_container").html( book );
+                    myApp.hidePleaseWait();
                 }).fail(function(){
+                    myApp.hidePleaseWait();
                     bootbox.alert('Prenotazione non trovata!');
                 });
 

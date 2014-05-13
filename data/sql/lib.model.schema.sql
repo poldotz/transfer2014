@@ -201,6 +201,29 @@ CREATE TABLE `route`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- rate
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rate`;
+
+CREATE TABLE `rate`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(20) NOT NULL,
+    `description` VARCHAR(100),
+    `day` VARCHAR(7) NOT NULL,
+    `hour_from` TIME NOT NULL,
+    `hour_to` TIME NOT NULL,
+    `surcharge` INTEGER(3),
+    `per_person` TINYINT(1) DEFAULT 0,
+    `note` VARCHAR(255),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `rate_name` (`name`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- booking
 -- ---------------------------------------------------------------------
 
@@ -213,7 +236,7 @@ CREATE TABLE `booking`
     `year` INTEGER(4) NOT NULL,
     `number` INTEGER(12) NOT NULL,
     `adult` INTEGER(4) NOT NULL,
-    `child` INTEGER(4) DEFAULT 0,
+    `child` INTEGER(4) DEFAULT 0  ,
     `contact` VARCHAR(100),
     `rif_file` VARCHAR(20),
     `customer_id` INTEGER NOT NULL,
@@ -387,7 +410,7 @@ CREATE TABLE `booking_archive`
     `year` INTEGER(4) NOT NULL,
     `number` INTEGER(12) NOT NULL,
     `adult` INTEGER(4) NOT NULL,
-    `child` INTEGER(4) DEFAULT 0,
+    `child` INTEGER(4) DEFAULT 0  ,
     `contact` VARCHAR(100),
     `rif_file` VARCHAR(20),
     `customer_id` INTEGER NOT NULL,
@@ -483,7 +506,7 @@ CREATE TABLE `booking_version`
     `year` INTEGER(4) NOT NULL,
     `number` INTEGER(12) NOT NULL,
     `adult` INTEGER(4) NOT NULL,
-    `child` INTEGER(4) DEFAULT 0,
+    `child` INTEGER(4) DEFAULT 0  ,
     `contact` VARCHAR(100),
     `rif_file` VARCHAR(20),
     `customer_id` INTEGER NOT NULL,

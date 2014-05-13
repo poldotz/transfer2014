@@ -14,14 +14,14 @@
             <?php echo $form['departure']['day_change']->render(array('class'=>'input-small','readonly')); ?>
         </form>&nbsp;&nbsp;&nbsp;
         <?php if(!$form->getObject()->isNew()): ?>
-            <a id="set_driver" href="Javascript:void(0)" title="Inserimento Autisti" class="btn btn-small btn-info"/>
+            <a id="set_driver" href="Javascript:void(0)" title="Inserimento Autisti" class="btn btn-small btn-info">
             <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span>
 
             </a>
-            <a id="edit_day" href="Javascript:void(0)" title="Cambia Data" class="btn btn-small btn-warning2"/>
+            <a id="edit_day" href="Javascript:void(0)" title="Cambia Data" class="btn btn-small btn-warning2">
                 <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
             </a>
-            <a id="print_arrival" target="_blank" href="<?php echo url_for('departure/departurePdf') ?>" title="stampa arrivi" class="btn btn-small btn-inverse"/>
+            <a id="print_arrival" target="_blank" href="<?php echo url_for('departure/departurePdf') ?>" title="stampa arrivi" class="btn btn-small btn-inverse">
             <span class="fs1" aria-hidden="true" data-icon="&#xe051;"></span>
             </a>
             <div class="pull-right">

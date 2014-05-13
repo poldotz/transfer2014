@@ -21,6 +21,7 @@ default:
       - bootstrap.js
       - bootbox.min.js
       - jq-theme/jquery-ui-1.9.2.custom.min.js
+      - processing.js
 
   has_layout:     true
   layout:         layout

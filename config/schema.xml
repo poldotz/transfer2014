@@ -131,6 +131,22 @@
     </foreign-key>
   </table>
 
+  <table name="rate">
+      <behavior name="Timestampable" />
+      <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+      <column name="name" type="varchar" size="20" required="true"/>
+      <column name="description" type="varchar" size="100" required="false"/>
+      <column name="day" type="varchar" size="7" required="true"/>
+      <column name="hour_from" type="time" required="true"/>
+      <column name="hour_to" type="time"  required="true"/>
+      <column name="surcharge" type="integer" size="3" required="false"/>
+      <column name="per_person" type="boolean" default="false" required="false"/>
+      <column name="note" type="varchar" size="255" required="false"/>
+      <unique name="rate_name">
+          <unique-column name="name" />
+      </unique>
+  </table>
+
   <table name="booking">
       <behavior name="Timestampable"/>
       <behavior name="versionable">

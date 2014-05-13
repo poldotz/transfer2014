@@ -176,8 +176,6 @@
                         bootbox.alert("errore:" + msg);
                     });
 
-            }else{
-                bootbox.alert('Selezionare località di partenza di arrivo e l\'orario');
             }
         }
     });
@@ -205,8 +203,6 @@
                         bootbox.alert("errore:" + msg);
                     });
 
-            }else{
-                bootbox.alert('Selezionare località di partenza di arrivo e l\'orario');
             }
         }
     });

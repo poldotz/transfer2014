@@ -92,7 +92,8 @@
 
         /* Click event handler */
         function clickRowHandler() {
-            $('#arrival_list tbody tr').bind('dblclick', function () {
+            $('#arrival_list tbody tr').bind('click', function () {
+                myApp.showPleaseWait();
                 var aData = table.row( this).data();
                 var idNumber = aData[2];
                 postSelectedRow(idNumber);
@@ -105,8 +106,11 @@
                 },
                 function(arrival){
                     $("#arrival_container").html(arrival);
+                    myApp.hidePleaseWait();
                 }).fail(function(){
+                    myApp.hidePleaseWait();
                     bootbox.alert('Arrivo non trovato!');
+
                 });
 
         }

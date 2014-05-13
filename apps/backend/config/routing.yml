@@ -71,13 +71,25 @@ vehicle_type:
     url:   /categorie-mezzi
     param: { module: vehicleType, action: index }
 
+rate:
+    url:   /tariffe
+    param: { module: rate, action: index }
+
+rate_new:
+    url:   /nuova-tariffa
+    param: { module: rate, action: new }
+
+rate_edit:
+    url:   /modifica-tariffa:id
+    param: { module: rate, action: edit }
+
 vehicle_type_new:
     url:   /nuova-categoria-mezzi
     param: { module: vehicleType, action: new }
 
 vehicle_type_edit:
     url:   /modifica-categoria-mezzi/:id
-    param: { module: vehicleType, action: new }
+    param: { module: vehicleType, action: edit }
     requirements:
       id: \d+
 
