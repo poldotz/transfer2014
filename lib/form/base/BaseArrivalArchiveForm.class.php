@@ -41,7 +41,7 @@ abstract class BaseArrivalArchiveForm extends BaseFormPropel
       'hour'              => new sfValidatorTime(array('required' => false)),
       'flight'            => new sfValidatorString(array('max_length' => 10, 'required' => false)),
       'rate_cost'         => new sfValidatorNumber(array('required' => false)),
-      'calculated_cost'   => new sfValidatorNumber(array('required' => false)),
+      'calculated_cost'   => new sfValidatorNumber(),
       'rate_name'         => new sfValidatorString(array('max_length' => 20, 'required' => false)),
       'note'              => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'payment_method_id' => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),

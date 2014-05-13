@@ -42,10 +42,24 @@ class ProjectConfiguration extends sfProjectConfiguration
           array('BaseForm', 'listenToValidationError')
       );
 
+      $this->dispatcher->connect(
+          'mailer.configure',
+          array($this, 'configureMailer')
+      );
+
+
     $this->enablePlugins('sfPropelORMPlugin');
     $this->enablePlugins('sfGuardPlugin');
     $this->enablePlugins('sfGuardExtraPlugin');
     $this->enablePlugins('sfFormExtraPlugin');
     $this->enablePlugins('sfTCPDFPlugin');
   }
+
+    public function configureMailer(sfEvent $event)
+    {
+        $mailer = $event->getSubject();
+
+        // fare qualcosa col mailer
+    }
+
 }

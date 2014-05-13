@@ -35,14 +35,13 @@ class RatePeer extends BaseRatePeer
     }
 
 
-    public static function getRateByAttributes($day,$hour){
+    public static function getRateByDay($day){
 
+        $con = Propel::getConnection();
         $c = new Criteria();
-        $c->add(RatePeer::DAY,"%.$day.%",Criteria::LIKE);
-        $c->add(RatePeer::HOUR_FROM,".$hour.",Criteria::LESS_EQUAL);
-        $c->add(RatePeer::HOUR_TO,".$hour.",Criteria::GREATER_EQUAL);
+        $c->add(RatePeer::DAY,"%".$day."%",Criteria::LIKE);
         $rate = RatePeer::doSelectOne($c);
-// disjunction
+        $query = $con->getLastExecutedQuery();
         return $rate;
 
     }

@@ -36,13 +36,18 @@ class Departure extends BaseDeparture
         //$customer_id = $booking->getCustomerId();
         $vehicle_type_id = $booking->getVehicleTypeId();
         $dayOfWeek = date('w',strtotime($this->getDay()));
-        $hour = $this->getHour();
-        $rate = RatePeer::getRateByAttributes($dayOfWeek,$hour);
+        $hour = $this->getDepartureTime();
+        $rate = RatePeer::getRateByDay($dayOfWeek);
         return $rate;
     }
 
     public function preUpdate(PropelPDO $con = null)
     {
+        $rate = $this->getRate();
+        if($rate){
+            $this->setRateName($rate->getName());
+        }
+
         $this->setFlight(strtoupper($this->getFlight()));
         return true;
     }

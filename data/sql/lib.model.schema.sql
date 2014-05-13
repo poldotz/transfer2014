@@ -329,7 +329,7 @@ CREATE TABLE `arrival`
     `hour` TIME,
     `flight` VARCHAR(10),
     `rate_cost` DECIMAL(10,2),
-    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00,
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
@@ -394,7 +394,7 @@ CREATE TABLE `departure`
     `departure_time` TIME,
     `flight` VARCHAR(10),
     `rate_cost` DECIMAL(10,2),
-    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00,
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
@@ -444,30 +444,6 @@ CREATE TABLE `departure`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- rate_archive
--- ---------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `rate_archive`;
-
-CREATE TABLE `rate_archive`
-(
-    `id` INTEGER NOT NULL,
-    `name` VARCHAR(20) NOT NULL,
-    `description` VARCHAR(100),
-    `day` VARCHAR(7) NOT NULL,
-    `hour_from` TIME NOT NULL,
-    `hour_to` TIME NOT NULL,
-    `surcharge` INTEGER(3),
-    `per_person` TINYINT(1) DEFAULT 0,
-    `note` VARCHAR(255),
-    `created_at` DATETIME,
-    `updated_at` DATETIME,
-    `archived_at` DATETIME,
-    PRIMARY KEY (`id`),
-    INDEX `rate_archive_I_1` (`name`)
-) ENGINE=InnoDB;
-
--- ---------------------------------------------------------------------
 -- booking_archive
 -- ---------------------------------------------------------------------
 
@@ -509,7 +485,7 @@ CREATE TABLE `arrival_archive`
     `hour` TIME,
     `flight` VARCHAR(10),
     `rate_cost` DECIMAL(10,2),
-    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00,
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
@@ -546,7 +522,7 @@ CREATE TABLE `departure_archive`
     `departure_time` TIME,
     `flight` VARCHAR(10),
     `rate_cost` DECIMAL(10,2),
-    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00,
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
@@ -673,7 +649,7 @@ CREATE TABLE `arrival_version`
     `hour` TIME,
     `flight` VARCHAR(10),
     `rate_cost` DECIMAL(10,2),
-    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00,
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,
@@ -711,7 +687,7 @@ CREATE TABLE `departure_version`
     `departure_time` TIME,
     `flight` VARCHAR(10),
     `rate_cost` DECIMAL(10,2),
-    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00,
+    `calculated_cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `rate_name` VARCHAR(20),
     `note` VARCHAR(100),
     `payment_method_id` INTEGER,

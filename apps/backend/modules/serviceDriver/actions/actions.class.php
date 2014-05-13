@@ -107,7 +107,7 @@ class serviceDriverActions extends sfActions
             return $this->renderText("Numero email inviate: ".$sended);
         }
         catch(Exception $e){
-            $this->renderText($e->getMessage());
+            return $this->renderText($this->renderText($e->getMessage()));
         }
     }
 
@@ -149,7 +149,14 @@ class serviceDriverActions extends sfActions
         $attachment = Swift_Attachment::fromPath($attachment, 'application/pdf');
         //	Attach it to the message
         $message->attach($attachment,'application/pdf');
-        $res = $this->getMailer()->send($message);
+        $mailer = $this->getMailer();
+
+        // To use the ArrayLogger
+        $res = $mailer->send($message);
+
+        // Dump the log contents
+        // NOTE: The EchoLogger dumps in realtime so dump() does nothing for it
+
         return $res;
     }
 

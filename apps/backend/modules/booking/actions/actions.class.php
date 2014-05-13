@@ -332,7 +332,6 @@ class bookingActions extends sfActions
         if ($form->isValid())
         {
             $values = $form->getValues();
-
             $booking = $form->save();
             $this->redirect('booking/edit?id='.$booking->getId());
 

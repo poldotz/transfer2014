@@ -19,6 +19,7 @@
  */
 class Rate extends BaseRate
 {
+
     public static function  getDaysOfWeek(){
 
         return array(1 => "Lunedi", 2 => "Martedi", 3 => "Mercoledi", 4 => "Giovedi", 5 => "Venerdi",6 => "Sabato",0 => "Domenica",8 => "Tutti");

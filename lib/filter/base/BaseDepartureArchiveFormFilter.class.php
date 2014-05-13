@@ -19,7 +19,7 @@ abstract class BaseDepartureArchiveFormFilter extends BaseFormFilterPropel
       'departure_time'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'flight'            => new sfWidgetFormFilterInput(),
       'rate_cost'         => new sfWidgetFormFilterInput(),
-      'calculated_cost'   => new sfWidgetFormFilterInput(),
+      'calculated_cost'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'rate_name'         => new sfWidgetFormFilterInput(),
       'note'              => new sfWidgetFormFilterInput(),
       'payment_method_id' => new sfWidgetFormFilterInput(),
