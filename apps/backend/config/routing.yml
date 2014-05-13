@@ -80,7 +80,7 @@ rate_new:
     param: { module: rate, action: new }
 
 rate_edit:
-    url:   /modifica-tariffa:id
+    url:   /modifica-tariffa/:id
     param: { module: rate, action: edit }
 
 vehicle_type_new:

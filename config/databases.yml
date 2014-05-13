@@ -24,9 +24,9 @@ all:
     class:        sfPropelDatabase
     param:
       classname:  PropelPDO
-      dsn:        mysql:dbname=transfer_new;host=localhost
+      dsn:        mysql:dbname=transfer2014;host=localhost
       username:   root
-      password:   lpodda
+      password:   ntbpassword
       encoding:   utf8
       persistent: true
       pooling:    true
