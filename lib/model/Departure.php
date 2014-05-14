@@ -20,6 +20,39 @@
 class Departure extends BaseDeparture
 {
 
+    public function preInsert(PropelPDO $con = null)
+    {
+        $rate = $this->getRate();
+        if($rate){
+            $this->setRateName($rate->getName());
+        }
+        $this->setFlight(strtoupper($this->getFlight()));
+        return true;
+    }
+
+
+    private function getRate(){
+        $booking = $this->getBooking();
+        //$customer_id = $booking->getCustomerId();
+        $vehicle_type_id = $booking->getVehicleTypeId();
+        $dayOfWeek = date('w',strtotime($this->getDay()));
+        $hour = $this->getDepartureTime();
+        $rate = RatePeer::getRateByDay($dayOfWeek);
+        return $rate;
+    }
+
+    public function preUpdate(PropelPDO $con = null)
+    {
+        $rate = $this->getRate();
+        if($rate){
+            $this->setRateName($rate->getName());
+        }
+
+        $this->setFlight(strtoupper($this->getFlight()));
+        return true;
+    }
+
+
     public function getDriver(){
         $driver = sfGuardUserPeer::retrieveByPK($this->getDriverId());
         if($driver){

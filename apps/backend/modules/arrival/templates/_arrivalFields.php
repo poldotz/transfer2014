@@ -100,7 +100,12 @@
                     <?php echo $form['arrival']['note']->render(array('class'=>"input-block-level","placeholder"=>"Nota")) ?>
                 </div>
                 <div class="span1 form-inline" required>
-                    <?php echo $form['arrival']['cancelled']->render() ?> Annulla
+                    <?php echo $form['arrival']['cancelled']->render() ?>
+                    <?php if($form['arrival']['cancelled']->getValue() == 1): ?>
+                        <div class="label label-important">Annullato</div>
+                    <?php else: ?>
+                        Annulla
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

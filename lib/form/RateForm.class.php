@@ -11,13 +11,18 @@ class RateForm extends BaseRateForm
 {
   public function configure()
   {
-      $optionsDays = array(1 => "Lunedi", 2 => "Martedi", 3 => "Mercoledi", 4 => "Giovedi", 5 => "Venerdi",6 => "Sabato",0 => "Domenica",8 => "Tutti");
+      $optionsDays = Rate::getDaysOfWeek();
+      if($this->getObject()){
+          $days = str_split($this->getObject()->getDay());
+      }
+
       $this->setWidget('day',new sfWidgetFormChoice(array('choices'=>$optionsDays,'multiple'=>true)));
+
       //$this->setValidator('day',new sfValidatorChoice(array('choices'=>array_keys($optionsDays),'multiple'=>true)));
       $optionsSurcharge = range(0,100, 5);
       $optionsSurcharge = array_combine($optionsSurcharge,$optionsSurcharge);
       $this->setWidget('surcharge',new sfWidgetFormChoice(array('choices'=>$optionsSurcharge)));
-      $this->setValidator('surcharge',new sfValidatorChoice(array('choices'=>array_keys($optionsSurcharge),'multiple'=>true)));
+      $this->setValidator('surcharge',new sfValidatorChoice(array('choices'=>$optionsSurcharge)));
 
       $this->validatorSchema['name']->setMessage('required','Campo Obbligatorio');
       $this->validatorSchema['day']->setMessage('required','Campo Obbligatorio');
@@ -34,4 +39,13 @@ class RateForm extends BaseRateForm
           'note' => "Note: "
       ));
   }
+
+    public function updateDefaultsFromObject()
+    {
+        parent::updateDefaultsFromObject();
+        if($this->getObject()){
+            $days = str_split($this->getObject()->getDay());
+            $this->setDefault('day',array_reverse($days));
+        }
+    }
 }

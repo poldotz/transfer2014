@@ -37,7 +37,7 @@ class DeparturePeer extends BaseDeparturePeer
     public static function getServicesByDay($day){
 
         $con = Propel::getConnection();
-        $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,22) as 'customer', substr(b.contact,1,22) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type',concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', substr(p.name,1,2) as 'pay_method',substr(d.note,1,30) as 'note' ";
+        $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, substr(d.departure_time,1,5) as 'hour', d.flight, substr(c.name, 1,22) as 'customer', substr(b.contact,1,22) as 'contact', concat(b.adult,'/',b.child) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type',concat(driver.first_name,'/',substr(driver.last_name,1,1),'.') as 'driver', substr(p.name,1,2) as 'pay_method',substr(d.note,1,30) as 'note' ";
         $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
             " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
             " JOIN locality as locfrom on (d.locality_from = locfrom.id) ".

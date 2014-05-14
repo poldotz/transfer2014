@@ -75,6 +75,10 @@ rate:
     url:   /tariffe
     param: { module: rate, action: index }
 
+rate_table:
+    url:   /tariffazione
+    param: { module: rateTable, action: index }
+
 rate_new:
     url:   /nuova-tariffa
     param: { module: rate, action: new }

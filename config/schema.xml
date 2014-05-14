@@ -133,6 +133,11 @@
 
   <table name="rate">
       <behavior name="Timestampable" />
+      <!--<behavior name="archivable"/> non riattivare questo behavior-->
+      <behavior name="versionable">
+          <parameter name="log_created_at" value="true" />
+          <parameter name="log_created_by" value="true" />
+      </behavior>
       <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
       <column name="name" type="varchar" size="20" required="true"/>
       <column name="description" type="varchar" size="100" required="false"/>
@@ -147,13 +152,40 @@
       </unique>
   </table>
 
+    <table name="customer_rate_table">
+        <behavior name="Timestampable" />
+        <behavior name="versionable">
+            <parameter name="log_created_at" value="true" />
+            <parameter name="log_created_by" value="true" />
+        </behavior>
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="customer_id" type="integer" required="true"/>
+        <column name="rate_id" type="integer" required="true"/>
+        <column name="vehicle_type_id" type="integer" required="true"/>
+        <column name="cost" type="decimal" size="10" scale="2" required="true" default="0.00"/>
+        <foreign-key foreignTable="rate" onDelete="cascade" onUpdate="cascade">
+            <reference local="rate_id" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="sf_guard_user_profile" onDelete="cascade" onUpdate="cascade">
+            <reference local="customer_id" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="vehicle_type" onDelete="cascade" onUpdate="cascade">
+            <reference local="vehicle_type_id" foreign="id" />
+        </foreign-key>
+        <unique name="customer_rate_table_index" >
+            <unique-column name="customer_id" />
+            <unique-column name="rate_id" />
+            <unique-column name="vehicle_type_id" />
+        </unique>
+    </table>
+
   <table name="booking">
       <behavior name="Timestampable"/>
       <behavior name="versionable">
           <parameter name="log_created_at" value="true" />
           <parameter name="log_created_by" value="true" />
       </behavior>
-      <!--<behavior name="archivable"/>-->
+      <behavior name="archivable"/>
       <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
       <column name="booking_date" type="timestamp" required="true"/>
       <column name="year" type="integer" size="4" required="true"/>
@@ -189,13 +221,15 @@
         <parameter name="log_created_at" value="true" />
         <parameter name="log_created_by" value="true" />
     </behavior>
-    <!--<behavior name="archivable"/>-->
+    <behavior name="archivable"/>
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="booking_id" type="integer" required="true"/>
     <column name="day" type="date" required="false"/>
     <column name="hour" type="time" required="false"/>
     <column name="flight" type="varchar" size="10" required="false"/>
-    <column name="cost" type="decimal" size="10" scale="2" required="false"/>
+    <column name="rate_cost" type="decimal" size="10" scale="2" required="false"/>
+    <column name="calculated_cost" type="decimal" size="10" scale="2" required="true" default="0.00"/>
+    <column name="rate_name" type="varchar" size="20" required="false"/>
     <column name="note" type="varchar" size="100" required="false"/>
     <column name="payment_method_id" type="integer" required="false"/>
     <column name="locality_from" type="integer" required="false"/>
@@ -232,7 +266,7 @@
         <parameter name="log_created_at" value="true" />
         <parameter name="log_created_by" value="true" />
     </behavior>
-    <!--<behavior name="archivable"/>-->
+    <behavior name="archivable"/>
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="booking_id" type="integer" required="true"/>
     <column name="day" type="date" required="false"/>
@@ -240,7 +274,9 @@
     <column name="pick_up" type="boolean" required="false" default="false"/>
     <column name="departure_time" type="time" required="false"/>
     <column name="flight" type="varchar" size="10" required="false"/>
-    <column name="cost" type="decimal" size="10" scale="2" required="false"/>
+    <column name="rate_cost" type="decimal" size="10" scale="2" required="false"/>
+    <column name="calculated_cost" type="decimal" size="10" scale="2" required="true" default="0.00"/>
+    <column name="rate_name" type="varchar" size="20" required="false"/>
     <column name="note" type="varchar" size="100" required="false"/>
     <column name="payment_method_id" type="integer" required="false"/>
     <column name="locality_from" type="integer" required="false"/>

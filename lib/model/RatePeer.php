@@ -33,4 +33,16 @@ class RatePeer extends BaseRatePeer
         $pager->init();
         return $pager;
     }
+
+
+    public static function getRateByDay($day){
+
+        $con = Propel::getConnection();
+        $c = new Criteria();
+        $c->add(RatePeer::DAY,"%".$day."%",Criteria::LIKE);
+        $rate = RatePeer::doSelectOne($c);
+        $query = $con->getLastExecutedQuery();
+        return $rate;
+
+    }
 }
