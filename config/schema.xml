@@ -185,7 +185,7 @@
           <parameter name="log_created_at" value="true" />
           <parameter name="log_created_by" value="true" />
       </behavior>
-      <behavior name="archivable"/>
+      <!--<behavior name="archivable"/>-->
       <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
       <column name="booking_date" type="timestamp" required="true"/>
       <column name="year" type="integer" size="4" required="true"/>
@@ -221,7 +221,7 @@
         <parameter name="log_created_at" value="true" />
         <parameter name="log_created_by" value="true" />
     </behavior>
-    <behavior name="archivable"/>
+      <!--<behavior name="archivable"/>-->
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="booking_id" type="integer" required="true"/>
     <column name="day" type="date" required="false"/>
@@ -266,7 +266,7 @@
         <parameter name="log_created_at" value="true" />
         <parameter name="log_created_by" value="true" />
     </behavior>
-    <behavior name="archivable"/>
+    <!--<behavior name="archivable"/>-->
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="booking_id" type="integer" required="true"/>
     <column name="day" type="date" required="false"/>
