@@ -127,7 +127,7 @@ class CustomPdf extends TCPDF {
                 /*if($header[$i] == "Costo")
                     $pos5 = $i;*/
 
-                    $this->Cell($w[$i], 4, $header[$i], 1, 0, 'C', 1);
+                    $this->Cell($w[$i], 4, $header[$i], 1, 0, 'C', 1,"",1);
 
             }
             /*else
@@ -141,7 +141,7 @@ class CustomPdf extends TCPDF {
 
         $this->SetFillColor(66, 139, 202);
         $this->SetTextColor(0);
-        $this->SetFont('courier', '', 8);
+        $this->SetFont('courier', '', 10);
         //Data
         $fill = 0;
         $num = 1;
@@ -154,7 +154,7 @@ class CustomPdf extends TCPDF {
                 {
                     if($i == 0)
                     {
-                        $this->Cell($w[$i], 4, $num, 0, 0, 'C', $fill);
+                        $this->Cell($w[$i], 4, $num, 0, 0, 'C', $fill,"",1);
                         if($row[$i]=="si")
                         {
                             $this->Line($this->GetX()-$w[$i],$this->GetY()+2,294,$this->GetY() + 2);
@@ -164,7 +164,7 @@ class CustomPdf extends TCPDF {
                     {
                         if($i == $pos)
                         {
-                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill,"",1);
                             if(strlen($row[$i])==0)
                                 $this->Line($this->GetX()-24,$this->GetY()+3.25,$this->GetX()-1,$this->GetY()+3.25);
                         }
@@ -172,16 +172,16 @@ class CustomPdf extends TCPDF {
                         {
                             if($row[$i] == "VO")
                                 $row[$pos4] = "";
-                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill,"",1);
 
                         }
                         else
-                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill,"",1);
                     }
 
                 }
                 else{
-                    $this->Cell($w[$i] , 4, $row[$i], 0, 1, 'L', 0);
+                    $this->Cell($w[$i] , 4, $row[$i], 0, 1, 'L', 0,"",1);
                 }
             }
             $num=$num+1;
