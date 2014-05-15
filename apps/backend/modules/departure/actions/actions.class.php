@@ -107,7 +107,7 @@ class departureActions extends sfActions
 
         try{
             $pdf = new CustomPdf();
-            $title = 'Transfer in arrivo: ('.count($rows).') - '.$giorno.' '.$data;
+            $title = 'Transfer in Partenza: ('.count($rows).') - '.$giorno.' '.$data;
             $pdf->setHeaderTitle($title);
             $pdf->AddPage();
             $pdf->SetAutoPageBreak(1,0.5);
