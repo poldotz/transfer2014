@@ -34,13 +34,13 @@ class DepartureForm extends BaseDepartureForm
         $c1 = new Criteria();
         $c1->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
         $c1->add(LocalityPeer::IS_VECTOR,false,Criteria::EQUAL);
-        $c1->addDescendingOrderByColumn('name');
+        $c1->addAscendingOrderByColumn('name');
         $this->widgetSchema['locality_from'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c1,'add_empty'=>'DA'));
 
         $c2 = new Criteria();
         $c2->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
         $c2->addDescendingOrderByColumn(LocalityPeer::IS_VECTOR);
-        $c2->addDescendingOrderByColumn(LocalityPeer::NAME,Criteria::DESC);
+        $c2->addAscendingOrderByColumn(LocalityPeer::NAME);
 
         $this->widgetSchema['locality_to'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c2,'add_empty'=>'A'));
 
