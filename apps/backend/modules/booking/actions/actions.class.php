@@ -263,26 +263,40 @@ class bookingActions extends sfActions
     public function executePickUp(sfWebRequest $request){
         $hour  = $request->getParameter('hour');
         $minute  = $request->getParameter('minute');
-        $locality_from   = $request->getParameter('locality_from');
-        $locality_to  = $request->getParameter('locality_to');
+        $locality_from_id   = $request->getParameter('locality_from');
+        $locality_to_id  = $request->getParameter('locality_to');
         $pickUp  = $request->getParameter('pickUp');
+
+        $locality_to = LocalityPeer::retrieveByPK($locality_to_id);
+
+        if(!$locality_to->getIsVector()){
+            $taxi_service = true;
+        }
+        else{
+            $taxi_service = false;
+        }
 
         if($pickUp == "false"){
             $route = RouteQuery::create()
-                ->filterByLocalityFrom($locality_from)
-                ->filterByLocalityTo($locality_to)
+                ->filterByLocalityFrom($locality_from_id)
+                ->filterByLocalityTo($locality_to_id)
                 ->findOne();
             if($route){
                 $duration = $route->getDuration();
                 $durationTime = explode(":",$duration);
                 $departureTime =  $this->calculateDepartureTime($hour,$minute,(int) $durationTime[0],(int) $durationTime[1]);
             }
+            else{
+                $departureTime = array('departureHour'=>$hour,'departureMinute'=>$minute);
+            }
 
         }else{
             $departureTime = array('departureHour'=>$hour,'departureMinute'=>$minute);
         }
 
+        $departureTime['taxi_service'] = $taxi_service;
         $departureTime = json_encode($departureTime);
+
         sfConfig::set('sf_web_debug', false);
         $this->getResponse()->setContentType('application/json');
         return $this->renderText($departureTime);

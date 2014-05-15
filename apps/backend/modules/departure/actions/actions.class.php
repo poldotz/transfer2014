@@ -68,7 +68,7 @@ class departureActions extends sfActions
             $booking = $v->getBooking();
             $route = $v->getLocalityFromName()."-".$v->getLocalityToName();
             $is_cancelled = $v->getCancelled() ? 'SI':'NO';
-            $json .= '["'.$v->getId().'","'.$is_cancelled.'","'.$booking->getNumber().'/'.$booking->getYear().'","'.substr($v->getDepartureTime(),0,5).'","'.$v->getFlight().'","'.$booking->getVehicleType().'","'.$v->getDriver().'","'.$booking->getCustomer().'","'.$booking->getContact().'","'.$route.'"]';
+            $json .= '["'.$v->getId().'","'.$is_cancelled.'","'.$booking->getNumber().'/'.$booking->getYear().'","'.substr($v->getHour(),0,5).'","'.$v->getFlight().'","'.$booking->getVehicleType().'","'.$v->getDriver().'","'.$booking->getCustomer().'","'.$booking->getContact().'","'.$route.'"]';
         }
         $json .= ']}';
         return $this->renderText($json);

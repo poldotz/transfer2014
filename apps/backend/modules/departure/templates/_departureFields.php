@@ -77,14 +77,14 @@
                 </div>
                 <div style="margin-left: 5px;" class="span1 input-left-top-margins" required>
                     <div class="input-append bootstrap-timepicker form-inline">
-                        <div class="control-group <?php echo $form['departure']['hour']->hasError() ? 'error' : ''; ?>">
-                            <?php echo $form['departure']['hour']->render(array('class'=>"span9")) ?>
-                        </div>
+                        <?php echo $form['departure']['departure_time']->render(array('class'=>"span9")) ?>
                     </div>
                 </div>
                 <div style="margin-left: 40px; margin-right: 0px;" class="span1">
                     <div class="input-append bootstrap-timepicker form-inline">
-                        <?php echo $form['departure']['departure_time']->render(array('class'=>"span9")) ?>
+                        <div class="control-group <?php echo $form['departure']['hour']->hasError() ? 'error' : ''; ?>">
+                            <?php echo $form['departure']['hour']->render(array('class'=>"span9")) ?>
+                        </div>
                     </div>
                 </div>
                 <div style="margin-left: 40px; margin-right: 0px;" class="span1">
@@ -153,7 +153,7 @@
 </script>
 
 <script type="text/javascript">
-    $('#booking_departure_hour_hour').change(function(){
+    $('#booking_departure_departure_time_hour').change(function(){
         var hour = this.value;
         var minute = $('#booking_departure_hour_minute').val();
         var locality_from  = $('#booking_departure_locality_from').val();
@@ -162,14 +162,24 @@
         if(pickUp === false){
             if(hour && minute && locality_from && locality_to){
                 $.ajax({
-                    url: '<?php echo url_for('departure/pickUp')?>',
+                    url: '<?php echo url_for('booking/pickUp')?>',
                     data: {hour: hour, minute: minute, locality_from: locality_from, locality_to: locality_to,pickUp: pickUp},
                     method: "post",
                     dataType: "json"
                 })
                     .done(function(response){
-                        var hour = $('#booking_departure_departure_time_hour').val(response.departureHour);
-                        var minute = $('#booking_departure_departure_time_minute').val(response.departureMinute);
+                        if(response.taxi_service){
+                            $('#booking_departure_departure_time_hour').hide();
+                            $('#booking_departure_departure_time_minute').hide();
+                            $('#booking_departure_pick_up').hide();
+                        }
+                        else{
+                            $('#booking_departure_departure_time_hour').show()
+                            $('#booking_departure_departure_time_minute').show();
+                            $('#booking_departure_pick_up').show();
+                        }
+                        var hour = $('#booking_departure_hour_hour').val(response.departureHour);
+                        var minute = $('#booking_departure_hour_minute').val(response.departureMinute);
 
                     })
                     .fail(function(msg){
@@ -180,8 +190,8 @@
         }
     });
 
-    $('#booking_departure_hour_minute').change(function(){
-        var hour = $('#booking_departure_hour_hour').val();
+    $('#booking_departure_departure_time_minute').change(function(){
+        var hour = $('#booking_departure_departure_time_hour').val();
         var minute = this.value;
         var locality_from  = $('#booking_departure_locality_from').val();
         var locality_to = $('#booking_departure_locality_to').val();
@@ -195,14 +205,13 @@
                     dataType: "json"
                 })
                     .done(function(response){
-                        var hour = $('#booking_departure_departure_time_hour').val(response.departureHour);
-                        var minute = $('#booking_departure_departure_time_minute').val(response.departureMinute);
+                        var hour = $('#booking_departure_hour_hour').val(response.departureHour);
+                        var minute = $('#booking_departure_hour_minute').val(response.departureMinute);
 
                     })
                     .fail(function(msg){
                         bootbox.alert("errore:" + msg);
                     });
-
             }
         }
     });
