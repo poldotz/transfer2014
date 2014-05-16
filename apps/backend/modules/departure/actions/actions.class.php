@@ -55,20 +55,16 @@ class departureActions extends sfActions
         sfConfig::set('sf_web_debug', false);
         $this->getResponse()->setContentType('application/json');
         $day  = $this->getUser()->getCurrentDepartureDate();
-        $departures = DepartureQuery::create()
-            ->filterByDay($day)
-            ->orderByHour()
-            ->orderById()
-            ->find();
+        $departures = DeparturePeer::getDataByDay($day);
         $json = '{ "data":[';
         $first = 0;
         foreach ($departures as $v)
         {
             if ($first++) $json .= ',';
-            $booking = $v->getBooking();
-            $route = $v->getLocalityFromName()."-".$v->getLocalityToName();
-            $is_cancelled = $v->getCancelled() ? 'SI':'NO';
-            $json .= '["'.$v->getId().'","'.$is_cancelled.'","'.$booking->getNumber().'/'.$booking->getYear().'","'.substr($v->getHour(),0,5).'","'.$v->getFlight().'","'.$booking->getVehicleType().'","'.$v->getDriver().'","'.$booking->getCustomer().'","'.$booking->getContact().'","'.$route.'"]';
+
+            $route = $v['route'];
+            $is_cancelled = strtoupper($v['Annullato']);
+            $json .= '["'.$v['id'].'","'.$is_cancelled.'","'.$v['number'].'/'.$v['year'].'","'.$v['hour'].'","'.$v['flight'].'","'.$v['vehicle_type'].'","'.$v['driver'].'","'.$v['customer'].'","'.$v['contact'].'","'.$route.'"]';
         }
         $json .= ']}';
         return $this->renderText($json);

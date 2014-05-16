@@ -50,7 +50,7 @@ class serviceDriverActions extends sfActions
                 foreach($services as $service){
                     $rows = Driver::getDriverServicesDay($day,$service['DRIVER_ID']);
                     $title = 'Autista: '.$service["driver"].' numero servizi:  ('.count($rows).') - '.$giorno.' '.$data;
-                    $pdf = $this->generateDriverServicesPdf($pdf,$title,$rows);
+                    $pdf = $this->generateDriverServicesPdf($pdf,$title,$rows,'',false,'NOT');
                 }
                 $pdf->Output("servizi_autisti"."_".$giorno."_".$data.".pdf","I");
             }

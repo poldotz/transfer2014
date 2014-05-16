@@ -53,6 +53,7 @@ Class Driver {
     public static  function getDriverServicesDay($day,$driver_id = null,$fetch_mode = 'NUM'){
 
         $con = Propel::getConnection();
+        $query = "SELECT * FROM ";
 
         $select = "(SELECT if(a.cancelled,'si','no') as 'Annullato', b.number, 'Arrivo' as 'arrival', substr(a.hour,1,5) as 'hour', a.flight, substr(c.name, 1,22) as 'customer', substr(b.contact,1,22) as 'contact', concat(b.adult,'/',if(b.child,b.child,0)) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type', substr(p.name,1,2) as 'pay_method',substr(a.note,1,32) as 'note' ";
         $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
@@ -63,10 +64,12 @@ Class Driver {
             " LEFT JOIN sf_guard_user as driver on (a.driver_id = driver.id) ".
             " LEFT JOIN payment_method as p on (a.payment_method_id = p.id) ";
         $where = " WHERE a.day ='".$day."' AND a.driver_id = ".$driver_id." AND a.cancelled = 0 ";
-        $order_by = " ORDER BY a.hour, v.id, b.number)";
+        $order_by = " ORDER BY a.hour, v.id, b.number) as a ";
 
         $queryArrivals = $select.$from.$where.$order_by;
+        $query .= $queryArrivals;
 
+        $query .= " UNION ALL SELECT * FROM ";
 
         $select = "(SELECT if(d.cancelled,'si','no') as 'Annullato', b.number, if(locto.is_vector,'Partenza','Taxi') as 'services', substr(d.hour,1,5) as 'hour', d.flight, substr(c.name, 1,22) as 'customer', substr(b.contact,1,22) as 'contact', concat(b.adult,'/',if(b.child,b.child,0)) as 'pax', concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type', substr(p.name,1,2) as 'pay_method',substr(d.note,1,30) as 'note' ";
         $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
@@ -77,11 +80,12 @@ Class Driver {
             " LEFT JOIN sf_guard_user as driver on (d.driver_id = driver.id) ".
             " LEFT JOIN payment_method as p on (d.payment_method_id = p.id) ";
         $where = " WHERE d.day ='".$day."' AND d.driver_id = ".$driver_id ." AND d.cancelled = 0 ";
-        $order_by = " ORDER BY d.hour, v.id, b.number)";
+        $order_by = " ORDER BY d.hour, v.id, b.number) as d";
 
-        $queryDepature = $select.$from.$where.$order_by;
-
-        $statement = $con->prepare($queryArrivals . "UNION" . $queryDepature);
+        $queryDepatures = $select.$from.$where.$order_by;
+        $query .= $queryDepatures;
+        $query .= " ORDER BY  hour,number;";
+        $statement = $con->prepare($query);
         $statement->execute();
 
         if($fetch_mode == "NUM"){
