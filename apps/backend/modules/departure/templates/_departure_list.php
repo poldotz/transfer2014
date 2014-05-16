@@ -113,16 +113,13 @@
         }
 
         $('#set_departure_driver').submit(function(e){
-
-
             e.preventDefault();
             $(this).attr('action');
             var driver_id = $(this).find('select').val();
-
             var table = $('#departure_list').DataTable();
             scroller.fnScrollToRow(rowIndex);
             var departure_id = table.cell(rowIndex,0).data();
-            if(departure_id && driver_id){
+            if(departure_id){
                 $.ajax({
                     url: "<?php echo url_for('departure/setDriver') ?>",
                     data:{departure_id: departure_id, driver_id: driver_id},
@@ -130,12 +127,23 @@
 
                 })
                     .done(function(driver_name){
-
                         table.cell(rowIndex,6).data(driver_name);
                         rowIndex  = rowIndex + 1;
                         scroller.fnScrollToRow(rowIndex);
                         var oTT = TableTools.fnGetInstance( 'departure_list' );
-                        oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
+                        if($('#departure_list tbody tr')[rowIndex]){
+                            oTT.fnSelect( $('#departure_list tbody tr')[rowIndex]);
+                            var aData = table.row( rowIndex).data();
+                            var idNumber = aData[2];
+                            postSelectedRow(idNumber);
+                        }else{
+                            rowIndex = 0;
+                            scroller.fnScrollToRow(rowIndex);
+                            oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
+                            var aData = table.row( rowIndex).data();
+                            var idNumber = aData[2];
+                            postSelectedRow(idNumber);
+                        }
                     })
                     .fail(function(){
                         bootbox.alert('Errore durante il salvataggio!');
@@ -144,7 +152,6 @@
             }else{
                 bootbox.alert('Nessun Record Selezionato.');
             }
-
         });
     });
 </script>

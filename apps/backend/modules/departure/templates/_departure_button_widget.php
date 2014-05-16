@@ -48,12 +48,14 @@
     $('#set_driver').click(function(){
         if($( "#set_driver_container").hasClass('hidden')){
             $( "#set_driver_container").removeClass('hidden');
+
             scroller.fnScrollToRow( rowIndex );
             var oTT = TableTools.fnGetInstance( 'departure_list' );
             oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
         }
         else{
             $( "#set_driver_container").addClass('hidden');
+            rowIndex = 0;
         }
     });
 </script>

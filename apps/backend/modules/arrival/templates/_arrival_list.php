@@ -117,12 +117,9 @@
 
 
         $('#set_arrival_driver').submit(function(e){
-
-
             e.preventDefault();
             $(this).attr('action');
             var driver_id = $(this).find('select').val();
-
             var table = $('#arrival_list').DataTable();
             scroller.fnScrollToRow(rowIndex);
             var arrival_id = table.cell(rowIndex,0).data();
@@ -139,7 +136,21 @@
                         rowIndex  = rowIndex + 1;
                         scroller.fnScrollToRow(rowIndex);
                         var oTT = TableTools.fnGetInstance( 'arrival_list' );
-                        oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
+                        if($('#arrival_list tbody tr')[rowIndex]){
+                            oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
+                            var aData = table.row( rowIndex).data();
+                            var idNumber = aData[2];
+                            postSelectedRow(idNumber);
+                        }
+                        else{
+                            rowIndex = 0;
+                            scroller.fnScrollToRow(rowIndex);
+                            oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
+                            var aData = table.row( rowIndex).data();
+                            var idNumber = aData[2];
+                            postSelectedRow(idNumber);
+                        }
+
                 })
                     .fail(function(){
                     bootbox.alert('Errore durante il salvataggio!');

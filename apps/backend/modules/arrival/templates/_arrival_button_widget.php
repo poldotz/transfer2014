@@ -52,7 +52,8 @@
             oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
         }
         else{
-            $( "#set_driver_container").addClass('hidden');
+            $("#set_driver_container").addClass('hidden');
+            rowIndex = 0;
         }
     });
 </script>
