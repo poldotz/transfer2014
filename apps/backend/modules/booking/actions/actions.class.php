@@ -342,16 +342,15 @@ class bookingActions extends sfActions
 
     protected function processForm(sfWebRequest $request, sfForm $form)
     {
-        $session_year = $this->getUser()->getSessionYear();
+       /* $session_year = $this->getUser()->getSessionYear();
         $number = BookingPeer::getIdentificationNumber($session_year);
         $parameters = $request->getParameter($form->getName());
         $parameters['number'] = $number;
-        $request->setParameter('booking',$parameters);
+        $request->setParameter('booking',$parameters);*/
 
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid())
         {
-            $values = $form->getValues();
             $booking = $form->save();
             $this->redirect('booking/edit?id='.$booking->getId());
 
