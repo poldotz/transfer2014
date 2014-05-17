@@ -76,12 +76,17 @@ class departureActions extends sfActions
             sfConfig::set('sf_web_debug', false);
             $departure = DeparturePeer::retrieveByPK($request->getParameter('departure_id'));
             $driver = $departure->getDriver();
-            $departure->setDriverId($request->getParameter('driver_id'));
+            if($request->getParameter('driver_id')){
+                $departure->setDriverId($request->getParameter('driver_id'));
+            }
+            else{
+                $departure->setDriverId(null);
+            }
             try{
                 $res = $departure->save();
 
                 if($res){
-                    $driver = $departure->getDriver();
+                    $driver = $departure->getDriver() ? $departure->getDriver() : "";
                 }
                 return $this->renderText($driver);
 

@@ -19,11 +19,6 @@ test:
     param:
       send_http_headers: false
 
-dev:
-  mailer:
-    param:
-      delivery_strategy: none
-
 all:
   routing:
     class: sfPatternRouting
@@ -46,8 +41,16 @@ all:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       mail.maremania.com
-          port:       587
-          encryption: tls
-          username:   transfer@maremania.com
-          password:   tra1234
+          host:       smtp.gmail.com
+          port:       465
+          encryption: ssl
+          username: maremania.transfer@gmail.com
+          password: m4r3m4n14
+#      transport:
+#        class: Swift_SmtpTransport
+#        param:
+#          host:       mail.maremania.com
+#          port:       587
+#          encryption: tls
+#          username:   transfer@maremania.com
+#          password:   tra1234

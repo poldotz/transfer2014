@@ -142,7 +142,12 @@ class arrivalActions extends sfActions
             sfConfig::set('sf_web_debug', false);
             $arrival = ArrivalPeer::retrieveByPK($request->getParameter('arrival_id'));
             $driver = $arrival->getDriver();
-            $arrival->setDriverId($request->getParameter('driver_id'));
+            if($request->getParameter('driver_id')){
+                $arrival->setDriverId($request->getParameter('driver_id'));
+            }
+            else{
+                $arrival->setDriverId(null);
+            }
             try{
                 $res = $arrival->save();
 

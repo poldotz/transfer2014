@@ -77,7 +77,7 @@ class serviceDriverActions extends sfActions
                 $filename = sfConfig::get('sf_upload_dir')."/servizi_autisti"."_".$giorno."_".$data.".pdf";
                 $this->generateDriverServicesPdf(null,$title,$rows,$filename,true,"F");
                 $template_params = array('name'=>$service['driver'],'date'=>$data);
-                $sended = $this->sendEmailTo('driver_mail',$template_params,array($service['EMAIL']=>$service['driver']),$title,$filename);
+                $sended += $this->sendEmailTo('driver_mail',$template_params,array($service['EMAIL']=>$service['driver']),$title,$filename);
                 unlink($filename);
             }
             return $this->renderText("Numero email inviate: ".$sended);
@@ -133,25 +133,23 @@ class serviceDriverActions extends sfActions
 
         $body = $this->getPartial($template_name, $template_params);
         $from = "transfer@maremania.com";
-
         $fromName = "Maremania";
         $to = key($recipient);
         $toName = current($recipient);
-        //$bbc_email = "leonardopodda.ntbusinss@gmail.com";
-
+        $bbc_email = "transfer@maremania.com";
         $message = Swift_Message::newInstance()
             ->setFrom(array($from=>$fromName))
             ->setTo(array($to=>$toName))
-            //->setBcc($bbc_email)
+            ->setBcc($bbc_email)
             ->setSubject($subject)
             ->setBody($body,'text/html');
+
+
 
         $attachment = Swift_Attachment::fromPath($attachment, 'application/pdf');
         //	Attach it to the message
         $message->attach($attachment,'application/pdf');
         $mailer = $this->getMailer();
-
-        // To use the ArrayLogger
         $res = $mailer->send($message);
 
         // Dump the log contents

@@ -47,7 +47,8 @@ class sfGuardUser extends PluginsfGuardUser
     }
 
     public function getDriver(){
-        return $this->getFirstName();
+        return ucfirst($this->first_name)." ".ucfirst(substr($this->last_name,0,1)).".";
+
     }
 
     /*public function addsfGuardUserProfile()

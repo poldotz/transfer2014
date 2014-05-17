@@ -169,7 +169,7 @@ CREATE TABLE `locality`
     CONSTRAINT `locality_FK_1`
         FOREIGN KEY (`user_id`)
         REFERENCES `sf_guard_user` (`id`)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -434,7 +434,7 @@ CREATE TABLE `departure`
     CONSTRAINT `departure_FK_5`
         FOREIGN KEY (`driver_id`)
         REFERENCES `sf_guard_user` (`id`)
-        ON UPDATE CASCADE
+        ON UPDATE SET NULL
         ON DELETE SET NULL,
     CONSTRAINT `departure_FK_6`
         FOREIGN KEY (`vehicle_id`)

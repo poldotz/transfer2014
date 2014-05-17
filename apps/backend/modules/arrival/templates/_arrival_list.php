@@ -123,7 +123,7 @@
             var table = $('#arrival_list').DataTable();
             scroller.fnScrollToRow(rowIndex);
             var arrival_id = table.cell(rowIndex,0).data();
-            if(arrival_id && driver_id){
+            if(arrival_id){
                 $.ajax({
                     url: "<?php echo url_for('arrival/setDriver') ?>",
                     data:{arrival_id: arrival_id, driver_id: driver_id},
