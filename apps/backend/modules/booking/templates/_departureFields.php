@@ -40,22 +40,22 @@
                 </div>
                 <div class="span1 input-left-top-margins" required>
                     <div class="input-append bootstrap-timepicker form-inline">
-                        <?php echo $form['departure']['departure_time']->render(array('class'=>"span9")) ?>
+                        <?php echo $form['departure']['departure_time']->render(array('class'=>"span11")) ?>
                     </div>
                 </div>
-                <div class="span1 input-left-top-margins" required>
+                <div class="span1" style="margin-left: 70px;" required >
                     <div class="input-append bootstrap-timepicker form-inline">
                         <div class="control-group <?php echo $form['departure']['hour']->hasError() ? 'error' : ''; ?>">
-                            <?php echo $form['departure']['hour']->render(array('class'=>"span9")) ?>
+                            <?php echo $form['departure']['hour']->render(array('class'=>"span11")) ?>
                         </div>
                     </div>
                 </div>
-                <div style="margin-left: 40px; margin-right: 0px;" class="span1">
+                <div style="margin-left: 70px; margin-right: 0px;" class="span1">
                    <?php echo $form['departure']['pick_up']->render() ?>
                     <?php if($form['departure']['pick_up']->getValue() == 1): ?>
                         <div class="label label-important">PK</div>
                     <?php else: ?>
-                        PickUp
+                        <div class="label label-inverse">PK</div>
                     <?php endif; ?>
 
 

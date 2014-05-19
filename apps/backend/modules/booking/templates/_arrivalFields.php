@@ -41,7 +41,7 @@
                 <div class="span1 input-left-top-margins" required>
                     <div class="input-append bootstrap-timepicker form-inline">
                         <div class="control-group <?php echo $form['arrival']['hour']->hasError() ? 'error' : ''; ?>">
-                            <?php echo $form['arrival']['hour']->render(array('class'=>"span9")) ?>
+                            <?php echo $form['arrival']['hour']->render(array('class'=>"span12")) ?>
                         </div>
                     </div>
                 </div>
