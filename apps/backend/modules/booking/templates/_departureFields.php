@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-left: 70px; margin-right: 0px;" class="span1">
+                <div style="margin-left: 70px; margin-right: -35px;" class="span1">
                    <?php echo $form['departure']['pick_up']->render() ?>
                     <?php if($form['departure']['pick_up']->getValue() == 1): ?>
                         <div class="label label-important">PK</div>

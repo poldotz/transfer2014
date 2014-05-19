@@ -57,7 +57,16 @@ class ArrivalForm extends BaseArrivalForm
       $this->widgetSchema['cancelled'] = new sfWidgetFormInputCheckbox(array(),array("class"=>"radio inline"));
       $this->validatorSchema['booking_id']->setOption('required',false);
       $this->validatorSchema['calculated_cost']->setOption('required',false);
-
-
   }
+
+    public function updateDefaultsFromObject()
+    {
+        parent::updateDefaultsFromObject();
+        if($this->getObject()->getPaymentMethodId()){
+            $this->setDefault('payment_method_id',$this->getObject()->getPaymentMethodId());
+        }
+        else if($p = PaymentMethodQuery::create()->findOne()){
+            $this->setDefault('payment_method_id',$p->getId());
+        }
+    }
 }
