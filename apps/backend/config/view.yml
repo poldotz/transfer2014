@@ -14,9 +14,11 @@ default:
 
   stylesheets:
       - main.css
+      - icomoon/style.css
       - jq-theme/jquery-ui-1.9.2.custom.min.css
 
   javascripts:
+      - html5-trunk.js
       - jquery.min.js
       - bootstrap.js
       - bootbox.min.js
