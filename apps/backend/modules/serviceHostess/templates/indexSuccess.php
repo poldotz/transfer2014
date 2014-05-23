@@ -15,18 +15,13 @@
                     <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess
                 </div>
                 <div style="padding: 5px;" class="widget-body">
-                    <form class="form-horizontal no-margin">
+                    <form id ="service_hostess_search" class="form-horizontal no-margin">
                         <fieldset>
                             <div class="control-group">
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10">
-                                            <div class="input-append">
-                                                <input type="text" name="date_range1" id="date_range1" class="span12 date_picker" placeholder="Seleziona date da - a"/>
-                                                      <span class="add-on">
-                                                        <i class="icon-calendar"></i>
-                                                      </span>
-                                            </div>
+                                            <?php echo $form['date_range']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
@@ -41,11 +36,26 @@
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins">
-                                            <input type="text" class="input-block-level" title="Referente" placeholder="Referente">
+                                            <?php echo $form['contact']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
                                                 <input type="checkbox"  name="esc_referente" value="escludi">
+                                                Escludi
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 0px;" class="controls">
+                                    <div class="row-fluid">
+                                        <div class="span10 input-left-top-margins">
+                                            <input type="text" class="input-block-level" title="Rif.File" placeholder="Rif.File">
+                                        </div>
+                                        <div class="span2 form-inline" >
+                                            <label class="radio inline">
+                                                <input type="checkbox"  name="esc_riffile" value="escludi">
                                                 Escludi
                                             </label>
                                         </div>
@@ -139,7 +149,7 @@
                                 </div>
                             </div>
                             <div class="form-actions no-margin no-bottom-padding no-top-padding">
-                                <button type="submit" class="btn btn-info pull-right">
+                                <button id="service_hostess_search_button" type="submit" class="btn btn-info pull-right">
                                     CERCA
                                 </button>
                                 <div class="clearfix">
@@ -166,7 +176,7 @@
 
                 </div>
                 <div class="widget-body">
-                    <table class="table table-striped table-condensed table-bordered no-margin">
+                    <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
                             <th class="span1">Progressivo</th>
@@ -188,3 +198,45 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#service_hostess_search_button').on('click',function(e){
+        e.preventDefault();
+        $form = $('#service_hostess_search_form');
+        var datastring = $form.serialize();
+        table = $('#service_hostess_list').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false
+
+                }
+            ],
+            "scrollY": 600,
+            scrollCollapse: true,
+            "deferRender": true,
+            'ajax': {
+                'url': "<?php echo url_for('serviceHostess/get_data') ?>",
+                'data': datastring
+            },
+            "language": {
+                "processing":     "Caricamento...",
+                "sLengthMenu":     "Visualizza _MENU_ elementi",
+                "zeroRecords":   "La ricerca non ha portato alcun risultato",
+                "info":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
+                "infoEmpty":     "Vista da 0 a 0 di 0 elementi",
+                "infoFiltered":   "(filtrati da _MAX_ elementi totali)",
+                "infoPostFix":    "",
+                "search":          "Cerca:",
+                "loadingRecords": "",
+                "paginate": {
+                    "first":    "Inizio",
+                    "previous": "Precedente",
+                    "next":    "Successivo",
+                    "last":     "Fine"
+                }
+            }
+        });
+        return false;
+    });
+</script>

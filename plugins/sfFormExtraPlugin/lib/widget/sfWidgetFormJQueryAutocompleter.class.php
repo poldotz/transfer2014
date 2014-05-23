@@ -70,6 +70,7 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
            sprintf(<<<EOF
 <script type="text/javascript">
   jQuery(document).ready(function() {
+    $(this.target).find('input').autocomplete();
     jQuery("#%s")
     .autocomplete('%s', jQuery.extend({}, {
       dataType: 'json',

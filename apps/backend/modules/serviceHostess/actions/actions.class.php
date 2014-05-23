@@ -17,6 +17,12 @@ class serviceHostessActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+      $this->form = new ServiceHostessForm(array('year'=> $this->getUser()->getSessionYear()));
 
+  }
+
+
+  public function executeGetContacts(sfWebRequest $request){
+    $params = $request;
   }
 }
