@@ -25,12 +25,14 @@ class ServiceHostessForm extends sfForm
                         array('years' => array_combine($years, $years),
                               'format' => '%day%/%month%/%year%'))),array('class'=>'span3')
             ))));
-
+      $this->setWidget('date_range_off', new sfWidgetFormInputCheckbox());
       $this->setWidget('contact', new sfWidgetFormPropelJQueryAutocompleter(  array(
           'model' => 'Booking',
           'method'=> 'getContact',
-          'url' => sfContext::getInstance()->getController()->genUrl('serviceHostess/contacts')
-      )));
+          'url' => sfContext::getInstance()->getController()->genUrl('serviceHostess/getContacts')
+      ),array('class'=>'span12')));
+
+
       $this->widgetSchema->setNameFormat('serviceHostess[%s]');
       $this->disableLocalCSRFProtection();
 

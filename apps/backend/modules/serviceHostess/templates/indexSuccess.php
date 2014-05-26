@@ -15,7 +15,7 @@
                     <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess
                 </div>
                 <div style="padding: 5px;" class="widget-body">
-                    <form id ="service_hostess_search" class="form-horizontal no-margin">
+                    <form id ="service_hostess_search_form" class="form-horizontal no-margin">
                         <fieldset>
                             <div class="control-group">
                                 <div style="margin-left: 0px;" class="controls">
@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_date" value="escludi">
+                                                <?php echo $form['date_range_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -202,9 +202,14 @@
 <script type="text/javascript">
     $('#service_hostess_search_button').on('click',function(e){
         e.preventDefault();
-        $form = $('#service_hostess_search_form');
-        var datastring = $form.serialize();
+        var form = $('#service_hostess_search_form');
+        var datastring = form.serialize();
+        if($.fn.dataTable.isDataTable( '#service_hostess_list' )){
+            table = $('#service_hostess_list').DataTable();
+            table.destroy();
+        }
         table = $('#service_hostess_list').DataTable({
+            "destroy": true,
             "columnDefs": [
                 {
                     "targets": [ 0 ],
@@ -215,9 +220,12 @@
             "scrollY": 600,
             scrollCollapse: true,
             "deferRender": true,
-            'ajax': {
-                'url': "<?php echo url_for('serviceHostess/get_data') ?>",
-                'data': datastring
+            "ajax": {
+                "url": "<?php echo url_for('serviceHostess/getData') ?>",
+                "data": function ( d ) {
+                    d.form = datastring
+                },
+                "type": "POST"
             },
             "language": {
                 "processing":     "Caricamento...",
