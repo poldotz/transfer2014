@@ -106,12 +106,51 @@ class usersActions extends sfActions
         $this->setTemplate('edit');
     }
 
+    public function executeCustomers(sfWebRequest $request){
+
+        if($request->isXmlHttpRequest()){
+            sfConfig::set('sf_web_debug', false);
+            if($request->getParameter('group_type',null)){
+                $group = sfGuardGroupPeer::retrieveByPK($request->getParameter('group_type'));
+                if($group->getName() == "Cliente"){
+                    $form = new sfGuardUserForm();
+                    return $this->renderPartial('customers',array('form'=>$form));
+                }
+                else{
+                    return $this->renderText("");
+                }
+            }
+            else{
+                return $this->renderText("");
+            }
+        }
+        else{
+            return $this->renderText("");
+        }
+    }
+
+    public function executeSelectCustomer(sfWebRequest $request){
+
+        if ($request->isXmlHttpRequest())
+        {
+            sfConfig::set('sf_web_debug', false);
+            $form = new sfGuardUserForm();
+            return $this->renderPartial('selectCustomer', array('form' => $form));
+        }
+    }
+
     protected function processForm(sfWebRequest $request, sfForm $form)
     {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid())
         {
             $user = $form->save();
+            $parameters = $request->getParameter($form->getName());
+            if(isset($parameters['customer_id'])){
+                $customer = CustomerPeer::retrieveByPK($parameters['customer_id']);
+                $customer->setsfGuardUser($user);
+                $customer->save();
+            }
 
             $this->redirect('users/edit?id='.$user->getId());
         }

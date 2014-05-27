@@ -13,9 +13,34 @@ class sfGuardUserForm extends BasesfGuardUserForm
   {
     parent::configure();
 
+    $this->validatorSchema->setOption('allow_extra_fields', true);
+    $this->validatorSchema->setOption('filter_extra_fields', false);
+
+
+      $customer_type_id = sfContext::getInstance()->getRequest()->getParameter('customer_type_id');
+      if($this->getObject()->getProfile()->getId()){
+          $customer = $this->getObject()->getProfile();
+          $this->setDefault('customer_id',$customer->getId());
+          $customer_type_id = $customer->getCustomerTypeId();
+          $this->setDefault('customer_type_id',$customer_type_id);
+      }
+      $this->setWidget('customer_type_id',new sfWidgetFormPropelChoice(array('model'=>'customerType','add_empty'=>'Tipo Cliente')));
+
+      $c1 = new Criteria();
+      if(isset($customer_type_id)){
+          $c1->add(CustomerPeer::CUSTOMER_TYPE_ID,$customer_type_id,Criteria::EQUAL);
+      }
+      else{
+          $c1->add(CustomerPeer::CUSTOMER_TYPE_ID, null, Criteria::ISNOTNULL);
+      }
+      $c1->addDescendingOrderByColumn('name');
+      $this->setWidget('customer_id',new sfWidgetFormPropelChoice(array('model'=>'customer','criteria'=>$c1,'add_empty'=>'Nome Cliente')));
+
+
+
     $c = new Criteria();
-    $c->add(sfGuardGroupPeer::NAME,sfConfig::get('app_internal_user_groups', array('Amministratore','Operatore','Autista')),Criteria::IN);
-    $this->setWidget('internal_user_groups',new sfWidgetFormPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup')));
+    $c->add(sfGuardGroupPeer::NAME,sfConfig::get('app_internal_user_groups', array('Amministratore','Operatore','Autista','Cliente')),Criteria::IN);
+    $this->setWidget('internal_user_groups',new sfWidgetFormPropelChoice(array('multiple' => false, 'model' => 'sfGuardGroup','criteria'=>$c)));
 
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
     $this->validatorSchema['password']->setOption('required', false);
