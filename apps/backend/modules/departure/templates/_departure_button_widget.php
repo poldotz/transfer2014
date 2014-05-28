@@ -14,19 +14,22 @@
             <?php echo $form['departure']['day_change']->render(array('class'=>'input-small','readonly')); ?>
         </form>&nbsp;&nbsp;&nbsp;
         <?php if(!$form->getObject()->isNew()): ?>
+            <?php if($sf_user->hasCredential('configuration')): ?>
             <a id="set_driver" href="Javascript:void(0)" title="Inserimento Autisti" class="btn btn-small btn-info">
             <span class="fs1" aria-hidden="true" data-icon="&#xe075;"></span>
-
             </a>
             <a id="edit_day" href="Javascript:void(0)" title="Cambia Data" class="btn btn-small btn-warning2">
                 <span class="fs1" aria-hidden="true" data-icon="&#xe052;"></span>
             </a>
+            <?php endif ?>
             <a id="print_arrival" target="_blank" href="<?php echo url_for('departure/departurePdf') ?>" title="stampa arrivi" class="btn btn-small btn-inverse">
             <span class="fs1" aria-hidden="true" data-icon="&#xe051;"></span>
             </a>
-            <div class="pull-right">
-                <button id="save_departure_form" class="btn btn-small btn-primary" type="button">SALVA</button>
-            </div>
+            <?php if($sf_user->hasCredential('configuration')): ?>
+                <div class="pull-right">
+                    <button id="save_departure_form" class="btn btn-small btn-primary" type="button">SALVA</button>
+                </div>
+             <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>
@@ -45,6 +48,8 @@
 
     }).addClass("embed");
 
+<?php if($sf_user->hasCredential('configuration')): ?>
+
     $('#set_driver').click(function(){
         if($( "#set_driver_container").hasClass('hidden')){
             $( "#set_driver_container").removeClass('hidden');
@@ -58,4 +63,5 @@
             rowIndex = 0;
         }
     });
+    <?php endif; ?>
 </script>

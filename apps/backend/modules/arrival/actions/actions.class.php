@@ -24,7 +24,19 @@ class arrivalActions extends sfActions
     }
     else{
         $day  = $this->getUser()->getCurrentArrivalDate();
-        $arrival = ArrivalQuery::create()->orderBy('hour')->findOneByDay($day);
+
+        if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+           $customer_id =$this->getUser()->getProfile()->getId();
+
+           $arrival =  ArrivalQuery::create()
+            ->useBookingQuery()
+                ->filterByCustomerId($customer_id)
+            ->endUse()
+            ->orderBy('hour')->findOneByDay($day);
+
+        }else{
+            $arrival = ArrivalQuery::create()->orderBy('hour')->findOneByDay($day);
+        }
         $booking = $arrival ? $arrival->getBooking() : null;
     }
     $this->form = new BookingArrivalForm($booking);
@@ -52,7 +64,16 @@ class arrivalActions extends sfActions
         sfConfig::set('sf_web_debug', false);
         $this->getResponse()->setContentType('application/json');
         $day  = $this->getUser()->getCurrentArrivalDate();
-        $arrivals = ArrivalPeer::getDataByDay($day);
+
+        /*
+         * customer permissions
+         */
+        if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+            $customer_id = $this->getUser()->getProfile()->getId();
+            $arrivals = ArrivalPeer::getDataByDay($day,$customer_id);
+        }else{
+            $arrivals = ArrivalPeer::getDataByDay($day);
+        }
 
         $json = '{ "data":[';
         $first = 0;
@@ -74,7 +95,16 @@ class arrivalActions extends sfActions
         $giorno =  explode('-',$day);
         $giorno = UtilityHelper::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
 
-        $rows = ArrivalPeer::getServicesByDay($day);
+        /*
+         * customer permissions.
+         */
+        if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+            $customer_id = $this->getUser()->getProfile()->getId();
+            $rows = ArrivalPeer::getServicesByDay($day,$customer_id);
+        }
+        else{
+            $rows = ArrivalPeer::getServicesByDay($day);
+        }
 
         try{
 

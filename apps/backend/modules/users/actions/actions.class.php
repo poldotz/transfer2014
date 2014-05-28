@@ -147,9 +147,14 @@ class usersActions extends sfActions
             $user = $form->save();
             $parameters = $request->getParameter($form->getName());
             if(isset($parameters['customer_id'])){
-                $customer = CustomerPeer::retrieveByPK($parameters['customer_id']);
-                $customer->setsfGuardUser($user);
-                $customer->save();
+                $newCustomer = CustomerPeer::retrieveByPK($parameters['customer_id']);
+                if($newCustomer != $user->getProfile()){
+                    $oldCustomer = $user->getProfile();
+                    $oldCustomer->setsfGuardUser(null);
+                    $oldCustomer->save();
+                }
+                $newCustomer->setsfGuardUser($user);
+                $newCustomer->save();
             }
 
             $this->redirect('users/edit?id='.$user->getId());

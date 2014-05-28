@@ -69,7 +69,38 @@ class serviceHostessActions extends sfActions
 
     $param = $request->getParameter('term');
     $result = BookingQuery::create()->select('contact')->findByContact("%$param%");
-    $contact = $result->toArray();
-    return $this->renderText(json_encode($contact));
+    $contacts = $result->toArray();
+    return $this->renderText(json_encode($contacts));
   }
+
+  public function executeGetRifFiles(sfWebRequest $request){
+      sfConfig::set('sf_web_debug', false);
+      $this->getResponse()->setContentType('application/json');
+
+      $param = $request->getParameter('term');
+      $result = BookingQuery::create()->select('rifFile')->findByRifFile("%$param%");
+      $rifFiles = $result->toArray();
+      return $this->renderText(json_encode($rifFiles));
+  }
+
+    public function executeGetCustomers(sfWebRequest $request){
+        sfConfig::set('sf_web_debug', false);
+        $this->getResponse()->setContentType('application/json');
+        $param = $request->getParameter('term');
+
+        $result = CustomerQuery::create()->select('name')->findByName("%$param%");
+        $customers = $result->toArray();
+        return $this->renderText(json_encode($customers));
+    }
+
+    public function executeGetLocalities(sfWebRequest $request){
+        sfConfig::set('sf_web_debug', false);
+        $this->getResponse()->setContentType('application/json');
+        $param = $request->getParameter('term');
+
+        $result = LocalityQuery::create()->select('name')->findByName("%$param%");
+        $localities = $result->toArray();
+        return $this->renderText(json_encode($localities));
+    }
+
 }

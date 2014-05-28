@@ -26,6 +26,8 @@
                             <span class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></span> In Partenza
                         </a>
                     </li>
+                    <?php if(!$sf_user->hasCredential('Cliente')): ?>
+
                     <li>
                         <a href="graphs.html">
                             <span class="fs1" aria-hidden="true" data-icon="&#xe096;"></span> Servizi Autista
@@ -36,6 +38,7 @@
                             <span class="fs1" aria-hidden="true" data-icon="&#xe0a5;"></span> Servizi Hostes
                         </a>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

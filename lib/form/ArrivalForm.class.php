@@ -50,7 +50,10 @@ class ArrivalForm extends BaseArrivalForm
       $c3->addJoin(sfGuardUserGroupPeer::GROUP_ID,sfGuardGroupPeer::ID);
       $c3->add(sfGuardGroupPeer::NAME,'Autista',Criteria::EQUAL);
       $c3->add(sfGuardUserPeer::IS_ACTIVE,true,Criteria::EQUAL);
-      $this->widgetSchema['driver_id'] = new sfWidgetFormPropelChoice(array('model'=>'sfGuardUser','criteria'=>$c3,'add_empty'=>'Autista'));
+      if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
+          $c3->add(sfGuardUserPeer::IS_ACTIVE,false,Criteria::EQUAL);
+      }
+          $this->widgetSchema['driver_id'] = new sfWidgetFormPropelChoice(array('model'=>'sfGuardUser','criteria'=>$c3,'add_empty'=>'Autista'));
       $c4 = new Criteria();
       $c4->add(PaymentMethodPeer::IS_ACTIVE,true,Criteria::EQUAL);
       $this->widgetSchema['payment_method_id'] = new sfWidgetFormPropelChoice(array('model'=>'paymentMethod','criteria'=>$c4,'multiple'=>false,'expanded'=>true),array("class"=>"horizontal_type"));

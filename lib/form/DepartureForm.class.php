@@ -52,6 +52,9 @@ class DepartureForm extends BaseDepartureForm
         $c3->addJoin(sfGuardUserGroupPeer::GROUP_ID,sfGuardGroupPeer::ID);
         $c3->add(sfGuardGroupPeer::NAME,'Autista',Criteria::EQUAL);
         $c3->add(sfGuardUserPeer::IS_ACTIVE,true,Criteria::EQUAL);
+        if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
+            $c3->add(sfGuardUserPeer::IS_ACTIVE,false,Criteria::EQUAL);
+        }
         $this->widgetSchema['driver_id'] = new sfWidgetFormPropelChoice(array('model'=>'sfGuardUser','criteria'=>$c3,'add_empty'=>'Autista'));
         $c4 = new Criteria();
         $c4->add(PaymentMethodPeer::IS_ACTIVE,true,Criteria::EQUAL);

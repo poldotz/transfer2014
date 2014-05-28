@@ -24,7 +24,18 @@ class departureActions extends sfActions
         }
         else{
             $day  = $this->getUser()->getCurrentDepartureDate();
-            $departure = DepartureQuery::create()->orderBy('hour')->findOneByDay($day);
+            if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+                $customer_id =$this->getUser()->getProfile()->getId();
+
+                $departure = DepartureQuery::create()
+                    ->useBookingQuery()
+                        ->filterByCustomerId($customer_id)
+                    ->endUse()
+                    ->orderBy('hour')->findOneByDay($day);
+            }
+            else{
+                $departure = DepartureQuery::create()->orderBy('hour')->findOneByDay($day);
+            }
             $booking = $departure ? $departure->getBooking() : null;
         }
         $this->form = new BookingDepartureForm($booking);
@@ -55,7 +66,15 @@ class departureActions extends sfActions
         sfConfig::set('sf_web_debug', false);
         $this->getResponse()->setContentType('application/json');
         $day  = $this->getUser()->getCurrentDepartureDate();
-        $departures = DeparturePeer::getDataByDay($day);
+
+        if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+            $customer_id =$this->getUser()->getProfile()->getId();
+            $departures = DeparturePeer::getDataByDay($day,$customer_id);
+        }
+        else{
+            $departures = DeparturePeer::getDataByDay($day);
+        }
+
         $json = '{ "data":[';
         $first = 0;
         foreach ($departures as $v)
@@ -104,7 +123,13 @@ class departureActions extends sfActions
         $giorno =  explode('-',$day);
         $giorno = UtilityHelper::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
 
-        $rows = DeparturePeer::getServicesByDay($day);
+        if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+            $customer_id = $this->getUser()->getPrifile()->getId();
+            $rows = DeparturePeer::getServicesByDay($day,$customer_id);
+        }
+        else{
+            $rows = DeparturePeer::getServicesByDay($day);
+        }
 
         try{
             $pdf = new CustomPdf();

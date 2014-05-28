@@ -72,7 +72,10 @@ class sfGuardUserForm extends BasesfGuardUserForm
       'last_name' => 'Cognome:',
       'internal_user_groups' => 'Gruppo utente:',
       'is_active' => 'Attivo:',
-      'phone' => 'Telefono:'
+      'phone' => 'Telefono:',
+      'email' => 'Email:',
+      'customer_type_id' => 'Tipo Cliente:',
+      'customer_id' => 'Nome Cliente:'
       ));
   }
 

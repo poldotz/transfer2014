@@ -170,8 +170,17 @@ class bookingActions extends sfActions
         $iSortCol_0 = $request->getParameter('iSortCol_0');
         if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
         $c = new Criteria();
+
         $c->addJoin(BookingPeer::CUSTOMER_ID,CustomerPeer::ID);
         $c->addJoin(BookingPeer::VEHICLE_TYPE_ID,VehicleTypePeer::ID);
+
+        /*
+         * customer credential
+         */
+        if(!$this->getUser()->isSuperAdmin() && $this->getUser()->hasCredential('customer')){
+            $c->addAnd(CustomerPeer::ID,$this->getUser()->getProfile()->getId(),Criteria::EQUAL);
+        }
+
         if ($query = $request->getParameter('sSearch'))
         {
             $identification_number = explode("/",$query);

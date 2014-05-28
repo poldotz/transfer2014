@@ -24,7 +24,7 @@
                 <?php echo link_to('Servizi','@booking',array('class'=>'active')) ?>
             </li>
             <?php endif; ?>
-            <?php if($sf_user->hasCredential('configuration')): ?>
+        <?php if($sf_user->hasCredential('configuration')): ?>
             <li style="border-right: 0px solid #1a1a1a;">
                 <?php include_component('general','sessionYear'); ?>
             </li>
@@ -34,9 +34,11 @@
     </div>
     <div id="mini-nav">
         <ul>
+    <?php if($sf_user->hasCredential('configuration')): ?>
             <li>
                 <a href="<?php echo url_for('@users') ?>"><span class="fs1" aria-hidden="true" data-icon="&#xe072;"></span></a>
             </li>
+        <?php endif ?>
             <li>
                 <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe0b1;"></span>', "@sf_guard_signout") ?></br>
             </li>

@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_referente" value="escludi">
+                                                <?php echo $form['contact_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -51,11 +51,11 @@
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins">
-                                            <input type="text" class="input-block-level" title="Rif.File" placeholder="Rif.File">
+                                            <?php echo $form['rifFile']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_riffile" value="escludi">
+                                                <?php echo $form['rifFile_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -66,11 +66,11 @@
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins">
-                                            <input type="text" class="input-block-level" title="Cliente" placeholder="Cliente">
+                                            <?php echo $form['customer']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_cliente" value="escludi">
+                                                <?php echo $form['rifFile_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -81,11 +81,11 @@
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins">
-                                            <input type="text" class="input-block-level" title="Localit&agrave" placeholder="Localit&agrave">
+                                            <?php echo $form['locality']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_localita" value="escludi">
+                                                <?php echo $form['locality_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -96,15 +96,11 @@
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins"required>
-                                            <select class="input-block-level" required >
-                                                <option selected>Mezzo</option>
-                                                <option>Bus 17/30</option>
-                                                <option>Auto 1/3 posti</option>
-                                            </select>
+                                            <?php echo $form['vehicle_type_id']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_mezzo" value="escludi">
+                                                <?php echo $form['vehicle_type_id_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -115,15 +111,11 @@
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins"required>
-                                            <select class="input-block-level" required >
-                                                <option selected>Autista</option>
-                                                <option >Maurizio</option>
-                                                <option>Leonardo</option>
-                                            </select>
+                                            <?php echo $form['driver_id']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <input type="checkbox"  name="esc_austista" value="escludi">
+                                                <?php echo $form['driver_id_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -133,18 +125,10 @@
                             <div class="control-group">
                                 <div style="margin-left: 0px;" class="controls">
                                     <div class="row-fluid">
-                                        <div class="span6 center-align-text">
-                                            <label class="radio inline">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                                                Arrivo
-                                            </label>
+                                        <div class="span12 center-align-text">
+                                            <?php echo $form['transfer_type']->render() ?>
                                         </div>
-                                        <div class="span6 center-align-text">
-                                            <label class="radio inline">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>
-                                                Partenza
-                                            </label>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

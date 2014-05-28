@@ -16,6 +16,7 @@
 </div>
 <?php if($form['customer_type_id']->getValue()): ?>
     <div class="control-group <?php echo $form['customer_id']->hasError() ? 'error' : ''; ?>" id="customer_id">
+        <label class="control-label"><?php echo $form['customer_id']->renderLabel() ?></label>
         <?php echo $form['customer_id']->render(array('required')) ?>
     </div>
 <?php else:  ?>

@@ -18,14 +18,26 @@ class BookingArrivalForm extends BookingForm
       $this->setWidget('version_created_by',new sfWidgetFormInputHidden());
 
       $customer_type_id = sfContext::getInstance()->getRequest()->getParameter('customer_type_id');
+
+      $c = new Criteria();
+      if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
+          $customer_profile = sfContext::getInstance()->getUser()->getProfile();
+          $customer_type_id = $customer_profile->getCustomerTypeId();
+          $c->add(CustomerTypePeer::ID,$customer_type_id,Criteria::EQUAL);
+      }
+
+
       if($this->getObject()->getCustomerId()){
         $customer = $this->getObject()->getCustomer();
         $customer_type_id = $customer->getCustomerTypeId();
         $this->setDefault('customer_type_id',$customer_type_id);
       }
-      $this->setWidget('customer_type_id',new sfWidgetFormPropelChoice(array('model'=>'customerType','add_empty'=>'Tipo Cliente')));
+      $this->setWidget('customer_type_id',new sfWidgetFormPropelChoice(array('model'=>'customerType','criteria'=>$c,'add_empty'=>'Tipo Cliente')));
       $c1 = new Criteria();
 
+      if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
+          $c1->addAnd(CustomerPeer::ID, $customer_profile->getId(),Criteria::EQUAL);
+      }
       if(isset($customer_type_id)){
           $c1->add(CustomerPeer::CUSTOMER_TYPE_ID,$customer_type_id,Criteria::EQUAL);
       }
