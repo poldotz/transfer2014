@@ -15,6 +15,7 @@
                     <span class="fs1" aria-hidden="true" data-icon="&#xe074;"></span> Servizi Hostess
                 </div>
                 <div style="padding: 5px;" class="widget-body">
+                    <div id="service_hostess_search_error" style="display: none"></div>
                     <form id ="service_hostess_search_form" class="form-horizontal no-margin">
                         <fieldset>
                             <div class="control-group">
@@ -150,12 +151,7 @@
         <div class="span12">
             <div class="widget">
                 <div class="widget-header">
-                    <div class="center-align-text form-inline">
-                        Servizi del:
-                        <div class="input-append date" id="dp3" data-date="02-01-2013" data-date-format="dd-mm-yyyy">
-                            <input class="span6" type="text" value="02-01-2013">
-                            <span class="add-on"><i class="icon-th"></i></span>
-                        </div>
+
                     </div>
 
                 </div>
@@ -192,15 +188,13 @@
             table = $('#service_hostess_list').DataTable();
             table.destroy();
         }
-        table = $('#service_hostess_list').DataTable({
+        table = $('#service_hostess_list').on('xhr.dt', function ( e, settings, json ) {
+            if(json.errors){
+                $('#service_hostess_search_error').html( json.errors );
+            }
+        } ).DataTable({
+            "dom": 'T<"clear">rtiS',
             "destroy": true,
-            "columnDefs": [
-                {
-                    "targets": [ 0 ],
-                    "visible": false
-
-                }
-            ],
             "scrollY": 600,
             scrollCollapse: true,
             "deferRender": true,

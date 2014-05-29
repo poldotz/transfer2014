@@ -23,44 +23,102 @@ class serviceHostessActions extends sfActions
 
     public function executeGetData(sfWebRequest $request)
     {
-        sfConfig::set('sf_web_debug', false);
-        $this->getResponse()->setContentType('application/json');
+
+        /*
+         * process the search request.
+         */
         $form = array();
-         parse_str(urldecode($request->getParameter('form')),$form);
-        //start: sorting
-        $type_colnames = array(BookingPeer::BOOKING_DATE,BookingPeer::CUSTOMER_ID,BookingPeer::CONTACT,BookingPeer::RIF_FILE);
-        $iSortCol_0 = $request->getParameter('iSortCol_0');
-        if($iSortCol_0 > max(array_keys($type_colnames)) || $iSortCol_0 < 0) $iSortCol_0 = 0;
-        $c = new Criteria();
-        $c->addJoin(BookingPeer::CUSTOMER_ID,CustomerPeer::ID);
-        $c->addDescendingOrderByColumn(BookingPeer::BOOKING_DATE);
-
+        $results = array();
+        parse_str(urldecode($request->getParameter('form')),$form);
         if(isset($form['serviceHostess']) && !empty($form['serviceHostess'])){
-            $serviceHostesForm = $form['serviceHostess'];
-
-            foreach($serviceHostesForm as $key => $field){
-                switch($key){
-                    case 'date_range':
-                        if(checkdate($field['from']['month'],$field['from']['day'],$field['from']['year']))
-                            $from = $field['from']['year']."-".$field['from']['month']."-".$field['from']['day'];
-                        break;
-                }
-            }
+           $serviceHostesForm = new ServiceHostessForm();
+           $results =  $this->ProcessSerch($form,$serviceHostesForm);
         }
-        $item_per_page = $request->getParameter('length', 10);
-        $page = ($request->getParameter('start', 0) / $item_per_page) + 1;
-        $pager = BookingPeer::doSelectPager($page, $item_per_page, $c);
 
-        $json["iTotalRecords"] = $pager->getNbResults();
-        $json["iTotalDisplayRecords"] = $pager->getNbResults();
+
         $json["aaData"] = array();
-        foreach ($pager->getResults() as $v)
+
+        if(isset($results['errors']) && !empty($results['errors'])){
+                $json['errors'] = $results['errors'];
+        }
+        $transfers = $results['transfers'];
+        foreach ($transfers as $v)
         {
             $val = array($v->getNumber().'/'.$v->getYear(),date('d-m-Y',strtotime($v->getBookingDate())),$v->getCustomer()->getName(),$v->getContact(),$v->getAdult().'/'.($v->getChild() ? $v->getChild() : 0),$v->getRifFile());
             array_push($json["aaData"],$val);
         }
+
+        sfConfig::set('sf_web_debug', false);
+        $this->getResponse()->setContentType('application/json');
         return $this->renderText(json_encode($json));
-    }
+  }
+
+  /*
+   * process the search form.
+   */
+  protected function processSerch($parameters, sfForm $form){
+
+
+      $form->bind($parameters[$form->getName()]);
+      if ($form->isValid()){
+          $conditions = array();
+          foreach($parameters[$form->getName()] as $key => $field){
+              switch($key){
+                  case 'date_range':
+                      $conditions['from'] = $field['from']['year']."-".sprintf("%02d",$field['from']['month'])."-".sprintf("%02d",$field['from']['day']);
+                      $conditions['from'] = $field['to']['year']."-".sprintf("%02d",$field['to']['month'])."-".sprintf("%02d",$field['to']['day']);
+                      break;
+                  case 'contact':
+                        if(strlen($field['contact'])){
+                            $conditions['contact'] = $field['contact'];
+                            issset($parameters[$form->getName()]['contact_off']) ? $conditions['contact_off'] = true : null;
+                        }
+                      break;
+                  case 'rifFile':
+                      if(strlen($field['rifFile'])){
+                          $conditions['rifFile'] = $field['rifFile'];
+                          issset($parameters[$form->getName()]['rifFile_off']) ? $conditions['rifFile_off'] = true : null;
+                      }
+                      break;
+                  case 'customer':
+                      if(strlen($field['customer'])){
+                          $conditions['customer'] = $field['customer'];
+                          issset($parameters[$form->getName()]['customer_off']) ? $conditions['customer_off'] = true : null;
+                      }
+                      break;
+                  case 'locality':
+                      if(strlen($field['locality'])){
+                          $conditions['locality'] = $field['locality'];
+                          isset($parameters[$form->getName()]['locality_off']) ? $conditions['locality_off'] = true : null;
+                      }
+                      break;
+                  case 'vehicle_type_id':
+                      $conditions['vehicle_type_id'] = $field['vehicle_type_id'];
+                      isset($parameters[$form->getName()]['vehicle_type_id_off']) ? $conditions['vehicle_type_id_off'] = true : null;
+                      break;
+                  case 'driver_id':
+                      $conditions['driver_id'] = $field['driver_id'];
+                      isset($parameters[$form->getName()]['driver_id_off']) ? $conditions['driver_id_off'] = true : null;
+                      break;
+                  case 'transfer_type':
+                      $conditions['transfer_type'] = $field['transfer_type'];
+                      break;
+              }
+          }
+          ServiceHostess::getServices($conditions);
+          return true;
+
+      }
+      else{
+          $errors = $form->getErrorSchema()->getErrors();
+          return $errors;
+      }
+
+
+
+
+
+  }
 
 
   public function executeGetContacts(sfWebRequest $request){

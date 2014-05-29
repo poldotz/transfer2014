@@ -11,6 +11,8 @@ class ServiceHostessForm extends sfForm
 {
   public function configure()
   {
+      $this->disableLocalCSRFProtection();
+      //$this->useFields(array('date_range','contact','contact_off','rifFile','rifFile_off','customer','customer_off','locality','locality_off','vehicle_type_id','vehicle_type_id_off','driver_id','driver_id_off','transfer_type'));
       $years =  BookingQuery::create()->withColumn('MAX(Booking.YEAR)','max')->withColumn('MIN(Booking.YEAR)','min')->select(array('max','min'))->groupBy('year')->orderBy('year')->findOne();
 
       $this->setWidget('date_range',new sfWidgetFormDateRange(array(
@@ -63,7 +65,13 @@ class ServiceHostessForm extends sfForm
 
       $this->widgetSchema['transfer_type'] = new sfWidgetFormChoice(array("choices"=>array('arrival'=>"Arrivo",'departure'=>"Partenza"),'multiple'=>false,'expanded'=>true),array("class"=>"horizontal_type"));
 
+      $this->validatorSchema['date_range'] = new sfValidatorDateRange(array(
+          'from_date' => new sfValidatorDate(),
+          'to_date' => new sfValidatorDate(),
+      ));
 
+      $this->validatorSchema->setOption('allow_extra_fields', true);
+      $this->validatorSchema->setOption('filter_extra_fields', false);
 
       $this->widgetSchema->setNameFormat('serviceHostess[%s]');
       $this->disableLocalCSRFProtection();
