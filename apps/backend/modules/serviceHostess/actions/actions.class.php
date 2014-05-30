@@ -35,7 +35,6 @@ class serviceHostessActions extends sfActions
            $results =  $this->ProcessSerch($form,$serviceHostesForm);
         }
 
-
         $json["aaData"] = array();
 
         if(isset($results['errors']) && !empty($results['errors'])){
