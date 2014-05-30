@@ -26,7 +26,7 @@ class ServiceHostessForm extends sfForm
                         array('years' => array_combine($years, $years),
                               'format' => '%day%/%month%/%year%'),array('class'=>'span1')))
             ))));
-      $this->setWidget('date_range_off', new sfWidgetFormInputCheckbox());
+      //$this->setWidget('date_range_off', new sfWidgetFormInputCheckbox());
 
       $this->setWidget('contact', new sfWidgetFormPropelJQueryAutocompleter(  array(
           'model' => 'Booking',

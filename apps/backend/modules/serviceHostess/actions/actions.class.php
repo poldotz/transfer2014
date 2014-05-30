@@ -40,10 +40,10 @@ class serviceHostessActions extends sfActions
         if(isset($results['errors']) && !empty($results['errors'])){
                 $json['errors'] = $results['errors'];
         }
-        $transfers = $results['transfers'];
+        $transfers = $results;
         foreach ($transfers as $v)
         {
-            $val = array($v->getNumber().'/'.$v->getYear(),date('d-m-Y',strtotime($v->getBookingDate())),$v->getCustomer()->getName(),$v->getContact(),$v->getAdult().'/'.($v->getChild() ? $v->getChild() : 0),$v->getRifFile());
+            $val = array($v['number'],date('d-m-Y',strtotime($v['booking_date'])),$v['name'],$v['contact'],$v['pax'],$v['rif_file']);
             array_push($json["aaData"],$val);
         }
 
@@ -64,48 +64,52 @@ class serviceHostessActions extends sfActions
           foreach($parameters[$form->getName()] as $key => $field){
               switch($key){
                   case 'date_range':
-                      $conditions['from'] = $field['from']['year']."-".sprintf("%02d",$field['from']['month'])."-".sprintf("%02d",$field['from']['day']);
-                      $conditions['from'] = $field['to']['year']."-".sprintf("%02d",$field['to']['month'])."-".sprintf("%02d",$field['to']['day']);
+                      $conditions['transfer']['date_range']['from'] = $field['from']['year']."-".sprintf("%02d",$field['from']['month'])."-".sprintf("%02d",$field['from']['day']);
+                      $conditions['transfer']['date_range']['to'] = $field['to']['year']."-".sprintf("%02d",$field['to']['month'])."-".sprintf("%02d",$field['to']['day']);
                       break;
                   case 'contact':
-                        if(strlen($field['contact'])){
-                            $conditions['contact'] = $field['contact'];
-                            issset($parameters[$form->getName()]['contact_off']) ? $conditions['contact_off'] = true : null;
+                        if(strlen($field)){
+                            $conditions['booking']['contact'] = $field;
+                            isset($parameters[$form->getName()]['contact_off']) ? $conditions['booking']['contact_off'] = true : null;
                         }
                       break;
                   case 'rifFile':
-                      if(strlen($field['rifFile'])){
-                          $conditions['rifFile'] = $field['rifFile'];
-                          issset($parameters[$form->getName()]['rifFile_off']) ? $conditions['rifFile_off'] = true : null;
+                      if(strlen($field)){
+                          $conditions['booking']['rifFile'] = $field;
+                          isset($parameters[$form->getName()]['rifFile_off']) ? $conditions['booking']['rifFile_off'] = true : null;
                       }
                       break;
                   case 'customer':
-                      if(strlen($field['customer'])){
-                          $conditions['customer'] = $field['customer'];
-                          issset($parameters[$form->getName()]['customer_off']) ? $conditions['customer_off'] = true : null;
+                      if(strlen($field)){
+                          $conditions['booking']['customer'] = $field;
+                          isset($parameters[$form->getName()]['customer_off']) ? $conditions['booking']['customer_off'] = true : null;
                       }
                       break;
                   case 'locality':
-                      if(strlen($field['locality'])){
-                          $conditions['locality'] = $field['locality'];
-                          isset($parameters[$form->getName()]['locality_off']) ? $conditions['locality_off'] = true : null;
+                      if(strlen($field)){
+                          $conditions['transfer']['locality'] = $field;
+                          isset($parameters[$form->getName()]['locality_off']) ? $conditions['transfer']['locality_off'] = true : null;
                       }
                       break;
                   case 'vehicle_type_id':
-                      $conditions['vehicle_type_id'] = $field['vehicle_type_id'];
-                      isset($parameters[$form->getName()]['vehicle_type_id_off']) ? $conditions['vehicle_type_id_off'] = true : null;
+                      if($field){
+                        $conditions['booking']['vehicle_type_id'] = $field;
+                        isset($parameters[$form->getName()]['vehicle_type_id_off']) ? $conditions['booking']['vehicle_type_id_off'] = true : null;
+                      }
                       break;
                   case 'driver_id':
-                      $conditions['driver_id'] = $field['driver_id'];
-                      isset($parameters[$form->getName()]['driver_id_off']) ? $conditions['driver_id_off'] = true : null;
+                      if($field){
+                        $conditions['transfer']['driver_id'] = $field;
+                        isset($parameters[$form->getName()]['driver_id_off']) ? $conditions['transfer']['driver_id_off'] = true : null;
+                      }
                       break;
                   case 'transfer_type':
-                      $conditions['transfer_type'] = $field['transfer_type'];
+                      $conditions['transfer_type'] = $field;
                       break;
               }
           }
-          ServiceHostess::getServices($conditions);
-          return true;
+          return ServiceHostess::getServices($conditions);
+
 
       }
       else{

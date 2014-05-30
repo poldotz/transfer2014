@@ -25,10 +25,10 @@
                                             <?php echo $form['date_range']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
-                                            <label class="radio inline">
-                                                <?php echo $form['date_range_off']->render() ?>
+                                            <!--<label class="radio inline">
+                                                <?php //echo $form['date_range_off']->render() ?>
                                                 Escludi
-                                            </label>
+                                            </label>-->
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <?php echo $form['rifFile_off']->render() ?>
+                                                <?php echo $form['customer_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
