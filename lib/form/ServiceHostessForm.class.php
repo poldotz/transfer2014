@@ -26,7 +26,7 @@ class ServiceHostessForm extends sfForm
                         array('years' => array_combine($years, $years),
                               'format' => '%day%/%month%/%year%'),array('class'=>'span1')))
             ))));
-      $this->setWidget('date_range_off', new sfWidgetFormInputCheckbox());
+      //$this->setWidget('date_range_off', new sfWidgetFormInputCheckbox());
 
       $this->setWidget('contact', new sfWidgetFormPropelJQueryAutocompleter(  array(
           'model' => 'Booking',
@@ -50,6 +50,7 @@ class ServiceHostessForm extends sfForm
       $this->setWidget('locality', new sfWidgetFormJQueryAutocompleter(  array(
           'url' => sfContext::getInstance()->getController()->genUrl('serviceHostess/getLocalities')
       ),array('class'=>'span12',"placeholder"=>'Località')));
+      $this->setWidget('locality_hidden',new sfWidgetFormInputHidden());
       $this->setWidget('locality_off', new sfWidgetFormInputCheckbox());
 
       $this->setWidget('vehicle_type_id',new sfWidgetFormPropelChoice(array('model'=>'vehicleType','add_empty'=>'Mezzo Richiesto'),array("class"=>"span12")));

@@ -258,6 +258,30 @@ abstract class sfWidgetForm extends sfWidget
     return $name;
   }
 
+    public function generateHiddenId($name, $value = null)
+    {
+        if (false === $this->getOption('id_format'))
+        {
+            return null;
+        }
+
+        // check to see if we have an array variable for a field name
+        if (strstr($name, '['))
+        {
+            $name = str_replace(array('[]', '][', '[', ']'), array(((null !== $value) && !is_array($value) ? '_'.$value : ''), '_', '_', ''), $name);
+        }
+
+        if (false !== strpos($this->getOption('id_format'), '%s'))
+        {
+            $name = sprintf($this->getOption('id_format'), $name);
+        }
+
+        // remove illegal characters
+        $name = preg_replace(array('/^[^A-Za-z]+/', '/[^A-Za-z0-9\:_\.\-]/'), array('', '_'), $name);
+
+        return $name."_hidden";
+    }
+
   /**
    * Generates a two chars range
    *

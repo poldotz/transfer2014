@@ -72,9 +72,27 @@ class sfWidgetFormJQueryAutocompleter extends sfWidgetFormInput
   $(function() {
     $( "#%s" ).autocomplete({
       source: "%s",
-      minLength: 3,
+      minLength: 2,
+      change: function(event,ui){
+      var field = '%s';
+      if(ui.item){
+         $('#'+field).val(ui.item.value);
+      }
+      else{
+         var hidden_field = '%s';
+         if($('#'+hidden_field)){
+            $('#'+hidden_field).val('');
+         }
+         $('#'+field).val('');
+
+      }
+      return false;
+      },
       select: function(event, ui){
-      $('#%s').val(ui.item.value);
+        $('#%s').val(ui.item.label);
+          if(ui.item.id){
+            $('#%s').val(ui.item.id);
+          }
       }
     });
   });
@@ -84,8 +102,11 @@ EOF
       $this->generateId('autocomplete_'.$name),
       $this->getOption('url'),
       $this->generateId($name),
-      $this->getOption('config'),
-      $this->generateId($name)
+      $this->generateHiddenId($name),
+      $this->generateId($name),
+      $this->generateHiddenId($name),
+      $this->getOption('config')
+
     );
   }
 

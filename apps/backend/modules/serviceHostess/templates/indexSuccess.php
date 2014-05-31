@@ -25,10 +25,10 @@
                                             <?php echo $form['date_range']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
-                                            <label class="radio inline">
-                                                <?php echo $form['date_range_off']->render() ?>
+                                          <!--  <label class="radio inline">
+                                                <?php //echo $form['date_range_off']->render() ?>
                                                 Escludi
-                                            </label>
+                                            </label>-->
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
-                                                <?php echo $form['rifFile_off']->render() ?>
+                                                <?php echo $form['customer_off']->render() ?>
                                                 Escludi
                                             </label>
                                         </div>
@@ -83,6 +83,7 @@
                                     <div class="row-fluid">
                                         <div class="span10 input-left-top-margins">
                                             <?php echo $form['locality']->render(); ?>
+                                            <?php echo $form['locality_hidden']->render(); ?>
                                         </div>
                                         <div class="span2 form-inline" >
                                             <label class="radio inline">
@@ -162,7 +163,7 @@
                             <th class="span1">Progressivo</th>
                             <th class="span2">Data Reg.</th>
                             <th class="span3">Cliente</th>
-                            <th class="span3 ">Referente</th>
+                            <th class="span3">Referente</th>
                             <th class="span2 ">Pax</th>
                             <th class="span1">Rif.File</th>
                         </tr>
