@@ -195,6 +195,10 @@
             }
         } ).DataTable({
             "dom": 'T<"clear">rtiS',
+            tableTools: {
+                "aButtons": [ "csv", "xls", "pdf","copy", "print" ],
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+            },
             "destroy": true,
             "scrollY": 600,
             scrollCollapse: true,
