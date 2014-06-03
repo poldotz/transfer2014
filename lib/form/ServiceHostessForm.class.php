@@ -50,6 +50,7 @@ class ServiceHostessForm extends sfForm
       $this->setWidget('locality', new sfWidgetFormJQueryAutocompleter(  array(
           'url' => sfContext::getInstance()->getController()->genUrl('serviceHostess/getLocalities')
       ),array('class'=>'span12',"placeholder"=>'Località')));
+      $this->setWidget('locality_hidden',new sfWidgetFormInputHidden());
       $this->setWidget('locality_off', new sfWidgetFormInputCheckbox());
 
       $this->setWidget('vehicle_type_id',new sfWidgetFormPropelChoice(array('model'=>'vehicleType','add_empty'=>'Mezzo Richiesto'),array("class"=>"span12")));

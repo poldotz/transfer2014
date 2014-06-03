@@ -85,20 +85,21 @@ class serviceHostessActions extends sfActions
                           isset($parameters[$form->getName()]['customer_off']) ? $conditions['booking']['customer_off'] = true : null;
                       }
                       break;
-                  case 'locality':
+                  case 'locality_hidden':
                       if(strlen($field)){
-                          $conditions['transfer']['locality'] = $field;
+                          $conditions['transfer']['locality_hidden'] = $field;
                           isset($parameters[$form->getName()]['locality_off']) ? $conditions['transfer']['locality_off'] = true : null;
                       }
                       break;
+
                   case 'vehicle_type_id':
-                      if($field){
+                      if(strlen($field)){
                         $conditions['booking']['vehicle_type_id'] = $field;
                         isset($parameters[$form->getName()]['vehicle_type_id_off']) ? $conditions['booking']['vehicle_type_id_off'] = true : null;
                       }
                       break;
                   case 'driver_id':
-                      if($field){
+                      if(strlen($field)){
                         $conditions['transfer']['driver_id'] = $field;
                         isset($parameters[$form->getName()]['driver_id_off']) ? $conditions['transfer']['driver_id_off'] = true : null;
                       }
@@ -110,17 +111,11 @@ class serviceHostessActions extends sfActions
           }
           return ServiceHostess::getServices($conditions);
 
-
       }
       else{
           $errors = $form->getErrorSchema()->getErrors();
           return $errors;
       }
-
-
-
-
-
   }
 
 
@@ -129,7 +124,7 @@ class serviceHostessActions extends sfActions
       $this->getResponse()->setContentType('application/json');
 
     $param = $request->getParameter('term');
-    $result = BookingQuery::create()->select('contact')->findByContact("%$param%");
+    $result = BookingQuery::create()->select('contact')->distinct()->findByContact("%$param%");
     $contacts = $result->toArray();
     return $this->renderText(json_encode($contacts));
   }
@@ -139,7 +134,7 @@ class serviceHostessActions extends sfActions
       $this->getResponse()->setContentType('application/json');
 
       $param = $request->getParameter('term');
-      $result = BookingQuery::create()->select('rifFile')->findByRifFile("%$param%");
+      $result = BookingQuery::create()->select('rifFile')->distinct()->findByRifFile("%$param%");
       $rifFiles = $result->toArray();
       return $this->renderText(json_encode($rifFiles));
   }
@@ -149,7 +144,7 @@ class serviceHostessActions extends sfActions
         $this->getResponse()->setContentType('application/json');
         $param = $request->getParameter('term');
 
-        $result = CustomerQuery::create()->select('name')->findByName("%$param%");
+        $result = CustomerQuery::create()->select('name')->distinct()->findByName("%$param%");
         $customers = $result->toArray();
         return $this->renderText(json_encode($customers));
     }
@@ -159,7 +154,7 @@ class serviceHostessActions extends sfActions
         $this->getResponse()->setContentType('application/json');
         $param = $request->getParameter('term');
 
-        $result = LocalityQuery::create()->select('name')->findByName("%$param%");
+        $result = LocalityQuery::create()->select(array('label','value'))->withColumn('name','label')->withColumn('name','value')->withColumn('id','id')->findByName("%$param%");
         $localities = $result->toArray();
         return $this->renderText(json_encode($localities));
     }
