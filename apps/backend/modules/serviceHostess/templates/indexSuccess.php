@@ -160,8 +160,10 @@
                     <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
-                            <th style="width: 10%">Progressivo</th>
-                            <th style="width: 10%">Data Reg.</th>
+                            <th style="width: 5%">Progressivo</th>
+                            <th style="width: 5%">Data Reg.</th>
+                            <th style="width: 5%">Giorno</th>
+                            <th style="width: 5%">Ora</th>
                             <th style="width: 20%">Cliente</th>
                             <th style="width: 15%">Referente</th>
                             <th style="width: 5%%">Pax</th>
@@ -173,7 +175,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="center-align-text" colspan="6"><h4>Effettuare una ricerca per visualizzare i risultati.</h4></td>
+                            <td class="center-align-text" colspan="11"><h4>Effettuare una ricerca per visualizzare i risultati.</h4></td>
                         </tr>
                         </tbody>
                     </table>
@@ -199,7 +201,11 @@
         } ).DataTable({
             "dom": 'T<"clear">rtiS',
             tableTools: {
-                "aButtons": [ "csv", "xls", "pdf","copy", "print" ],
+                "aButtons": [ {
+                    "sExtends": "csv",
+                    "sFieldSeperator": ",",
+                    "sFileName": "Export.csv"
+                }, "xls", "pdf","copy", "print" ],
                 "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
             },
             "destroy": true,
