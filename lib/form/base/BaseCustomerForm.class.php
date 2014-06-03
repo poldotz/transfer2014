@@ -15,6 +15,7 @@ abstract class BaseCustomerForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
+      'is_active'         => new sfWidgetFormInputCheckbox(),
       'user_id'           => new sfWidgetFormPropelChoice(array('model' => 'sfGuardUser', 'add_empty' => true)),
       'customer_type_id'  => new sfWidgetFormPropelChoice(array('model' => 'CustomerType', 'add_empty' => true)),
       'name'              => new sfWidgetFormInputText(),
@@ -36,6 +37,7 @@ abstract class BaseCustomerForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'                => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
+      'is_active'         => new sfValidatorBoolean(),
       'user_id'           => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id', 'required' => false)),
       'customer_type_id'  => new sfValidatorPropelChoice(array('model' => 'CustomerType', 'column' => 'id', 'required' => false)),
       'name'              => new sfValidatorString(array('max_length' => 100)),

@@ -160,12 +160,15 @@
                     <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
-                            <th class="span1">Progressivo</th>
-                            <th class="span2">Data Reg.</th>
-                            <th class="span3">Cliente</th>
-                            <th class="span3">Referente</th>
-                            <th class="span2 ">Pax</th>
-                            <th class="span1">Rif.File</th>
+                            <th style="width: 10%">Progressivo</th>
+                            <th style="width: 10%">Data Reg.</th>
+                            <th style="width: 20%">Cliente</th>
+                            <th style="width: 15%">Referente</th>
+                            <th style="width: 5%%">Pax</th>
+                            <th style="width: 5%">Rif.File</th>
+                            <th style="width: 20%">Percorso</th>
+                            <th style="width: 10%">Mezzo</th>
+                            <th style="width: 5%">Tipo</th>
                         </tr>
                         </thead>
                         <tbody>

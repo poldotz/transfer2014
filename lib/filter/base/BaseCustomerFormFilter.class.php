@@ -12,6 +12,7 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
+      'is_active'         => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'user_id'           => new sfWidgetFormPropelChoice(array('model' => 'sfGuardUser', 'add_empty' => true)),
       'customer_type_id'  => new sfWidgetFormPropelChoice(array('model' => 'CustomerType', 'add_empty' => true)),
       'name'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
@@ -32,6 +33,7 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
+      'is_active'         => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'user_id'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'sfGuardUser', 'column' => 'id')),
       'customer_type_id'  => new sfValidatorPropelChoice(array('required' => false, 'model' => 'CustomerType', 'column' => 'id')),
       'name'              => new sfValidatorPass(array('required' => false)),
@@ -67,6 +69,7 @@ abstract class BaseCustomerFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'                => 'Number',
+      'is_active'         => 'Boolean',
       'user_id'           => 'ForeignKey',
       'customer_type_id'  => 'ForeignKey',
       'name'              => 'Text',

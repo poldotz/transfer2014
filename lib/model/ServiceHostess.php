@@ -38,7 +38,7 @@ Class ServiceHostess {
     private static function getArrivalServices($conditions,$bookingConditions){
 
 
-        $select = "SELECT concat(b.number,'/',b.year) as number, b.booking_date,c.name,b.contact,concat(b.adult,'/',if(b.child,b.child,0)) as 'pax',b.rif_file, 'Arrivo' as 'arrival' ";
+        $select = "SELECT concat(b.number,'/',b.year) as number, b.booking_date,c.name,b.contact,concat(b.adult,'/',if(b.child,b.child,0)) as 'pax',b.rif_file,concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type', substr(p.name,1,2) as 'pay_method', 'Arrivo' as 'arrival' ";
         $from = " FROM arrival as a JOIN booking as b on (a.booking_id = b.id) ".
             " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
             " JOIN locality as locfrom on (a.locality_from = locfrom.id) ".
@@ -74,7 +74,7 @@ Class ServiceHostess {
 
     private static function getDepartureServices($conditions,$bookigConditions){
 
-        $select = "SELECT concat(b.number,'/',b.year) as number, b.booking_date,c.name,b.contact,concat(b.adult,'/',if(b.child,b.child,0)) as 'pax',b.rif_file, if(locto.is_vector,'Partenza','Taxi') as 'services' ";
+        $select = "SELECT concat(b.number,'/',b.year) as number, b.booking_date,c.name,b.contact,concat(b.adult,'/',if(b.child,b.child,0)) as 'pax',b.rif_file,concat(substr(locfrom.name,1,15),'/',substr(locto.name,1,15)) as 'route', substr(v.name,1,15) as 'vehicle_type', substr(p.name,1,2) as 'pay_method', if(locto.is_vector,'Partenza','Taxi') as 'services' ";
         $from = " FROM departure as d JOIN booking as b on (d.booking_id = b.id) ".
             " JOIN sf_guard_user_profile as c on (b.customer_id = c.id) ".
             " JOIN locality as locfrom on (d.locality_from = locfrom.id) ".

@@ -52,19 +52,19 @@ class customerActions extends sfActions
         $page = ($request->getParameter('iDisplayStart', 0) / $item_per_page) + 1;
         $pager = CustomerPeer::doSelectPager($page, $item_per_page, $c);
         //end: paging
-        $json = '{"iTotalRecords":'.$pager->getNbResults().',
-     "iTotalDisplayRecords":'.$pager->getNbResults().',
-     "aaData":[';
-        $first = 0;
+        $json["iTotalRecords"] = $pager->getNbResults();
+        $json["iTotalDisplayRecords"] = $pager->getNbResults();
+        $json["aaData"] = array();
         foreach ($pager->getResults() as $v)
         {
-            if ($first++) $json .= ',';
-            $status = $v->getSfGuardUser()->getIsActive() ? "ATTIVO" : "NON ATTIVO";
+            $status = $v->getIsActive() ? '<span class="badge badge-success"> ATTIVO</span>' : '<span class="badge badge-warning"> NON ATTIVO</span>';
             $tax_field = $v->getCustomerType() == "Privato" ? $v->getTaxCode() : $v->getVatNumber();
-            $json .= '["'.$v->getName().'","'.$v->getCustomerType().'","'.$tax_field.'","'.$v->getEmail().'","'.$v->getPhone().'","'.$v->getFax().'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'customer/edit/id/'.$v->getId().' \';\">"]';
+            $url = $this->generateUrl('customer_edit',array('id'=>$v->getId()));
+            $action = '<input class="btn btn-info" style="float:left; margin: 5px;" value="Modifica" type="button" onclick="document.location.href=\''.$url.'\'">';
+            $val = array($v->getName(),$v->getCustomerType()->getDescription(),$tax_field,$v->getEmail(),$v->getPhone(),$v->getFax(),$status,$action);
+            array_push($json["aaData"],$val);
         }
-        $json .= ']}';
-        return $this->renderText($json);
+        return $this->renderText(json_encode($json));
     }
 
     public function executeNew(sfWebRequest $request)
@@ -114,72 +114,13 @@ class customerActions extends sfActions
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid())
         {
-            $values = $form->getValues();
-
-            if($form->getObject()->isNew()){
-                    $user = new sfGuardUser();
-
-                    if(isset($values['email']) && strlen($values['email'])){
-                        $user->setEmail($values['email']);
-                        $user->setUsername($values['email']);
-                    }
-                    else{
-                        $userEmail = uniqid();
-                        $user->setEmail($userEmail);
-                        $user->setUsername($userEmail);
-                    }
-                    try{
-                    $user->save();
-                    $customer = new Customer();
-                    $customer->fromArray($values, BasePeer::TYPE_FIELDNAME);
-                    $customer->setsfGuardUser($user);
-
-                        $customer->save();
-                    }
-                    catch(Exception $e){
-                        return "Verificare l'indirizzo inserito e riprovare";
-                    }
-                    $this->redirect('customer/edit?id='.$customer->getId());
+            try{
+                $customer = $form->save();
             }
-            else{
-                    try{
-                        $user = sfGuardUserPeer::retrieveByPK($values['user_id']);
-                        if(isset($values['email']) && strlen($values['email'])>0 && $user->getEmail() !== $values['email']){
-                            $checkUserEmail = sfGuardUserPeer::retrieveByUsernameOrEmail($values['email'],true,$user->getId());
-                            if(!isset($checkUserEmail)){
-                                $user->setEmail($values['email']);
-                                $user->setUsername($values['email']);
-
-                            }
-                            else{
-                                $errorSchema = $form->getErrorSchema();
-                                $errorSchema->addError(new sfValidatorError(new sfValidatorEmail(), 'Campo Email usato precedentemente da un altro utente.'), 'email');
-                                throw new sfValidatorErrorSchema(new sfValidatorEmail(), $errorSchema);
-                            }
-
-                        }
-                        $user->setEmail($values['email']);
-                        $user->setUsername($values['email']);
-
-                        if(isset($values['is_active'])){
-                            $user->setIsActive($values['is_active']);
-                        }
-                        else{
-                            $user->setIsActive(false);
-                        }
-                        $user->save();
-                        $customer = CustomerPeer::retrieveByPK($values['id']);
-                        $customer->fromArray($values, BasePeer::TYPE_FIELDNAME);
-                        $customer->setsfGuardUser($user);
-                        $customer->save();
-                    }
-                    catch(Exception $e){
-                            return "Verificare l'indirizzo inserito e riprovare";
-                    }
-                    $this->redirect('customer/edit?id='.$customer->getId());
-
-
+            catch(Exception $e){
+                    return "Verificare l'indirizzo inserito e riprovare";
             }
+            $this->redirect('customer/edit?id='.$customer->getId());
         }
 
     }

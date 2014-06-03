@@ -68,8 +68,9 @@
         <parameter name="geocoder_api_key" value="AIzaSyDHe1uZEarjAj5pYie_sNwZsEqwLaeuUeY" />
     </behavior>
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+    <column name="is_active" type="boolean" required="true" default="1" />
     <column name="user_id" type="integer" required="false" />
-    <foreign-key foreignTable="sf_guard_user" onDelete="cascade">
+    <foreign-key foreignTable="sf_guard_user" onDelete="setnull">
       <reference local="user_id" foreign="id" />
     </foreign-key>
     <column name="customer_type_id" type="integer" required="false" />

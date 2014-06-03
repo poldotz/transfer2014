@@ -111,6 +111,7 @@ DROP TABLE IF EXISTS `sf_guard_user_profile`;
 CREATE TABLE `sf_guard_user_profile`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `is_active` TINYINT(1) DEFAULT 1 NOT NULL,
     `user_id` INTEGER,
     `customer_type_id` INTEGER,
     `name` VARCHAR(100) NOT NULL,
@@ -134,7 +135,7 @@ CREATE TABLE `sf_guard_user_profile`
     CONSTRAINT `sf_guard_user_profile_FK_1`
         FOREIGN KEY (`user_id`)
         REFERENCES `sf_guard_user` (`id`)
-        ON DELETE CASCADE,
+        ON DELETE SET NULL,
     CONSTRAINT `sf_guard_user_profile_FK_2`
         FOREIGN KEY (`customer_type_id`)
         REFERENCES `customer_type` (`id`)
@@ -169,7 +170,7 @@ CREATE TABLE `locality`
     CONSTRAINT `locality_FK_1`
         FOREIGN KEY (`user_id`)
         REFERENCES `sf_guard_user` (`id`)
-        ON DELETE CASCADE
+        ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -434,7 +435,7 @@ CREATE TABLE `departure`
     CONSTRAINT `departure_FK_5`
         FOREIGN KEY (`driver_id`)
         REFERENCES `sf_guard_user` (`id`)
-        ON UPDATE SET NULL
+        ON UPDATE CASCADE
         ON DELETE SET NULL,
     CONSTRAINT `departure_FK_6`
         FOREIGN KEY (`vehicle_id`)
