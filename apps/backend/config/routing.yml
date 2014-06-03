@@ -138,7 +138,7 @@ customer_new:
 
 customer_edit:
     url:   /modifica-cliente/:id
-    param: { module: customer, action: new }
+    param: { module: customer, action: edit }
     requirements:
       id: \d+
 
