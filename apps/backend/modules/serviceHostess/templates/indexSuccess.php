@@ -201,6 +201,19 @@
         } ).DataTable({
             "dom": 'T<"clear">rtiS',
             tableTools: {
+                "columns": [
+                    { "type": "string" },
+                    { "type": "date" },
+                    { "type": "date" },
+                    { "type": "date" },
+                    { "type": "string" },
+                    { "type": "string" },
+                    { "type": "string" },
+                    { "type": "string" },
+                    { "type": "string" },
+                    { "type": "string" },
+                    { "type": "string" }
+                ],
                 "aButtons": [ {
                     "sExtends": "csv",
                     "sFieldSeperator": ",",
