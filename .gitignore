@@ -1,3 +1,5 @@
 .idea
 cache/
 log/
+config/databases.yml
+plugins/sfPropelORMPlugin
