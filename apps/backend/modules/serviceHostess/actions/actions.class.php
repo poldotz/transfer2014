@@ -43,7 +43,7 @@ class serviceHostessActions extends sfActions
         $transfers = $results;
         foreach ($transfers as $v)
         {
-            $val = array($v['number'],date('d-m-Y',strtotime($v['booking_date'])),date('d-m-Y',strtotime($v['day'])),$v['hour'],$v['name'],$v['contact'],$v['pax'],$v['rif_file'],$v['route'],$v['vehicle_type'],$v['pay_method']);
+            $val = array($v['number'],date('d-m-Y',strtotime($v['booking_date'])),date('d-m-Y',strtotime($v['day'])),$v['hour'],$v['name'],$v['contact'],$v['pax'],$v['rif_file'],$v['route'],$v['vehicle_type'],$v['driver'],$v['pay_method'],$v['note']);
             array_push($json["aaData"],$val);
         }
 

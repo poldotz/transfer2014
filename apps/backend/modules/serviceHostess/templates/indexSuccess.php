@@ -160,17 +160,19 @@
                     <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
-                            <th style="width: 5%">Progressivo</th>
-                            <th style="width: 5%">Data Reg.</th>
-                            <th style="width: 5%">Giorno</th>
-                            <th style="width: 5%">Ora</th>
-                            <th style="width: 20%">Cliente</th>
+                            <th style="width: 4%">Progressivo</th>
+                            <th style="width: 4%">Data Reg.</th>
+                            <th style="width: 4%">Giorno</th>
+                            <th style="width: 4%">Ora</th>
+                            <th style="width: 15%">Cliente</th>
                             <th style="width: 15%">Referente</th>
-                            <th style="width: 5%%">Pax</th>
+                            <th style="width: 4%">Pax</th>
                             <th style="width: 5%">Rif.File</th>
-                            <th style="width: 20%">Percorso</th>
-                            <th style="width: 10%">Mezzo</th>
+                            <th style="width: 17%">Percorso</th>
+                            <th style="width: 8%">Mezzo</th>
+                            <th style="width: 6%">Autista</th>
                             <th style="width: 5%">Tipo</th>
+                            <th style="width: 9%">Note</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -212,13 +214,18 @@
                     { "type": "string" },
                     { "type": "string" },
                     { "type": "string" },
+                    { "type": "string" },
+                    { "type": "string" },
                     { "type": "string" }
                 ],
                 "aButtons": [ {
                     "sExtends": "csv",
                     "sFieldSeperator": ",",
                     "sFileName": "Export.csv"
-                }, "xls", "pdf","copy", "print" ],
+                }, {
+                "sExtends": "xls",
+                "sFileName": "Export.xls"
+                }, "pdf","copy", "print" ],
                 "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
             },
             "destroy": true,
