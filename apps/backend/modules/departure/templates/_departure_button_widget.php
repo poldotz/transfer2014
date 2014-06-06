@@ -42,7 +42,7 @@
 <script type="text/javascript">
     $("#booking_departure_day_change").datepicker({
         showOn: "button",
-        buttonImage: "/images/calendar.gif",
+        buttonImage: "<?php echo $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot() ?>/images/calendar.gif",
         buttonImageOnly: true,
         dateFormat: 'dd-mm-yy'
 

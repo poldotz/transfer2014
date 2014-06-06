@@ -226,7 +226,7 @@
                 "sExtends": "xls",
                 "sFileName": "Export.xls"
                 }, "pdf","copy", "print" ],
-                "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+                "sSwfPath": "<?php echo $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot() ?>/swf/copy_csv_xls_pdf.swf"
             },
             "destroy": true,
             "scrollY": 600,
