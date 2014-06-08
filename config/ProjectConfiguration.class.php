@@ -53,6 +53,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfGuardExtraPlugin');
     $this->enablePlugins('sfFormExtraPlugin');
     $this->enablePlugins('sfTCPDFPlugin');
+    $this->enablePlugins('sfPhpExcelPlugin');
   }
 
     public function configureMailer(sfEvent $event)

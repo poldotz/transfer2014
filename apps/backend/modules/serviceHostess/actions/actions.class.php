@@ -17,6 +17,7 @@ class serviceHostessActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+      $this->getResponse()->setTitle('Servizi Hostess');
       $this->form = new ServiceHostessForm(array('year'=> $this->getUser()->getSessionYear()));
 
   }

@@ -2,9 +2,11 @@
 <?php use_stylesheet('dataTableNew/jquery.dataTables.min.css','last') ?>
 <?php use_stylesheet('dataTableNew/dataTables.tableTools.min.css','last') ?>
 <?php use_stylesheet('dataTableNew/dataTables.scroller.min.css','last') ?>
+<?php use_stylesheet('dataTableNew/dataTables.colVis.min.css','last') ?>
 <?php use_javascript('dataTableNew/jquery.dataTables.min.js') ?>
 <?php use_javascript('dataTableNew/dataTables.scroller.min.js') ?>
 <?php use_javascript('dataTableNew/dataTables.tableTools.min.js') ?>
+<?php use_javascript('dataTableNew/dataTables.colVis.min.js') ?>
 
 <div class="main-container">
     <?php include_partial('global/navbar_mini'); ?>
@@ -201,31 +203,51 @@
                 $('#service_hostess_search_error').html( json.errors );
             }
         } ).DataTable({
-            "dom": 'T<"clear">rtiS',
+            "dom": 'C<"clear">T<"clear">rtiS',
+            "colVis": {
+                "buttonText": "Mostra/Nascondi Colonne",
+                exclude: [0,2,3,4,5,6,7,8,11]
+            },
+            "columns": [
+                { "type": "string"},
+                { "type": "date"},
+                { "type": "date"},
+                { "type": "date"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string"},
+                { "type": "string","visible": false}
+            ],
             tableTools: {
-                "columns": [
-                    { "type": "string" },
-                    { "type": "date" },
-                    { "type": "date" },
-                    { "type": "date" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" },
-                    { "type": "string" }
-                ],
                 "aButtons": [ {
                     "sExtends": "csv",
                     "sFieldSeperator": ",",
                     "sFileName": "Export.csv"
                 }, {
                 "sExtends": "xls",
-                "sFileName": "Export.xls"
-                }, "pdf","copy", "print" ],
+                "sFileName": "Export.xls",
+                "mColumns": [0,2,3,4,5,6,7,8,9,10,11,12]
+
+                }, {
+                    "sExtends": "pdf",
+                    "sPdfOrientation": "landscape",
+                    //"sPdfMessage": "Elenco servizi effettuati: ",
+                        "mColumns": [2,3,4,5,6,7,8,9]
+                },
+                {
+                    "sExtends":"copy",
+                    "sMessage": "Servizi Effettuati"
+                },
+                {
+                    "sExtends":"print",
+                    "sMessage": "Servizi Effettuati"
+                }
+                 ],
                 "sSwfPath": "<?php echo $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot() ?>/swf/copy_csv_xls_pdf.swf"
             },
             "destroy": true,
