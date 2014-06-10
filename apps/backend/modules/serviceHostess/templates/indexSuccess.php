@@ -221,7 +221,7 @@
                 { "type": "string","visible": false}, //8 rif_file
                 { "type": "string"}, //9 route
                 { "type": "string"}, //10 vehicle_type
-                { "type": "string","visible": false}, //11 driver
+                { "type": "string"}, //11 driver
                 { "type": "string"}, //12 pay_method
                 { "type": "string"} //13 note
             ],
@@ -239,7 +239,7 @@
                     "sExtends": "pdf",
                     "sPdfOrientation": "landscape",
                     //"sPdfMessage": "Elenco servizi effettuati: ",
-                        "mColumns": [2,3,4,5,6,7,9,10,11,12,13]
+                        "mColumns": [2,3,4,5,6,7,9,10,11,13]
                 },
                 {
                     "sExtends":"copy",
