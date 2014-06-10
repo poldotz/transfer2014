@@ -239,7 +239,7 @@
                     "sExtends": "pdf",
                     "sPdfOrientation": "landscape",
                     //"sPdfMessage": "Elenco servizi effettuati: ",
-                        "mColumns": [2,3,4,5,6,7,9,10,11,13]
+                        "mColumns": [2,3,4,5,6,7,9,10,11,12,13]
                 },
                 {
                     "sExtends":"copy",
