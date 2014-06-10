@@ -23,7 +23,7 @@ class CustomPdf extends TCPDF {
         //$this->Image('images/travel_002.png', 1, 2,35);
         $this->SetFont('courier','',7);
         $this->Cell(0,2,date('d-m-Y:H:i:s') . " - Pag. " . $this->PageNo() ,0,1,'R');
-        $this->SetFont('courier','B',10);
+        $this->SetFont('courier','B',12);
         //Title
         $this->Cell(0,4,$this->getHeaderTitle(),0,1,'C');
         //Line break
@@ -100,7 +100,7 @@ class CustomPdf extends TCPDF {
         $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.3);
-        $this->SetFont('courier', '', 8);
+        $this->SetFont('courier', 'B', 8);
         $pos =  -1;
         $pos2 = -1;
         $pos3 = -1;
@@ -118,6 +118,10 @@ class CustomPdf extends TCPDF {
                     $pos = $i;
                 }
 
+                if($header[$i] == "Servizio"){
+                    $pos2 = $i;
+                }
+
                 if($header[$i] == "Tipo")
                     $pos3 = $i;
 
@@ -127,7 +131,7 @@ class CustomPdf extends TCPDF {
                 /*if($header[$i] == "Costo")
                     $pos5 = $i;*/
 
-                    $this->Cell($w[$i], 4, $header[$i], 1, 0, 'C', 1,"",1);
+                    $this->Cell($w[$i], 4, strtoupper($header[$i]), 1, 0, 'C', 1,"",1);
 
             }
             /*else
@@ -154,7 +158,7 @@ class CustomPdf extends TCPDF {
                 {
                     if($i == 0)
                     {
-                        $this->Cell($w[$i], 4, $num, 0, 0, 'C', $fill,"",1);
+                        $this->Cell($w[$i], 4, $num, 0, 0, 'L', $fill,"",1);
                         if($row[$i]=="si")
                         {
                             $this->Line($this->GetX()-$w[$i],$this->GetY()+2,294,$this->GetY() + 2);
@@ -164,19 +168,26 @@ class CustomPdf extends TCPDF {
                     {
                         if($i == $pos)
                         {
-                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill,"",1);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'L', $fill,"",1);
                             if(strlen($row[$i])==0)
                                 $this->Line($this->GetX()-24,$this->GetY()+3.25,$this->GetX()-1,$this->GetY()+3.25);
+                        }
+                        else if($i == $pos2)
+                        {
+                            $this->SetFont('courier', 'B', 10);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'L', $fill,"",1);
+                            $this->SetFont('courier', '', 10);
+
                         }
                         else if($i == $pos3)
                         {
                             if($row[$i] == "VO")
                                 $row[$pos4] = "";
-                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill,"",1);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'L', $fill,"",1);
 
                         }
                         else
-                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'C', $fill,"",1);
+                            $this->Cell($w[$i], 4, $row[$i], 0, 0, 'L', $fill,"",1);
                     }
 
                 }
