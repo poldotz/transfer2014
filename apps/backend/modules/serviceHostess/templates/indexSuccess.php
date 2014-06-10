@@ -166,6 +166,7 @@
                             <th style="width: 4%">Data Reg.</th>
                             <th style="width: 4%">Giorno</th>
                             <th style="width: 4%">Ora</th>
+                            <th style="width: 4%">Vettore</th>
                             <th style="width: 15%">Cliente</th>
                             <th style="width: 15%">Referente</th>
                             <th style="width: 4%">Pax</th>
@@ -174,7 +175,7 @@
                             <th style="width: 8%">Mezzo</th>
                             <th style="width: 6%">Autista</th>
                             <th style="width: 5%">Tipo</th>
-                            <th style="width: 9%">Note</th>
+                            <th style="width: 10%">Note</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -206,22 +207,23 @@
             "dom": 'C<"clear">T<"clear">rtiS',
             "colVis": {
                 "buttonText": "Mostra/Nascondi Colonne",
-                exclude: [0,2,3,4,5,6,7,8,11]
+                exclude: [0,2,3,4,5,6,7,9,10,12,13]
             },
             "columns": [
-                { "type": "string"},
-                { "type": "date"},
-                { "type": "date"},
-                { "type": "date"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string"},
-                { "type": "string","visible": false}
+                { "type": "string"}, //0 number
+                { "type": "date"}, //1 booking_date
+                { "type": "date"}, //2 day
+                { "type": "date"}, //3 hour
+                { "type": "string"}, //4 flight
+                { "type": "string"}, //5 name
+                { "type": "string"}, //6 contact
+                { "type": "string"}, //7 pax
+                { "type": "string","visible": false}, //8 rif_file
+                { "type": "string"}, //9 route
+                { "type": "string"}, //10 vehicle_type
+                { "type": "string","visible": false}, //11 driver
+                { "type": "string"}, //12 pay_method
+                { "type": "string"} //13 note
             ],
             tableTools: {
                 "aButtons": [ {
@@ -231,13 +233,13 @@
                 }, {
                 "sExtends": "xls",
                 "sFileName": "Export.xls",
-                "mColumns": [0,2,3,4,5,6,7,8,9,10,11,12]
+                "mColumns": [0,2,3,4,5,6,7,8,9,10,11,12,13]
 
                 }, {
                     "sExtends": "pdf",
                     "sPdfOrientation": "landscape",
                     //"sPdfMessage": "Elenco servizi effettuati: ",
-                        "mColumns": [2,3,4,5,6,7,8,9]
+                        "mColumns": [2,3,4,5,6,7,9,10,11,13]
                 },
                 {
                     "sExtends":"copy",
