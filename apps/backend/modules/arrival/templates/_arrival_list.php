@@ -97,7 +97,7 @@
                 var aData = table.row(this).data();
                 var idNumber = aData[2];
                 var oTT = TableTools.fnGetInstance( 'arrival_list' );
-                oTT.fnSelect( $('#arrival_list tbody tr')[table.row(this).index()] );
+                oTT.fnSelect(table.row(this).index());
                 postSelectedRow(idNumber);
             });
         }
