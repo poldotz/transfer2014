@@ -101,8 +101,7 @@
             });
         }
 
-        function postSelectedRow(idNumber,index) {
-            rowIndex = index;
+        function postSelectedRow(idNumber) {
             $.get("<?php echo url_for('departure/editJs') ?>", {
                     idNumber: idNumber
                 },
