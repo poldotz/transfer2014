@@ -94,7 +94,10 @@
                 myApp.showPleaseWait();
                 var aData = table.row( this).data();
                 var idNumber = aData[2];
-                postSelectedRow(idNumber,table.row( this).index());
+                var oTT = TableTools.fnGetInstance( 'departure_list' );
+                oTT.fnSelect(table.row(this).index());
+                rowIndex = table.row(this).index();
+                postSelectedRow(idNumber);
             });
         }
 
@@ -105,8 +108,6 @@
                 },
                 function(departure){
                     $("#departure_container").html(departure);
-                    var oTT = TableTools.fnGetInstance( 'departure_list' );
-                    oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
                     myApp.hidePleaseWait();
                 }).fail(function(){
                     myApp.hidePleaseWait();
@@ -138,14 +139,14 @@
                             oTT.fnSelect( $('#departure_list tbody tr')[rowIndex]);
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
-                            postSelectedRow(idNumber,rowIndex);
+                            postSelectedRow(idNumber);
                         }else{
                             rowIndex = 0;
                             scroller.fnScrollToRow(rowIndex);
                             oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
-                            postSelectedRow(idNumber,rowIndex);
+                            postSelectedRow(idNumber);
                         }
                     })
                     .fail(function(){
