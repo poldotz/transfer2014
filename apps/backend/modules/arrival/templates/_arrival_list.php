@@ -98,6 +98,7 @@
                 var idNumber = aData[2];
                 var oTT = TableTools.fnGetInstance( 'arrival_list' );
                 oTT.fnSelect(table.row(this).index());
+                rowIndex = table.row(this).index();
                 postSelectedRow(idNumber);
             });
         }
