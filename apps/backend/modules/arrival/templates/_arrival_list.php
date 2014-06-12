@@ -96,19 +96,18 @@
                 myApp.showPleaseWait();
                 var aData = table.row(this).data();
                 var idNumber = aData[2];
-                postSelectedRow(idNumber,table.row(this).index());
+                var oTT = TableTools.fnGetInstance( 'arrival_list' );
+                oTT.fnSelect( $('#arrival_list tbody tr')[table.row(this).index()] );
+                postSelectedRow(idNumber);
             });
         }
 
-        function postSelectedRow(idNumber,index) {
-            rowIndex = index;
+        function postSelectedRow(idNumber) {
             $.get("<?php echo url_for('arrival/editJs') ?>", {
                     idNumber: idNumber
                 },
                 function(arrival){
                     $("#arrival_container").html(arrival);
-                    var oTT = TableTools.fnGetInstance( 'arrival_list' );
-                    oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
                     myApp.hidePleaseWait();
                 }).fail(function(){
                     myApp.hidePleaseWait();
@@ -143,7 +142,7 @@
                             oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
-                            postSelectedRow(idNumber,rowIndex);
+                            postSelectedRow(idNumber);
                         }
                         else{
                             rowIndex = 0;
@@ -151,7 +150,7 @@
                             oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
-                            postSelectedRow(idNumber,rowIndex);
+                            postSelectedRow(idNumber);
                         }
 
                 })
