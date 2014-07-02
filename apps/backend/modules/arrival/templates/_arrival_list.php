@@ -121,10 +121,10 @@
 
         $('#set_arrival_driver').submit(function(e){
             e.preventDefault();
-            $(this).attr('action');
+            //$(this).attr('action');
             var driver_id = $(this).find('select').val();
             var table = $('#arrival_list').DataTable();
-            scroller.fnScrollToRow(rowIndex);
+            //scroller.fnScrollToRow(rowIndex);
             var arrival_id = table.cell(rowIndex,0).data();
             if(arrival_id){
                 $.ajax({
@@ -134,13 +134,12 @@
 
                 })
                     .done(function(driver_name){
-
                         table.cell(rowIndex,6).data(driver_name);
                         rowIndex  = rowIndex + 1;
                         scroller.fnScrollToRow(rowIndex);
                         var oTT = TableTools.fnGetInstance( 'arrival_list' );
-                        if($('#arrival_list tbody tr')[rowIndex]){
-                            oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
+                        if(table.row(rowIndex).node()){
+                            oTT.fnSelect(table.row(rowIndex).node());
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
                             postSelectedRow(idNumber);
@@ -148,7 +147,7 @@
                         else{
                             rowIndex = 0;
                             scroller.fnScrollToRow(rowIndex);
-                            oTT.fnSelect( $('#arrival_list tbody tr')[rowIndex] );
+                            oTT.fnSelect(table.row(rowIndex).node());
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
                             postSelectedRow(idNumber);
