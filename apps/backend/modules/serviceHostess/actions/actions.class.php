@@ -174,4 +174,18 @@ class serviceHostessActions extends sfActions
         return $this->renderText(json_encode($localities));
     }
 
+    /**
+     * Export servizi hostess.
+     *
+     * @param sfWebRequest $request
+     * @return bool
+     *
+     *
+     */
+    public function executeExportCsv(sfWebRequest $request){
+
+        $parameters = $request->getGetParameters();
+        return true;
+    }
+
 }

@@ -228,8 +228,29 @@
             tableTools: {
                 "aButtons": [ {
                     "sExtends": "csv",
-                    "sFieldSeperator": ",",
-                    "sFileName": "Export.csv"
+                    "sAjaxUrl": "<?php echo url_for('serviceHostess/exportCsv') ?>",
+                    "fnClick": function ( button, conf ) {
+                        var headers = table.columns().header();
+                        var headerData = array();
+                        $.each(headers, function( index, value ) {
+                            headerData[index] = value.html();
+                        });
+                        headerData = headerData;
+                        var data = this.fnGetTableData(conf);
+                        $.ajax( {
+                            "url": conf.sAjaxUrl,
+                            "data":JSON.stringify({ "name": "tableData", "value": data }),
+                            "contentType": "application/json; charset=utf-8",
+                            "success": conf.fnAjaxComplete,
+                            "dataType": "json",
+                            "type": "POST",
+                            "cache": false,
+                            "error": function () {
+                                alert( "Error detected when sending table data to server" );
+                            }
+                        } );
+                    }
+
                 }, {
                 "sExtends": "xls",
                 "sFileName": "Export.xls",
