@@ -35,13 +35,13 @@ class ArrivalForm extends BaseArrivalForm
       $c1 = new Criteria();
       $c1->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
       $c1->add(LocalityPeer::IS_VECTOR,true,Criteria::EQUAL);
-      $c1->addAscendingOrderByColumn('name');
+      $c1->addAscendingOrderByColumn(LocalityPeer::NAME);
       $this->widgetSchema['locality_from'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c1,'add_empty'=>'DA'));
 
       $c2 = new Criteria();
       $c2->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
       $c2->add(LocalityPeer::IS_VECTOR,false,Criteria::EQUAL);
-      $c2->addAscendingOrderByColumn('name');
+      $c2->addAscendingOrderByColumn(LocalityPeer::NAME);
       $this->widgetSchema['locality_to'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c2,'add_empty'=>'A'));
 
       $this->widgetSchema['hour'] = new sfWidgetFormTime();
@@ -50,6 +50,7 @@ class ArrivalForm extends BaseArrivalForm
       $c3->addJoin(sfGuardUserGroupPeer::GROUP_ID,sfGuardGroupPeer::ID);
       $c3->add(sfGuardGroupPeer::NAME,'Autista',Criteria::EQUAL);
       $c3->add(sfGuardUserPeer::IS_ACTIVE,true,Criteria::EQUAL);
+      $c3->addAscendingOrderByColumn(sfGuardUserPeer::FIRST_NAME);
       if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
           $c3->add(sfGuardUserPeer::IS_ACTIVE,false,Criteria::EQUAL);
       }

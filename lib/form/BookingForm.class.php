@@ -20,6 +20,7 @@ class BookingForm extends BaseBookingForm
       $customer_type_id = sfContext::getInstance()->getRequest()->getParameter('customer_type_id');
 
       $c = new Criteria();
+      $c->addAscendingOrderByColumn(CustomerTypePeer::DESCRIPTION);
 
       if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
           $customer_profile = sfContext::getInstance()->getUser()->getProfile();
@@ -35,6 +36,7 @@ class BookingForm extends BaseBookingForm
 
       $this->setWidget('customer_type_id',new sfWidgetFormPropelChoice(array('model'=>'customerType','criteria'=>$c, 'add_empty'=>'Tipo Cliente')));
       $c1 = new Criteria();
+      $c1->addAscendingOrderByColumn(CustomerPeer::NAME);
       if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
           $c1->addAnd(CustomerPeer::ID, $customer_profile->getId(),Criteria::EQUAL);
       }
@@ -44,7 +46,6 @@ class BookingForm extends BaseBookingForm
       else{
           $c1->add(CustomerPeer::CUSTOMER_TYPE_ID, null, Criteria::ISNOTNULL);
       }
-      $c1->addDescendingOrderByColumn('name');
       $this->setWidget('customer_id',new sfWidgetFormPropelChoice(array('model'=>'customer','criteria'=>$c1,'add_empty'=>'Nome Cliente')));
 
       $this->setWidget('vehicle_type_id',new sfWidgetFormPropelChoice(array('model'=>'vehicleType','add_empty'=>'Mezzo Richiesto')));

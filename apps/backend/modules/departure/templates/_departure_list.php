@@ -117,10 +117,10 @@
 
         $('#set_departure_driver').submit(function(e){
             e.preventDefault();
-            $(this).attr('action');
+            //
             var driver_id = $(this).find('select').val();
             var table = $('#departure_list').DataTable();
-            scroller.fnScrollToRow(rowIndex);
+            //scroller.fnScrollToRow(rowIndex);
             var departure_id = table.cell(rowIndex,0).data();
             if(departure_id){
                 $.ajax({
@@ -134,15 +134,15 @@
                         rowIndex  = rowIndex + 1;
                         scroller.fnScrollToRow(rowIndex);
                         var oTT = TableTools.fnGetInstance( 'departure_list' );
-                        if($('#departure_list tbody tr')[rowIndex]){
-                            oTT.fnSelect( $('#departure_list tbody tr')[rowIndex]);
+                        if(table.row(rowIndex).node()){
+                            oTT.fnSelect(table.row(rowIndex).node());
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
                             postSelectedRow(idNumber);
                         }else{
                             rowIndex = 0;
                             scroller.fnScrollToRow(rowIndex);
-                            oTT.fnSelect( $('#departure_list tbody tr')[rowIndex] );
+                            oTT.fnSelect(table.row(rowIndex).node());
                             var aData = table.row( rowIndex).data();
                             var idNumber = aData[2];
                             postSelectedRow(idNumber);

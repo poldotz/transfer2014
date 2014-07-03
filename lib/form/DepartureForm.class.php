@@ -34,7 +34,7 @@ class DepartureForm extends BaseDepartureForm
         $c1 = new Criteria();
         $c1->add(LocalityPeer::IS_ACTIVE,true,Criteria::EQUAL);
         $c1->add(LocalityPeer::IS_VECTOR,false,Criteria::EQUAL);
-        $c1->addAscendingOrderByColumn('name');
+        $c1->addAscendingOrderByColumn(LocalityPeer::NAME);
         $this->widgetSchema['locality_from'] = new sfWidgetFormPropelChoice(array('model'=>'locality','criteria'=>$c1,'add_empty'=>'DA'));
 
         $c2 = new Criteria();
@@ -52,6 +52,7 @@ class DepartureForm extends BaseDepartureForm
         $c3->addJoin(sfGuardUserGroupPeer::GROUP_ID,sfGuardGroupPeer::ID);
         $c3->add(sfGuardGroupPeer::NAME,'Autista',Criteria::EQUAL);
         $c3->add(sfGuardUserPeer::IS_ACTIVE,true,Criteria::EQUAL);
+        $c3->addAscendingOrderByColumn(sfGuardUserPeer::FIRST_NAME);
         if(sfContext::getInstance()->getUser()->hasCredential('customer') && !sfContext::getInstance()->getUser()->isSuperAdmin()){
             $c3->add(sfGuardUserPeer::IS_ACTIVE,false,Criteria::EQUAL);
         }
