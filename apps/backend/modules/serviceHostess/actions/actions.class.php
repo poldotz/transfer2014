@@ -184,8 +184,18 @@ class serviceHostessActions extends sfActions
      */
     public function executeExportCsv(sfWebRequest $request){
 
-        $parameters = $request->getGetParameters();
-        return true;
+        $headers = json_decode($request->getPostParameter('headers'));
+        $values  =  json_decode($request->getPostParameter('values'));
+
+      $xls = new ExcelExport();
+        $xls->addRow(array("Servizi:"));
+        $xls->addRow(str_getcsv($headers));
+       for($i = 0; $i < count($values); $i++){
+            $xls->addRow($values[$i]);
+        }
+        return $xls->download('export.xls');
+
+
     }
 
 }

@@ -159,6 +159,14 @@
 
                 </div>
                 <div class="widget-body">
+                    <div style=" text-align: right;  margin: 0 auto;">
+                        <?php echo form_tag('serviceHostess/exportCsv',array('id'=>'exportHostess','method'=>'post','target'=>'_parent')) ?>
+                            <input  type="hidden" name="values"/>
+                            <input  type="hidden" name="headers"/>
+                            <button type="submit" class="btn btn-info">CSV</button>
+                            <button type="submit" class="btn btn-danger">PDF</button>
+                        </form>
+                    </div>
                     <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
@@ -191,6 +199,28 @@
 </div>
 
 <script type="text/javascript">
+
+
+        $('#exportHostess').submit(function(e){
+            e.preventDefault();
+            if($.fn.dataTable.isDataTable( '#service_hostess_list' )){
+                table = $('#service_hostess_list').DataTable();
+                var headerData = table.columns().header();
+                var headers = "";
+                $.each(headerData, function( index, value ) {
+                 headers = headers  + $(value).html() + ",";
+                 });
+                var values = [];
+                var valueData = table.data();
+                $.each(valueData, function( index, value ) {
+                    values[index] = value;
+                });
+                $("#exportHostess input[name=headers]").val(JSON.stringify(headers.slice(0, - 1)));
+                $("#exportHostess input[name=values]").val(JSON.stringify(values));
+                this.submit();
+            }
+        });
+
     $('#service_hostess_search_button').on('click',function(e){
         e.preventDefault();
         var form = $('#service_hostess_search_form');
@@ -204,7 +234,7 @@
                 $('#service_hostess_search_error').html( json.errors );
             }
         } ).DataTable({
-            "dom": 'C<"clear">T<"clear">rtiS',
+            "dom": 'rtiS',
             "colVis": {
                 "buttonText": "Mostra/Nascondi Colonne",
                 exclude: [0,2,3,4,5,6,7,9,10,12,13]
@@ -225,30 +255,34 @@
                 { "type": "string"}, //12 pay_method
                 { "type": "string"} //13 note
             ],
-            tableTools: {
+            /*tableTools: {
                 "aButtons": [ {
-                    "sExtends": "csv",
-                    "sAjaxUrl": "<?php echo url_for('serviceHostess/exportCsv') ?>",
+                    "sExtends": "ajax",
+                    "sFieldBoundary": '"',
+                    "sFieldSeperator": ",",
+                    "sAjaxUrl": "<?php //echo url_for('serviceHostess/exportCsv') ?>",
                     "fnClick": function ( button, conf ) {
-                        var headers = table.columns().header();
-                        var headerData = array();
-                        $.each(headers, function( index, value ) {
-                            headerData[index] = value.html();
-                        });
-                        headerData = headerData;
-                        var data = this.fnGetTableData(conf);
+                        // array of table headers.
+                        //var headerData = table.columns().header();
+                        //var headers = [];
+                        /*$.each(headerData, function( index, value ) {
+                            headers[index] = $(value).html();
+                        });*/
+                        // array of table data.
+                        /*var dataTable = this.fnGetTableData(conf);
                         $.ajax( {
-                            "url": conf.sAjaxUrl,
-                            "data":JSON.stringify({ "name": "tableData", "value": data }),
-                            "contentType": "application/json; charset=utf-8",
-                            "success": conf.fnAjaxComplete,
-                            "dataType": "json",
-                            "type": "POST",
-                            "cache": false,
-                            "error": function () {
-                                alert( "Error detected when sending table data to server" );
+                            url: conf.sAjaxUrl,
+                            type: "POST",
+                            success: function($data){
+                                return $data;
+                            },
+                            dataType: "json",
+                            data: {'dataTable': dataTable},
+                            cache: false,
+                            error: function($data){
+                                return $data;
                             }
-                        } );
+                        }
                     }
 
                 }, {
@@ -271,8 +305,8 @@
                     "sMessage": "Servizi Effettuati"
                 }
                  ],
-                "sSwfPath": "<?php echo $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot() ?>/swf/copy_csv_xls_pdf.swf"
-            },
+                "sSwfPath": "<?php //echo $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot() ?>/swf/copy_csv_xls_pdf.swf"
+            },*/
             "destroy": true,
             "scrollY": 600,
             scrollCollapse: true,
