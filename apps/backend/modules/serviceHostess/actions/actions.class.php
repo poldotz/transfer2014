@@ -237,6 +237,9 @@ class serviceHostessActions extends sfActions
           }
           foreach($sum as $index => $value){
               $average[$index] = $value / $divider[$index];
+              if($average[$index]>52){
+                  $average[$index] = 52;
+              }
           }
         }
 
