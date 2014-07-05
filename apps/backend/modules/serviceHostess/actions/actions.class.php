@@ -175,25 +175,19 @@ class serviceHostessActions extends sfActions
     }
 
     /**
-     * Export servizi hostess.
+     * Export service hostess.
      *
      * @param sfWebRequest $request
      * @return bool
      *
      *
      */
-    public function executeExportCsv(sfWebRequest $request){
-
+    public function executeExport(sfWebRequest $request){
         $headers = str_getcsv(json_decode($request->getPostParameter('headers')),',',"'");
         $values  =  json_decode($request->getPostParameter('values'));
-
         $type = "export".ucfirst($request->getPostParameter('type'));
-
-        // call the appropiate functon.
+        // call the correct function.
         $this->$type($headers,$values);
-
-
-
     }
 
     /**
@@ -209,49 +203,44 @@ class serviceHostessActions extends sfActions
         for($i = 0; $i < count($values); $i++){
             $xls->addRow($values[$i]);
         }
-        return $xls->download('export.xls');
+        $xls->download('export.xls');
+        exit;
+
     }
     /**
      * @param array $headers
      * @param array $values
      *
-     * <th style="width: 4%">Progressivo</th>
-        <th style="width: 4%">Data Reg.</th>
-        <th style="width: 4%">Giorno</th>
-        <th style="width: 4%">Ora</th>
-        <th style="width: 4%">Vettore</th>
-        <th style="width: 15%">Cliente</th>
-        <th style="width: 15%">Referente</th>
-        <th style="width: 4%">Pax</th>
-        <th style="width: 5%">Rif.File</th>
-        <th style="width: 17%">Percorso</th>
-        <th style="width: 8%">Mezzo</th>
-        <th style="width: 6%">Autista</th>
-        <th style="width: 5%">Tipo</th>
-        <th style="width: 10%">Note</th>
-     *
      */
     private function exportPdf($headers = array(),$values = array()){
 
-
-
-
-        $pdf = new CustomPdf("L","mm","A4");
-
-
+        $pdf = new CustomPdf();
 
         $pdf->AddPage();
         $pdf->SetAutoPageBreak(1,0.5);
-        $w = array();
 
+        $w = array_fill(0,count($headers),0);
+        $sum = array_fill(0,count($headers),0);
+        $average = array_fill(0,count($headers),0);
+        $divider = array_fill(0,count($headers),0);
         if($values && is_array($values) && count($values)){
-            foreach($values[0] as $val){
-                $val = trim($val) ? $val : str_pad ( $val, 10);
+          foreach($values as $num => $row){
+            foreach($row as $index => $val){
+                $val = trim($val) ? $val : "";
                 $val = $pdf->GetStringWidth($val,'courier','',10);
-                array_push($w,$val);
+                if($val > $w[$index]){
+                    $sum[$index] += $val;
+                    $w[$index] = $val; // max of row n
+                    $divider[$index] +=1;
+                }
             }
+          }
+          foreach($sum as $index => $value){
+              $average[$index] = $value / $divider[$index];
+          }
         }
-        $pdf->FancyTable($headers, $values,$w);
+
+        $pdf->FancyTable($headers, $values,$average,false,false);
         $pdf->Output("servizi.pdf","I");
 
     }

@@ -93,7 +93,7 @@ class CustomPdf extends TCPDF {
     }
 
     //Colored table
-    function FancyTable($header, $data, $w) {
+    function FancyTable($header, $data, $w,$numeration = true,$underscore = true) {
         //Colors, line width and bold font
         $this->SetFillColor(255, 0, 0);
         $this->SetFillColor(66, 139, 202);
@@ -156,7 +156,7 @@ class CustomPdf extends TCPDF {
             {
                 if($i < count($row) -1 )
                 {
-                    if($i == 0)
+                    if($i == 0 && $numeration)
                     {
                         $this->Cell($w[$i], 4, $num, 0, 0, 'L', $fill,"",1);
                         if($row[$i]=="si")
@@ -169,7 +169,7 @@ class CustomPdf extends TCPDF {
                         if($i == $pos)
                         {
                             $this->Cell($w[$i], 4, $row[$i], 0, 0, 'L', $fill,"",1);
-                            if(strlen($row[$i])==0)
+                            if(strlen($row[$i])==0 && $underscore)
                                 $this->Line($this->GetX()-24,$this->GetY()+3.25,$this->GetX()-1,$this->GetY()+3.25);
                         }
                         else if($i == $pos2)

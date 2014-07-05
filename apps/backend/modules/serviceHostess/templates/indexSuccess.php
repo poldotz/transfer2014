@@ -155,7 +155,7 @@
             <div class="widget">
                 <div class="widget-header">
                     <div style=" text-align: center;  margin: 0 auto;">
-                        <?php echo form_tag('serviceHostess/exportCsv',array('id'=>'exportHostess','method'=>'post','target'=>'_blank')) ?>
+                        <?php echo form_tag('serviceHostess/export',array('id'=>'exportHostess','method'=>'post','target'=>'_blank')) ?>
                         <input  type="hidden" name="values"/>
                         <input  type="hidden" name="headers"/>
                         <input  type="hidden" name="type"/>
@@ -170,7 +170,7 @@
                     <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
-                            <th style="width: 4%">Progressivo</th>
+                            <th style="width: 4%">Progress.</th>
                             <th style="width: 4%">Data Reg.</th>
                             <th style="width: 4%">Giorno</th>
                             <th style="width: 4%">Ora</th>

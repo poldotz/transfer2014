@@ -61,6 +61,7 @@ class ServiceHostessForm extends sfForm
       $c3->addJoin(sfGuardUserGroupPeer::GROUP_ID,sfGuardGroupPeer::ID);
       $c3->add(sfGuardGroupPeer::NAME,'Autista',Criteria::EQUAL);
       $c3->add(sfGuardUserPeer::IS_ACTIVE,true,Criteria::EQUAL);
+      $c3->addAscendingOrderByColumn(sfGuardUserPeer::FIRST_NAME);
       $this->widgetSchema['driver_id'] = new sfWidgetFormPropelChoice(array('model'=>'sfGuardUser','criteria'=>$c3,'add_empty'=>'Autista'),array("class"=>"span12"));
       $this->setWidget('driver_id_off', new sfWidgetFormInputCheckbox());
 
