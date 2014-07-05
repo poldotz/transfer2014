@@ -154,19 +154,19 @@
         <div class="span12">
             <div class="widget">
                 <div class="widget-header">
-
+                    <div style=" text-align: center;  margin: 0 auto;">
+                        <?php echo form_tag('serviceHostess/exportCsv',array('id'=>'exportHostess','method'=>'post','target'=>'_blank')) ?>
+                        <input  type="hidden" name="values"/>
+                        <input  type="hidden" name="headers"/>
+                        <input  type="hidden" name="type"/>
+                        <button name="csv" type="submit" disabled="disabled" class="btn btn-info">CSV</button>
+                        <button name="pdf" type="submit" disabled="disabled" class="btn btn-danger">PDF</button>
+                        </form>
+                    </div>
                     </div>
 
                 </div>
                 <div class="widget-body">
-                    <div style=" text-align: right;  margin: 0 auto;">
-                        <?php echo form_tag('serviceHostess/exportCsv',array('id'=>'exportHostess','method'=>'post','target'=>'_parent')) ?>
-                            <input  type="hidden" name="values"/>
-                            <input  type="hidden" name="headers"/>
-                            <button type="submit" class="btn btn-info">CSV</button>
-                            <button type="submit" class="btn btn-danger">PDF</button>
-                        </form>
-                    </div>
                     <table id="service_hostess_list" class="table striped table-bordered no-margin">
                         <thead>
                         <tr>
@@ -207,18 +207,33 @@
                 table = $('#service_hostess_list').DataTable();
                 var headerData = table.columns().header();
                 var headers = "";
+                var excludedIndex = [];
                 $.each(headerData, function( index, value ) {
-                 headers = headers  + $(value).html() + ",";
+                    if(table.column(index).visible() === true){
+                        headers = headers  + $(value).html() + ",";
+                    }
+                    else{
+                        excludedIndex.push(index);
+                    }
                  });
                 var values = [];
                 var valueData = table.data();
                 $.each(valueData, function( index, value ) {
+                    for (var i = excludedIndex.length -1; i >= 0; i--){  // reverse order to maintains correspondence of index
+                        value.splice(excludedIndex[i],1);
+                    }
                     values[index] = value;
                 });
                 $("#exportHostess input[name=headers]").val(JSON.stringify(headers.slice(0, - 1)));
                 $("#exportHostess input[name=values]").val(JSON.stringify(values));
                 this.submit();
+                table.ajax.reload();
             }
+        });
+
+
+        $("#exportHostess button").on('click',function(e){
+            $("#exportHostess input[name=type]").val($(this).attr('name'));
         });
 
     $('#service_hostess_search_button').on('click',function(e){
@@ -234,14 +249,15 @@
                 $('#service_hostess_search_error').html( json.errors );
             }
         } ).DataTable({
-            "dom": 'rtiS',
+            "dom": 'CrtiS',
+            "order": [[ 2, "asc" ],[ 3, "asc" ]],
             "colVis": {
                 "buttonText": "Mostra/Nascondi Colonne",
-                exclude: [0,2,3,4,5,6,7,9,10,12,13]
+                exclude: [0,2,3,4,5,6,7,9,12,13]
             },
             "columns": [
                 { "type": "string"}, //0 number
-                { "type": "date"}, //1 booking_date
+                { "type": "date","visible": false}, //1 booking_date
                 { "type": "date"}, //2 day
                 { "type": "date"}, //3 hour
                 { "type": "string"}, //4 flight
@@ -336,6 +352,8 @@
                 }
             }
         });
+        $("#exportHostess button[name=csv]").prop('disabled',false);
+        $("#exportHostess button[name=pdf]").prop('disabled',false);
         return false;
     });
 </script>

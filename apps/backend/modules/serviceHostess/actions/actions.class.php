@@ -184,18 +184,75 @@ class serviceHostessActions extends sfActions
      */
     public function executeExportCsv(sfWebRequest $request){
 
-        $headers = json_decode($request->getPostParameter('headers'));
+        $headers = str_getcsv(json_decode($request->getPostParameter('headers')),',',"'");
         $values  =  json_decode($request->getPostParameter('values'));
 
-      $xls = new ExcelExport();
-        $xls->addRow(array("Servizi:"));
-        $xls->addRow(str_getcsv($headers));
-       for($i = 0; $i < count($values); $i++){
-            $xls->addRow($values[$i]);
-        }
-        return $xls->download('export.xls');
+        $type = "export".ucfirst($request->getPostParameter('type'));
+
+        // call the appropiate functon.
+        $this->$type($headers,$values);
+
 
 
     }
 
+    /**
+     * @param array $headers
+     * @param array $values
+     *
+     */
+    private function exportCsv($headers = array(),$values = array()){
+
+        $xls = new ExcelExport();
+        $xls->addRow(array("Servizi:"));
+        $xls->addRow($headers);
+        for($i = 0; $i < count($values); $i++){
+            $xls->addRow($values[$i]);
+        }
+        return $xls->download('export.xls');
+    }
+    /**
+     * @param array $headers
+     * @param array $values
+     *
+     * <th style="width: 4%">Progressivo</th>
+        <th style="width: 4%">Data Reg.</th>
+        <th style="width: 4%">Giorno</th>
+        <th style="width: 4%">Ora</th>
+        <th style="width: 4%">Vettore</th>
+        <th style="width: 15%">Cliente</th>
+        <th style="width: 15%">Referente</th>
+        <th style="width: 4%">Pax</th>
+        <th style="width: 5%">Rif.File</th>
+        <th style="width: 17%">Percorso</th>
+        <th style="width: 8%">Mezzo</th>
+        <th style="width: 6%">Autista</th>
+        <th style="width: 5%">Tipo</th>
+        <th style="width: 10%">Note</th>
+     *
+     */
+    private function exportPdf($headers = array(),$values = array()){
+
+
+
+
+        $pdf = new CustomPdf("L","mm","A4");
+
+
+
+        $pdf->AddPage();
+        $pdf->SetAutoPageBreak(1,0.5);
+        $w = array();
+
+        if($values && is_array($values) && count($values)){
+            foreach($values[0] as $val){
+                $val = trim($val) ? $val : str_pad ( $val, 10);
+                $val = $pdf->GetStringWidth($val,'courier','',10);
+                array_push($w,$val);
+            }
+        }
+        $pdf->FancyTable($headers, $values,$w);
+        $pdf->Output("servizi.pdf","I");
+
+    }
 }

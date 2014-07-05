@@ -65,7 +65,7 @@ Class ServiceHostess {
             }
         }
 
-        $order_by = " ORDER BY b.booking_date, b.number";
+        $order_by = " ORDER BY a.day,hour, b.number";
 
         $queryArrivals = $select.$from.$where.$order_by;
 
@@ -100,7 +100,7 @@ Class ServiceHostess {
             }
         }
 
-        $order_by = " ORDER BY b.booking_date, b.number ";
+        $order_by = " ORDER BY d.day,hour, b.number ";
 
         $queryDepatures = $select.$from.$where.$order_by;
 
@@ -128,7 +128,7 @@ Class ServiceHostess {
             $query .=  self::getArrivalServices($conditions['transfer'],$bookingConditions);
             $query .= ") as a UNION ALL SELECT * FROM (";
             $query .=  self::getDepartureServices($conditions['transfer'],$bookingConditions);
-            $query .= ") as d ORDER BY  booking_date,number;";
+            $query .= ") as d ORDER BY day, hour,number;";
         }
 
         $statement = $con->prepare($query);
