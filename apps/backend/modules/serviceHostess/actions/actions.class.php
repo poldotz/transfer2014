@@ -219,14 +219,14 @@ class serviceHostessActions extends sfActions
         $pdf->AddPage();
         $pdf->SetAutoPageBreak(1,0.5);
 
-        $w = array_fill(0,count($headers),0);
-        $sum = array_fill(0,count($headers),0);
+        $w = array_fill(0,count($headers),1);
+        $sum = array_fill(0,count($headers),1);
         $average = array_fill(0,count($headers),0);
         $divider = array_fill(0,count($headers),0);
         if($values && is_array($values) && count($values)){
           foreach($values as $num => $row){
             foreach($row as $index => $val){
-                $val = trim($val) ? $val : "";
+                $val = trim($val) ? $val : "     ";
                 $val = $pdf->GetStringWidth($val,'courier','',10);
                 if($val > $w[$index]){
                     $sum[$index] += $val;
