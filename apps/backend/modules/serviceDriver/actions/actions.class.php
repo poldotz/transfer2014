@@ -118,7 +118,7 @@ class serviceDriverActions extends sfActions
     public function executeDriverServiceList(sfRequest $request){
         $day = $request->getParameter('day');
         $driver_id = $request->getParameter('driver_id');
-        $services = Driver::getDriverServicesDay($day,$driver_id);
+        $services = Driver::getDriverServicesDay($day,$driver_id,true);
         return $this->renderPartial('driverServiceList',array('driverService'=>$services,'id'=>$driver_id,'day'=>$day));
         exit;
         sfView::SUCCESS;

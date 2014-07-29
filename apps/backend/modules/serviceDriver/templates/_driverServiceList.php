@@ -39,11 +39,11 @@
         <td class="hidden-phone"><?php echo $service[8]?></td>
         <td>
             <?php if($service[2] == "Partenza" || $service[2] == "Taxi"): ?>
-                <a href="<?php echo url_for('@departure')?>">
+                <a href="<?php echo url_for('@departure?id='.$service[12])?>">
                     <span data-icon="&#xe07f;"></span> Visualizza
                 </a>
             <?php else: ?>
-                <a href="<?php echo url_for('@arrival')?>">
+                <a href="<?php echo url_for('@arrival?id='.$service[12])?>">
                     <span data-icon="&#xe07f;"></span> Visualizza
                 </a>
             <?php endif; ?>
