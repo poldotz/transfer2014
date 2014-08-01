@@ -69,6 +69,9 @@
 
         var day = $(this).attr('data-date');
         var driver_id = $(this).attr('data-content');
+        $('.service_driver').removeClass('selected');
+        $(this).addClass('selected');
+
         $.ajax(
             {
                 url: '<?php echo url_for('serviceDriver/driverServiceList') ?>',
@@ -82,6 +85,7 @@
                 }
             }
         );
+
 
 
     });

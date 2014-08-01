@@ -7799,3 +7799,7 @@ ul.radio_list{
 table.sidebar tr:hover td {
     background-color: #428bca;
 }
+
+table.sidebar tr.selected td {
+    background-color: #428bca;
+}
