@@ -167,7 +167,7 @@ class departureActions extends sfActions
                 );
                 $pdf->FancyTable($header, $rows,$w);
             }
-            $pdf->Output("transfer_arrivo"."_".$giorno."_".$data.".pdf","I");
+            $pdf->Output("transfer_partenza"."_".$giorno."_".$data.".pdf","I");
         }
         catch(Exception $e){
             $e->getMessage();
