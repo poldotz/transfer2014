@@ -20,10 +20,10 @@ Class Driver {
         ->withColumn('sfGuardUser.EMAIL', 'EMAIL')
         ->groupBy('Arrival.DRIVER_ID')
         ->select(array('DRIVER_ID', 'num','driver','EMAIL'))
-        ->orderBy('sfGuardUser.FIRST_NAME')
+        ->orderBy('driver')
         ->find();
 
-        $arrivals = $arrivals->toArray();
+        $arrivals = $arrivals->toArray('driver');
 
         $departures = DepartureQuery::create()
         ->join('sfGuardUser')
@@ -34,11 +34,12 @@ Class Driver {
         ->withColumn('sfGuardUser.EMAIL', 'EMAIL')
         ->groupBy('Departure.DRIVER_ID')
         ->select(array('DRIVER_ID', 'num','driver',"EMAIL"))
-        ->orderBy('sfGuardUser.FIRST_NAME')
+        ->orderBy('driver')
         ->find();
-        $departures = $departures->toArray();
-        $raw_services = array_merge($arrivals,$departures);
+        $departures = $departures->toArray('driver');
 
+        $raw_services = array_merge($arrivals,$departures);
+        ksort($raw_services);
         $services = array();
         foreach($raw_services as $row){
             if(array_key_exists($row['DRIVER_ID'],$services)){
