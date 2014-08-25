@@ -23,7 +23,7 @@ Class Driver {
         ->orderBy('driver')
         ->find();
 
-        $arrivals = $arrivals->toArray('driver');
+        $arrivals = $arrivals->toArray();
 
         $departures = DepartureQuery::create()
         ->join('sfGuardUser')
@@ -36,10 +36,9 @@ Class Driver {
         ->select(array('DRIVER_ID', 'num','driver',"EMAIL"))
         ->orderBy('driver')
         ->find();
-        $departures = $departures->toArray('driver');
-
+        $departures = $departures->toArray();
         $raw_services = array_merge($arrivals,$departures);
-        ksort($raw_services);
+
         $services = array();
         foreach($raw_services as $row){
             if(array_key_exists($row['DRIVER_ID'],$services)){
