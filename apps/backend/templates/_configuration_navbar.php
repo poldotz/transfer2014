@@ -17,6 +17,8 @@
         <li>
             <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe00d;"></span> Localit&agrave',"@locality",array("class"=>($selected == "locality") ? "selected": "")); ?>
             <ul>
+                <li><?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe1cf;"></span> Zone',"@areas",array("class"=>($selected == "area") ? "selected": "")); ?></li>
+
                 <li><?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe11b;"></span> Percorsi',"@route",array("class"=>($selected == "route") ? "selected": "")); ?></li>
             </ul>
         </li>

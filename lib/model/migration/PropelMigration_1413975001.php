@@ -2,10 +2,10 @@
 
 /**
  * Data object containing the SQL and PHP code to migrate the database
- * up to version 1401803472.
- * Generated on 2014-06-03 15:51:12 by lpodda
+ * up to version 1413975001.
+ * Generated on 2014-10-22 12:50:01 by lpodda
  */
-class PropelMigration_1401803472
+class PropelMigration_1413975001
 {
 
     public function preUp($manager)
@@ -42,15 +42,23 @@ class PropelMigration_1401803472
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
 
-ALTER TABLE `sf_guard_user_profile` DROP FOREIGN KEY `sf_guard_user_profile_FK_1`;
 
-ALTER TABLE `sf_guard_user_profile`
-    ADD `is_active` TINYINT(1) DEFAULT 1 NOT NULL AFTER `id`;
 
-ALTER TABLE `sf_guard_user_profile` ADD CONSTRAINT `sf_guard_user_profile_FK_1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `sf_guard_user` (`id`)
-    ON DELETE SET NULL;
+CREATE TABLE `area`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `is_active` TINYINT(1) DEFAULT 1 NOT NULL,
+    `name` VARCHAR(200) NOT NULL,
+    `latitude` DOUBLE(10,8),
+    `longitude` DOUBLE(10,8),
+    `viewport_sw_lt` DOUBLE(10,8),
+    `viewport_sw_ln` DOUBLE(10,8),
+    `viewport_ne_lt` DOUBLE(10,8),
+    `viewport_ne_ln` DOUBLE(10,8),
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
@@ -71,6 +79,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 # This is a fix for InnoDB in MySQL >= 4.1.x
 # It "suspends judgement" for fkey relationships until are tables are set.
 SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `tl_tasks`;
+
+DROP TABLE IF EXISTS `area`;
 
 ALTER TABLE `arrival` CHANGE `rate_cost` `rate_cost` DECIMAL;
 
@@ -96,14 +108,7 @@ ALTER TABLE `departure_version` CHANGE `rate_cost` `rate_cost` DECIMAL;
 
 ALTER TABLE `departure_version` CHANGE `calculated_cost` `calculated_cost` DECIMAL DEFAULT 0.00;
 
-ALTER TABLE `sf_guard_user_profile` DROP FOREIGN KEY `sf_guard_user_profile_FK_1`;
-
-ALTER TABLE `sf_guard_user_profile` DROP `is_active`;
-
-ALTER TABLE `sf_guard_user_profile` ADD CONSTRAINT `sf_guard_user_profile_FK_1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `sf_guard_user` (`id`)
-    ON DELETE CASCADE;
+ALTER TABLE `locality` CHANGE `formatted_address` `formatted_address` VARCHAR(150);
 
 CREATE TABLE `arrival_archive`
 (

@@ -2,7 +2,6 @@
 <?php use_stylesheet('dataTables/jquery.dataTables.css','last') ?>
 <?php use_javascript('dataTables/jquery.dataTables.min.js') ?>
 <?php use_javascript('dataTables/jquery.dataTables.filterDelay.js') ?>
-
 <div class="main-container">
     <div class="row-fluid">
         <div class="span12">

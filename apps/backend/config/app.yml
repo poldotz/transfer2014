@@ -7,3 +7,10 @@ all:
   sf_guard_plugin_profile_class: Customer
   sita_airport_api_key: 3ae4a70d22ba260f2cb5c2629a941ac3
   sita_bag_trac_api_Key: 7dd60bfff75c47d1e0484f1d6aa7b7c7
+
+  fcDbBackupPlugin:
+    path: /data/sql/backup
+
+  email_from: maremania.transfer@gmail.com
+  email_from_name: Maremania
+  email_bcc:  maremania.transfer@gmail.com

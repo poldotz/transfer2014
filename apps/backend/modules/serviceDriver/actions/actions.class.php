@@ -66,25 +66,34 @@ class serviceDriverActions extends sfActions
         $day = $this->getUser()->getCurrentDriversDate();
         $services = Driver::getDriversServices($day);
 
-        try{
+
             $data = date('d-m-Y',strtotime($day));
             $giorno =  explode('-',$day);
             $giorno = UtilityHelper::translateToItaDayOfWeek(date('D',mktime(0, 0, 0, $giorno[1], $giorno[2], $giorno[0])));
+            $response_message = "";
             $sended = 0;
+            $notSended = 0;
             foreach($services as $service){
+            try{
                 $rows = Driver::getDriverServicesDay($day,$service['DRIVER_ID']);
                 $title = 'Autista: '.$service["driver"].' numero servizi:  ('.count($rows).') - '.$giorno.' '.$data;
                 $filename = sfConfig::get('sf_upload_dir')."/servizi_autisti"."_".$giorno."_".$data.".pdf";
                 $this->generateDriverServicesPdf(null,$title,$rows,$filename,true,"F");
                 $template_params = array('name'=>$service['driver'],'date'=>$data);
-                $sended += $this->sendEmailTo('driver_mail',$template_params,array($service['EMAIL']=>$service['driver']),$title,$filename);
+                if(isset($service['EMAIL'])){
+                    $sended += $this->sendEmailTo('driver_mail',$template_params,array($service['EMAIL']=>$service['driver']),$title,$filename);
+                }
+
+            }
+            catch(Exception $e){
+                $notSended += 1;
+                $response_message .= $e->getMessage()."<br/>";
+            }
                 unlink($filename);
             }
-            return $this->renderText("Numero email inviate: ".$sended);
-        }
-        catch(Exception $e){
-            $this->renderText($e->getMessage());
-        }
+            $response_message .= "Numero email inviate: ".$sended."<br/> Numero email fallite: ".$notSended;
+            return $this->renderText($response_message);
+
     }
 
     public function executeServicesDriverPdfEmail(sfWebRequest $request){
@@ -132,15 +141,15 @@ class serviceDriverActions extends sfActions
 
 
         $body = $this->getPartial($template_name, $template_params);
-        $from = "transfer@maremania.com";
-        $fromName = "Maremania";
+        $from = sfConfig::get('app_email_from',"");
+        $fromName = sfConfig::get('app_email_from_name',"");
         $to = key($recipient);
         $toName = current($recipient);
-        $bbc_email = "maremania.transfer@gmail.com";
+        $bcc_email = sfConfig::get('app_email_bcc',"");
         $message = Swift_Message::newInstance()
             ->setFrom(array($from=>$fromName))
             ->setTo(array($to=>$toName))
-            ->setBcc($bbc_email)
+            ->setBcc($bcc_email)
             ->setSubject($subject)
             ->setBody($body,'text/html');
 
@@ -151,6 +160,7 @@ class serviceDriverActions extends sfActions
         $message->attach($attachment,'application/pdf');
         $mailer = $this->getMailer();
         $res = $mailer->send($message);
+
 
         // Dump the log contents
         // NOTE: The EchoLogger dumps in realtime so dump() does nothing for it

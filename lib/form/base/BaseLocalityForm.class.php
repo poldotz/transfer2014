@@ -25,10 +25,10 @@ abstract class BaseLocalityForm extends BaseFormPropel
       'email'             => new sfWidgetFormInputText(),
       'site'              => new sfWidgetFormInputText(),
       'formatted_address' => new sfWidgetFormInputText(),
-      'created_at'        => new sfWidgetFormDateTime(),
-      'updated_at'        => new sfWidgetFormDateTime(),
       'latitude'          => new sfWidgetFormInputText(),
       'longitude'         => new sfWidgetFormInputText(),
+      'created_at'        => new sfWidgetFormDateTime(),
+      'updated_at'        => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -42,11 +42,11 @@ abstract class BaseLocalityForm extends BaseFormPropel
       'mobile'            => new sfValidatorString(array('max_length' => 20, 'required' => false)),
       'email'             => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'site'              => new sfValidatorString(array('max_length' => 150, 'required' => false)),
-      'formatted_address' => new sfValidatorString(array('max_length' => 150, 'required' => false)),
-      'created_at'        => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'        => new sfValidatorDateTime(array('required' => false)),
+      'formatted_address' => new sfValidatorString(array('max_length' => 150)),
       'latitude'          => new sfValidatorNumber(array('required' => false)),
       'longitude'         => new sfValidatorNumber(array('required' => false)),
+      'created_at'        => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'        => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('locality[%s]');

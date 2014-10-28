@@ -11,7 +11,10 @@ class LocalityForm extends BaseLocalityForm
 {
   public function configure()
   {
-      $this->useFields(array('is_vector','is_active','name','phone','fax','mobile','email','site','formatted_address'));
+      $this->useFields(array('is_vector','is_active','name','phone','fax','mobile','email','site','formatted_address','latitude','longitude'));
+
+      $this->widgetSchema['latitude'] = new sfWidgetFormInputHidden();
+      $this->widgetSchema['longitude'] = new sfWidgetFormInputHidden();
       $this->widgetSchema->setLabels(array(
           'name'    => 'Denominazione',
           'is_vector' => 'Vettore',

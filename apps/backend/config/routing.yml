@@ -195,6 +195,29 @@ locality_update:
     url:   /aggiorna-localita
     param: { module: locality, action: update }
 
+areas:
+  url:   /gestione-aree
+  param: { module: area, action: index }
+
+area_new:
+    url:   /nuovo-area
+    param: { module: area, action: new }
+
+area_edit:
+    url:   /modifica-area/:id
+    param: { module: area, action: edit }
+    requirements:
+      id: \d+
+
+area_create:
+    url:   /crea-area
+    param: { module: area, action: create }
+
+area_update:
+    url:   /aggiorna-area
+    param: { module: area, action: update }
+
+
 route:
     url:   /percorsi
     param: { module: route, action: index }

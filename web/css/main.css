@@ -89,6 +89,13 @@ img {
 #map_canvas img, .google-maps img {
     max-width: none; }
 
+#map_canvas_area {
+    height: 600px;
+    width: 440px;
+    margin: 0 auto;
+    padding: 0px
+}
+
 button, input, select, textarea {
     margin: 0;
     font-size: 100%;

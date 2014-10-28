@@ -92,12 +92,12 @@
 
   <table name="locality">
     <behavior name="Timestampable" />
-    <behavior name="Geocodable">
+    <!--<behavior name="Geocodable">
       <parameter name="geocode_address" value="true" />
       <parameter name="address_columns" value="formatted_address" />
       <parameter name="geocoder_provider" value="\Geocoder\Provider\GoogleMapsProvider" />
       <parameter name="geocoder_api_key" value="AIzaSyDHe1uZEarjAj5pYie_sNwZsEqwLaeuUeY" />
-    </behavior>
+    </behavior>-->
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="user_id" type="integer" required="false" />
     <foreign-key foreignTable="sf_guard_user" onDelete="setnull">
@@ -111,9 +111,22 @@
     <column name="mobile" type="varchar" required="false" size="20" />
     <column name="email" type="varchar" required="false" size="100" />
     <column name="site" type="varchar" required="false" size="150" />
-    <column name="formatted_address" type="varchar" required="false" size="150" />
+    <column name="formatted_address" type="varchar" required="true" size="150" />
+    <column name="latitude" type="double" size="10" scale="8" required="false"/>
+    <column name="longitude" type="double" size="10" scale="8" required="false"/>
   </table>
-
+    <table name="area">
+        <behavior name="Timestampable" />
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="is_active" type="boolean" required="true" default="1" />
+        <column name="name" type="varchar" required="true" size="200" />
+        <column name="latitude" type="double" size="10" scale="8" required="false"/>
+        <column name="longitude" type="double" size="10" scale="8" required="false"/>
+        <column name="viewport_sw_lt" type="double" size="10" scale="8" required="false"/>
+        <column name="viewport_sw_ln" type="double" size="10" scale="8" required="false"/>
+        <column name="viewport_ne_lt" type="double" size="10" scale="8" required="false"/>
+        <column name="viewport_ne_ln" type="double" size="10" scale="8" required="false"/>
+    </table>
   <table name="route">
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="locality_from" type="integer" required="true"/>
