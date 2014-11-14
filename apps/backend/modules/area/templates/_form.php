@@ -103,8 +103,8 @@
             });
 
             var bounds = new google.maps.LatLngBounds(
-                place.geometry.viewport.getNorthEast(),
-                place.geometry.viewport.getSouthWest()
+                place.geometry.viewport.getSouthWest(),
+                place.geometry.viewport.getNorthEast()
             );
 
              areaSquare = new google.maps.Rectangle({
@@ -112,6 +112,7 @@
                 editable: false
             });
             areaSquare.setMap(map);
+            map.fitBounds(bounds);
 
         });
 
