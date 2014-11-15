@@ -90,7 +90,7 @@ class areaActions extends sfActions
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
         $area = AreaQuery::create()->findPk($request->getParameter('id'));
         $this->forward404Unless($area, sprintf('Object Area does not exist (%s).', $request->getParameter('id')));
-        $this->form = new AreaForm(AreaQuery);
+        $this->form = new AreaForm($area);
 
         $error = $this->processForm($request, $this->form);
         if($error){
@@ -121,6 +121,7 @@ class areaActions extends sfActions
             catch(Exception $e){
                 return "Verificate l'indirizzo inserito e riprovare";
             }
+
             $this->redirect('area/edit?id='.$area->getId());
         }
     }

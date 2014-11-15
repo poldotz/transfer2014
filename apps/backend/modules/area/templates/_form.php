@@ -47,18 +47,45 @@
         var map;
         var marker;
         var areaSquare;
+        var lat = 40.12;
+        var lng = 9.01;
+
 
             // sardegna
-            var myOptions = {
+            var mapOptions = {
                 zoom: 8,
-                center: new google.maps.LatLng(40.12, 9.01),
+                center: new google.maps.LatLng(lat,lng),
                 mapTypeControl: false,
                 panControl: false,
                 zoomControl: false,
                 streetViewControl: false
             };
 
-            map = new google.maps.Map(document.getElementById('map_canvas_area'), myOptions);
+        map = new google.maps.Map(document.getElementById('map_canvas_area'), mapOptions);
+
+        if($('#area_latitude').val() && $('#area_longitude').val()){
+            lat = $('#area_latitude').val();
+            lng = $('#area_longitude').val();
+
+        }
+        var markerPosition = new google.maps.LatLng(lat,lng);
+        marker = new google.maps.Marker({
+            position: markerPosition,
+            map: map,
+            title: $('#area_name').val()
+        });
+
+        var bounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng($('#area_viewport_ne_lt').val(),$('#area_viewport_ne_ln').val()),
+            new google.maps.LatLng($('#area_viewport_sw_lt').val(),$('#area_viewport_sw_ln').val())
+        );
+
+        areaSquare = new google.maps.Rectangle({
+            bounds:bounds,
+            editable: false
+        });
+        areaSquare.setMap(map);
+        map.fitBounds(bounds);
 
 
         // Create the autocomplete object, restricting the search
@@ -73,7 +100,6 @@
         // populate the address fields in the form.
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
             var place = autocomplete.getPlace();
-
             map.panTo(place.geometry.location);
             map.setZoom(8);
 
@@ -81,12 +107,13 @@
             if (place.geometry) {
                 $('#area_latitude').val(place.geometry.location.k);
                 $('#area_longitude').val(place.geometry.location.B);
+                //viewport area. ne
+                $('#area_viewport_ne_lt').val(place.geometry.viewport.Ea.j); //lat
+                $('#area_viewport_ne_ln').val(place.geometry.viewport.va.j);// lng
                 //viewport area. sw
-                $('#area_viewport_sw_lt').val(place.geometry.viewport.Ea.j);
-                $('#area_viewport_sw_ln').val(place.geometry.viewport.Ea.k);
-                //viewport area. sw
-                $('#area_viewport_ne_lt').val(place.geometry.viewport.va.j);
-                $('#area_viewport_ne_ln').val(place.geometry.viewport.va.k);
+                $('#area_viewport_sw_lt').val(place.geometry.viewport.Ea.k); //lat
+                $('#area_viewport_sw_ln').val(place.geometry.viewport.va.k); //lng
+
             }
             // se esiste già lo elimino.
             if(marker){
@@ -116,5 +143,12 @@
 
         });
 
+    });
+</script>
+<script>
+    document.getElementById('area_name').addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
     });
 </script>
