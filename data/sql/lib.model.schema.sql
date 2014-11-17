@@ -230,6 +230,32 @@ CREATE TABLE `route`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- area_vehicle_rate_table
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `area_vehicle_rate_table`;
+
+CREATE TABLE `area_vehicle_rate_table`
+(
+    `area_id` INTEGER NOT NULL,
+    `vehicle_type_id` INTEGER NOT NULL,
+    `customer_id` INTEGER NOT NULL,
+    `cost` DECIMAL(10,2),
+    PRIMARY KEY (`area_id`,`vehicle_type_id`,`customer_id`),
+    INDEX `area_vehicle_rate_table_FI_1` (`customer_id`),
+    INDEX `area_vehicle_rate_table_FI_3` (`vehicle_type_id`),
+    CONSTRAINT `area_vehicle_rate_table_FK_1`
+        FOREIGN KEY (`customer_id`)
+        REFERENCES `sf_guard_user_profile` (`id`),
+    CONSTRAINT `area_vehicle_rate_table_FK_2`
+        FOREIGN KEY (`area_id`)
+        REFERENCES `area` (`id`),
+    CONSTRAINT `area_vehicle_rate_table_FK_3`
+        FOREIGN KEY (`vehicle_type_id`)
+        REFERENCES `vehicle_type` (`id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- rate
 -- ---------------------------------------------------------------------
 
