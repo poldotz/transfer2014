@@ -11,7 +11,15 @@ class rateTableActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->CustomerRateTables = CustomerRateTableQuery::create()->find();
+      $this->form = new CustomerSearchForm();
+    //$this->CustomerRateTables = CustomerRateTableQuery::create()->find();
+  }
+
+  public function executeSearch(sfWebRequest $request){
+
+    $customer_id = $request->getParameter('id',null);
+
+
   }
 
     public function executeGet_data(sfWebRequest $request)

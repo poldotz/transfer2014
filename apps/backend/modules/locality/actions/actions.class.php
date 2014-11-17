@@ -51,7 +51,7 @@ class localityActions extends sfActions
             if ($first++) $json .= ',';
             $status = $v->getIsActive() ? "SI" : "NO";
             $vector = $v->getIsVector() ? "SI" : "NO";
-            $json .= '["'.$v->getName().'","'.$vector.'","'.$v->getEmail().'","'.$v->getPhone().'","'.$v->getFax().'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'locality/edit/id/'.$v->getId().' \';\">"]';
+            $json .= '["'.$v->getName().'","'.$vector.'","'.$v->getArea().'","'.$v->getEmail().'","'.$v->getPhone().'","'.$v->getFax().'","'.$status.'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'locality/edit/id/'.$v->getId().' \';\">"]';
         }
         $json .= ']}';
         return $this->renderText($json);

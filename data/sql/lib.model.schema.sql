@@ -59,6 +59,7 @@ CREATE TABLE `vehicle_type`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
+    `per_person` TINYINT(1) DEFAULT 0 NOT NULL,
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`)
@@ -163,14 +164,19 @@ CREATE TABLE `locality`
     `formatted_address` VARCHAR(150) NOT NULL,
     `latitude` DOUBLE(10,8),
     `longitude` DOUBLE(10,8),
+    `area_id` INTEGER NOT NULL,
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
     INDEX `locality_FI_1` (`user_id`),
+    INDEX `locality_FI_2` (`area_id`),
     CONSTRAINT `locality_FK_1`
         FOREIGN KEY (`user_id`)
         REFERENCES `sf_guard_user` (`id`)
-        ON DELETE SET NULL
+        ON DELETE SET NULL,
+    CONSTRAINT `locality_FK_2`
+        FOREIGN KEY (`area_id`)
+        REFERENCES `area` (`id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -238,7 +244,7 @@ CREATE TABLE `rate`
     `hour_from` TIME NOT NULL,
     `hour_to` TIME NOT NULL,
     `surcharge` INTEGER(3),
-    `per_person` TINYINT(1) DEFAULT 0,
+    `reduced_percentage` INTEGER(2),
     `note` VARCHAR(255),
     `created_at` DATETIME,
     `updated_at` DATETIME,
@@ -250,42 +256,59 @@ CREATE TABLE `rate`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- customer_rate_table
+-- rate_extra
 -- ---------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `customer_rate_table`;
+DROP TABLE IF EXISTS `rate_extra`;
 
-CREATE TABLE `customer_rate_table`
+CREATE TABLE `rate_extra`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `value` INTEGER(2) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- rate_extra_rate
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rate_extra_rate`;
+
+CREATE TABLE `rate_extra_rate`
+(
+    `rate_id` INTEGER NOT NULL,
+    `rate_extra_id` INTEGER NOT NULL,
+    PRIMARY KEY (`rate_id`,`rate_extra_id`),
+    INDEX `rate_extra_rate_FI_2` (`rate_extra_id`),
+    CONSTRAINT `rate_extra_rate_FK_1`
+        FOREIGN KEY (`rate_id`)
+        REFERENCES `rate` (`id`),
+    CONSTRAINT `rate_extra_rate_FK_2`
+        FOREIGN KEY (`rate_extra_id`)
+        REFERENCES `rate_extra` (`id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- customer_rate
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `customer_rate`;
+
+CREATE TABLE `customer_rate`
+(
     `customer_id` INTEGER NOT NULL,
     `rate_id` INTEGER NOT NULL,
-    `vehicle_type_id` INTEGER NOT NULL,
-    `cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `created_at` DATETIME,
     `updated_at` DATETIME,
-    `version` INTEGER DEFAULT 0,
-    `version_created_at` DATETIME,
-    `version_created_by` VARCHAR(100),
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `customer_rate_table_index` (`customer_id`, `rate_id`, `vehicle_type_id`),
-    INDEX `customer_rate_table_FI_1` (`rate_id`),
-    INDEX `customer_rate_table_FI_3` (`vehicle_type_id`),
-    CONSTRAINT `customer_rate_table_FK_1`
+    PRIMARY KEY (`customer_id`,`rate_id`),
+    INDEX `customer_rate_FI_2` (`rate_id`),
+    CONSTRAINT `customer_rate_FK_1`
+        FOREIGN KEY (`customer_id`)
+        REFERENCES `sf_guard_user_profile` (`id`),
+    CONSTRAINT `customer_rate_FK_2`
         FOREIGN KEY (`rate_id`)
         REFERENCES `rate` (`id`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT `customer_rate_table_FK_2`
-        FOREIGN KEY (`customer_id`)
-        REFERENCES `sf_guard_user_profile` (`id`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT `customer_rate_table_FK_3`
-        FOREIGN KEY (`vehicle_type_id`)
-        REFERENCES `vehicle_type` (`id`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -301,6 +324,7 @@ CREATE TABLE `booking`
     `year` INTEGER(4) NOT NULL,
     `number` INTEGER(12) NOT NULL,
     `adult` INTEGER(4) NOT NULL,
+    `reduced` INTEGER(2),
     `child` INTEGER(4) DEFAULT 0  ,
     `contact` VARCHAR(100),
     `rif_file` VARCHAR(20),
@@ -481,45 +505,17 @@ CREATE TABLE `rate_version`
     `hour_from` TIME NOT NULL,
     `hour_to` TIME NOT NULL,
     `surcharge` INTEGER(3),
-    `per_person` TINYINT(1) DEFAULT 0,
+    `reduced_percentage` INTEGER(2),
     `note` VARCHAR(255),
     `created_at` DATETIME,
     `updated_at` DATETIME,
     `version` INTEGER DEFAULT 0 NOT NULL,
     `version_created_at` DATETIME,
     `version_created_by` VARCHAR(100),
-    `customer_rate_table_ids` TEXT,
-    `customer_rate_table_versions` TEXT,
     PRIMARY KEY (`id`,`version`),
     CONSTRAINT `rate_version_FK_1`
         FOREIGN KEY (`id`)
         REFERENCES `rate` (`id`)
-        ON DELETE CASCADE
-) ENGINE=InnoDB;
-
--- ---------------------------------------------------------------------
--- customer_rate_table_version
--- ---------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `customer_rate_table_version`;
-
-CREATE TABLE `customer_rate_table_version`
-(
-    `id` INTEGER NOT NULL,
-    `customer_id` INTEGER NOT NULL,
-    `rate_id` INTEGER NOT NULL,
-    `vehicle_type_id` INTEGER NOT NULL,
-    `cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
-    `created_at` DATETIME,
-    `updated_at` DATETIME,
-    `version` INTEGER DEFAULT 0 NOT NULL,
-    `version_created_at` DATETIME,
-    `version_created_by` VARCHAR(100),
-    `rate_id_version` INTEGER DEFAULT 0,
-    PRIMARY KEY (`id`,`version`),
-    CONSTRAINT `customer_rate_table_version_FK_1`
-        FOREIGN KEY (`id`)
-        REFERENCES `customer_rate_table` (`id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -536,6 +532,7 @@ CREATE TABLE `booking_version`
     `year` INTEGER(4) NOT NULL,
     `number` INTEGER(12) NOT NULL,
     `adult` INTEGER(4) NOT NULL,
+    `reduced` INTEGER(2),
     `child` INTEGER(4) DEFAULT 0  ,
     `contact` VARCHAR(100),
     `rif_file` VARCHAR(20),

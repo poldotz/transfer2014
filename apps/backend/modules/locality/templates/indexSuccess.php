@@ -13,6 +13,8 @@
 
                     <th>Vettore</th>
 
+                    <th>Zona</th>
+
                     <th>Email</th>
 
                     <th>Telefono</th>

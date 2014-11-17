@@ -27,6 +27,7 @@ abstract class BaseLocalityForm extends BaseFormPropel
       'formatted_address' => new sfWidgetFormInputText(),
       'latitude'          => new sfWidgetFormInputText(),
       'longitude'         => new sfWidgetFormInputText(),
+      'area_id'           => new sfWidgetFormPropelChoice(array('model' => 'Area', 'add_empty' => false)),
       'created_at'        => new sfWidgetFormDateTime(),
       'updated_at'        => new sfWidgetFormDateTime(),
     ));
@@ -45,6 +46,7 @@ abstract class BaseLocalityForm extends BaseFormPropel
       'formatted_address' => new sfValidatorString(array('max_length' => 150)),
       'latitude'          => new sfValidatorNumber(array('required' => false)),
       'longitude'         => new sfValidatorNumber(array('required' => false)),
+      'area_id'           => new sfValidatorPropelChoice(array('model' => 'Area', 'column' => 'id')),
       'created_at'        => new sfValidatorDateTime(array('required' => false)),
       'updated_at'        => new sfValidatorDateTime(array('required' => false)),
     ));

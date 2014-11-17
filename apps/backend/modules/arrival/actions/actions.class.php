@@ -83,7 +83,7 @@ class arrivalActions extends sfActions
 
             $route = $v['route'];
             $is_cancelled = strtoupper($v['Anullato']);
-            $json .= '["'.$v['id'].'","'.$is_cancelled.'","'.$v['number'].'/'.$v['year'].'","'.$v['hour'].'","'.$v['flight'].'","'.$v['name'].'","'.$v['driver'].'","'.$v['customer'].'","'.$v['contact'].'","'.$route.'"]';
+            $json .= '["'.$v['id'].'","'.$is_cancelled.'","'.$v['number'].'/'.$v['year'].'","'.$v['hour'].'","'.$v['flight'].'","'.$v['vehicle_type'].'","'.$v['driver'].'","'.$v['customer'].'","'.$v['contact'].'","'.$route.'"]';
         }
         $json .= ']}';
         return $this->renderText($json);

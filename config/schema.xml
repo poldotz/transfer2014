@@ -38,6 +38,7 @@
     <behavior name="Timestampable" />
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
     <column name="name" type="varchar" required="true" size="100" />
+    <column name="per_person" type="boolean" required="true" default="0"/>
   </table>
 
   <table name="vehicle">
@@ -114,6 +115,10 @@
     <column name="formatted_address" type="varchar" required="true" size="150" />
     <column name="latitude" type="double" size="10" scale="8" required="false"/>
     <column name="longitude" type="double" size="10" scale="8" required="false"/>
+    <column name="area_id" type="integer" required="true"/>
+      <foreign-key foreignTable="area">
+          <reference local="area_id" foreign="id" />
+      </foreign-key>
   </table>
     <table name="area">
         <behavior name="Timestampable" />
@@ -159,39 +164,43 @@
       <column name="hour_from" type="time" required="true"/>
       <column name="hour_to" type="time"  required="true"/>
       <column name="surcharge" type="integer" size="3" required="false"/>
-      <column name="per_person" type="boolean" default="false" required="false"/>
+      <column name="reduced_percentage" type="integer" size="2" required="false"/>
       <column name="note" type="varchar" size="255" required="false"/>
       <unique name="rate_name">
           <unique-column name="name" />
       </unique>
   </table>
 
-    <table name="customer_rate_table">
-        <behavior name="Timestampable" />
-        <behavior name="versionable">
-            <parameter name="log_created_at" value="true" />
-            <parameter name="log_created_by" value="true" />
-        </behavior>
+    <table name="rate_extra">
         <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
-        <column name="customer_id" type="integer" required="true"/>
-        <column name="rate_id" type="integer" required="true"/>
-        <column name="vehicle_type_id" type="integer" required="true"/>
-        <column name="cost" type="decimal" size="10" scale="2" required="true" default="0.00"/>
-        <foreign-key foreignTable="rate" onDelete="cascade" onUpdate="cascade">
+        <column name="name" type="varchar" size="100" required="true"/>
+        <column name="value" type="integer" size="2" required="true"/>
+    </table>
+
+    <table name="rate_extra_rate">
+        <column name="rate_id" type="integer"  primaryKey="true"/>
+        <column name="rate_extra_id" type="integer"  primaryKey="true"/>
+        <foreign-key foreignTable="rate">
             <reference local="rate_id" foreign="id" />
         </foreign-key>
-        <foreign-key foreignTable="sf_guard_user_profile" onDelete="cascade" onUpdate="cascade">
-            <reference local="customer_id" foreign="id" />
+        <foreign-key foreignTable="rate_extra">
+            <reference local="rate_extra_id" foreign="id" />
         </foreign-key>
-        <foreign-key foreignTable="vehicle_type" onDelete="cascade" onUpdate="cascade">
-            <reference local="vehicle_type_id" foreign="id" />
-        </foreign-key>
-        <unique name="customer_rate_table_index" >
-            <unique-column name="customer_id" />
-            <unique-column name="rate_id" />
-            <unique-column name="vehicle_type_id" />
-        </unique>
     </table>
+
+
+  <table name="customer_rate">
+      <behavior name="Timestampable"/>
+      <column name="customer_id" type="integer" primaryKey="true"/>
+      <column name="rate_id" type="integer" primaryKey="true"/>
+      <foreign-key foreignTable="sf_guard_user_profile">
+          <reference local="customer_id" foreign="id" />
+      </foreign-key>
+      <foreign-key foreignTable="rate">
+          <reference local="rate_id" foreign="id" />
+      </foreign-key>
+  </table>
+
 
   <table name="booking">
       <behavior name="Timestampable"/>
@@ -205,6 +214,7 @@
       <column name="year" type="integer" size="4" required="true"/>
       <column name="number" type="integer" size="12" required="true"/>
       <column name="adult" type="integer" size="4" required="true"/>
+      <column name="reduced" type="integer" size="2" required="false"/>
       <column name="child" type="integer" size="4" required="false" default="0  "/>
       <column name="contact" type="varchar" size="100" required="false"/>
       <column name="rif_file" type="varchar" size="20" required="false"/>

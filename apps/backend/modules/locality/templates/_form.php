@@ -29,12 +29,22 @@
           <th><?php echo $form['name']->renderLabel() ?></th>
           <td>
               <?php echo $form['name']->renderError() ?>
-              <?php echo $form['name']->render(array('class'=>'input-xlarge')) ?>
+              <?php echo $form['name']->render(array('class'=>'input-xlarge','placeholder'=>'Inserire denominazione')) ?>
           </td>
           <th><?php echo $form['is_vector']->renderLabel() ?></th>
           <td>
               <?php echo $form['is_vector']->renderError() ?>
               <?php echo $form['is_vector'] ?>
+          </td>
+      </tr>
+      <tr>
+          <th><?php echo $form['area_id']->renderLabel() ?></th>
+          <td colspan="3">
+              <?php echo $form['area_id']->renderError() ?>
+              <?php echo $form['area_id']->render() ?>
+              <div>
+
+              </div>
           </td>
       </tr>
       <tr>

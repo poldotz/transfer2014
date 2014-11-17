@@ -42,17 +42,17 @@ class vehicleTypeActions extends sfActions
     $page = ($request->getParameter('iDisplayStart', 0) / $item_per_page) + 1;
     $pager = VehicleTypePeer::doSelectPager($page, $item_per_page, $c);
     //end: paging
-    $json = '{"iTotalRecords":'.$pager->getNbResults().',
-     "iTotalDisplayRecords":'.$pager->getNbResults().',
-     "aaData":[';
-    $first = 0;
-    foreach ($pager->getResults() as $v)
-    {
-        if ($first++) $json .= ',';
-        $json .= '["'.$v->getName().'","<input class=\'btn btn-info\' style=\'float:left; margin: 5px;\' value=\'Modifica\' type=\'button\' onclick=\"document.location.href=\'vehicleType/edit/id/'.$v->getId().' \';\">"]';
-    }
-    $json .= ']}';
-    return $this->renderText($json);
+      $json["iTotalRecords"] = $pager->getNbResults();
+      $json["iTotalDisplayRecords"] = $pager->getNbResults();
+      $json["aaData"] = array();
+      foreach ($pager->getResults() as $v)
+      {
+          $status = $v->getPerPerson() ? "SI" : "NO";          $url = $this->generateUrl('vehicle_type_edit',array('id'=>$v->getId()));
+          $action = '<input class="btn btn-info" style="float:left; margin: 5px;" value="Modifica" type="button" onclick="document.location.href=\''.$url.'\'">';
+          $val = array($v->getName(),$status,$action);
+          array_push($json["aaData"],$val);
+      }
+      return $this->renderText(json_encode($json));
   }
 
   public function executeNew(sfWebRequest $request)

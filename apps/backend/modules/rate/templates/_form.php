@@ -42,6 +42,13 @@
         </td>
       </tr>
       <tr>
+          <th><?php echo $form['surcharge']->renderLabel() ?></th>
+          <td>
+              <?php echo $form['surcharge']->renderError() ?>
+              <?php echo $form['surcharge'] ?>%
+          </td>
+      </tr>
+      <tr>
         <th><?php echo $form['hour_from']->renderLabel() ?></th>
         <td>
           <?php echo $form['hour_from']->renderError() ?>
@@ -53,13 +60,6 @@
         <td>
           <?php echo $form['hour_to']->renderError() ?>
           <?php echo $form['hour_to']->render(array('style'=>'width:80px;')) ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['surcharge']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['surcharge']->renderError() ?>
-          <?php echo $form['surcharge'] ?>%
         </td>
       </tr>
       <tr>

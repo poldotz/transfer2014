@@ -43,7 +43,6 @@
 <div id="map_canvas_area"></div>
 <script type="text/javascript">
     $( document ).ready(function() {
-
         var map;
         var marker;
         var areaSquare;

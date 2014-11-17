@@ -58,7 +58,10 @@
                         <?php echo $form['adult']->render(array('class'=>"input-block-level",'required',"maxlength"=>"2","pattern"=>"\d","placeholder"=>"Adulti")) ?>
                     </div>
                 </div>
-                <div class="span2 input-left-top-margins">
+                <div class="span1 input-left-top-margins">
+                    <?php echo $form['reduced']->render(array('class'=>"input-block-level",'required',"maxlength"=>"2","pattern"=>"\d","placeholder"=>"Ridotti")) ?>
+                </div>
+                <div class="span1 input-left-top-margins">
                     <?php echo $form['child']->render(array('class'=>"input-block-level",'required',"maxlength"=>"2","pattern"=>"\d","placeholder"=>"Bambini")) ?>
                 </div>
             </div>

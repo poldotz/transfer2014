@@ -50,6 +50,7 @@ class BookingForm extends BaseBookingForm
 
       $this->setWidget('vehicle_type_id',new sfWidgetFormPropelChoice(array('model'=>'vehicleType','add_empty'=>'Mezzo Richiesto')));
 
+      $this->setDefault('reduced','');
       $this->setDefault('child','');
 
       if($this->getObject()->getId()){

@@ -46,11 +46,15 @@
                         <?php echo $form['vehicle_type_id']->render(array('class'=>"input-block-level",'required')) ?>
                     </div>
                 </div>
-                <div class="span3 input-left-top-margins"required>
+                <div class="span2 input-left-top-margins"required>
                     <div class="control-group <?php echo $form['adult']->hasError() ? 'error' : ''; ?>">
                         <?php echo $form['adult']->render(array('class'=>"input-block-level",'required',"maxlength"=>"2","pattern"=>"\d","placeholder"=>"Adulti")) ?>
-                    </div>                 </div>
-                <div class="span2 input-left-top-margins">
+                    </div>
+                </div>
+                <div class="span1 input-left-top-margins">
+                    <?php echo $form['reduced']->render(array('class'=>"input-block-level",'required',"maxlength"=>"2","pattern"=>"\d","placeholder"=>"Ridotti")) ?>
+                </div>
+                <div class="span1 input-left-top-margins">
                     <?php echo $form['child']->render(array('class'=>"input-block-level",'required',"maxlength"=>"2","pattern"=>"\d","placeholder"=>"Bambini")) ?>
                 </div>
             </div>

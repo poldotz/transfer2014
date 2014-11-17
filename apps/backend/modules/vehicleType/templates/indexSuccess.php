@@ -11,6 +11,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>A persona</th>
                             <th>Azioni</th>
                         </tr>
 

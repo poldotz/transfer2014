@@ -32,10 +32,9 @@ class RateForm extends BaseRateForm
           'name'    => 'Nome: ',
           'description'   => 'Descrizione :',
           'day' => 'Giorni: ',
-          'hour_from' => 'Dalle: ',
-          'hour_to' => 'Alle: ',
-          'hour_from' => 'Dalle: ',
-          'surcharge' => "Supplemento: ",
+          'hour_from' => 'Supplemento dalle ore: ',
+          'hour_to' => 'Supplemento alle ore: ',
+          'surcharge' => "Supplemento fascia oraria: ",
           'note' => "Note: "
       ));
   }
