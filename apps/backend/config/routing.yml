@@ -150,6 +150,12 @@ customer_update:
     url:   /aggiorna-cliente
     param: { module: customer, action: update }
 
+customer_rate:
+    url:   /tariffa-cliente
+    param: { module: areaRateTable, action: index }
+    requirements:
+      id: \d+
+
 users:
   url:   /gestione-utenti
   param: { module: users, action: index }

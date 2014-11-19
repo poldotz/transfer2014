@@ -60,6 +60,7 @@ CREATE TABLE `vehicle_type`
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
     `per_person` TINYINT(1) DEFAULT 0 NOT NULL,
+    `is_active` TINYINT(1) DEFAULT 1 NOT NULL,
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`)

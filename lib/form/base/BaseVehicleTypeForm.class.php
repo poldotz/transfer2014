@@ -17,6 +17,7 @@ abstract class BaseVehicleTypeForm extends BaseFormPropel
       'id'         => new sfWidgetFormInputHidden(),
       'name'       => new sfWidgetFormInputText(),
       'per_person' => new sfWidgetFormInputCheckbox(),
+      'is_active'  => new sfWidgetFormInputCheckbox(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -25,6 +26,7 @@ abstract class BaseVehicleTypeForm extends BaseFormPropel
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'name'       => new sfValidatorString(array('max_length' => 100)),
       'per_person' => new sfValidatorBoolean(),
+      'is_active'  => new sfValidatorBoolean(),
       'created_at' => new sfValidatorDateTime(array('required' => false)),
       'updated_at' => new sfValidatorDateTime(array('required' => false)),
     ));

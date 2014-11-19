@@ -61,7 +61,9 @@ class customerActions extends sfActions
             $tax_field = $v->getCustomerType() == "Privato" ? $v->getTaxCode() : $v->getVatNumber();
             $url = $this->generateUrl('customer_edit',array('id'=>$v->getId()));
             $action = '<input class="btn btn-info" style="float:left; margin: 5px;" value="Modifica" type="button" onclick="document.location.href=\''.$url.'\'">';
-            $val = array($v->getName(),$v->getCustomerType()->getDescription(),$tax_field,$v->getEmail(),$v->getPhone(),$v->getFax(),$status,$action);
+            $tariffa_url = $this->generateUrl('customer_rate',array('id'=>$v->getId()));
+            $action_tariffa = '<input class="btn btn-info" style="float:left; margin: 5px;" value="Tariffa" type="button" onclick="document.location.href=\''.$tariffa_url.'\'">';
+            $val = array($v->getName(),$v->getCustomerType()->getDescription(),$tax_field,$v->getEmail(),$v->getPhone(),$v->getFax(),$status,$action.$action_tariffa);
             array_push($json["aaData"],$val);
         }
         return $this->renderText(json_encode($json));
