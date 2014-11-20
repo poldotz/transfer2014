@@ -20,7 +20,7 @@ class areaRateTableActions extends sfActions
       $customer_id = $request->getGetParameter('id',null);
       if($customer_id){
           //$rateTable = AreaVehicleRateTableQuery::findByCustomerId($customer_id);
-          $this->form = new AreaVehicleRateTableFormCollection(null,array('customer_id'=>$customer_id));
+          $this->form = new AreaVehicleRateTableCollectionForm(null,array('customer_id'=>$customer_id));
           $this->customer_id = $customer_id;
       }
       else{

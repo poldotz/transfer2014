@@ -15,6 +15,6 @@ class AreaVehicleRateTableForm extends BaseAreaVehicleRateTableForm
       $this->setWidget('customer_id',new sfWidgetFormInputHidden());
       $this->setWidget('area_id',new sfWidgetFormInputHidden());
       $this->setWidget('vehicle_type_id',new sfWidgetFormInputHidden());
-      $this->setWidget('value',new sfWidgetFormInputText());
+      $this->setWidget('cost',new sfWidgetFormInputText());
   }
 }

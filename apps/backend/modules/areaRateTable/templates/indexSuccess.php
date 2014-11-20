@@ -21,11 +21,28 @@
                     <th>Tariffa</th>
                     </thead>
                     <tbody>
-                        <?php echo $form->render() ?>
+                    <?php foreach($form->getFormFieldSchema() as $collectionField): ?>
+                    <?php if(get_class($collectionField) == 'sfFormFieldSchema'): ?>
+                        <tr>
+                            <?php foreach( $collectionField as  $field ): ?>
+                                <?php if($field->getName() == "area_id"): ?>
+                                    <td class="span3">
+
+                                        <?php echo $field->render(); ?>
+                                    </td>
+                                <?php endif; ?>
+                                <td class="<?php echo $field->isHidden() ? 'hidden' : 'span3' ?> ">
+                                    <?php echo $field->render(array("class"=>"span4")); ?>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php else: ?>
+                        <?php echo $collectionField->render() ?>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </form>
         </div>
     </div>
 </div>
-
