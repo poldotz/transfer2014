@@ -12,18 +12,15 @@ class AreaVehicleRateTableCollectionForm extends sfForm
 
   public function configure()
   {
-      $areas = AreaQuery::create()
-          ->filterByIsActive(true)
-          ->orderByName()
-          ->find();
+      $area = AreaPeer::retrieveByPK($this->getOption('area_id'));
 
       $vehicleTypes = VehicleTypeQuery::create()
           //->filterByIsActive(true)
           ->orderByName()
           ->find();
 
-      foreach($areas as $area){
-          foreach($vehicleTypes as $vehicleType){
+
+      foreach($vehicleTypes as $vehicleType){
               $areaVehicleRateTable = AreaVehicleRateTableQuery::create()
                   ->filterByCustomerId($this->getOption('customer_id'))
                   ->filterByAreaId($area->getId())
@@ -42,7 +39,6 @@ class AreaVehicleRateTableCollectionForm extends sfForm
               $rateTableRowForm->setDefault('vehicle_type_id',$vehicleType->getId());
               $this->embedForm($area->getId()."-".$vehicleType->getId(),$rateTableRowForm);
           }
-      }
       $this->widgetSchema->setNameFormat('customerRates[%s]');
       $this->disableLocalCSRFProtection();
 

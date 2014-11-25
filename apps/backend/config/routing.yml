@@ -151,8 +151,13 @@ customer_update:
     param: { module: customer, action: update }
 
 customer_rate:
-    url:   /tariffa-cliente
+    url:   /seleziona-zona-tariffa
     param: { module: areaRateTable, action: index }
+    requirements:
+      id: \d+
+area_customer_rate:
+    url:   /tariffa-cliente-zona
+    param: { module: areaRateTable, action: areaCustomerRateTable }
     requirements:
       id: \d+
 

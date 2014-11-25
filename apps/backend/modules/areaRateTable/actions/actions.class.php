@@ -19,14 +19,36 @@ class areaRateTableActions extends sfActions
   {
       $customer_id = $request->getGetParameter('id',null);
       if($customer_id){
-          //$rateTable = AreaVehicleRateTableQuery::findByCustomerId($customer_id);
-          $this->customerAreaForm = new AreaCustomerForm(null,array('customer_id'=>$customer_id));
-          $this->form = new AreaVehicleRateTableCollectionForm(null,array('customer_id'=>$customer_id));
-          $this->customer = CustomerPeer::retrieveByPK($customer_id);
+         $this->customer = CustomerPeer::retrieveByPK($customer_id);
       }
       else{
           $this->redirect('@customer');
       }
+  }
+
+    /**
+     *  AreaVehicle form.
+     */
+    public function executeAreaCustomerRateTable(sfWebRequest $request){
+
+        if($request->getParameter('areaCustomer',null)){
+            $customerAreaForm = new AreaCustomerForm();
+            $customerAreaForm->bind($request->getParameter('areaCustomer'));
+            if($customerAreaForm->isValid()){
+                $this->area = AreaPeer::retrieveByPK($customerAreaForm->getValue('area_id'));
+                $this->customer = CustomerPeer::retrieveByPK($customerAreaForm->getValue('customer_id'));
+                $this->form = new AreaVehicleRateTableCollectionForm(null,array('customer_id'=>$this->customer->getId(),'area_id'=>$this->area->getId()));
+            }
+            else{
+                $customer_id = $request->getGetParameter('id',null);
+                $this->redirect($this->generateUrl('area_customer_rate',array('id'=>$customer_id)));
+            }
+        }
+        else{
+            $this->redirect('@customer');
+        }
+
+
   }
 
 
