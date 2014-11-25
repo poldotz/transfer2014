@@ -20,13 +20,15 @@ class areaRateTableActions extends sfActions
       $customer_id = $request->getGetParameter('id',null);
       if($customer_id){
           //$rateTable = AreaVehicleRateTableQuery::findByCustomerId($customer_id);
+          $this->customerAreaForm = new AreaCustomerForm(null,array('customer_id'=>$customer_id));
           $this->form = new AreaVehicleRateTableCollectionForm(null,array('customer_id'=>$customer_id));
-          $this->customer_id = $customer_id;
+          $this->customer = CustomerPeer::retrieveByPK($customer_id);
       }
       else{
           $this->redirect('@customer');
       }
   }
+
 
   public function executeCustomerRateTable(sfWebRequest $request){
       $customer_id = $request->getGetParameter('id',null);
