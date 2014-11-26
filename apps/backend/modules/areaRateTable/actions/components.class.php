@@ -9,7 +9,7 @@
 class areaRateTableComponents extends sfComponents {
 
     public function executeAreaCustomer(){
-        $this->customerAreaForm = new AreaCustomerForm(null,array('customer_id'=>$this->customer->getId()));
-        $this->urlForm = $this->generateUrl('area_customer_rate',array('id'=>$this->customer->getId()));
+        $this->customerAreaForm = new AreaCustomerForm(null,array('customer_id'=>$this->customer_id));
+        $this->urlForm = $this->generateUrl('area_customer_rate',array('id'=>$this->customer_id ));
     }
 } 

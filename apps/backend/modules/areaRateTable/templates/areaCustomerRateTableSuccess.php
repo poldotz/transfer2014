@@ -9,7 +9,7 @@
 <?php include_partial('global/configuration_navbar',array('selected'=>'customer')); ?>
 <div class="main-container" xmlns="http://www.w3.org/1999/html">
     <h4>Gestionie Tariffa </h4>
-    <?php include_component('areaRateTable','areaCustomer',array('customer'=>$customer)); ?>
+    <?php include_component('areaRateTable','areaCustomer',array('customer_id'=>$customer->getId())); ?>
     <div class="row-fluid">
         <div class="span6"><h3>Cliente: <?php echo $customer->getName() ?></h3></div>
         <div class="span6"><h3>Area: <?php echo $area->getName() ?></h3></div>
@@ -18,6 +18,8 @@
         <div class="span12">
 
             <form action="<?php echo url_for('areaRateTable/save')?>" method="post">
+                <input type="hidden" name="customer_id" value="<?php echo  $customer->getId() ?>" />
+                <input type="hidden" name="area_id" value="<?php echo  $area->getId() ?>" />
                 <button type="submit" class="btn btn-success">Salva</button>
                 <br/><br/>
                 <table class="table table-bordered table-striped">
@@ -30,6 +32,12 @@
                     <?php if(get_class($collectionField) == 'sfFormFieldSchema'): ?>
                         <tr>
                             <?php foreach( $collectionField as  $field ): ?>
+                            <?php if($field->getName() == "id"): ?>
+                                <?php echo $field->render(); ?>
+                            <?php endif; ?>
+                            <?php if($field->getName() == "area_id"): ?>
+                                <?php echo $field->render(); ?>
+                            <?php endif; ?>
                             <?php if($field->getName() == "customer_id"): ?>
                                     <?php echo $field->render(); ?>
                             <?php endif; ?>

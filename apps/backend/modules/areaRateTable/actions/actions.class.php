@@ -37,7 +37,7 @@ class areaRateTableActions extends sfActions
             if($customerAreaForm->isValid()){
                 $this->area = AreaPeer::retrieveByPK($customerAreaForm->getValue('area_id'));
                 $this->customer = CustomerPeer::retrieveByPK($customerAreaForm->getValue('customer_id'));
-                $this->form = new AreaVehicleRateTableCollectionForm(null,array('customer_id'=>$this->customer->getId(),'area_id'=>$this->area->getId()));
+                $this->form = new AreaVehicleRateTableCollectionForm(array('customer_id'=>$this->customer->getId()),array('area'=>$this->area));
             }
             else{
                 $customer_id = $request->getGetParameter('id',null);
@@ -47,7 +47,38 @@ class areaRateTableActions extends sfActions
         else{
             $this->redirect('@customer');
         }
+  }
 
+    /**
+     * @param sfWebRequest $request
+     */
+    public function executeSave(sfWebRequest $request){
+
+        $rates = $request->getParameter('areaCustomerRates');
+
+        $customer_id = $request->getParameter('customer_id');
+        $area_id = $request->getParameter('area_id');
+
+        foreach($rates as $rate){
+
+            $rateTableObj = AreaVehicleRateTableQuery::create()->findPk(array($rate['area_id'],$rate['vehicle_type_id'],$rate['customer_id']));
+            if($rateTableObj == null){
+                $rateTableObj = new AreaVehicleRateTable();
+            }
+            $rateForm = new AreaVehicleRateTableForm($rateTableObj);
+
+            $rateForm->bind($rate);
+            //$customer_id = $request->getParameter('customer_id');
+            if($rateForm->isValid()){
+                $rateForm->save();
+
+            }
+            else{
+                $this->getUser()->setFlash("error",'Si è verificato un errore durante la processazione del form');
+            }
+
+        }
+        $this->redirect($this->generateUrl('area_customer_rate',array('id'=>$customer_id,'area_id'=>$area_id)));
 
   }
 
@@ -63,4 +94,6 @@ class areaRateTableActions extends sfActions
           $this->redirect('@customer');
       }
   }
+
+
 }

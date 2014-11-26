@@ -158,8 +158,6 @@ customer_rate:
 area_customer_rate:
     url:   /tariffa-cliente-zona
     param: { module: areaRateTable, action: areaCustomerRateTable }
-    requirements:
-      id: \d+
 
 users:
   url:   /gestione-utenti
