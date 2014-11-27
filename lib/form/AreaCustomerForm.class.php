@@ -15,7 +15,7 @@ class AreaCustomerForm extends BaseAreaVehicleRateTableForm
       $this->setWidget('customer_id',new sfWidgetFormInputHidden());
       $this->setDefault('customer_id',$this->getOption('customer_id'));
       if($this->getOption('area_id')){
-        $this->setDefault('are',$this->getOption('area_id'));
+        $this->setDefault('area_id',$this->getOption('area_id'));
       }
       $c = new Criteria();
       $c->add(AreaPeer::IS_ACTIVE,true,Criteria::EQUAL);

@@ -8,20 +8,25 @@
 ?>
 <?php include_partial('global/configuration_navbar',array('selected'=>'customer')); ?>
 <div class="main-container" xmlns="http://www.w3.org/1999/html">
-    <h4>Gestionie Tariffa </h4>
-    <?php include_component('areaRateTable','areaCustomer',array('customer_id'=>$customer->getId())); ?>
+    <h4>Gestionie Tariffa <?php echo $customer->getName() ?></h4>
+    <ul class="nav nav-tabs">
+        <li><a href="#home" data-toggle="tab">Parametri tariffa</a></li>
+        <li><a href="#profile" data-toggle="tab">Tariffa Zona</a></li>
+    </ul>
     <div class="row-fluid">
-        <div class="span6"><h3>Cliente: <?php echo $customer->getName() ?></h3></div>
-        <div class="span6"><h3>Area: <?php echo $area->getName() ?></h3></div>
+        <div class="span12 right-align-text">
+             <?php include_component('areaRateTable','areaCustomer',array('customer_id'=>$customer->getId(),'area_id'=>$area->getId())); ?>
+        </div>
     </div>
     <div class="row-fluid">
         <div class="span12">
-
             <form action="<?php echo url_for('areaRateTable/save')?>" method="post">
+                    <div class="form-actions"><button type="submit" class="btn btn-success">Salva</button>
+                        <?php echo link_to('Torna alla lista','@customer',array('class'=>'btn btn-info')) ?>
+                    </div>
                 <input type="hidden" name="customer_id" value="<?php echo  $customer->getId() ?>" />
                 <input type="hidden" name="area_id" value="<?php echo  $area->getId() ?>" />
-                <button type="submit" class="btn btn-success">Salva</button>
-                <br/><br/>
+
                 <table class="table table-bordered table-striped">
                     <thead>
                     <th>Categoria Mezzo</th>
@@ -62,7 +67,11 @@
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                    <div class="form-actions"><button type="submit" class="btn btn-success">Salva</button>
+                        <?php echo link_to('Torna alla lista','@customer',array('class'=>'btn btn-info')) ?>
+                    </div>
             </form>
+            <br/>
         </div>
     </div>
 </div>

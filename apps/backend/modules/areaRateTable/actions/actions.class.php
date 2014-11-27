@@ -41,8 +41,13 @@ class areaRateTableActions extends sfActions
             }
             else{
                 $customer_id = $request->getGetParameter('id',null);
-                $this->redirect($this->generateUrl('area_customer_rate',array('id'=>$customer_id)));
+                $this->redirect($this->generateUrl('customer_rate',array('id'=>$customer_id)));
             }
+        }
+        else if($request->getGetParameter('id',null) && $customer_id = $request->getGetParameter('area_id',null) ){
+            $this->area = AreaPeer::retrieveByPK($request->getGetParameter('area_id',null));
+            $this->customer = CustomerPeer::retrieveByPK($request->getGetParameter('id',null));
+            $this->form = new AreaVehicleRateTableCollectionForm(array('customer_id'=>$this->customer->getId()),array('area'=>$this->area));
         }
         else{
             $this->redirect('@customer');
