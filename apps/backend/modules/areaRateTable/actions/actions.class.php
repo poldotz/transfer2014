@@ -19,7 +19,8 @@ class areaRateTableActions extends sfActions
   {
       $customer_id = $request->getGetParameter('id',null);
       if($customer_id){
-         $this->customer = CustomerPeer::retrieveByPK($customer_id);
+        $this->customer = CustomerPeer::retrieveByPK($customer_id);
+
       }
       else{
           $this->redirect('@customer');
@@ -99,6 +100,18 @@ class areaRateTableActions extends sfActions
           $this->redirect('@customer');
       }
   }
+
+    public function executeCustomerRateTableParameters(sfWebRequest $request){
+        $customer_id = $request->getGetParameter('id',null);
+        if($customer_id){
+            $this->customer = CustomerPeer::retrieveByPK($customer_id);
+        }
+        else{
+            $this->redirect('@customer');
+        }
+    }
+
+
 
 
 }

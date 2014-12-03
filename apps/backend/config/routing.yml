@@ -159,6 +159,10 @@ area_customer_rate:
     url:   /tariffa-cliente-zona
     param: { module: areaRateTable, action: areaCustomerRateTable }
 
+parameter_customer_rate:
+    url:   /parametri-tariffa-cliente
+    param: { module: areaRateTable, action: customerRateTableParameters }
+
 users:
   url:   /gestione-utenti
   param: { module: users, action: index }

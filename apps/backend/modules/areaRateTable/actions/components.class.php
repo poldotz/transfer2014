@@ -16,4 +16,13 @@ class areaRateTableComponents extends sfComponents {
         $this->customerAreaForm = new AreaCustomerForm(null,$options);
         $this->urlForm = $this->generateUrl('area_customer_rate',array('id'=>$this->customer_id ));
     }
+
+    /**
+     *  header rateTable
+     */
+    public function executeRateTableHeader(){
+
+        $this->urlRateAreas = $this->generateUrl('customer_rate',array('id'=>$this->customer_id ));
+        $this->urlRateParameters = $this->generateUrl('parameter_customer_rate',array('id'=>$this->customer_id ));
+    }
 } 

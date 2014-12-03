@@ -17,6 +17,7 @@ abstract class BaseRateExtraForm extends BaseFormPropel
       'id'                   => new sfWidgetFormInputHidden(),
       'name'                 => new sfWidgetFormInputText(),
       'value'                => new sfWidgetFormInputText(),
+      'typology'             => new sfWidgetFormChoice(array('choices' => array (  '' => '',  'percentage' => 'percentage',  'additional' => 'additional',))),
       'rate_extra_rate_list' => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'Rate')),
     ));
 
@@ -24,6 +25,7 @@ abstract class BaseRateExtraForm extends BaseFormPropel
       'id'                   => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'name'                 => new sfValidatorString(array('max_length' => 100)),
       'value'                => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647)),
+      'typology'             => new sfValidatorChoice(array('choices' => array (  0 => 'percentage',  1 => 'additional',), 'required' => false)),
       'rate_extra_rate_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'Rate', 'required' => false)),
     ));
 

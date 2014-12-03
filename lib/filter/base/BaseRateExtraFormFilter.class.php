@@ -14,12 +14,14 @@ abstract class BaseRateExtraFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'name'                 => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'value'                => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'typology'             => new sfWidgetFormChoice(array('choices' => array(''=>'all',0=>'percentage',1=>'additional',))),
       'rate_extra_rate_list' => new sfWidgetFormPropelChoice(array('model' => 'Rate', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
       'name'                 => new sfValidatorPass(array('required' => false)),
       'value'                => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'typology'             => new sfValidatorChoice(array('required' => false, 'choices' => array(0=>0,1=>1,))),
       'rate_extra_rate_list' => new sfValidatorPropelChoice(array('model' => 'Rate', 'required' => false)),
     ));
 
@@ -66,6 +68,7 @@ abstract class BaseRateExtraFormFilter extends BaseFormFilterPropel
       'id'                   => 'Number',
       'name'                 => 'Text',
       'value'                => 'Number',
+      'typology'             => 'Text',
       'rate_extra_rate_list' => 'ManyKey',
     );
   }

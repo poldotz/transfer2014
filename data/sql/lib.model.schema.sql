@@ -293,6 +293,7 @@ CREATE TABLE `rate_extra`
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
     `value` INTEGER(2) NOT NULL,
+    `typology` TINYINT,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
