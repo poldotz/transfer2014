@@ -38,6 +38,14 @@ all:
       logging:           %SF_LOGGING_ENABLED%
       charset:           %SF_CHARSET%
       delivery_strategy: realtime
+#      transport:
+#        class: Swift_SmtpTransport
+#        param:
+#          host:       smtp.gmail.com
+#          port:       465
+#          encryption: ssl
+#          username: leonardo.podda@gmail.com
+#          password: ang3lica
       transport:
         class: Swift_SmtpTransport
         param:
@@ -46,11 +54,3 @@ all:
           encryption: ssl
           username: maremania.transfer@gmail.com
           password: m4r3m4n14
-#      transport:
-#        class: Swift_SmtpTransport
-#        param:
-#          host:       mail.maremania.com
-#          port:       587
-#          encryption: tls
-#          username:   transfer@maremania.com
-#          password:   tra1234
