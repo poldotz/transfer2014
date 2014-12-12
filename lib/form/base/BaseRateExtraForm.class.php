@@ -14,19 +14,19 @@ abstract class BaseRateExtraForm extends BaseFormPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'id'                   => new sfWidgetFormInputHidden(),
-      'name'                 => new sfWidgetFormInputText(),
-      'value'                => new sfWidgetFormInputText(),
-      'typology'             => new sfWidgetFormChoice(array('choices' => array (  '' => '',  'percentage' => 'percentage',  'additional' => 'additional',))),
-      'rate_extra_rate_list' => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'Rate')),
+      'id'                       => new sfWidgetFormInputHidden(),
+      'name'                     => new sfWidgetFormInputText(),
+      'value'                    => new sfWidgetFormInputText(),
+      'typology'                 => new sfWidgetFormChoice(array('choices' => array (  '' => '',  'percentuale' => 'percentuale',  'addizionale' => 'addizionale',))),
+      'customer_rate_extra_list' => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'Customer')),
     ));
 
     $this->setValidators(array(
-      'id'                   => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
-      'name'                 => new sfValidatorString(array('max_length' => 100)),
-      'value'                => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647)),
-      'typology'             => new sfValidatorChoice(array('choices' => array (  0 => 'percentage',  1 => 'additional',), 'required' => false)),
-      'rate_extra_rate_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'Rate', 'required' => false)),
+      'id'                       => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
+      'name'                     => new sfValidatorString(array('max_length' => 100)),
+      'value'                    => new sfValidatorNumber(),
+      'typology'                 => new sfValidatorChoice(array('choices' => array (  0 => 'percentuale',  1 => 'addizionale',), 'required' => false)),
+      'customer_rate_extra_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'Customer', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('rate_extra[%s]');
@@ -46,15 +46,15 @@ abstract class BaseRateExtraForm extends BaseFormPropel
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['rate_extra_rate_list']))
+    if (isset($this->widgetSchema['customer_rate_extra_list']))
     {
       $values = array();
-      foreach ($this->object->getRateExtraRates() as $obj)
+      foreach ($this->object->getCustomerRateExtras() as $obj)
       {
-        $values[] = $obj->getRateId();
+        $values[] = $obj->getCustomerId();
       }
 
-      $this->setDefault('rate_extra_rate_list', $values);
+      $this->setDefault('customer_rate_extra_list', $values);
     }
 
   }
@@ -63,17 +63,17 @@ abstract class BaseRateExtraForm extends BaseFormPropel
   {
     parent::doSave($con);
 
-    $this->saveRateExtraRateList($con);
+    $this->saveCustomerRateExtraList($con);
   }
 
-  public function saveRateExtraRateList($con = null)
+  public function saveCustomerRateExtraList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['rate_extra_rate_list']))
+    if (!isset($this->widgetSchema['customer_rate_extra_list']))
     {
       // somebody has unset this widget
       return;
@@ -85,17 +85,17 @@ abstract class BaseRateExtraForm extends BaseFormPropel
     }
 
     $c = new Criteria();
-    $c->add(RateExtraRatePeer::RATE_EXTRA_ID, $this->object->getPrimaryKey());
-    RateExtraRatePeer::doDelete($c, $con);
+    $c->add(CustomerRateExtraPeer::RATE_EXTRA_ID, $this->object->getPrimaryKey());
+    CustomerRateExtraPeer::doDelete($c, $con);
 
-    $values = $this->getValue('rate_extra_rate_list');
+    $values = $this->getValue('customer_rate_extra_list');
     if (is_array($values))
     {
       foreach ($values as $value)
       {
-        $obj = new RateExtraRate();
+        $obj = new CustomerRateExtra();
         $obj->setRateExtraId($this->object->getPrimaryKey());
-        $obj->setRateId($value);
+        $obj->setCustomerId($value);
         $obj->save($con);
       }
     }

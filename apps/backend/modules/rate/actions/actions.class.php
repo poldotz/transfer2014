@@ -11,7 +11,7 @@ class rateActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->Rates = RateQuery::create()->find();
+    $this->Rates = RateQuery::create()->find();
   }
 
     public function executeGet_data(sfWebRequest $request)

@@ -66,25 +66,27 @@
             lat = $('#area_latitude').val();
             lng = $('#area_longitude').val();
 
+            var bounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng($('#area_viewport_sw_lt').val(),$('#area_viewport_sw_ln').val()),
+                new google.maps.LatLng($('#area_viewport_ne_lt').val(),$('#area_viewport_ne_ln').val())
+            );
+
+            areaSquare = new google.maps.Rectangle({
+                bounds:bounds,
+                editable: false
+            });
+            areaSquare.setMap(map);
+            map.fitBounds(bounds);
+
         }
-        var markerPosition = new google.maps.LatLng(lat,lng);
-        marker = new google.maps.Marker({
-            position: markerPosition,
-            map: map,
-            title: $('#area_name').val()
-        });
 
-        var bounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng($('#area_viewport_ne_lt').val(),$('#area_viewport_ne_ln').val()),
-            new google.maps.LatLng($('#area_viewport_sw_lt').val(),$('#area_viewport_sw_ln').val())
-        );
 
-        areaSquare = new google.maps.Rectangle({
-            bounds:bounds,
-            editable: false
-        });
-        areaSquare.setMap(map);
-        map.fitBounds(bounds);
+            var markerPosition = new google.maps.LatLng(lat,lng);
+            marker = new google.maps.Marker({
+                position: markerPosition,
+                map: map,
+                title: $('#area_name').val()
+            });
 
 
         // Create the autocomplete object, restricting the search
@@ -104,14 +106,14 @@
 
             // fill form fields.
             if (place.geometry) {
-                $('#area_latitude').val(place.geometry.location.k);
-                $('#area_longitude').val(place.geometry.location.B);
+                $('#area_latitude').val(place.geometry.location.lat());
+                $('#area_longitude').val(place.geometry.location.lng());
                 //viewport area. ne
-                $('#area_viewport_ne_lt').val(place.geometry.viewport.Ea.j); //lat
-                $('#area_viewport_ne_ln').val(place.geometry.viewport.va.j);// lng
+                $('#area_viewport_ne_lt').val(place.geometry.viewport.getNorthEast().lat()); //lat
+                $('#area_viewport_ne_ln').val(place.geometry.viewport.getNorthEast().lng());// lng
                 //viewport area. sw
-                $('#area_viewport_sw_lt').val(place.geometry.viewport.Ea.k); //lat
-                $('#area_viewport_sw_ln').val(place.geometry.viewport.va.k); //lng
+                $('#area_viewport_sw_lt').val(place.geometry.viewport.getSouthWest().lat()); //lat
+                $('#area_viewport_sw_ln').val(place.geometry.viewport.getSouthWest().lng()); //lng
 
             }
             // se esiste già lo elimino.

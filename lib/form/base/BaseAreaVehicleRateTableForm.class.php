@@ -24,7 +24,7 @@ abstract class BaseAreaVehicleRateTableForm extends BaseFormPropel
       'area_id'         => new sfValidatorPropelChoice(array('model' => 'Area', 'column' => 'id', 'required' => false)),
       'vehicle_type_id' => new sfValidatorPropelChoice(array('model' => 'VehicleType', 'column' => 'id', 'required' => false)),
       'customer_id'     => new sfValidatorPropelChoice(array('model' => 'Customer', 'column' => 'id', 'required' => false)),
-      'cost'            => new sfValidatorNumber(array('required' => false)),
+      'cost'            => new sfValidatorNumber(),
     ));
 
     $this->widgetSchema->setNameFormat('area_vehicle_rate_table[%s]');

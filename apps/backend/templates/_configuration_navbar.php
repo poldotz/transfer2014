@@ -31,6 +31,9 @@
                 <li>
                     <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe03a;"></span> Tariffazione',"@rate_table",array("class"=>($selected == "rate_table") ? "selected": "")); ?>
                 </li>
+                <li>
+                    <?php echo link_to('<span class="fs1" aria-hidden="true" data-icon="&#xe03a;"></span> Extra Tariffa',"@rate_extra",array("class"=>($selected == "rate_table") ? "selected": "")); ?>
+                </li>
             </ul>
         </li>
     </ul>

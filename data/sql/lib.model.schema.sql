@@ -241,7 +241,7 @@ CREATE TABLE `area_vehicle_rate_table`
     `area_id` INTEGER NOT NULL,
     `vehicle_type_id` INTEGER NOT NULL,
     `customer_id` INTEGER NOT NULL,
-    `cost` DECIMAL(10,2),
+    `cost` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     PRIMARY KEY (`area_id`,`vehicle_type_id`,`customer_id`),
     INDEX `area_vehicle_rate_table_FI_1` (`customer_id`),
     INDEX `area_vehicle_rate_table_FI_3` (`vehicle_type_id`),
@@ -292,27 +292,29 @@ CREATE TABLE `rate_extra`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
-    `value` INTEGER(2) NOT NULL,
+    `value` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
     `typology` TINYINT,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- rate_extra_rate
+-- customer_rate_extra
 -- ---------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `rate_extra_rate`;
+DROP TABLE IF EXISTS `customer_rate_extra`;
 
-CREATE TABLE `rate_extra_rate`
+CREATE TABLE `customer_rate_extra`
 (
-    `rate_id` INTEGER NOT NULL,
+    `customer_id` INTEGER NOT NULL,
     `rate_extra_id` INTEGER NOT NULL,
-    PRIMARY KEY (`rate_id`,`rate_extra_id`),
-    INDEX `rate_extra_rate_FI_2` (`rate_extra_id`),
-    CONSTRAINT `rate_extra_rate_FK_1`
-        FOREIGN KEY (`rate_id`)
-        REFERENCES `rate` (`id`),
-    CONSTRAINT `rate_extra_rate_FK_2`
+    `value` DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+    `typology` TINYINT,
+    PRIMARY KEY (`customer_id`,`rate_extra_id`),
+    INDEX `customer_rate_extra_FI_2` (`rate_extra_id`),
+    CONSTRAINT `customer_rate_extra_FK_1`
+        FOREIGN KEY (`customer_id`)
+        REFERENCES `sf_guard_user_profile` (`id`),
+    CONSTRAINT `customer_rate_extra_FK_2`
         FOREIGN KEY (`rate_extra_id`)
         REFERENCES `rate_extra` (`id`)
 ) ENGINE=InnoDB;

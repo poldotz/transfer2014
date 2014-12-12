@@ -161,7 +161,16 @@ area_customer_rate:
 
 parameter_customer_rate:
     url:   /parametri-tariffa-cliente
-    param: { module: areaRateTable, action: customerRateTableParameters }
+    param: { module: parameterRateTable, action: customerRateTableParameters }
+
+rate_extra:
+    url: /extra-tariffa
+    param: {module: rateExtra, action:index}
+
+rate_extra_edit:
+    url:   /modifica-extra-tariffa/:id
+    param: { module: rateExtra, action: edit }
+
 
 users:
   url:   /gestione-utenti
