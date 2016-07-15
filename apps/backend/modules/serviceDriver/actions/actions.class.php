@@ -132,11 +132,11 @@ class serviceDriverActions extends sfActions
 
 
         $body = $this->getPartial($template_name, $template_params);
-        $from = "transfer@maremania.com";
-        $fromName = "Maremania";
+        $from = "btravel@btravel.eu";
+        $fromName = "Btravel S.r.l.";
         $to = key($recipient);
         $toName = current($recipient);
-        $bbc_email = "maremania.transfer@gmail.com";
+        $bbc_email = "btravel@btravel.com";
         $message = Swift_Message::newInstance()
             ->setFrom(array($from=>$fromName))
             ->setTo(array($to=>$toName))
