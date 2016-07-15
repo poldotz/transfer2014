@@ -199,14 +199,15 @@ class bookingActions extends sfActions
             $c->addOr(BookingPeer::RIF_FILE,"%".$query."%",Criteria::LIKE);
             $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
         }
-        if ('desc' === $request->getParameter('sSortDir_0', 'desc'))
+        $c->addDescendingOrderByColumn(BookingPeer::YEAR)->addDescendingOrderByColumn(BookingPeer::NUMBER);
+        /*if ('desc' === $request->getParameter('sSortDir_0', 'desc'))
         {
             $c->addAscendingOrderByColumn($type_colnames[$iSortCol_0]);
         }
         else
         {
             $c->addDescendingOrderByColumn($type_colnames[$iSortCol_0]);
-        }
+        }*/
         //end: sorting
         //start: paging
         $item_per_page = $request->getParameter('iDisplayLength', 10);
@@ -310,6 +311,155 @@ class bookingActions extends sfActions
         $this->getResponse()->setContentType('application/json');
         return $this->renderText($departureTime);
 
+    }
+
+    public function executeImportBooking(sfWebRequest $request){
+
+        $this->form = new BookingImportForm();
+        if($request->isMethod('POST')) {
+          $response =    $this->processImportForm($request, $this->form);
+            $response ? die('OK') : die('KO');
+        }
+    }
+
+    protected function processImportForm(sfWebRequest $request, sfForm $form)
+    {
+
+        if(! empty($request->getFiles())) {
+            $fileName = $request->getFiles('import_file');
+            var_dump($fileName);
+            $theFileName = time() . "_import_booking.csv";
+            $uploadDir = sfConfig::get("sf_upload_dir");
+            $uploadFileName =  $uploadDir.DIRECTORY_SEPARATOR.$theFileName;
+            if(move_uploaded_file($fileName ["tmp_name"], $uploadFileName)){
+
+                $rows = array();
+                if (($handle = fopen($uploadFileName, "r")) !== FALSE) {
+                    $i = 0;
+                    while (($data = fgetcsv($handle, null, ";")) !== FALSE) {
+                        $i++;
+                        if ($i == 1) { continue; }
+                        $rows[] = $data;
+                    }
+                    fclose($handle);
+                }
+                var_dump($rows);
+                //$this->importBookingFromArray($rows);
+                unlink($uploadFileName);
+                return true;
+
+            }
+        }
+        return false;
+    }
+
+
+    private function retrieveDepartureTime(Locality $locality_from,Locality $locality_to,$time){
+
+        $times = explode(":",$time);
+        list($hour,$minute) = $times;
+
+        $route = RouteQuery::create()
+            ->filterByLocalityFrom($locality_from->getId())
+            ->filterByLocalityTo($locality_to->getId())
+            ->findOne();
+        if($route){
+            $duration = $route->getDuration();
+            $durationTime = explode(":",$duration);
+            $departureTime =  $this->calculateDepartureTime($hour,$minute,(int) $durationTime[0],(int) $durationTime[1]);
+        }
+        else{
+            $departureTime = array('departureHour'=>$hour,'departureMinute'=>$minute);
+        }
+        return $departureTime;
+    }
+
+    private function getCustomer($customerValue){
+        $customer = null;
+        if(! empty($customerValue)){
+            if(is_numeric($customerValue)){
+                $customer = CustomerQuery::create()->findOneById($customerValue);
+            }
+            else{
+                $customer = CustomerQuery::create()->findOneByName($customerValue);
+            }
+
+        }
+        return $customer;
+    }
+
+
+    protected function importBookingFromArray($rows = []){
+
+        if(! empty($rows)) {
+            foreach($rows as $row) {
+                try{
+
+                    $customer = $this->getCustomer($rows[5]);
+                    $booking = new Booking();
+
+                    $session_year = $this->getUser()->getSessionYear();
+                    $number = BookingPeer::getIdentificationNumber($session_year);
+                    $booking->setNumber($number);
+                    $booking->setYear($session_year);
+                    $booking->setBookingDate($row[0]);
+                    $booking->setAdult($row[1]);
+                    $booking->setChild($row[2]);
+                    $booking->setContact(isset($row[3]) ? $row[3] : "");
+                    $booking->setRifFile(isset($row[4]) ? $row[4] : "");
+                    $booking->setCustomer($customer);
+                    if (isset($row) && $vehicleType = VehicleTypeQuery::create()->findOneByName($rows['6'])) {
+                        $booking->setVehicleType($vehicleType);
+                    }
+                    $booking->save();
+
+                    switch ($row[7]) {
+                        case "arrival":
+                            $this->importArrival($booking, $row);
+                            break;
+                        case "departure":
+                            $this->importDeparture($booking, $row);
+                            break;
+                    }
+                }
+                catch(Exception $e){
+                    sfContext::getInstance()->getLogger()->err($e->getMessage());
+                    die($e->getMessage());
+
+                }
+            }
+        }
+    }
+
+    private function importArrival($booking,$data){
+
+        $arrival = new Arrival();
+        $arrival->setBooking($booking);
+        $arrival->setDay($data[8]);
+        $arrival->setHour($data[9]);
+        $arrival->setFlight($data[10]);
+        $arrival->setNote($data[11]);
+        $from = LocalityQuery::create()->findOneByName($data[12]);
+        $arrival->setLocalityFrom($from->getId());
+        $to = LocalityQuery::create()->findOneByName($data[13]);
+        $arrival->setLocalityTo($to->getId());
+        $arrival->save();
+    }
+    private function importDeparture($booking,$data){
+
+        $departure = new Departure();
+        $departure->setBooking($booking);
+        $departure->setDay($data[8]);
+        $departure->setHour($data[9]);
+        $departure->setNote($data[11]);
+        $from = LocalityQuery::create()->findOneByName($data[12]);
+        $departure->setLocalityFrom($from->getId());
+        $to = LocalityQuery::create()->findOneByName($data[13]);
+        $departure->setLocalityTo($to->getId());
+        $departure->setDepartureTime($data[14]);
+        $departureTime = $this->retrieveDepartureTime($from,$to,$data[9]);
+        $departure->setDepartureTime($departureTime);
+        $departure->save();
     }
 
     private function calculateDepartureTime($hour,$minute,$routeHour = 0,$routeMinute = 0){

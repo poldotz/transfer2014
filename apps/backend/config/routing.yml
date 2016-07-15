@@ -19,6 +19,11 @@ booking:
     url:   /gestione-prenotazioni
     param: { module: booking, action: index }
 
+booking_import:
+    url:   /importa-prenotazioni
+    param: { module: booking, action: importBooking }
+
+
 booking_copy:
   url:   /clona-prenotazione/:id
   param: { module: booking, action: copy }
