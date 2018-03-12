@@ -44,8 +44,8 @@ all:
           host:       smtp.gmail.com
           port:       465
           encryption: ssl
-          username: maremania.transfer@gmail.com
-          password: m4r3m4n14
+          username: btravel.transfer@gmail.com
+          password: btr4v3ltr4nsf3r
 #      transport:
 #        class: Swift_SmtpTransport
 #        param:

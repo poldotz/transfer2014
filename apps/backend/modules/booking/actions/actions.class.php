@@ -199,14 +199,15 @@ class bookingActions extends sfActions
             $c->addOr(BookingPeer::RIF_FILE,"%".$query."%",Criteria::LIKE);
             $c->addOr(CustomerPeer::NAME,"%".$query."%",Criteria::LIKE);
         }
-        if ('desc' === $request->getParameter('sSortDir_0', 'desc'))
+        $c->addDescendingOrderByColumn(BookingPeer::YEAR)->addDescendingOrderByColumn(BookingPeer::NUMBER);
+        /*if ('desc' === $request->getParameter('sSortDir_0', 'desc'))
         {
             $c->addAscendingOrderByColumn($type_colnames[$iSortCol_0]);
         }
         else
         {
             $c->addDescendingOrderByColumn($type_colnames[$iSortCol_0]);
-        }
+        }*/
         //end: sorting
         //start: paging
         $item_per_page = $request->getParameter('iDisplayLength', 10);

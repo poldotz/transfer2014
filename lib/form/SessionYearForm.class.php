@@ -13,12 +13,11 @@ class SessionYearForm extends BaseForm
     {
         $years =  BookingQuery::create()->select(array('year'))->groupBy('year')->find();
 
-        if(is_array($years)){
-           $years =  array_merge($years,array($this->getDefault('year')));
+        if(is_object($years) && ! $years->isEmpty()){
+           $years =  array_merge($years->getData(),array($this->getDefault('year')));
 
         }
-        else{
-            $years = array($this->getDefault('year'));
+        else{            $years = array($this->getDefault('year'));
         }
         // TODO: verificare array_combine.
         $this->setWidget('year',new sfWidgetFormChoice(array('choices'=>array_combine($years, $years)),array('class'=>'sessionYear')));
